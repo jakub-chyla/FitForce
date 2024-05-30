@@ -1,4 +1,4 @@
-package com.stat;
+package com.coach;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

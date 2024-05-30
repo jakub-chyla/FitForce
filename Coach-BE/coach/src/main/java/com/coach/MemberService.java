@@ -1,29 +1,32 @@
-package com.stat;
+package com.coach;
 
-import com.stat.client.StatClient;
-import lombok.RequiredArgsConstructor;
+import com.coach.client.StatClient;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class MemberService {
 
-    private final MemberRepository repository;
+    private final MemberRepository memberRepository;
     private final StatClient client;
 
+    public MemberService(MemberRepository memberRepository, StatClient client) {
+        this.memberRepository = memberRepository;
+        this.client = client;
+    }
 
-    public void saveMember(Member member) {
-        repository.save(member);
+
+    public Member saveMember(Member member) {
+       return memberRepository.save(member);
     }
 
     public List<Member> findAllMembers() {
-        return repository.findAll();
+        return memberRepository.findAll();
     }
 
     public FullMemberResponse findMembersWithStats(Integer memberId) {
-        var member = repository.findById(memberId)
+        var member = memberRepository.findById(memberId)
                 .orElse(
                         Member.builder()
                                 .name("NOT_FOUND")

@@ -27,9 +27,3 @@ spring:
 application:
   config:
     members-url: http://localhost:8222/api/v1/stats
-
-#spring:
-#  application:
-#    name: schools
-#  config:
-#    import: optional:configserver:http://localhost:8888

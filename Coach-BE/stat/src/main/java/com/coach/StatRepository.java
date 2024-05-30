@@ -1,4 +1,4 @@
-package com.stat;
+package com.coach;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

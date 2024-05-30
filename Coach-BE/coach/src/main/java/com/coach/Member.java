@@ -1,4 +1,4 @@
-package com.stat;
+package com.coach;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,13 +11,11 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Stat {
+public class Member {
 
     @Id
     @GeneratedValue
     private Integer id;
-    private String firstname;
-    private String lastname;
+    private String name;
     private String email;
-    private Integer memberId;
 }

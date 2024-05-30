@@ -1,6 +1,6 @@
-package com.stat.client;
+package com.coach.client;
 
-import com.stat.Stat;
+import com.coach.Stat;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
