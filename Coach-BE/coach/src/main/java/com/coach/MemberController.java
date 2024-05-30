@@ -16,8 +16,8 @@ public class MemberController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void save(@RequestBody Member member) {
-        service.saveMember(member);
+    public Member save(@RequestBody Member member) {
+        return service.saveMember(member);
     }
 
     @GetMapping
