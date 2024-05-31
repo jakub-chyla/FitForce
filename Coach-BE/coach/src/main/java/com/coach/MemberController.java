@@ -27,7 +27,7 @@ public class MemberController {
 
     @GetMapping("/with-stats/{member-id}")
     public ResponseEntity<FullMemberResponse> findAllMembers(@PathVariable("member-id") Integer memberId) {
-        return ResponseEntity.ok(service.findMembersWithStats(memberId));
+        return ResponseEntity.ok(service.findMemberWithStats(memberId));
     }
 
 

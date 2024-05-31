@@ -16,28 +16,17 @@ public class MemberService {
         this.client = client;
     }
 
-
     public Member saveMember(Member member) {
-       return memberRepository.save(member);
+        return memberRepository.save(member);
     }
 
     public List<Member> findAllMembers() {
         return memberRepository.findAll();
     }
 
-    public FullMemberResponse findMembersWithStats(Integer memberId) {
-        var member = memberRepository.findById(memberId)
-                .orElse(
-                        Member.builder()
-                                .name("NOT_FOUND")
-                                .email("NOT_FOUND")
-                                .build()
-                );
+    public FullMemberResponse findMemberWithStats(Integer memberId) {
+        var member = memberRepository.findById(memberId).orElse(Member.builder().name("NOT_FOUND").email("NOT_FOUND").build());
         var members = client.findAllStatsByMember(memberId);
-        return FullMemberResponse.builder()
-                .name(member.getName())
-                .email(member.getEmail())
-                .stats(members)
-                .build();
+        return FullMemberResponse.builder().name(member.getName()).email(member.getEmail()).stats(members).build();
     }
 }
