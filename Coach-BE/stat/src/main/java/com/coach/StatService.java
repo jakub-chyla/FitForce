@@ -11,8 +11,8 @@ public class StatService {
 
     private final StatRepository repository;
 
-    public void saveStat(Stat stat) {
-        repository.save(stat);
+    public Stat saveStat(Stat stat) {
+        return repository.save(stat);
     }
 
     public List<Stat> findAllStats() {

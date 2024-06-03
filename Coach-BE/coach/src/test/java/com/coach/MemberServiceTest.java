@@ -22,9 +22,9 @@ class MemberServiceTest {
 
     @Mock
     public MemberRepository memberRepository;
+
     @Mock
     public StatClient client;
-
 
     @BeforeEach
     void setUp() {
@@ -49,7 +49,9 @@ class MemberServiceTest {
         Member response = memberService.saveMember(member);
 
         //then
+        assertEquals(member.getId(), response.getId());
         assertEquals(member.getName(), response.getName());
+        assertEquals(member.getEmail(), response.getEmail());
 
     }
 
