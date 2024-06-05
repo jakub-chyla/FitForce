@@ -113,7 +113,30 @@ class StatServiceTest {
     }
 
     @Test
-    @Disabled
-    void findAllStatsByMember() {
+    void should_find_all_stats_by_Member() {
+        //given
+        Stat stat = new Stat();
+        stat.setFirstname("John");
+        stat.setLastname("Rambo");
+        stat.setEmail("test@gmail.com");
+        stat.setMemberId(1);
+
+        List<Stat> savedStats = new ArrayList<>();
+
+        Stat savedStat = new Stat();
+        savedStat.setFirstname("John");
+        savedStat.setLastname("Rambo");
+        savedStat.setEmail("test@gmail.com");
+        savedStat.setMemberId(1);
+        savedStats.add(savedStat);
+
+        //mock the calls
+        when(statRepository.findAllByMemberId(savedStat.getId())).thenReturn(savedStats);
+
+        //when
+        List<Stat> response = statService.findAllStatsByMember(stat.getId());
+
+        //then
+        assertEquals(stat.getFirstname(), response.get(0).getFirstname());
     }
 }
