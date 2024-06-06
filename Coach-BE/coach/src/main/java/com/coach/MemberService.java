@@ -29,4 +29,8 @@ public class MemberService {
         var members = client.findAllStatsByMember(memberId);
         return FullMemberResponse.builder().name(member.getName()).email(member.getEmail()).stats(members).build();
     }
+
+    public List<Member> findAllMembersWithName(String name) {
+        return memberRepository.findMembersWithName(name);
+    }
 }

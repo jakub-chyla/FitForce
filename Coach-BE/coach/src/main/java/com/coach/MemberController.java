@@ -25,6 +25,11 @@ public class MemberController {
         return ResponseEntity.ok(service.findAllMembers());
     }
 
+    @GetMapping("/with-name")
+    public ResponseEntity<List<Member>> findAllMembersWithName(String name) {
+        return ResponseEntity.ok(service.findAllMembersWithName(name));
+    }
+
     @GetMapping("/with-stats/{member-id}")
     public ResponseEntity<FullMemberResponse> findAllMembers(@PathVariable("member-id") Integer memberId) {
         return ResponseEntity.ok(service.findMemberWithStats(memberId));
