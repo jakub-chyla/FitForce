@@ -18,9 +18,17 @@ spring:
     url: jdbc:postgresql://localhost:5432/members
     username: postgres
     password: root
+  flyway:
+    locations: classpath:db/migration
+    enabled: true
+    baselineOnMigrate: true
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
