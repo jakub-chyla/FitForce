@@ -1,26 +1,37 @@
-eureka:
-  instance:
-    hostname: localhost
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka
+hostname: localhost
+client:
+  service-url:
+    defaultZone: http://localhost:8761/eureka
+
 
 server:
   port: 8090
 spring:
+  application:
+    name: stat
+  config:
+    import: optional:configserver:http://localhost:8888
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:testdb
-    username: sa
-    password:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/stats
+    username: postgres
+    password: root
+  flyway:
+    locations: classpath:db/migration
+    enabled: true
+    baselineOnMigrate: true
+    cleanDisabled: false
+    cleanOnValidationError: true
+    clean-on-startup: true
   jpa:
     hibernate:
-      ddl-auto: create-drop
-    database-platform: org.hibernate.dialect.H2Dialect
-  cloud:
-    config:
-      import-check:
-        enabled: false
+      ddl-auto: drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
 
 
 
