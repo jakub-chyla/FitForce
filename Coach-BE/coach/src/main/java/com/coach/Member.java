@@ -1,8 +1,6 @@
 package com.coach;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -11,10 +9,12 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Table(name = "members")
 public class Member {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "members_seq")
+    @SequenceGenerator(name = "members_seq", sequenceName = "members_seq", allocationSize = 1)
     private Integer id;
     private String name;
     private String email;
