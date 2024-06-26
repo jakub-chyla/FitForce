@@ -1,5 +1,7 @@
 CREATE SEQUENCE stats_seq INCREMENT BY 1;
 
+SELECT setval('stats_seq', 2);
+
 CREATE TABLE stats (
     id BIGINT PRIMARY KEY,
     weight TEXT,

@@ -26,8 +26,8 @@ public class MemberController {
         return ResponseEntity.ok(service.findAllMembers());
     }
 
-    @GetMapping("/with-name")
-    public ResponseEntity<List<Member>> findAllMembersWithName(String name) {
+    @GetMapping("/with-name/{name}")
+    public ResponseEntity<List<Member>> findAllMembersWithName(@PathVariable("name") String name) {
         return ResponseEntity.ok(service.findAllMembersWithName(name));
     }
 
