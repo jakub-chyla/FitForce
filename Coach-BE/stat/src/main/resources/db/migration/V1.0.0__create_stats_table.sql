@@ -1,6 +1,6 @@
 CREATE SEQUENCE stats_seq INCREMENT BY 1;
 
-SELECT setval('stats_seq', 2);
+SELECT setval('stats_seq', 1);
 
 CREATE TABLE stats (
     id BIGINT PRIMARY KEY,

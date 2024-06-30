@@ -1,6 +1,6 @@
 CREATE SEQUENCE members_seq INCREMENT BY 1;
 
-SELECT setval('members_seq', 2);
+SELECT setval('members_seq', 1);
 
 CREATE TABLE members (
     id BIGINT PRIMARY KEY,
