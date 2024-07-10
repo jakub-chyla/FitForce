@@ -10,4 +10,15 @@
   <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
     <mat-icon>share</mat-icon>
   </button>
+
+  <div class="theme-control">
+    <mat-slide-toggle checked (click)="toggleTheme()"></mat-slide-toggle>
+    <button mat-icon-button>
+      @if (themeService.themeSignal() === 'dark'){
+      <mat-icon>bedtime</mat-icon>
+      } @else {
+      <mat-icon>brightness_5</mat-icon>
+      }
+    </button>
+  </div>
 </mat-toolbar>
