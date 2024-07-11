@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CardComponent } from "./card/card.component";
-import { Card } from "../model/Card";
+import { Card } from "../../model/Card";
 import { CommonModule } from "@angular/common";
-import {MemberService} from "../service/member.service";
-import {Member} from "../model/Member";
+import {MemberService} from "../../service/member.service";
+import {Member} from "../../model/Member";
 
 @Component({
   selector: 'app-cards',
