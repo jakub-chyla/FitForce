@@ -10,6 +10,5 @@ import java.util.List;
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Integer> {
 
-    @Query("SELECT m FROM Member AS m WHERE name = :name")
     List<Member> findMembersByName(@Param("name") String name);
 }
