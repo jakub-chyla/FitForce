@@ -1,8 +1,16 @@
 <div mat-dialog-content>
-<form [formGroup]="myForm" (ngSubmit)="save()">
+  <form [formGroup]="myForm" (ngSubmit)="save()">
+    <p>
+      <mat-form-field>
+        <mat-label>Outline form field</mat-label>
+        <input matInput formControlName="name" placeholder="Placeholder">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-hint>Hint</mat-hint>
+      </mat-form-field>
+    </p>
 
-
-</form>
-
-<h3>hello</h3>
+    <button mat-raised-button type="submit">Submit</button>
+  </form>
+  <button>Submit</button>
+  <h3>hello</h3>
 </div>
