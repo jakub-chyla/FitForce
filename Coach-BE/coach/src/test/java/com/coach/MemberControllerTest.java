@@ -41,15 +41,15 @@ class MemberControllerTest {
     @Test
     public void testAddSentence() {
         Member member = new Member();
-        member.setName("john");
-        member.setEmail("john@example.com");
+        member.setFirstName("john");
+        member.setLastName("john@example.com");
 
         ResponseEntity<Member> responseEntity = restTemplate.exchange(
                 baseUrl + "/", HttpMethod.POST, new HttpEntity<>(member), Member.class
         );
 
         assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
-        assertEquals("john", responseEntity.getBody().getName());
+        assertEquals("john", responseEntity.getBody().getFirstName());
         assertEquals(1, repo.findAll().size());
     }
 

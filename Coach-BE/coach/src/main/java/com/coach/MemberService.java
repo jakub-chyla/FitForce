@@ -25,12 +25,13 @@ public class MemberService {
     }
 
     public FullMemberResponse findMemberWithStats(Integer memberId) {
-        var member = memberRepository.findById(memberId).orElse(Member.builder().name("NOT_FOUND").email("NOT_FOUND").build());
+        var member = memberRepository.findById(memberId).orElse(Member.builder().firstName("NOT_FOUND").lastName("NOT_FOUND").build());
         var members = client.findAllStatsByMember(memberId);
-        return FullMemberResponse.builder().name(member.getName()).email(member.getEmail()).stats(members).build();
+        return FullMemberResponse.builder().name(member.getFirstName()).email(member.getLastName()).stats(members).build();
     }
 
     public List<Member> findAllMembersWithName(String name) {
-        return memberRepository.findMembersByName(name);
+        return memberRepository.findMembersByFirstName(name);
     }
 }
+

@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Integer> {
 
-    List<Member> findMembersByName(@Param("name") String name);
+    List<Member> findMembersByFirstName(@Param("fistName") String fistName);
 }

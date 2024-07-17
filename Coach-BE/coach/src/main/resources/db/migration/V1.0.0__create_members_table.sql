@@ -4,10 +4,10 @@ SELECT setval('members_seq', 1);
 
 CREATE TABLE members (
     id BIGINT PRIMARY KEY,
-    name TEXT,
-    email TEXT
+    first_name TEXT,
+    last_name TEXT
 );
 
-  insert into members (id, name, email)
+  insert into members (id, first_name, last_name)
 values
   (1, 'a', 'b');

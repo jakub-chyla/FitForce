@@ -9,7 +9,6 @@ import lombok.*;
 @Builder
 public class Stat {
 
-    private String firstname;
-    private String lastname;
-    private String email;
+    private String weight;
+
 }

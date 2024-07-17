@@ -9,6 +9,10 @@ import {MatInputModule} from "@angular/material/input";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatCardModule} from "@angular/material/card";
 import {MatDividerModule} from "@angular/material/divider";
+import {MyErrorStateMatcher} from "./my-error-state-matcher";
+import {NameValidatorPipe} from "./name-validator.pipe";
+import {MemberService} from "../../service/member.service";
+import {Member} from "../../model/Member";
 
 @Component({
   selector: 'app-add',
@@ -20,7 +24,8 @@ import {MatDividerModule} from "@angular/material/divider";
     MatInputModule,
     MatIconModule,
     MatCardModule,
-    MatDividerModule
+    MatDividerModule,
+    NameValidatorPipe
   ],
   templateUrl: './add.component.html',
   styleUrl: './add.component.scss',
@@ -33,21 +38,30 @@ export class AddComponent implements OnInit {
 
   myForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder,
+              private memberService: MemberService) {
   }
 
   ngOnInit() {
     this.myForm = this.formBuilder.group({
-      name: ['', [Validators.required]],
-      date: [DateHelper.setSafeDate(new Date()), [Validators.required]],
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
     })
   }
 
 
   save() {
     if (this.myForm.valid) {
-      console.log(this.myForm.get('name')?.value);
+      console.log(this.myForm.get('firstName')?.value);
       const formData = this.myForm.value;
+
+      let member: Member = {
+        firstName: this.myForm.get('firstName')?.value,
+        lastName: this.myForm.get('lastName')?.value
+      }
+
+      this.memberService.addMember(member).subscribe()
+
       // const member: Member = {
         // anme: formData.employeeFilter,
         // date:   DateHelper.setSafeDate(formData.date).toISOString(),

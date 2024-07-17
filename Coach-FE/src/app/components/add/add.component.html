@@ -1,24 +1,20 @@
 <div class="flex justify-center w-full pt-6">
   <mat-card class="w-3/12 rounded-lg drop-shadow-md md:drop-shadow-xl">
     <mat-card-content>
+      <h2>Add</h2>
 
-
-      <form [formGroup]="myForm" (ngSubmit)="save()">
-        <div class="title">
-          <h3>
-            <span class="h-mr-xs">Add</span>
-          </h3>
-        </div>
-        <mat-divider class="h-my-md"></mat-divider>
-        <p>
-          <mat-form-field>
-            <mat-label>Outline form field</mat-label>
-            <input matInput formControlName="name" placeholder="Placeholder">
-            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-            <mat-hint>Hint</mat-hint>
+      <form class="form-container" [formGroup]="myForm" (ngSubmit)="save()">
+        <div class="grid grid-cols-2 gap-4">
+          <mat-form-field class="h-w-full">
+            <input type="text" matInput formControlName="firstName" placeholder="firstName">
           </mat-form-field>
-        </p>
-        <button mat-raised-button type="submit">Submit</button>
+          <mat-form-field class="h-w-full">
+            <input type="text" matInput formControlName="lastName" placeholder="lastName">
+          </mat-form-field>
+        </div>
+        <div class="grid justify-items-end">
+          <button mat-raised-button type="submit">Submit</button>
+        </div>
       </form>
     </mat-card-content>
   </mat-card>

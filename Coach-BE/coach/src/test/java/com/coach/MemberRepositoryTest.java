@@ -18,8 +18,8 @@ class MemberRepositoryTest {
     void should_find_stat_by_id() {
         //given
         Member member = new Member();
-        member.setName("aa");
-        member.setEmail("a@example.com");
+        member.setFirstName("aa");
+        member.setLastName("a@example.com");
 
         //when
         memberRepository.save(member);
@@ -27,16 +27,16 @@ class MemberRepositoryTest {
 
         //then
         assertEquals(member.getId(), savedMember.getId());
-        assertEquals(member.getName(), savedMember.getName());
-        assertEquals(member.getEmail(), savedMember.getEmail());
+        assertEquals(member.getFirstName(), savedMember.getFirstName());
+        assertEquals(member.getLastName(), savedMember.getLastName());
     }
 
     @Test
     void should_find_all_stats() {
         //given
         Member member = new Member();
-        member.setName("aa");
-        member.setEmail("a@example.com");
+        member.setFirstName("aa");
+        member.setLastName("a@example.com");
 
         //when
         memberRepository.save(member);
@@ -44,26 +44,26 @@ class MemberRepositoryTest {
 
         //then
         assertEquals(member.getId(), savedMember.getId());
-        assertEquals(member.getName(), savedMember.getName());
-        assertEquals(member.getEmail(), savedMember.getEmail());
+        assertEquals(member.getFirstName(), savedMember.getFirstName());
+        assertEquals(member.getLastName(), savedMember.getLastName());
     }
 
     @Test
     void should_find_members_by_name() {
         //given
         Member member1 = new Member();
-        member1.setName("aa");
-        member1.setEmail("a@example.com");
+        member1.setFirstName("aa");
+        member1.setLastName("a@example.com");
 
         Member member2 = new Member();
-        member2.setName("bb");
-        member2.setEmail("b@example.com");
+        member2.setFirstName("bb");
+        member2.setLastName("b@example.com");
 
         //when
         memberRepository.save(member1);
-        List<Member> savedMembers = memberRepository.findMembersByName(member1.getName());
+        List<Member> savedMembers = memberRepository.findMembersByFirstName(member1.getFirstName());
 
         //then
-        assertEquals(member1.getName(), savedMembers.get(0).getName());
+        assertEquals(member1.getFirstName(), savedMembers.get(0).getFirstName());
     }
 }
