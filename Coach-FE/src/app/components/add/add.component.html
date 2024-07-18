@@ -1,21 +1,133 @@
-<div class="flex justify-center w-full pt-6">
-  <mat-card class="w-3/12 rounded-lg drop-shadow-md md:drop-shadow-xl">
-    <mat-card-content>
-      <h2>Add</h2>
+<div [ngClass]="themeService.themeSignal()">
 
+  <div class="dialog">
+    <div mat-dialog-title class="title">
+      <h3>
+        <span class="material-icons h-mr-xs">add</span>
+        <span>{{'add'}}</span>
+      </h3>
+      <button class="close-btn" mat-icon-button (click)="closeDialog()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <mat-divider class="h-my-md"></mat-divider>
+
+    <div mat-dialog-content>
       <form class="form-container" [formGroup]="myForm" (ngSubmit)="save()">
-        <div class="grid grid-cols-2 gap-4">
-          <mat-form-field class="h-w-full">
-            <input type="text" matInput formControlName="firstName" placeholder="firstName">
-          </mat-form-field>
-          <mat-form-field class="h-w-full">
-            <input type="text" matInput formControlName="lastName" placeholder="lastName">
-          </mat-form-field>
+        <div class="flex justify-center w-full pt-6">
+          <mat-card class="w-3/12 rounded-lg drop-shadow-md md:drop-shadow-xl">
+            <mat-card-content>
+              <h2>Add</h2>
+
+              <form class="form-container" [formGroup]="myForm" (ngSubmit)="save()">
+                <div class="grid grid-cols-2 gap-4">
+                  <mat-form-field class="h-w-full">
+                    <input type="text" matInput formControlName="firstName" placeholder="firstName">
+                  </mat-form-field>
+                  <mat-form-field class="h-w-full">
+                    <input type="text" matInput formControlName="lastName" placeholder="lastName">
+                  </mat-form-field>
+                </div>
+                <div class="grid justify-items-end">
+                  <button mat-raised-button type="submit">Submit</button>
+                </div>
+              </form>
+            </mat-card-content>
+          </mat-card>
         </div>
-        <div class="grid justify-items-end">
-          <button mat-raised-button type="submit">Submit</button>
-        </div>
+
+
+        <!--      <div>-->
+        <!--        <mat-form-field class="h-w-full">-->
+        <!--          <input type="text" matInput formControlName="employeeFilter" [matAutocomplete]="autoEmployees"-->
+        <!--                 placeholder="{{'pending-list.dialog.label.employee' | translate}}">-->
+        <!--        </mat-form-field>-->
+        <!--        <mat-autocomplete #autoEmployees="matAutocomplete">-->
+        <!--          <mat-option *ngFor="let option of autocompleteFilteredEmployees | async" [value]="option"-->
+        <!--                      matTooltip="{{option}}" matTooltipShowDelay="400" matTooltipPosition="left">-->
+        <!--            {{ option }}-->
+        <!--          </mat-option>-->
+        <!--        </mat-autocomplete>-->
+        <!--      </div>-->
+
+        <!--      <div>-->
+        <!--        <mat-form-field class="h-w-full">-->
+        <!--          <mat-label>{{ 'pending-list.dialog.label.choose-date' }}</mat-label>-->
+        <!--          <input matInput [matDatepicker]="picker" formControlName="date"-->
+        <!--                 [disabled]="this.myForm.get('employeeFilter').invalid | employeeValid"-->
+        <!--                 [readonly]="myForm.get('employeeFilter').invalid | employeeValid">-->
+        <!--          <mat-hint>DD/MM/YYYY</mat-hint>-->
+        <!--          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
+        <!--          <mat-datepicker #picker></mat-datepicker>-->
+        <!--        </mat-form-field>-->
+        <!--      </div>-->
+
+        <!--      <div class="form-2-col-grid">-->
+        <!--        <div>-->
+        <!--          <mat-form-field class="h-w-full">-->
+        <!--            <input type="text" matInput formControlName="officeFilter" [matAutocomplete]="autoOffice"-->
+        <!--                   placeholder="{{ 'pending-list.dialog.label.office' | translate }}"-->
+        <!--                   [readonly]="myForm.get('employeeFilter').invalid | employeeValid">-->
+        <!--          </mat-form-field>-->
+        <!--          <mat-autocomplete #autoOffice="matAutocomplete">-->
+        <!--            <mat-option *ngFor="let option of autocompleteFilteredOffices | async" [value]="option"-->
+        <!--                        matTooltip="{{option}}" matTooltipShowDelay="400" matTooltipPosition="left">-->
+        <!--              {{ option }}-->
+        <!--            </mat-option>-->
+        <!--          </mat-autocomplete>-->
+        <!--        </div>-->
+
+        <!--        <div>-->
+        <!--          <mat-form-field class="h-w-full">-->
+        <!--            <input type="text" matInput formControlName="timeZone" [matAutocomplete]="autoTimeZone"-->
+        <!--                   placeholder="{{ 'pending-list.dialog.label.timezone' | translate }}"-->
+        <!--                   [readonly]="myForm.get('employeeFilter').invalid | employeeValid">-->
+        <!--          </mat-form-field>-->
+        <!--          <mat-autocomplete #autoTimeZone="matAutocomplete">-->
+        <!--            <mat-option *ngFor="let option of autocompleteFilteredTimeZones | async" [value]="option"-->
+        <!--                        matTooltip="{{option}}" matTooltipShowDelay="400" matTooltipPosition="left">-->
+        <!--              {{ option }}-->
+        <!--            </mat-option>-->
+        <!--          </mat-autocomplete>-->
+        <!--        </div>-->
+        <!--      </div>-->
+
+        <!--      <div class="form-2-col-grid">-->
+        <!--        <mat-form-field class="h-w-full">-->
+        <!--          <input type="text" matInput formControlName="clockIn" placeholder="{{ 'pending-list.dialog.label.clock-in'}}"-->
+        <!--                 [readonly]="myForm.get('employeeFilter').invalid | employeeValid">-->
+        <!--          <mat-error *ngIf="myForm.get('clockIn').invalid">{{'pending-list.dialog.error.clock' }}-->
+        <!--          </mat-error>-->
+        <!--        </mat-form-field>-->
+
+        <!--        <mat-form-field class="h-w-full">-->
+        <!--          <input type="text" matInput formControlName="clockOut" placeholder="{{ 'pending-list.dialog.label.clock-out' | translate }}"-->
+        <!--                 [readonly]="myForm.get('employeeFilter').invalid | employeeValid">-->
+        <!--          <mat-error *ngIf="myForm.get('clockOut').invalid">{{'pending-list.dialog.error.clock'}</mat-error>-->
+        <!--        </mat-form-field>-->
+        <!--      </div>-->
+
+        <!--      <div>-->
+        <!--        <mat-form-field class="h-w-full">-->
+        <!--    <textarea rows="3" matInput formControlName="reason" placeholder="{{ 'pending-list.dialog.label.reason' }}"-->
+        <!--              [readonly]="myForm.get('employeeFilter').invalid | employeeValid"></textarea>-->
+        <!--        </mat-form-field>-->
+        <!--      </div>-->
+
+        <!--      <div class="h-mb-md">-->
+        <!--        <mat-checkbox formControlName="swat" class="h-w-full"-->
+        <!--                      [disabled]="this.myForm.get('employeeFilter').invalid | employeeValid"-->
+        <!--        >{{'pending-list.dialog.checkbox.support-swat'}-->
+        <!--        </mat-checkbox>-->
+        <!--      </div>-->
       </form>
-    </mat-card-content>
-  </mat-card>
+    </div>
+
+    <mat-divider class="h-my-md"></mat-divider>
+    <div mat-dialog-actions class="actions">
+      <button mat-raised-button color="primary" (click)="save()" [disabled]="myForm.invalid "
+              type="submit">{{ 'save'}}</button>
+    </div>
+  </div>
 </div>

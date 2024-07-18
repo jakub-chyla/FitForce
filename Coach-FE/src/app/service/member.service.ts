@@ -14,8 +14,11 @@ export class MemberService {
 
   }
 
-  getUsers(): Observable<Member[]>{
-
+  getMembers(): Observable<Member[]>{
     return this.httpClient.get<Member[]>(`${this.baseURL}`);
+  }
+
+  addMember(member: Member): Observable<Member>{
+    return this.httpClient.post(`${this.baseURL}`, member);
   }
 }

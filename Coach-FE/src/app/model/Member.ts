@@ -1,4 +1,5 @@
 export class Member {
   id?: number;
-  name?: string;
+  firstName?: string;
+  lastName?: string;
 }

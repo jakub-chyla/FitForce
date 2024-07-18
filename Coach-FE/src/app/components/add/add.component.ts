@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, inject, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {DateAdapter, MAT_DATE_FORMATS} from "@angular/material/core";
 import {FORM_DATE_FORMATS, FormDateAdapter} from "../../util/form-date-adapter";
@@ -13,6 +13,9 @@ import {MyErrorStateMatcher} from "./my-error-state-matcher";
 import {NameValidatorPipe} from "./name-validator.pipe";
 import {MemberService} from "../../service/member.service";
 import {Member} from "../../model/Member";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {ThemeService} from "../../service/theme.service";
+import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-add',
@@ -25,7 +28,8 @@ import {Member} from "../../model/Member";
     MatIconModule,
     MatCardModule,
     MatDividerModule,
-    NameValidatorPipe
+    NameValidatorPipe,
+    CommonModule
   ],
   templateUrl: './add.component.html',
   styleUrl: './add.component.scss',
@@ -36,10 +40,14 @@ import {Member} from "../../model/Member";
 })
 export class AddComponent implements OnInit {
 
+  themeService: ThemeService = inject(ThemeService);
+
   myForm!: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
-              private memberService: MemberService) {
+              private memberService: MemberService,
+              private dialogRef: MatDialogRef<AddComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any) {
   }
 
   ngOnInit() {
@@ -74,5 +82,9 @@ export class AddComponent implements OnInit {
       //   }
       // );
     }
+  }
+
+  closeDialog(): void {
+    this.dialogRef.close();
   }
 }

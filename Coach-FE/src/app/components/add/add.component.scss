@@ -1,3 +1,45 @@
 .title {
   position: relative;
 }
+
+$rowGap: 4px;
+$colGap: 4px;
+
+.dialog{
+  height: 540px
+}
+
+.title {
+  position: relative;
+
+  h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: -16px;
+    right: -16px;
+  }
+}
+
+.form-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-row-gap: 8px;
+}
+
+.form-2-col-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 24px;
+}
+
+.actions  {
+  display: flex;
+  justify-content: flex-end;
+}
