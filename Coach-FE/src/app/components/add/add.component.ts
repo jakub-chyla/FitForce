@@ -13,7 +13,13 @@ import {MyErrorStateMatcher} from "./my-error-state-matcher";
 import {NameValidatorPipe} from "./name-validator.pipe";
 import {MemberService} from "../../service/member.service";
 import {Member} from "../../model/Member";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {
+  MAT_DIALOG_DATA,
+  MatDialogActions, MatDialogClose,
+  MatDialogContent,
+  MatDialogRef,
+  MatDialogTitle
+} from "@angular/material/dialog";
 import {ThemeService} from "../../service/theme.service";
 import {CommonModule} from "@angular/common";
 
@@ -29,7 +35,11 @@ import {CommonModule} from "@angular/common";
     MatCardModule,
     MatDividerModule,
     NameValidatorPipe,
-    CommonModule
+    CommonModule,
+    MatDialogContent,
+    MatDialogTitle,
+    MatDialogActions,
+    MatDialogClose
   ],
   templateUrl: './add.component.html',
   styleUrl: './add.component.scss',
