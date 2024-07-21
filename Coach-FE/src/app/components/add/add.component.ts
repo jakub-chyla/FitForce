@@ -78,7 +78,11 @@ export class AddComponent implements OnInit {
         lastName: this.myForm.get('lastName')?.value
       }
 
-      this.memberService.addMember(member).subscribe()
+      this.memberService.addMember(member).subscribe(
+        (response) =>{
+
+        }
+      );
 
       // const member: Member = {
         // anme: formData.employeeFilter,

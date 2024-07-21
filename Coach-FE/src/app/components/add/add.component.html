@@ -1,7 +1,7 @@
 <div [ngClass]="themeService.themeSignal()">
   <h2 mat-dialog-title>Add Member</h2>
   <mat-dialog-content>
-    <form [formGroup]="myForm" (ngSubmit)="save()">
+    <form [formGroup]="myForm">
       <div class="grid grid-cols-2 gap-4">
         <mat-divider class="col-span-2"></mat-divider>
         <mat-form-field class="">
