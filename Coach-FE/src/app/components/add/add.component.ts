@@ -1,5 +1,12 @@
 import {Component, inject, Inject, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {
+  FormBuilder, FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  ValidationErrors,
+  ValidatorFn,
+  Validators
+} from "@angular/forms";
 import {DateAdapter, MAT_DATE_FORMATS} from "@angular/material/core";
 import {FORM_DATE_FORMATS, FormDateAdapter} from "../../util/form-date-adapter";
 import {DateHelper} from "../../util/date-helper";
@@ -22,6 +29,10 @@ import {
 } from "@angular/material/dialog";
 import {ThemeService} from "../../service/theme.service";
 import {CommonModule} from "@angular/common";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+
+class AbstractControl {
+}
 
 @Component({
   selector: 'app-add',
@@ -39,7 +50,10 @@ import {CommonModule} from "@angular/common";
     MatDialogContent,
     MatDialogTitle,
     MatDialogActions,
-    MatDialogClose
+    MatDialogClose,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule
   ],
   templateUrl: './add.component.html',
   styleUrl: './add.component.scss',
@@ -54,6 +68,8 @@ export class AddComponent implements OnInit {
 
   myForm!: FormGroup;
 
+  readonly startDate = new Date(1990, 0, 1);
+
   constructor(private formBuilder: FormBuilder,
               private memberService: MemberService,
               private dialogRef: MatDialogRef<AddComponent>,
@@ -62,39 +78,36 @@ export class AddComponent implements OnInit {
 
   ngOnInit() {
     this.myForm = this.formBuilder.group({
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
+      firstName: ['', [Validators.required, Validators.minLength(3),]],
+      lastName: ['', [Validators.required, Validators.minLength(3),]],
+      phone: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9), this.phoneValidator()]],
     })
   }
 
+  phoneValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = (control as FormControl).value;
+      const valid = /^\d+$/.test(value);
+      return valid ? null : { numeric: true };
+    };
+  }
 
   save() {
     if (this.myForm.valid) {
-      console.log(this.myForm.get('firstName')?.value);
       const formData = this.myForm.value;
 
       let member: Member = {
         firstName: this.myForm.get('firstName')?.value,
-        lastName: this.myForm.get('lastName')?.value
+        lastName: this.myForm.get('lastName')?.value,
+        phone: this.myForm.get('phone')?.value
       }
 
       this.memberService.addMember(member).subscribe(
-        (response) =>{
+        (response) => {
 
         }
       );
 
-      // const member: Member = {
-        // anme: formData.employeeFilter,
-        // date:   DateHelper.setSafeDate(formData.date).toISOString(),
-
-      // };
-      // this.memberService.save(DTO).subscribe(
-      //   (response) => {
-      //     this.openSnackBar(response.message);
-      //     this.onSave.emit();
-      //   }
-      // );
     }
   }
 

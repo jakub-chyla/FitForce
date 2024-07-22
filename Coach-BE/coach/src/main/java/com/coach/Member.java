@@ -21,4 +21,6 @@ public class Member {
 
     @Column(name ="last_name")
     private String lastName;
+
+    private Integer phone;
 }
