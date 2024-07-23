@@ -6,9 +6,11 @@ CREATE TABLE members (
     id BIGINT PRIMARY KEY,
     first_name TEXT,
     last_name TEXT,
-    phone BIGINT
+    phone BIGINT,
+    birthday DATE
+
 );
 
-  insert into members (id, first_name, last_name, phone)
+  insert into members (id, first_name, last_name, phone, birthday)
 values
-  (1, 'a', 'b', 123456789);
+  (1, 'a', 'b', 123456789, '2000-02-01');

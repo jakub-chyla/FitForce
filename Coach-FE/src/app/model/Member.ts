@@ -3,4 +3,5 @@ export class Member {
   firstName?: string;
   lastName?: string;
   phone?: number;
+  birthday?: string;
 }

@@ -81,6 +81,7 @@ export class AddComponent implements OnInit {
       firstName: ['', [Validators.required, Validators.minLength(3),]],
       lastName: ['', [Validators.required, Validators.minLength(3),]],
       phone: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9), this.phoneValidator()]],
+      birthday: ['', [Validators.required]]
     })
   }
 
@@ -94,13 +95,14 @@ export class AddComponent implements OnInit {
 
   save() {
     if (this.myForm.valid) {
-      const formData = this.myForm.value;
 
       let member: Member = {
         firstName: this.myForm.get('firstName')?.value,
         lastName: this.myForm.get('lastName')?.value,
-        phone: this.myForm.get('phone')?.value
+        phone: this.myForm.get('phone')?.value,
+        birthday: this.myForm.get('birthday')?.value,
       }
+
 
       this.memberService.addMember(member).subscribe(
         (response) => {

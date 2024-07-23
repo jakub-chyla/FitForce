@@ -3,6 +3,8 @@ package com.coach;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
+
 @Entity
 @Getter
 @Setter
@@ -23,4 +25,6 @@ public class Member {
     private String lastName;
 
     private Integer phone;
+
+    private LocalDate birthday;
 }
