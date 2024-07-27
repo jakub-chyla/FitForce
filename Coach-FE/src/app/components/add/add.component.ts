@@ -9,14 +9,12 @@ import {
 } from "@angular/forms";
 import {DateAdapter, MAT_DATE_FORMATS} from "@angular/material/core";
 import {FORM_DATE_FORMATS, FormDateAdapter} from "../../util/form-date-adapter";
-import {DateHelper} from "../../util/date-helper";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {MatInputModule} from "@angular/material/input";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatCardModule} from "@angular/material/card";
 import {MatDividerModule} from "@angular/material/divider";
-import {MyErrorStateMatcher} from "./my-error-state-matcher";
 import {NameValidatorPipe} from "./name-validator.pipe";
 import {MemberService} from "../../service/member.service";
 import {Member} from "../../model/Member";
