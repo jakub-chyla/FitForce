@@ -1,11 +1,11 @@
-<div class="card md:drop-shadow-xl">
-  <mat-card class="example-card">
+<div class="page md:drop-shadow-xl">
+  <mat-card class="card">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
       <mat-card-title>Shiba Inu</mat-card-title>
       <mat-card-subtitle>Dog Breed</mat-card-subtitle>
       <span class="icon-spacer"></span>
-      <button mat-icon-button aria-label="Example icon-button with heart icon">
+      <button mat-icon-button aria-label="Example icon-button with heart icon" (click)="editMember()">
         <mat-icon>edit</mat-icon>
       </button>
       <button mat-icon-button aria-label="Example icon-button with heart icon">
@@ -13,7 +13,24 @@
       </button>
     </mat-card-header>
     <mat-divider></mat-divider>
-    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+    <div class="grid grid-cols-2 gap-4 p-4">
+      <div class=""><img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+                         alt="Photo of a Shiba Inu"></div>
+      <div class="grid gap-3 grid-cols-1">
+        <div>Name:</div>
+        <div>Surname:</div>
+        <div>Phone:</div>
+        <div>Email:</div>
+        <div>Next training:</div>
+      </div>
+      <div class="col-span-2">
+        <mat-tab-group>
+          <mat-tab label="Progress">Progress</mat-tab>
+          <mat-tab label="Trainings">Trainings</mat-tab>
+          <mat-tab label="Diet">Diet</mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
     <mat-card-content>
       <p>
         {{card?.name}}
