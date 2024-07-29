@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { CardComponent } from "./card/card.component";
-import { Card } from "../../model/Card";
-import { CommonModule } from "@angular/common";
+import {Component, OnInit} from '@angular/core';
+import {CardComponent} from "./card/card.component";
+import {Card} from "../../model/Card";
+import {CommonModule} from "@angular/common";
 import {MemberService} from "../../service/member.service";
 import {Member} from "../../model/Member";
 import {MatDialog} from "@angular/material/dialog";
@@ -32,29 +32,23 @@ export class CardsComponent implements OnInit {
   cards: Member[] = [];
 
   ngOnInit() {
-    // this.cards = [
-    //   { id: 1, name: 'a' },
-    //   { id: 3, name: 'c' },
-    //   { id: 4, name: 'd' },
-    //   { id: 5, name: 'e' },
-    //   { id: 7, name: 'f' }
-    // ];
+    this.getMembers();
+  }
 
-
-    this.service.getMembers().subscribe((response)=>{
-
-      console.log(response);
+  getMembers() {
+    this.service.getMembers().subscribe((response) => {
       this.cards = response;
     });
   }
 
-  addClock() {
+  addMember() {
     const dialogRef = this.dialog.open(AddComponent, {
       autoFocus: false,
       width: '620px',
     });
-    // dialogRef.componentInstance.onSave.subscribe(() => {
-    //   this.handleSaveEvent();
-    // });
+    dialogRef.componentInstance.onSave.subscribe(() => {
+      console.log('here')
+      this.getMembers();
+    });
   }
 }

@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {MatCardModule} from "@angular/material/card";
 import {MatButtonModule} from "@angular/material/button";
 import {Card} from "../../../model/Card";
@@ -14,12 +14,16 @@ import {MatTabsModule} from "@angular/material/tabs";
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss'
 })
-export class CardComponent {
+export class CardComponent implements OnInit{
+
+  @Input() card?: Card
 
   constructor( private router: Router) {
   }
+  ngOnInit() {
 
-  @Input() card?: Card
+    console.log(this.card)
+  }
 
   editMember() {
     this.router.navigate(['edit', this.card?.id]);

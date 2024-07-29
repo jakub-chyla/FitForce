@@ -1,5 +1,7 @@
 export class Card {
   id?: number;
-  name?: string;
+  firstName?: string;
+  lastName?: string;
   email?: string;
+  phone?: number;
 }

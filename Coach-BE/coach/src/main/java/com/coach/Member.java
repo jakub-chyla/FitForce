@@ -25,6 +25,7 @@ public class Member {
     private String lastName;
 
     private Integer phone;
+    private String email;
 
     private LocalDate birthday;
 }

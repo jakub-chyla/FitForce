@@ -17,10 +17,10 @@
       <div class=""><img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
                          alt="Photo of a Shiba Inu"></div>
       <div class="grid gap-3 grid-cols-1">
-        <div>Name:</div>
-        <div>Surname:</div>
-        <div>Phone:</div>
-        <div>Email:</div>
+        <div>{{card?.firstName}}</div>
+        <div>{{card?.lastName}}</div>
+        <div>{{card?.phone}}</div>
+        <div>{{card?.email}}</div>
         <div>Next training:</div>
       </div>
       <div class="col-span-2">
@@ -33,12 +33,14 @@
     </div>
     <mat-card-content>
       <p>
-        {{card?.name}}
+        {{card?.firstName}}
       </p>
     </mat-card-content>
-    <mat-card-actions>
-      <button mat-button>LIKE</button>
-      <button mat-button>SHARE</button>
+    <mat-divider></mat-divider>
+    <mat-card-actions class="flex justify-end">
+      <div class="p-4">
+        <button mat-button>DETAILS</button>
+      </div>
     </mat-card-actions>
   </mat-card>
 </div>
