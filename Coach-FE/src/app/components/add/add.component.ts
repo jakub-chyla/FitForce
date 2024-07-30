@@ -1,4 +1,4 @@
-import {Component, inject, Inject, OnInit} from '@angular/core';
+import {Component, EventEmitter, inject, Inject, OnInit, Output} from '@angular/core';
 import {
   FormBuilder, FormControl,
   FormGroup,
@@ -63,6 +63,7 @@ class AbstractControl {
 export class AddComponent implements OnInit {
 
   themeService: ThemeService = inject(ThemeService);
+  @Output() onSave: EventEmitter<Member> = new EventEmitter<Member>();
 
   myForm!: FormGroup;
 
@@ -93,18 +94,17 @@ export class AddComponent implements OnInit {
 
   save() {
     if (this.myForm.valid) {
-
-      let member: Member = {
+      const member: Member = {
         firstName: this.myForm.get('firstName')?.value,
         lastName: this.myForm.get('lastName')?.value,
         phone: this.myForm.get('phone')?.value,
         birthday: this.myForm.get('birthday')?.value,
       }
 
-
       this.memberService.addMember(member).subscribe(
         (response) => {
-
+          this.onSave.emit(response);
+          this.closeDialog();
         }
       );
 

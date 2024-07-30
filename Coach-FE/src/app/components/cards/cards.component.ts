@@ -29,7 +29,7 @@ export class CardsComponent implements OnInit {
               private dialog: MatDialog) {
   }
 
-  cards: Member[] = [];
+  members: Member[] = [];
 
   ngOnInit() {
     this.getMembers();
@@ -37,7 +37,7 @@ export class CardsComponent implements OnInit {
 
   getMembers() {
     this.service.getMembers().subscribe((response) => {
-      this.cards = response;
+      this.members = response;
     });
   }
 
@@ -46,9 +46,8 @@ export class CardsComponent implements OnInit {
       autoFocus: false,
       width: '620px',
     });
-    dialogRef.componentInstance.onSave.subscribe(() => {
-      console.log('here')
-      this.getMembers();
+    dialogRef.componentInstance.onSave.subscribe((response) => {
+      this.members.push(response)
     });
   }
 }

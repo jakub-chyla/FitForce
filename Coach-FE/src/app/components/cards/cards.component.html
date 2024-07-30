@@ -1,9 +1,9 @@
 <div class="cards-container">
-  <div *ngFor="let card of cards">
+  <div *ngFor="let card of members">
     <app-card [card]="card"></app-card>
   </div>
 </div>
 
-<button class="h-fab-button-position" mat-fab color="primary" (click)="addClock()"
+<button class="h-fab-button-position" mat-fab color="primary" (click)="addMember()"
         matTooltip="{{ 'Add' }}"><span><mat-icon>add</mat-icon></span>
 </button>
