@@ -1,4 +1,60 @@
-<div class="page md:drop-shadow-xl">
-  <mat-card class="card">
-  </mat-card>
+<div [ngClass]="themeService.themeSignal()">
+  <h2 mat-dialog-title>Add Member</h2>
+  <mat-dialog-content>
+    <form [formGroup]="myForm">
+      <div class="grid grid-cols-2 gap-4">
+        <mat-divider class="col-span-2"></mat-divider>
+        <mat-form-field class="">
+          <input type="text" matInput formControlName="firstName" placeholder="John">
+          <mat-hint>Enter name</mat-hint>
+          @if (myForm.controls['firstName'].hasError('required')) {
+          <mat-error>  Field is required</mat-error>
+          }
+          @if (myForm.controls['firstName'].hasError('minlength')) {
+          <mat-error>Minimum length is 2 </mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field>
+          <input type="text" matInput formControlName="lastName" placeholder="Smith">
+          <mat-hint>Enter last name</mat-hint>
+          @if (myForm.controls['lastName'].hasError('required')) {
+          <mat-error>Field is required</mat-error>
+          }
+          @if (myForm.controls['lastName'].hasError('minlength')) {
+          <mat-error>Minimum length is 2</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field>
+          <input type="text" matInput formControlName="phone" placeholder="123456789">
+          <mat-hint>Enter phone number</mat-hint>
+          @if (myForm.controls['phone'].hasError('required')) {
+          <mat-error>Field is required</mat-error>
+          }
+          @if (myForm.controls['phone'].hasError('minlength')) {
+          <mat-error>Too short</mat-error>
+          }
+          @if (myForm.controls['phone'].hasError('maxLength')) {
+          <mat-error>Too long</mat-error>
+          }
+          @if (myForm.controls['phone'].hasError('numeric')) {
+          <mat-error>Only numbers are allowed</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Choose a date</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="birthday">
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+        </mat-form-field>
+        <mat-divider class="col-span-2"></mat-divider>
+      </div>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-raised-button (click)="save()" [disabled]="myForm.invalid "
+            type="submit">Submit
+    </button>
+  </mat-dialog-actions>
 </div>
