@@ -7,21 +7,56 @@ import {
   AbstractControl,
   FormBuilder,
   FormControl,
-  FormGroup,
+  FormGroup, ReactiveFormsModule,
   ValidationErrors,
   ValidatorFn,
   Validators
 } from "@angular/forms";
 import {MemberService} from "../../service/member.service";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {
+  MAT_DIALOG_DATA,
+  MatDialogActions, MatDialogClose,
+  MatDialogContent,
+  MatDialogRef,
+  MatDialogTitle,
+
+} from "@angular/material/dialog";
 import {AddComponent} from "../add/add.component";
+import {MatButtonModule} from "@angular/material/button";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {MatIconModule} from "@angular/material/icon";
+import {MatDividerModule} from "@angular/material/divider";
+import {NameValidatorPipe} from "../add/name-validator.pipe";
+import {CommonModule} from "@angular/common";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {DateAdapter, MAT_DATE_FORMATS} from "@angular/material/core";
+import {FORM_DATE_FORMATS, FormDateAdapter} from "../../util/form-date-adapter";
 
 @Component({
   selector: 'app-edit-member',
   standalone: true,
-  imports: [MatCardModule, MatTabsModule],
+  imports: [MatCardModule,
+    MatTabsModule,
+    MatDialogActions,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatDividerModule,
+    NameValidatorPipe,
+    CommonModule,
+    MatDialogContent,
+    MatDialogTitle,
+    MatDialogClose,
+    MatDatepickerModule],
   templateUrl: './edit-member.component.html',
-  styleUrl: './edit-member.component.scss'
+  styleUrl: './edit-member.component.scss',
+  providers: [
+    {provide: DateAdapter, useClass: FormDateAdapter},
+    {provide: MAT_DATE_FORMATS, useValue: FORM_DATE_FORMATS},
+  ]
 })
 export class EditMemberComponent implements OnInit {
 
@@ -51,7 +86,7 @@ export class EditMemberComponent implements OnInit {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = (control as FormControl).value;
       const valid = /^\d+$/.test(value);
-      return valid ? null : { numeric: true };
+      return valid ? null : {numeric: true};
     };
   }
 

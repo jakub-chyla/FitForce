@@ -8,6 +8,7 @@ import {MatTabsModule} from "@angular/material/tabs";
 import {AddComponent} from "../../add/add.component";
 import {MatDialog} from "@angular/material/dialog";
 import {Member} from "../../../model/Member";
+import {EditMemberComponent} from "../../edit-member/edit-member.component";
 
 @Component({
   selector: 'app-card',
@@ -28,7 +29,7 @@ export class CardComponent implements OnInit{
   }
 
   editMember() {
-    const dialogRef = this.dialog.open(AddComponent, {
+    const dialogRef = this.dialog.open(EditMemberComponent, {
       autoFocus: false,
       width: '620px',
     });
