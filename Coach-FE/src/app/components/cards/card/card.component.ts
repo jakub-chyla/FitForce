@@ -17,13 +17,14 @@ import {EditMemberComponent} from "../../edit-member/edit-member.component";
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss'
 })
-export class CardComponent implements OnInit{
+export class CardComponent implements OnInit {
 
   @Input() member?: Member
 
-  constructor( private router: Router,
-               private dialog: MatDialog) {
+  constructor(private router: Router,
+              private dialog: MatDialog) {
   }
+
   ngOnInit() {
 
   }
@@ -32,6 +33,10 @@ export class CardComponent implements OnInit{
     const dialogRef = this.dialog.open(EditMemberComponent, {
       autoFocus: false,
       width: '620px',
+      data: this.member
+    });
+    dialogRef.componentInstance.onSave.subscribe((response) => {
+      this.member = (response);
     });
   }
 

@@ -75,11 +75,13 @@ export class EditMemberComponent implements OnInit {
 
   ngOnInit() {
     this.myForm = this.formBuilder.group({
-      firstName: ['', [Validators.required, Validators.minLength(3),]],
-      lastName: ['', [Validators.required, Validators.minLength(3),]],
-      phone: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9), this.phoneValidator()]],
-      birthday: ['', [Validators.required]]
+      firstName: [this.data.firstName, [Validators.required, Validators.minLength(3),]],
+      lastName: [this.data.lastName, [Validators.required, Validators.minLength(3),]],
+      phone: [this.data.phone, [Validators.required, Validators.minLength(9), Validators.maxLength(9), this.phoneValidator()]],
+      birthday: [this.data.birthday, [Validators.required]],
+      email: [this.data.email, [Validators.required]]
     })
+    console.log(this.data)
   }
 
   phoneValidator(): ValidatorFn {
@@ -93,10 +95,12 @@ export class EditMemberComponent implements OnInit {
   save() {
     if (this.myForm.valid) {
       const member: Member = {
+        id: this.data.id,
         firstName: this.myForm.get('firstName')?.value,
         lastName: this.myForm.get('lastName')?.value,
         phone: this.myForm.get('phone')?.value,
         birthday: this.myForm.get('birthday')?.value,
+        email: this.myForm.get('email')?.value,
       }
 
       this.memberService.addMember(member).subscribe(

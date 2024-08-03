@@ -47,6 +47,9 @@
           <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
         </mat-form-field>
+        <mat-form-field>
+          <input type="text" matInput formControlName="email" placeholder="email">
+        </mat-form-field>
         <mat-divider class="col-span-2"></mat-divider>
       </div>
     </form>
