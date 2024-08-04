@@ -5,11 +5,17 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {AddComponent} from "../add/add.component";
 import {MatDividerModule} from "@angular/material/divider";
+import {RouterModule} from "@angular/router";
 
 @Component({
   selector: 'app-details',
   standalone: true,
-  imports: [MatCardModule, MatTabsModule, MatButtonModule, MatIconModule, MatDividerModule],
+  imports: [MatCardModule,
+    MatTabsModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDividerModule,
+    RouterModule],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss'
 })
