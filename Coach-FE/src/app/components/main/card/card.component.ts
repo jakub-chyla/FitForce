@@ -5,7 +5,6 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatDividerModule} from "@angular/material/divider";
 import {Router} from "@angular/router";
 import {MatTabsModule} from "@angular/material/tabs";
-import {AddComponent} from "../../add/add.component";
 import {MatDialog} from "@angular/material/dialog";
 import {Member} from "../../../model/Member";
 import {EditMemberComponent} from "../../edit-member/edit-member.component";

@@ -1,16 +1,16 @@
-import {Component, OnInit} from '@angular/core';
-import {CardComponent} from "./card/card.component";
-import {CommonModule} from "@angular/common";
-import {MemberService} from "../../service/member.service";
+import {Component, Input, OnInit} from '@angular/core';
 import {Member} from "../../model/Member";
 import {MatDialog} from "@angular/material/dialog";
-import {AddComponent} from "../add/add.component";
-import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatFabButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
+import {MemberService} from "../../service/member.service";
+import {AddComponent} from "../add/add.component";
+import {CardComponent} from "./card/card.component";
+import {CommonModule} from "@angular/common";
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 @Component({
-  selector: 'app-cards',
+  selector: 'app-main',
   standalone: true,
   imports: [
     CardComponent,
@@ -19,10 +19,10 @@ import {MatIcon} from "@angular/material/icon";
     MatFabButton,
     MatIcon,
   ],
-  templateUrl: './cards.component.html',
-  styleUrls: ['./cards.component.scss']
+  templateUrl: './main.component.html',
+  styleUrl: './main.component.scss'
 })
-export class CardsComponent implements OnInit {
+export class MainComponent implements OnInit  {
 
   constructor(private service: MemberService,
               private dialog: MatDialog) {
