@@ -18,6 +18,11 @@ export class MemberService {
     return this.httpClient.get<Member[]>(`${this.baseURL}`);
   }
 
+  getMemberWithStats(memberId: number): Observable<Member> {
+    return this.httpClient.get<Member>(`${this.baseURL}/with-stats/${memberId}`);
+  }
+
+
   addMember(member: Member): Observable<Member>{
     return this.httpClient.post(`${this.baseURL}`, member);
   }
