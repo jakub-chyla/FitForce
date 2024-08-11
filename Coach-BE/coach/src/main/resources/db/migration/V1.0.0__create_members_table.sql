@@ -8,10 +8,12 @@ create TABLE members (
     last_name TEXT,
     phone BIGINT,
     email TEXT,
-    birthday DATE
-
+    birthday DATE,
+    goal TEXT,
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    created TIMESTAMP
 );
 
-  insert into members (id, first_name, last_name, phone, email, birthday)
+insert into members (id, first_name, last_name, phone, email, birthday, goal, is_active, created)
 values
-  (1, 'John', 'Wich', 508388845, 'example@gmail.com', '2000-02-01');
+  (1, 'John', 'Williams', 1234567890, 'john.williams@example.com', '1985-05-15', 'LOSE_WEIGHT', true, CURRENT_TIMESTAMP);

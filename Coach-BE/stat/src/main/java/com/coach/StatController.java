@@ -26,9 +26,7 @@ public class StatController {
     }
 
     @GetMapping("/member/{member-id}")
-    public ResponseEntity<List<Stat>> findAllStats(
-            @PathVariable("member-id") Integer memberId
-    ) {
+    public ResponseEntity<List<Stat>> findAllStats(@PathVariable("member-id") Integer memberId) {
         return ResponseEntity.ok(service.findAllStatsByMember(memberId));
     }
 }
