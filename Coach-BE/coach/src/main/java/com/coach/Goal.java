@@ -1,18 +1,23 @@
 package com.coach;
 
-public enum Goal {
+import jakarta.persistence.*;
+import lombok.*;
 
-    LOSE_WEIGHT("Lose weight"),
-    GAIN_MUSCLES("Gain muscles");
+@Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Table(name = "goals")
+public class Goal {
 
-    private final String value;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "goals_seq")
+    @SequenceGenerator(name = "goals_seq", sequenceName = "goals_seq", allocationSize = 1)
+    private Long id;
 
-    Goal(String value) {
-        this.value = value;
-    }
-
-    public String getValue() {
-        return value;
-    }
+    @Column(nullable = false, unique = true)
+    private String value;
 
 }

@@ -34,7 +34,8 @@ public class Member {
 
     private String email;
 
-    @Enumerated(EnumType.STRING)
+    @OneToOne
+    @JoinColumn(name = "goal_id", referencedColumnName = "id")
     private Goal goal;
 
     private LocalDate birthday;

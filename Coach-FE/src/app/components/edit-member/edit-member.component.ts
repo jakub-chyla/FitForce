@@ -7,7 +7,7 @@ import {
   AbstractControl,
   FormBuilder,
   FormControl,
-  FormGroup, ReactiveFormsModule,
+  FormGroup, FormsModule, ReactiveFormsModule,
   ValidationErrors,
   ValidatorFn,
   Validators
@@ -32,6 +32,14 @@ import {CommonModule} from "@angular/common";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {DateAdapter, MAT_DATE_FORMATS} from "@angular/material/core";
 import {FORM_DATE_FORMATS, FormDateAdapter} from "../../util/form-date-adapter";
+import {MatSelect, MatSelectModule} from "@angular/material/select";
+
+
+interface Food {
+  value: string;
+  viewValue: string;
+}
+
 
 @Component({
   selector: 'app-edit-member',
@@ -50,7 +58,12 @@ import {FORM_DATE_FORMATS, FormDateAdapter} from "../../util/form-date-adapter";
     MatDialogContent,
     MatDialogTitle,
     MatDialogClose,
-    MatDatepickerModule],
+    MatDatepickerModule,
+    MatSelect,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    FormsModule],
   templateUrl: './edit-member.component.html',
   styleUrl: './edit-member.component.scss',
   providers: [
@@ -58,7 +71,14 @@ import {FORM_DATE_FORMATS, FormDateAdapter} from "../../util/form-date-adapter";
     {provide: MAT_DATE_FORMATS, useValue: FORM_DATE_FORMATS},
   ]
 })
+
 export class EditMemberComponent implements OnInit {
+
+  foods: Food[] = [
+    {value: 'steak-0', viewValue: 'Steak'},
+    {value: 'pizza-1', viewValue: 'Pizza'},
+    {value: 'tacos-2', viewValue: 'Tacos'},
+  ];
 
   themeService: ThemeService = inject(ThemeService);
   @Output() onSave: EventEmitter<Member> = new EventEmitter<Member>();

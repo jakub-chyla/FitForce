@@ -109,8 +109,7 @@ class MemberServiceTest {
 
         List<Stat> stavedStats = new ArrayList<>();
         Stat saveStat = new Stat();
-        saveStat.setFirstname("statName");
-        saveStat.setLastname("statLastName");
+        saveStat.setWeight("80");
         stavedStats.add(saveStat);
 
         //mock the calls

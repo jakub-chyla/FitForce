@@ -3,6 +3,7 @@ package com.coach;
 import com.coach.client.StatClient;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -32,6 +33,10 @@ public class MemberService {
 
     public List<Member> findAllMembersWithName(String name) {
         return memberRepository.findMembersByFirstName(name);
+    }
+
+    public List<Goal> findAllGoals() {
+        return new ArrayList<>();
     }
 }
 

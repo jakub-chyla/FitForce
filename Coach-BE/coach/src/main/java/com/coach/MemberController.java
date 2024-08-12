@@ -12,28 +12,33 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberController {
 
-    private final MemberService service;
+    private final MemberService memberService;
+    private final GoalRepository goalRepository;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Member save(@RequestBody Member member) {
-        return service.saveMember(member);
+        return memberService.saveMember(member);
     }
 
     @GetMapping
     public ResponseEntity<List<Member>> findAllMembers() {
-        return ResponseEntity.ok(service.findAllMembers());
+        return ResponseEntity.ok(memberService.findAllMembers());
     }
 
     @GetMapping("/with-name/{name}")
     public ResponseEntity<List<Member>> findAllMembersWithName(@PathVariable("name") String name) {
-        return ResponseEntity.ok(service.findAllMembersWithName(name));
+        return ResponseEntity.ok(memberService.findAllMembersWithName(name));
     }
 
     @GetMapping("/with-stats/{member-id}")
     public ResponseEntity<FullMemberResponse> findAllMembers(@PathVariable("member-id") Integer memberId) {
-        return ResponseEntity.ok(service.findMemberWithStats(memberId));
+        return ResponseEntity.ok(memberService.findMemberWithStats(memberId));
     }
 
+    @GetMapping("/goals")
+    public ResponseEntity<List<Goal>> findAllGoals() {
+        return ResponseEntity.ok(goalRepository.findAll());
+    }
 
 }
