@@ -23,8 +23,8 @@ create table members (
 
 -- Insert values into goals table
 insert into goals (id, value) values
-  (1, 'LOSE_WEIGHT'),
-  (2, 'GAIN_MUSCLES');
+  (1, 'Lose weight'),
+  (2, 'Gain muscles');
 
 -- Insert values into members table
 insert into members (id, first_name, last_name, phone, email, birthday, goal_id, is_active, created)

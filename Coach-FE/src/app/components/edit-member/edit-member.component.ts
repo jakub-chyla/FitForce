@@ -7,7 +7,9 @@ import {
   AbstractControl,
   FormBuilder,
   FormControl,
-  FormGroup, FormsModule, ReactiveFormsModule,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
   ValidationErrors,
   ValidatorFn,
   Validators
@@ -33,12 +35,7 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {DateAdapter, MAT_DATE_FORMATS} from "@angular/material/core";
 import {FORM_DATE_FORMATS, FormDateAdapter} from "../../util/form-date-adapter";
 import {MatSelect, MatSelectModule} from "@angular/material/select";
-
-
-interface Food {
-  value: string;
-  viewValue: string;
-}
+import {Goal} from "../../model/Goal";
 
 
 @Component({
@@ -74,16 +71,11 @@ interface Food {
 
 export class EditMemberComponent implements OnInit {
 
-  foods: Food[] = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'},
-  ];
-
   themeService: ThemeService = inject(ThemeService);
   @Output() onSave: EventEmitter<Member> = new EventEmitter<Member>();
 
   myForm!: FormGroup;
+  goals: Goal[] =[];
 
   readonly startDate = new Date(1990, 0, 1);
 
@@ -99,9 +91,18 @@ export class EditMemberComponent implements OnInit {
       lastName: [this.data.lastName, [Validators.required, Validators.minLength(3),]],
       phone: [this.data.phone, [Validators.required, Validators.minLength(9), Validators.maxLength(9), this.phoneValidator()]],
       birthday: [this.data.birthday, [Validators.required]],
-      email: [this.data.email, [Validators.required]]
-    })
-    console.log(this.data)
+      email: [this.data.email, [Validators.required]],
+      goal: [this.data.goal, [Validators.required]]
+    });
+    this.getGoals();
+  }
+
+  getGoals(){
+    this.memberService.getGoals().subscribe(
+      (response) => {
+        this.goals = response;
+      }
+    );
   }
 
   phoneValidator(): ValidatorFn {
@@ -121,6 +122,7 @@ export class EditMemberComponent implements OnInit {
         phone: this.myForm.get('phone')?.value,
         birthday: this.myForm.get('birthday')?.value,
         email: this.myForm.get('email')?.value,
+        goal: this.myForm.get('goal')?.value
       }
 
       this.memberService.addMember(member).subscribe(

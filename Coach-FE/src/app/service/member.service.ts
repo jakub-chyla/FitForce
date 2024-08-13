@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {Member} from "../model/Member";
+import {Goal} from "../model/Goal";
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +23,11 @@ export class MemberService {
     return this.httpClient.get<Member>(`${this.baseURL}/with-stats/${memberId}`);
   }
 
-
   addMember(member: Member): Observable<Member>{
     return this.httpClient.post(`${this.baseURL}`, member);
+  }
+
+  getGoals(): Observable<Goal[]>{
+    return this.httpClient.get<Goal[]>(`${this.baseURL}/goals`);
   }
 }
