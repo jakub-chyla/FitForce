@@ -50,32 +50,22 @@
         <mat-form-field>
           <input type="text" matInput formControlName="email" placeholder="email">
         </mat-form-field>
-          <mat-form-field>
-            <mat-label>Favorite food</mat-label>
-            <mat-select>
-              @for (food of foods; track food) {
-              <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
-              }
-            </mat-select>
-          </mat-form-field>
+        <mat-form-field>
+          <mat-label>Goal</mat-label>
+          <mat-select>
+            @for (goal of goals; track goal) {
+            <mat-option [value]="goal.id">{{goal.value}}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
         <mat-divider class="col-span-2"></mat-divider>
       </div>
     </form>
   </mat-dialog-content>
   <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>Cancel</button>
-    <button mat-raised-button (click)="save()" [disabled]="myForm.invalid "
-            type="submit">Submit
-    </button>
+    <button mat-raised-button (click)="save()" [disabled]="myForm.invalid" type="submit">Submit</button>
   </mat-dialog-actions>
 </div>
 
 
-<!--<mat-form-field>-->
-<!--  <mat-label>Favorite food</mat-label>-->
-<!--  <mat-select>-->
-<!--    @for (food of foods; track food) {-->
-<!--    <mat-option [value]="food.value">{{food.viewValue}}</mat-option>-->
-<!--    }-->
-<!--  </mat-select>-->
-<!--</mat-form-field>-->
