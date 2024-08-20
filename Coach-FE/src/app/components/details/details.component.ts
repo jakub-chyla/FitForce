@@ -6,21 +6,24 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatDividerModule} from "@angular/material/divider";
 import {ActivatedRoute, RouterModule} from "@angular/router";
 import {MemberService} from "../../service/member.service";
+import {ProgressComponent} from "./progress/progress.component";
+import {Member} from "../../model/Member";
 
 @Component({
   selector: 'app-details',
   standalone: true,
-  imports: [MatCardModule,
-    MatTabsModule,
-    MatButtonModule,
-    MatIconModule,
-    MatDividerModule,
-    RouterModule],
+    imports: [MatCardModule,
+        MatTabsModule,
+        MatButtonModule,
+        MatIconModule,
+        MatDividerModule,
+        RouterModule, ProgressComponent],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss'
 })
 export class DetailsComponent implements OnInit {
-
+  id?:number
+  member?: Member;
 
   constructor(private service: MemberService,
               private route: ActivatedRoute ) {
@@ -31,6 +34,8 @@ export class DetailsComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       const memberId = params.get('id');
       if (memberId !== null) {
+        this.id = Number(memberId)
+        console.log(this.id)
         this.getMemberWithStats(Number(memberId));
       }
     });
@@ -38,7 +43,7 @@ export class DetailsComponent implements OnInit {
 
   getMemberWithStats(memberId: number) {
     this.service.getMemberWithStats(memberId).subscribe((response) => {
-      console.log(response);
+      this.member = response;
     });
   }
 
