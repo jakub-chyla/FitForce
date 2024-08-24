@@ -1,6 +1,6 @@
 package com.coach.client;
 
-import com.coach.Stat;
+import com.coach.stats.Weight;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,5 +11,5 @@ import java.util.List;
 public interface StatClient {
 
     @GetMapping("/member/{member-id}")
-    List<Stat> findAllStatsByMember(@PathVariable("member-id") Integer memberId);
+    List<Weight> findAllStatsByMember(@PathVariable("member-id") Integer memberId);
 }

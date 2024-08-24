@@ -1,4 +1,4 @@
-package com.coach;
+package com.coach.stats.weight;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -7,19 +7,19 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class StatService {
+public class WeightService {
 
-    private final StatRepository repository;
+    private final WeightRepository repository;
 
-    public Stat saveStat(Stat stat) {
+    public Weight saveStat(Weight stat) {
         return repository.save(stat);
     }
 
-    public List<Stat> findAllStats() {
+    public List<Weight> findAllStats() {
         return repository.findAll();
     }
 
-    public List<Stat> findAllStatsByMember(Integer memberId) {
+    public List<Weight> findAllStatsByMember(Integer memberId) {
         return repository.findAllByMemberId(memberId);
     }
 }

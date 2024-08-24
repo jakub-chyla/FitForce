@@ -1,4 +1,4 @@
-package com.coach;
+package com.coach.stats.weight;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -10,23 +10,23 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/stats")
 @RequiredArgsConstructor
-public class StatController {
+public class WeightController {
 
-    private final StatService service;
+    private final WeightService service;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void save(@RequestBody Stat Stat) {
+    public void save(@RequestBody Weight Stat) {
         service.saveStat(Stat);
     }
 
     @GetMapping
-    public ResponseEntity<List<Stat>> findAllStats() {
+    public ResponseEntity<List<Weight>> findAllStats() {
         return ResponseEntity.ok(service.findAllStats());
     }
 
     @GetMapping("/member/{member-id}")
-    public ResponseEntity<List<Stat>> findAllStats(@PathVariable("member-id") Integer memberId) {
+    public ResponseEntity<List<Weight>> findAllStats(@PathVariable("member-id") Integer memberId) {
         return ResponseEntity.ok(service.findAllStatsByMember(memberId));
     }
 }

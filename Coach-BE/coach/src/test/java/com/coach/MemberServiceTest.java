@@ -1,6 +1,7 @@
 package com.coach;
 
 import com.coach.client.StatClient;
+import com.coach.stats.Weight;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -107,14 +108,14 @@ class MemberServiceTest {
         savedMember.setFirstName("John");
         savedMember.setLastName("John@gmail.com");
 
-        List<Stat> stavedStats = new ArrayList<>();
-        Stat saveStat = new Stat();
-        saveStat.setWeight("80");
-        stavedStats.add(saveStat);
+        List<Weight> stavedWeights = new ArrayList<>();
+        Weight saveWeight = new Weight();
+        saveWeight.setWeight("80");
+        stavedWeights.add(saveWeight);
 
         //mock the calls
         when(memberRepository.findById(savedMember.getId())).thenReturn(Optional.of(savedMember));
-        when(client.findAllStatsByMember(savedMember.getId())).thenReturn(stavedStats);
+        when(client.findAllStatsByMember(savedMember.getId())).thenReturn(stavedWeights);
 
         //when
         FullMemberResponse response = memberService.findMemberWithStats(savedMember.getId());

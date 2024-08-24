@@ -1,4 +1,4 @@
-package com.coach;
+package com.coach.stats;
 
 import lombok.*;
 
@@ -7,8 +7,12 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Stat {
+public class Weight {
+
+    private Integer id;
 
     private String weight;
+
+    private Long memberId;
 
 }

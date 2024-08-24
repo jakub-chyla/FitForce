@@ -1,5 +1,6 @@
 package com.coach;
 
+import com.coach.stats.weight.WeightRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -9,10 +10,10 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DataJpaTest
-class StatRepositoryTest {
+class WeightRepositoryTest {
 
     @Autowired
-    StatRepository statRepository;
+    WeightRepository weightRepository;
 
     @Test
     void should_find_stat_by_id() {
@@ -21,8 +22,8 @@ class StatRepositoryTest {
         stat.setWeight("aa");
 
         //when
-        statRepository.save(stat);
-        Stat savedStat = statRepository.findById(stat.getId()).orElseThrow();
+        weightRepository.save(stat);
+        Stat savedStat = weightRepository.findById(stat.getId()).orElseThrow();
 
         //then
         assertEquals(stat.getId(), savedStat.getId());
@@ -36,8 +37,8 @@ class StatRepositoryTest {
         stat.setWeight("aa");
 
         //when
-        statRepository.save(stat);
-        Stat savedStat = statRepository.findById(stat.getId()).orElseThrow();
+        weightRepository.save(stat);
+        Stat savedStat = weightRepository.findById(stat.getId()).orElseThrow();
 
         //then
         assertEquals(stat.getId(), savedStat.getId());
@@ -56,8 +57,8 @@ class StatRepositoryTest {
         stat2.setMemberId(2);
 
         //when
-        statRepository.save(stat1);
-        List<Stat> savedMembers = statRepository.findAllByMemberId(stat1.getId());
+        weightRepository.save(stat1);
+        List<Stat> savedMembers = weightRepository.findAllByMemberId(stat1.getId());
 
         //then
         assertEquals(stat1.getWeight(), savedMembers.get(0).getWeight());

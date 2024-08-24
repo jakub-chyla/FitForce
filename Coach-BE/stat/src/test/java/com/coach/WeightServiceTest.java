@@ -1,5 +1,7 @@
 package com.coach;
 
+import com.coach.stats.weight.WeightRepository;
+import com.coach.stats.weight.WeightService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -12,13 +14,13 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
-class StatServiceTest {
+class WeightServiceTest {
 
     @InjectMocks
-    private StatService statService;
+    private WeightService weightService;
 
     @Mock
-    public StatRepository statRepository;
+    public WeightRepository weightRepository;
 
     @BeforeEach
     void setUp() {
@@ -37,10 +39,10 @@ class StatServiceTest {
         savedMember.setMemberId(1);
 
         //mock the calls
-        when(statRepository.save(stat)).thenReturn(savedMember);
+        when(weightRepository.save(stat)).thenReturn(savedMember);
 
         //when
-        Stat response = statService.saveStat(stat);
+        Stat response = weightService.saveStat(stat);
 
         //then
         assertEquals(stat.getId(), response.getId());
@@ -78,10 +80,10 @@ class StatServiceTest {
         savedStats.add(savedStat2);
 
         //mock the calls
-        when(statRepository.findAll()).thenReturn(savedStats);
+        when(weightRepository.findAll()).thenReturn(savedStats);
 
         //when
-        List<Stat> response = statService.findAllStats();
+        List<Stat> response = weightService.findAllStats();
 
         //then
         assertEquals(stats.get(0).getId(), response.get(0).getId());
@@ -108,10 +110,10 @@ class StatServiceTest {
         savedStats.add(savedStat);
 
         //mock the calls
-        when(statRepository.findAllByMemberId(savedStat.getId())).thenReturn(savedStats);
+        when(weightRepository.findAllByMemberId(savedStat.getId())).thenReturn(savedStats);
 
         //when
-        List<Stat> response = statService.findAllStatsByMember(stat.getId());
+        List<Stat> response = weightService.findAllStatsByMember(stat.getId());
 
         //then
         assertEquals(stat.getWeight(), response.get(0).getWeight());
