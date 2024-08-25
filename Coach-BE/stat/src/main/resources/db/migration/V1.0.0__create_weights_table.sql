@@ -1,13 +1,14 @@
-CREATE SEQUENCE weights_seq INCREMENT BY 1;
+create sequence weights_seq increment by 1;
 
-SELECT setval('weights_seq', 1);
+select setval('weights_seq', 1);
 
-CREATE TABLE weights (
+create TABLE weights (
     id BIGINT PRIMARY KEY,
-    value double precision,
-    member_id bigint
+    member_id bigint,
+    created DATE,
+    value double precision
 );
 
-  insert into weights (id, value, member_id)
+  insert into weights (id, member_id, created, value)
 values
-  (1, 80.5, 1);
+  (1, 1, '1985-05-15', 80.5);

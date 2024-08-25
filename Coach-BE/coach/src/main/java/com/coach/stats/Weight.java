@@ -2,6 +2,8 @@ package com.coach.stats;
 
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -11,8 +13,11 @@ public class Weight {
 
     private Integer id;
 
-    private String weight;
-
     private Long memberId;
+
+    private LocalDateTime created;
+
+    private Double value;
+
 
 }
