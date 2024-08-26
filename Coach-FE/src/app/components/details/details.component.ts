@@ -35,7 +35,6 @@ export class DetailsComponent implements OnInit {
       const memberId = params.get('id');
       if (memberId !== null) {
         this.id = Number(memberId)
-        console.log(this.id)
         this.getMemberWithStats(Number(memberId));
       }
     });
