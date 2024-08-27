@@ -52,9 +52,10 @@
         </mat-form-field>
         <mat-form-field>
           <mat-label>Goal</mat-label>
-          <mat-select>
+          <mat-select [panelClass]="themeService.themeSignal() === 'dark' ? 'dark-mode-panel' : 'light-mode-panel'">
             @for (goal of goals; track goal) {
-            <mat-option [value]="goal.id">{{goal.value}}</mat-option>
+            <mat-option  [ngClass]="themeService.themeSignal() === 'dark' ? 'dark-mode-option' : 'light-mode-option'"
+             [value]="goal.id">{{goal.value}}</mat-option>
             }
           </mat-select>
         </mat-form-field>

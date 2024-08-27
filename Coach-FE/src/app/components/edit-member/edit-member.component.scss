@@ -1,3 +1,5 @@
+@import '../../../theme.scss';
+
 .page{
   display: flex;
   justify-content: center;
@@ -10,4 +12,12 @@
 
 .example-stretched-tabs {
   width: 800px;
+}
+
+::ng-deep .mat-mdc-select-panel.dark-mode-panel {
+  background-color: $semi-dark-bg-color !important;
+}
+
+::ng-deep .mat-mdc-option.dark-mode-option {
+  color: #cacaca !important;
 }
