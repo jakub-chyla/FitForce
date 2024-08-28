@@ -45,7 +45,9 @@
           <input matInput [matDatepicker]="picker" formControlName="birthday">
           <mat-hint>MM/DD/YYYY</mat-hint>
           <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+          <mat-datepicker
+            [ngClass]="themeService.themeSignal() === 'dark' ? 'dark-mode-option' : 'light-mode-option'"
+            [panelClass]="themeService.themeSignal() === 'dark' ? 'dark-mode-panel' : 'light-mode-panel'" #picker startView="year" [startAt]="startDate"></mat-datepicker>
         </mat-form-field>
         <mat-divider class="col-span-2"></mat-divider>
       </div>

@@ -54,7 +54,7 @@
           <mat-label>Goal</mat-label>
           <mat-select [panelClass]="themeService.themeSignal() === 'dark' ? 'dark-mode-panel' : 'light-mode-panel'">
             @for (goal of goals; track goal) {
-            <mat-option  [ngClass]="themeService.themeSignal() === 'dark' ? 'dark-mode-option' : 'light-mode-option'"
+            <mat-option [ngClass]="themeService.themeSignal() === 'dark' ? 'dark-mode-option' : 'light-mode-option'"
              [value]="goal.id">{{goal.value}}</mat-option>
             }
           </mat-select>
