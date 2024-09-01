@@ -1,5 +1,5 @@
 <div class="page md:drop-shadow-xl">
-  <mat-card class="card" appearance="outlined">
+  <mat-card class="w-1/2" appearance="outlined">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
       <mat-card-title>Simple card</mat-card-title>
@@ -9,8 +9,10 @@
         <mat-icon style="color: red">close</mat-icon>
       </button>
     </mat-card-header>
-    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
-      <mat-tab label="Progress"><app-progress [member]="member"></app-progress></mat-tab>
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center">
+      <mat-tab label="Progress">
+        <app-progress [member]="member"></app-progress>
+      </mat-tab>
       <mat-tab label="Trainings">Trainings</mat-tab>
       <mat-tab label="Diet">Diet</mat-tab>
     </mat-tab-group>
