@@ -5,7 +5,7 @@ select setval('goals_seq', 1);
 
 create table goals (
     id BIGINT PRIMARY KEY,
-    value TEXT UNIQUE NOT NULL
+    name TEXT UNIQUE NOT NULL
 );
 
 create sequence members_seq increment by 1;
@@ -25,7 +25,7 @@ create table members (
     CONSTRAINT fk_goal FOREIGN KEY (goal_id) REFERENCES goals(id)
 );
 
-insert into goals (id, value) values
+insert into goals (id, name) values
   (1, 'Lose weight'),
   (2, 'Gain muscles');
 

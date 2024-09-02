@@ -16,7 +16,7 @@ class GoalRepositoryTest {
     void should_find_all_Goals() {
         // given
         Goal goal = Goal.builder()
-                .value("LOSE_WEIGHT")
+                .name("LOSE_WEIGHT")
                 .build();
 
         // when
@@ -25,7 +25,7 @@ class GoalRepositoryTest {
 
         // then
         assertEquals(savedGoal.getId(), retrievedGoal.getId());
-        assertEquals(savedGoal.getValue(), retrievedGoal.getValue());
+        assertEquals(savedGoal.getName(), retrievedGoal.getName());
     }
 
 }

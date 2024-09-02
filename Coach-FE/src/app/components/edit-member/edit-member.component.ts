@@ -34,7 +34,7 @@ import {CommonModule} from "@angular/common";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {DateAdapter, MAT_DATE_FORMATS} from "@angular/material/core";
 import {FORM_DATE_FORMATS, FormDateAdapter} from "../../util/form-date-adapter";
-import {MatSelect, MatSelectModule} from "@angular/material/select";
+import {MatSelect, MatSelectChange, MatSelectModule} from "@angular/material/select";
 import {Goal} from "../../model/Goal";
 
 
@@ -75,7 +75,8 @@ export class EditMemberComponent implements OnInit {
   @Output() onSave: EventEmitter<Member> = new EventEmitter<Member>();
 
   myForm!: FormGroup;
-  goals: Goal[] =[];
+  goals: Goal[] = [];
+  selectedGoal?: Goal;
 
   readonly startDate = new Date(1990, 0, 1);
 
@@ -97,10 +98,12 @@ export class EditMemberComponent implements OnInit {
     this.getGoals();
   }
 
-  getGoals(){
+  getGoals() {
     this.memberService.getGoals().subscribe(
       (response) => {
         this.goals = response;
+        const goal: Goal = this.myForm.get('goal')?.value;
+        this.selectedGoal = this.goals.find(g => g.id === goal.id);
       }
     );
   }
@@ -113,6 +116,10 @@ export class EditMemberComponent implements OnInit {
     };
   }
 
+  onGoalSelected(event: MatSelectChange): void {
+    this.selectedGoal = event.value;
+  }
+
   save() {
     if (this.myForm.valid) {
       const member: Member = {
@@ -122,8 +129,8 @@ export class EditMemberComponent implements OnInit {
         phone: this.myForm.get('phone')?.value,
         birthday: this.myForm.get('birthday')?.value,
         email: this.myForm.get('email')?.value,
-        goal: this.myForm.get('goal')?.value
-      }
+        goal: this.selectedGoal
+      };
 
       this.memberService.addMember(member).subscribe(
         (response) => {

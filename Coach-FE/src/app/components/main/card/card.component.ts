@@ -36,6 +36,7 @@ export class CardComponent implements OnInit {
     });
     dialogRef.componentInstance.onSave.subscribe((response) => {
       this.member = (response);
+      console.log(this.member )
     });
   }
 
