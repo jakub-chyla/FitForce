@@ -22,4 +22,8 @@ public class WeightService {
     public List<Weight> findAllStatsByMember(Integer memberId) {
         return repository.findAllByMemberId(memberId);
     }
+
+    public void deleteById(Integer memberId) {
+        repository.deleteById(memberId);
+    }
 }

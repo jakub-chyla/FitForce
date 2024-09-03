@@ -31,6 +31,11 @@ public class MemberService {
         return FullMemberResponse.builder().name(member.getFirstName()).email(member.getLastName()).weights(members).build();
     }
 
+    public void deleteWithStats(Integer memberId) {
+        memberRepository.deleteById(memberId);
+        client.deleteAllStatsByMember(memberId);
+    }
+
     public List<Member> findAllMembersWithName(String name) {
         return memberRepository.findMembersByFirstName(name);
     }

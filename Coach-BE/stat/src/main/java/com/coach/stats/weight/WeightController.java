@@ -29,4 +29,9 @@ public class WeightController {
     public ResponseEntity<List<Weight>> findAllStats(@PathVariable("member-id") Integer memberId) {
         return ResponseEntity.ok(service.findAllStatsByMember(memberId));
     }
+
+    @DeleteMapping("/member/{member-id}")
+    public void deleteAllStatsByMember(@PathVariable("member-id") Integer memberId) {
+        service.deleteById(memberId);
+    }
 }

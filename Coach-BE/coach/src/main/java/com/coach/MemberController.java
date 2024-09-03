@@ -36,6 +36,11 @@ public class MemberController {
         return ResponseEntity.ok(memberService.findMemberWithStats(memberId));
     }
 
+    @DeleteMapping("/with-stats/{member-id}")
+    public void deleteWithStats(@PathVariable("member-id") Integer memberId) {
+       memberService.deleteWithStats(memberId);
+    }
+
     @GetMapping("/goals")
     public ResponseEntity<List<Goal>> findAllGoals() {
         return ResponseEntity.ok(goalRepository.findAll());
