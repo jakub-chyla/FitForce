@@ -8,6 +8,7 @@ import {MatTabsModule} from "@angular/material/tabs";
 import {MatDialog} from "@angular/material/dialog";
 import {Member} from "../../../model/Member";
 import {EditMemberComponent} from "../../edit-member/edit-member.component";
+import {NotificationComponent} from "./notification/notification.component";
 
 @Component({
   selector: 'app-card',
@@ -36,12 +37,24 @@ export class CardComponent implements OnInit {
     });
     dialogRef.componentInstance.onSave.subscribe((response) => {
       this.member = (response);
-      console.log(this.member )
     });
   }
+
+  deleteMember() {
+  const dialogRef = this.dialog.open(NotificationComponent, {
+    autoFocus: false,
+    width: '620px',
+    data: this.member
+  });
+  dialogRef.componentInstance.onSave.subscribe((response) => {
+  this.member = (response);
+});
+}
 
   openDetails() {
     this.router.navigate(['details', this.member?.id]);
   }
+
+
 
 }
