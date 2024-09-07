@@ -1,8 +1,11 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, inject, Input, OnInit} from '@angular/core';
+import {CommonModule} from '@angular/common';  // Import CommonModule here
 import {Member} from "../../../model/Member";
 import {MatTableModule} from "@angular/material/table";
 import {ChartConfiguration, ChartOptions} from "chart.js";
 import {BaseChartDirective} from "ng2-charts";
+import {MatDivider} from "@angular/material/divider";
+import {ThemeService} from "../../../service/theme.service";
 
 export interface PeriodicElement {
   name: string;
@@ -27,11 +30,12 @@ const ELEMENT_DATA: PeriodicElement[] = [
 @Component({
   selector: 'app-progress',
   standalone: true,
-  imports: [MatTableModule, BaseChartDirective],
+  imports: [CommonModule, MatTableModule, BaseChartDirective, MatDivider],
   templateUrl: './progress.component.html',
   styleUrl: './progress.component.scss'
 })
 export class ProgressComponent implements OnInit {
+  themeService: ThemeService = inject(ThemeService);
   @Input() member?: Member;
 
   public lineChartData: ChartConfiguration<'line'>['data'] = {

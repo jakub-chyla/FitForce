@@ -27,6 +27,10 @@ export class MemberService {
     return this.httpClient.post(`${this.baseURL}`, member);
   }
 
+  deleteMember(memberId: number | undefined): Observable<any>{
+    return this.httpClient.delete(`${this.baseURL}/with-stats/${memberId}`);
+  }
+
   getGoals(): Observable<Goal[]>{
     return this.httpClient.get<Goal[]>(`${this.baseURL}/goals`);
   }
