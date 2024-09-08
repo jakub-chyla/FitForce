@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MatCardModule} from "@angular/material/card";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
@@ -20,13 +20,13 @@ import {NotificationComponent} from "./notification/notification.component";
 export class CardComponent implements OnInit {
 
   @Input() member?: Member
+  @Output() onDelete?: Member;
 
   constructor(private router: Router,
               private dialog: MatDialog) {
   }
 
   ngOnInit() {
-
   }
 
   editMember() {
@@ -41,20 +41,20 @@ export class CardComponent implements OnInit {
   }
 
   deleteMember() {
-  const dialogRef = this.dialog.open(NotificationComponent, {
-    autoFocus: false,
-    width: '620px',
-    data: this.member
-  });
-  dialogRef.componentInstance.onSave.subscribe((response) => {
-  this.member = (response);
-});
-}
+    const dialogRef = this.dialog.open(NotificationComponent, {
+      autoFocus: false,
+      width: '620px',
+      data: this.member
+    });
+
+    dialogRef.componentInstance.onDelete.subscribe(() => {
+      this.router.navigate(['main', this.member?.id]);
+    });
+  }
+
 
   openDetails() {
     this.router.navigate(['details', this.member?.id]);
   }
-
-
 
 }

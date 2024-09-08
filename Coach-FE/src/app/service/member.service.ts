@@ -27,8 +27,8 @@ export class MemberService {
     return this.httpClient.post(`${this.baseURL}`, member);
   }
 
-  deleteMember(memberId: number | undefined): Observable<any>{
-    return this.httpClient.delete(`${this.baseURL}/with-stats/${memberId}`);
+  deleteMember(memberId: number): Observable<void>{
+    return this.httpClient.delete<void>(`${this.baseURL}/with-stats/${memberId}`);
   }
 
   getGoals(): Observable<Goal[]>{

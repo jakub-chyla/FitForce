@@ -22,6 +22,7 @@ import {NameValidatorPipe} from "../../../add/name-validator.pipe";
 import {CommonModule} from "@angular/common";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatSelect, MatSelectModule} from "@angular/material/select";
+import {MemberEventService} from "../../../../service/member-event-service.service";
 
 @Component({
   selector: 'app-notification',
@@ -52,12 +53,13 @@ import {MatSelect, MatSelectModule} from "@angular/material/select";
 export class NotificationComponent implements OnInit {
 
   themeService: ThemeService = inject(ThemeService);
-  @Output() onSave: EventEmitter<Member> = new EventEmitter<Member>();
+  @Output() onDelete: EventEmitter<Member> = new EventEmitter<Member>();
   member?: Member;
 
   constructor(private memberService: MemberService,
-              private dialogRef: MatDialogRef<AddComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any) {
+              private dialogRef: MatDialogRef<NotificationComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              private memberEventService: MemberEventService) {
   }
 
   ngOnInit() {
@@ -65,8 +67,11 @@ export class NotificationComponent implements OnInit {
   }
 
   delete() {
-    const memberId = this.member?.id
-    this.memberService.deleteMember(memberId);
+    const memberId = this.member?.id!;
+    this.memberService.deleteMember(memberId).subscribe(() => {
+      this.memberEventService.deleteMember(this.member!);
+      this.closeDialog();
+    });
   }
 
   closeDialog(): void {
