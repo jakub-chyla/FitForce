@@ -8,49 +8,26 @@ import {MatDivider} from "@angular/material/divider";
 import {ThemeService} from "../../../service/theme.service";
 
 export interface PeriodicElement {
-  name: string;
-  position: number;
+  month: string;
   weight: number;
-  symbol: string;
 }
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
 
 @Component({
   selector: 'app-progress',
   standalone: true,
   imports: [CommonModule, MatTableModule, BaseChartDirective, MatDivider],
   templateUrl: './progress.component.html',
-  styleUrl: './progress.component.scss'
+  styleUrls: ['./progress.component.scss'] // Fixed typo (styleUrl -> styleUrls)
 })
 export class ProgressComponent implements OnInit {
   themeService: ThemeService = inject(ThemeService);
   @Input() member?: Member;
 
   public lineChartData: ChartConfiguration<'line'>['data'] = {
-    labels: [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July'
-    ],
+    labels: [],
     datasets: [
       {
-        data: [ 90, 85, 80, 83, 88, 80 ],
+        data: [],
         label: 'Weight',
         fill: true,
         tension: 0.5,
@@ -59,20 +36,34 @@ export class ProgressComponent implements OnInit {
       }
     ]
   };
-  public lineChartOptions: ChartOptions<'line'> = {
-    responsive: false
-  };
+
+  public lineChartOptions: ChartOptions<'line'> = {responsive: true};
   public lineChartLegend = true;
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
+  displayedColumns: string[] = ['month', 'weight'];
+  dataSource: PeriodicElement[] = [];
 
   ngOnInit() {
-    setTimeout(() => {
-      console.log(this.member)
-
-    }, 100);
-
+      this.init();
   }
 
+  init() {
+    const tableData: PeriodicElement[] = [
+      {month: 'January', weight: 90},
+      {month: 'February', weight: 120},
+      {month: 'March', weight: 80},
+      {month: 'April', weight: 90}
+    ];
+
+    this.dataSource = tableData;
+    this.updateChartData(tableData);
+  }
+
+  updateChartData(data: PeriodicElement[]) {
+    const months = data.map(d => d.month);
+    const weights = data.map(d => d.weight);
+
+    this.lineChartData.labels = months;
+    this.lineChartData.datasets[0].data = weights;
+  }
 }
