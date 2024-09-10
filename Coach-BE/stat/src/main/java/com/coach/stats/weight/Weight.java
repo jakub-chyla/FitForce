@@ -24,6 +24,7 @@ public class Weight {
 
     private LocalDateTime created;
 
-    private Double value;
+    @Column(name = "weight_value")
+    private Double weightValue;
 
 }

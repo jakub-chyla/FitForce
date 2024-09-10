@@ -26,7 +26,7 @@ public class WeightController {
     }
 
     @GetMapping("/member/{member-id}")
-    public ResponseEntity<List<Weight>> findAllStats(@PathVariable("member-id") Integer memberId) {
+    public ResponseEntity<List<Weight>> findAllStats(@PathVariable("member-id") Long memberId) {
         return ResponseEntity.ok(service.findAllStatsByMember(memberId));
     }
 

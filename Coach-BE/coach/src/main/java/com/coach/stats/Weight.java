@@ -11,13 +11,13 @@ import java.time.LocalDateTime;
 @Builder
 public class Weight {
 
-    private Integer id;
+    private Long id;
 
     private Long memberId;
 
     private LocalDateTime created;
 
-    private Double value;
+    private Double weightValue;
 
 
 }

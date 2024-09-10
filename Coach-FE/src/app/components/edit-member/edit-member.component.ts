@@ -2,7 +2,7 @@ import {Component, EventEmitter, Inject, inject, OnInit, Output} from '@angular/
 import {MatCardModule} from "@angular/material/card";
 import {MatTabsModule} from "@angular/material/tabs";
 import {ThemeService} from "../../service/theme.service";
-import {Member} from "../../model/Member";
+import {Member} from "../../model/member";
 import {
   AbstractControl,
   FormBuilder,
@@ -35,7 +35,7 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {DateAdapter, MAT_DATE_FORMATS} from "@angular/material/core";
 import {FORM_DATE_FORMATS, FormDateAdapter} from "../../util/form-date-adapter";
 import {MatSelect, MatSelectChange, MatSelectModule} from "@angular/material/select";
-import {Goal} from "../../model/Goal";
+import {Goal} from "../../model/goal";
 
 
 @Component({

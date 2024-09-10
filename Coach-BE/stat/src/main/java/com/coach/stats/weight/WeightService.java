@@ -1,6 +1,8 @@
 package com.coach.stats.weight;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,8 +21,8 @@ public class WeightService {
         return repository.findAll();
     }
 
-    public List<Weight> findAllStatsByMember(Integer memberId) {
-        return repository.findAllByMemberId(memberId);
+    public List<Weight> findAllStatsByMember(Long memberId) {
+        return repository.findAllByMemberIdRecent(memberId);
     }
 
     public void deleteById(Integer memberId) {

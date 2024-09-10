@@ -13,6 +13,5 @@ import java.util.List;
 public class FullMemberResponse {
 
     private String name;
-    private String email;
     List<Weight> weights;
 }

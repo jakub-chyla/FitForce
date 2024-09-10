@@ -27,8 +27,8 @@ public class MemberService {
 
     public FullMemberResponse findMemberWithStats(Integer memberId) {
         var member = memberRepository.findById(memberId).orElse(Member.builder().firstName("NOT_FOUND").lastName("NOT_FOUND").build());
-        var members = client.findAllStatsByMember(memberId);
-        return FullMemberResponse.builder().name(member.getFirstName()).email(member.getLastName()).weights(members).build();
+        var weights = client.findAllStatsByMember(memberId);
+        return FullMemberResponse.builder().name(member.getFirstName()).weights(weights).build();
     }
 
     public void deleteWithStats(Integer memberId) {

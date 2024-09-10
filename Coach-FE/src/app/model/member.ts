@@ -1,4 +1,4 @@
-import {Goal} from "./Goal";
+import {Goal} from "./goal";
 
 export class Member {
   id?: number;

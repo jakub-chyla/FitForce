@@ -9,7 +9,7 @@ import {
   MatDialogTitle
 } from "@angular/material/dialog";
 import {AddComponent} from "../../../add/add.component";
-import {Member} from "../../../../model/Member";
+import {Member} from "../../../../model/member";
 import {ThemeService} from "../../../../service/theme.service";
 import {MatButton, MatButtonModule} from "@angular/material/button";
 import {MatCardModule} from "@angular/material/card";

@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Member} from "../../model/Member";
+import {Member} from "../../model/member";
 import {MatDialog} from "@angular/material/dialog";
 import {MatFabButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";

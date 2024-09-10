@@ -17,7 +17,7 @@ import {MatCardModule} from "@angular/material/card";
 import {MatDividerModule} from "@angular/material/divider";
 import {NameValidatorPipe} from "./name-validator.pipe";
 import {MemberService} from "../../service/member.service";
-import {Member} from "../../model/Member";
+import {Member} from "../../model/member";
 import {
   MAT_DIALOG_DATA,
   MatDialogActions, MatDialogClose,

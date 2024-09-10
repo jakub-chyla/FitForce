@@ -6,9 +6,14 @@ create TABLE weights (
     id BIGINT PRIMARY KEY,
     member_id bigint,
     created DATE,
-    value double precision
+    weight_value double precision
 );
 
-  insert into weights (id, member_id, created, value)
+  insert into weights (id, member_id, created, weight_value)
 values
-  (1, 1, '1985-05-15', 80.5);
+  (1, 1, '2024-01-10', 70.5),
+  (2, 1, '2024-02-10', 75.0),
+  (3, 1, '2025-03-10', 78.8),
+  (4, 1, '2025-04-10', 82.3),
+  (5, 1, '2025-05-10', 77.5),
+  (6, 1, '2025-06-10', 74.2);

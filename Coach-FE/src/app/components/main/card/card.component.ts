@@ -6,7 +6,7 @@ import {MatDividerModule} from "@angular/material/divider";
 import {Router} from "@angular/router";
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatDialog} from "@angular/material/dialog";
-import {Member} from "../../../model/Member";
+import {Member} from "../../../model/member";
 import {EditMemberComponent} from "../../edit-member/edit-member.component";
 import {NotificationComponent} from "./notification/notification.component";
 

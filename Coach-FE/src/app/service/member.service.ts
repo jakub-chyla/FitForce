@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
-import {Member} from "../model/Member";
-import {Goal} from "../model/Goal";
+import {Member} from "../model/member";
+import {Goal} from "../model/goal";
+import {FullMemberResponse} from "../model/fullMemberResponse";
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class MemberService {
   }
 
   getMemberWithStats(memberId: number): Observable<Member> {
-    return this.httpClient.get<Member>(`${this.baseURL}/with-stats/${memberId}`);
+    return this.httpClient.get<FullMemberResponse>(`${this.baseURL}/with-stats/${memberId}`);
   }
 
   addMember(member: Member): Observable<Member>{
