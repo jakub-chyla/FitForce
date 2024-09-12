@@ -16,9 +16,13 @@ public class MemberController {
     private final GoalRepository goalRepository;
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Member save(@RequestBody Member member) {
-        return memberService.saveMember(member);
+    public ResponseEntity<Member> save(@RequestBody Member member) {
+        return ResponseEntity.ok(memberService.saveMember(member));
+    }
+
+    @PatchMapping
+    public ResponseEntity<Member> update(@RequestBody Member member) {
+        return ResponseEntity.ok(memberService.saveMember(member));
     }
 
     @GetMapping
@@ -38,7 +42,7 @@ public class MemberController {
 
     @DeleteMapping("/with-stats/{member-id}")
     public void deleteWithStats(@PathVariable("member-id") Integer memberId) {
-       memberService.deleteWithStats(memberId);
+        memberService.deleteWithStats(memberId);
     }
 
     @GetMapping("/goals")
