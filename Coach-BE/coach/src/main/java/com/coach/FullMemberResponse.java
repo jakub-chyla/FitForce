@@ -1,5 +1,6 @@
 package com.coach;
 
+import com.coach.dto.WeightDto;
 import com.coach.stats.Weight;
 import lombok.*;
 
@@ -13,5 +14,5 @@ import java.util.List;
 public class FullMemberResponse {
 
     private String name;
-    List<Weight> weights;
+    List<WeightDto> weights;
 }

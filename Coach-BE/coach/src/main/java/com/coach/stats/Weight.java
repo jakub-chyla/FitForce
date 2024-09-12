@@ -2,7 +2,7 @@ package com.coach.stats;
 
 import lombok.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -15,7 +15,7 @@ public class Weight {
 
     private Long memberId;
 
-    private LocalDateTime created;
+    private LocalDate created;
 
     private Double weightValue;
 

@@ -1,7 +1,5 @@
 export class Weight{
   id?: number;
-  memberId?: number;
-  crated?: string;
+  created?: string;
   weightValue?: number;
-
 }

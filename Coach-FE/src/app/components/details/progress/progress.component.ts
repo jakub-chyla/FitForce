@@ -1,6 +1,5 @@
 import {Component, inject, Input, OnInit} from '@angular/core';
-import {CommonModule} from '@angular/common';  // Import CommonModule here
-import {Member} from "../../../model/member";
+import {CommonModule} from '@angular/common';
 import {MatTableModule} from "@angular/material/table";
 import {ChartConfiguration, ChartOptions} from "chart.js";
 import {BaseChartDirective} from "ng2-charts";
@@ -18,7 +17,7 @@ export interface weightData {
   standalone: true,
   imports: [CommonModule, MatTableModule, BaseChartDirective, MatDivider],
   templateUrl: './progress.component.html',
-  styleUrls: ['./progress.component.scss'] // Fixed typo (styleUrl -> styleUrls)
+  styleUrls: ['./progress.component.scss']
 })
 export class ProgressComponent implements OnInit {
   themeService: ThemeService = inject(ThemeService);
@@ -53,30 +52,24 @@ export class ProgressComponent implements OnInit {
 
   init() {
     const tableData: weightData[] = [];
-
-    // Check if weights array exists in fullMemberResponse
     if (this.fullMemberResponse?.weights) {
-      // Loop over the weights array and push the necessary data into tableData
       this.fullMemberResponse.weights.forEach(weight => {
         tableData.push({
-          created: weight.crated ?? '',  // Handling undefined values with a fallback
-          weightValue: weight.weightValue ?? 0      // Default to 0 if weight value is undefined
+          created: weight.created ?? '',
+          weightValue: weight.weightValue ?? 0
         });
       });
 
-      // Assign the tableData to the dataSource
       this.dataSource = tableData;
-      console.log(this.dataSource)
-
-      // Update the chart data
       this.updateChartData(tableData);
     }
   }
 
-// Helper function to update chart data
   updateChartData(tableData: weightData[]) {
-    const labels = tableData.map(data => data.created);  // Extract dates for the labels
-    const data = tableData.map(data => data.weightValue);     // Extract weights for the dataset
+    const reversedData = tableData.slice().reverse();
+    
+    const labels = reversedData.map(data => data.created);
+    const data = reversedData.map(data => data.weightValue);
 
     this.lineChartData = {
       labels: labels,
@@ -93,11 +86,3 @@ export class ProgressComponent implements OnInit {
     };
   }
 }
-
-
-// const tableData: weightData[] = [
-//   {month: 'January', weight: 90},
-//   {month: 'February', weight: 120},
-//   {month: 'March', weight: 80},
-//   {month: 'April', weight: 90}
-// ];

@@ -1,10 +1,12 @@
 package com.coach;
 
 import com.coach.client.StatClient;
+import com.coach.stats.Weight;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MemberService {
@@ -26,9 +28,9 @@ public class MemberService {
     }
 
     public FullMemberResponse findMemberWithStats(Integer memberId) {
-        var member = memberRepository.findById(memberId).orElse(Member.builder().firstName("NOT_FOUND").lastName("NOT_FOUND").build());
-        var weights = client.findAllStatsByMember(memberId);
-        return FullMemberResponse.builder().name(member.getFirstName()).weights(weights).build();
+        Member member = memberRepository.findById(memberId).orElse(Member.builder().firstName("NOT_FOUND").lastName("NOT_FOUND").build());
+        List<Weight> weights = client.findAllStatsByMember(memberId);
+        return FullMemberResponse.builder().name(member.getFirstName()).weights(weights.stream().map(Mapper::map).collect(Collectors.toList())).build();
     }
 
     public void deleteWithStats(Integer memberId) {

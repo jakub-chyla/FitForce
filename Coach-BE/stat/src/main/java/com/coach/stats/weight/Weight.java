@@ -3,6 +3,7 @@ package com.coach.stats.weight;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -22,7 +23,7 @@ public class Weight {
     @Column(name = "member_id")
     private Long memberId;
 
-    private LocalDateTime created;
+    private LocalDate created;
 
     @Column(name = "weight_value")
     private Double weightValue;
