@@ -28,6 +28,10 @@ export class MemberService {
     return this.httpClient.post(`${this.baseURL}`, member);
   }
 
+  updateMember(member: Member): Observable<Member>{
+    return this.httpClient.patch(`${this.baseURL}`, member);
+  }
+
   deleteMember(memberId: number): Observable<void>{
     return this.httpClient.delete<void>(`${this.baseURL}/with-stats/${memberId}`);
   }

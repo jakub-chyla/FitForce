@@ -132,7 +132,7 @@ export class EditMemberComponent implements OnInit {
         goal: this.selectedGoal
       };
 
-      this.memberService.addMember(member).subscribe(
+      this.memberService.updateMember(member).subscribe(
         (response) => {
           this.onSave.emit(response);
           this.closeDialog();
