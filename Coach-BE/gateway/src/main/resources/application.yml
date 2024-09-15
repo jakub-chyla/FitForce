@@ -37,6 +37,6 @@ spring:
         - id: security
           uri: http://localhost:9898
           predicates:
-            - Path=/api/v1/security/**
+            - Path=/auth/**
   config:
     import: optional:configserver:http://localhost:8888
