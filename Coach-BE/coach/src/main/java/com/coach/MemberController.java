@@ -1,7 +1,8 @@
 package com.coach;
 
+import com.coach.client.StatClient2;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +15,9 @@ public class MemberController {
 
     private final MemberService memberService;
     private final GoalRepository goalRepository;
+
+
+    private final StatClient2 statClient2;
 
     @PostMapping
     public ResponseEntity<Member> save(@RequestBody Member member) {
@@ -28,6 +32,11 @@ public class MemberController {
     @GetMapping
     public ResponseEntity<List<Member>> findAllMembers() {
         return ResponseEntity.ok(memberService.findAllMembers());
+    }
+
+    @GetMapping("mess")
+    public ResponseEntity<String> getMessToken() {
+        return ResponseEntity.ok(statClient2.getMessToken());
     }
 
     @GetMapping("/with-name/{name}")

@@ -25,7 +25,7 @@ import {MemberEventService} from "../../service/member-event-service.service";
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'
 })
-export class MainComponent implements OnInit  {
+export class MainComponent implements OnInit {
 
   constructor(private service: MemberService,
               private dialog: MatDialog,
@@ -35,8 +35,8 @@ export class MainComponent implements OnInit  {
   members: Member[] = [];
 
   ngOnInit() {
-    this.getMembers();
-
+    // this.getMembers();
+    this.getMembersToken();
     this.memberEventService.memberDeleted$.subscribe((deletedMember) => {
       if (deletedMember) {
         this.members = this.members.filter(m => m.id !== deletedMember.id);
@@ -47,6 +47,13 @@ export class MainComponent implements OnInit  {
   getMembers() {
     this.service.getMembers().subscribe((response) => {
       this.members = response;
+    });
+  }
+
+  getMembersToken() {
+    this.service.getMssToken().subscribe((response) => {
+      console.log(response)
+
     });
   }
 

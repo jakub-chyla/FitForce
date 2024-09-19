@@ -8,11 +8,17 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/stats")
+@RequestMapping("/stats")
 @RequiredArgsConstructor
 public class WeightController {
 
     private final WeightService service;
+
+    @GetMapping("/mess/{member-id}")
+    public ResponseEntity<String> getString(@PathVariable("member-id") Long memberId) {
+        String response = "hello from stats" + memberId;
+        return ResponseEntity.ok(response);
+    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -34,4 +40,6 @@ public class WeightController {
     public void deleteAllStatsByMember(@PathVariable("member-id") Integer memberId) {
         service.deleteById(memberId);
     }
+
+
 }

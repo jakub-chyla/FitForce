@@ -1,13 +1,38 @@
-eureka:
-  client:
-    register-with-eureka: false
 server:
   port: 8222
 spring:
-  application:
-    name: gateway
   cloud:
     gateway:
+      routes:
+        - id: swiggy-app
+          uri: http://localhost:8081
+          predicates:
+            - Path=/swiggy/**
+          filters:
+            - AuthenticationFilter
+        - id: stats
+          uri: http://localhost:8090
+          predicates:
+            - Path=/stats/**
+          filters:
+            - AuthenticationFilter
+        - id: members
+          uri: http://localhost:8070
+          predicates:
+            - Path=/api/v1/members/**
+          filters:
+            - AuthenticationFilter
+        - id: restaurant-service
+          uri: lb://RESTAURANT-SERVICE
+          predicates:
+            - Path=/restaurant/**
+          filters:
+            - AuthenticationFilter
+
+        - id: security
+          uri: http://localhost:9898
+          predicates:
+            - Path=/auth/**
       globalcors:
         cors-configurations:
           '[/**]':
@@ -25,18 +50,10 @@ spring:
       discovery:
         locator:
           enabled: true
-      routes:
-        - id: stats
-          uri: http://localhost:8090
-          predicates:
-            - Path=/api/v1/stats/**
-        - id: members
-          uri: http://localhost:8070
-          predicates:
-            - Path=/api/v1/members/**
-        - id: security
-          uri: http://localhost:9898
-          predicates:
-            - Path=/auth/**
-  config:
-    import: optional:configserver:http://localhost:8888
+  application:
+    name: SWIGGY-GATEWAY
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
