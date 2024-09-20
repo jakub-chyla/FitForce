@@ -4,10 +4,10 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: swiggy-app
-          uri: http://localhost:8081
+        - id: members
+          uri: http://localhost:8070
           predicates:
-            - Path=/swiggy/**
+            - Path=/api/v1/members/**
           filters:
             - AuthenticationFilter
         - id: stats
@@ -16,19 +16,6 @@ spring:
             - Path=/stats/**
           filters:
             - AuthenticationFilter
-        - id: members
-          uri: http://localhost:8070
-          predicates:
-            - Path=/api/v1/members/**
-          filters:
-            - AuthenticationFilter
-        - id: restaurant-service
-          uri: lb://RESTAURANT-SERVICE
-          predicates:
-            - Path=/restaurant/**
-          filters:
-            - AuthenticationFilter
-
         - id: security
           uri: http://localhost:9898
           predicates:
@@ -51,9 +38,13 @@ spring:
         locator:
           enabled: true
   application:
-    name: SWIGGY-GATEWAY
+    name: gateway
 
 eureka:
+  instance:
+    hostname: localhost
   client:
+    register-with-eureka: false
+    fetch-registry: false
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/

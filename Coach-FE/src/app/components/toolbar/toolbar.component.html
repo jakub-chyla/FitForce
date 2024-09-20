@@ -4,10 +4,6 @@
   </button>
   <a routerLink="main" routerLinkActive="active" class="nav-link">Coach</a>
   <span class="icon-spacer"></span>
-  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" [routerLink]="['/add']">
-    <mat-icon>add</mat-icon>
-  </button>
-
   <div class="theme-control">
     <mat-slide-toggle checked (click)="toggleTheme()"></mat-slide-toggle>
     <button mat-icon-button>
@@ -18,4 +14,12 @@
       }
     </button>
   </div>
+  <button mat-icon-button class="example-icon favorite-icon"
+          aria-label="Example icon-button with heart icon" [routerLink]="'/log-in'">
+    <mat-icon>login</mat-icon>
+  </button>
+  <button mat-icon-button class="example-icon favorite-icon"
+          aria-label="Example icon-button with heart icon" [routerLink]="'/sign-in'">
+    <mat-icon>person</mat-icon>
+  </button>
 </mat-toolbar>

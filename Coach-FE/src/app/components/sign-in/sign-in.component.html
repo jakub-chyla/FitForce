@@ -1,0 +1,72 @@
+<div class="flex justify-center pt-20" [ngClass]="themeService.themeSignal()">
+  <mat-card class="w-3/5 " appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>Sign in</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+    <form [formGroup]="myForm">
+      <div class="grid grid-cols-2 gap-4">
+        <mat-divider class="col-span-2"></mat-divider>
+        <mat-form-field class="">
+          <input type="text" matInput formControlName="firstName" placeholder="John">
+          <mat-hint>Enter name</mat-hint>
+          @if (myForm.controls['firstName'].hasError('required')) {
+            <mat-error> Field is required</mat-error>
+          }
+          @if (myForm.controls['firstName'].hasError('minlength')) {
+            <mat-error>Minimum length is 2</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field>
+          <input type="text" matInput formControlName="lastName" placeholder="Smith">
+          <mat-hint>Enter last name</mat-hint>
+          @if (myForm.controls['lastName'].hasError('required')) {
+            <mat-error>Field is required</mat-error>
+          }
+          @if (myForm.controls['lastName'].hasError('minlength')) {
+            <mat-error>Minimum length is 2</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field>
+          <input type="text" matInput formControlName="name" placeholder="aaa">
+          <mat-hint>Enter login</mat-hint>
+          @if (myForm.controls['name'].hasError('required')) {
+            <mat-error>Field is required</mat-error>
+          }
+          @if (myForm.controls['name'].hasError('minlength')) {
+            <mat-error>Too short</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field>
+          <input type="text" matInput formControlName="password" placeholder="aaa">
+          <mat-hint>Enter password</mat-hint>
+          @if (myForm.controls['password'].hasError('required')) {
+            <mat-error>Field is required</mat-error>
+          }
+          @if (myForm.controls['password'].hasError('minlength')) {
+            <mat-error>Too short</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field>
+          <input type="text" matInput formControlName="email" placeholder="aaa@gmail.com">
+          <mat-hint>Enter email</mat-hint>
+          @if (myForm.controls['email'].hasError('required')) {
+            <mat-error>Field is required</mat-error>
+          }
+          @if (myForm.controls['email'].hasError('minlength')) {
+            <mat-error>Minimum length is 2</mat-error>
+          }
+        </mat-form-field>
+        <mat-divider class="col-span-2"></mat-divider>
+      </div>
+    </form>
+    </mat-card-content>
+    <mat-card-footer class="card-footer flex justify-end">
+
+    <button mat-button [routerLink]="'/main'" mat-dialog-close>Cancel</button>
+    <button mat-raised-button [routerLink]="'/main'" (click)="save()" [disabled]="myForm.invalid "
+            type="submit">Submit
+    </button>
+    </mat-card-footer>
+  </mat-card>
+</div>
