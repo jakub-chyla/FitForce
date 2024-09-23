@@ -1,1 +1,45 @@
-<p>log-in works!</p>
+<div class="flex justify-center pt-20" [ngClass]="themeService.themeSignal()">
+  <mat-card class="w-2/5 md:drop-shadow-xl" appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>Log in</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="myForm">
+        <div class="grid grid-cols-2 gap-4">
+          <mat-divider class="col-span-2"></mat-divider>
+          <mat-form-field>
+            <input type="text" matInput formControlName="username" placeholder="aaa">
+            <mat-hint>Enter login</mat-hint>
+            @if (myForm.controls['username'].hasError('required')) {
+              <mat-error>Field is required</mat-error>
+            }
+            @if (myForm.controls['username'].hasError('minlength')) {
+              <mat-error>Too short</mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field>
+            <input type="text" matInput formControlName="password" placeholder="aaa">
+            <mat-hint>Enter password</mat-hint>
+            @if (myForm.controls['password'].hasError('required')) {
+              <mat-error>Field is required</mat-error>
+            }
+            @if (myForm.controls['password'].hasError('minlength')) {
+              <mat-error>Too short</mat-error>
+            }
+          </mat-form-field>
+          <mat-divider class="col-span-2"></mat-divider>
+        </div>
+      </form>
+    </mat-card-content>
+    <mat-card-footer class="card-footer flex justify-between">
+      <div>
+        <button mat-button [routerLink]="'/sign-in'" mat-dialog-close>Sing up</button>
+      </div>
+      <div>
+        <button mat-raised-button color="primary" (click)="save()" [disabled]="myForm.invalid "
+                type="submit">Log in
+        </button>
+      </div>
+    </mat-card-footer>
+  </mat-card>
+</div>

@@ -10,6 +10,10 @@ import {CommonModule} from "@angular/common";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {NotificationComponent} from "./card/notification/notification.component";
 import {MemberEventService} from "../../service/member-event-service.service";
+import {UserService} from "../../service/user.service";
+import {catchError, map, Observable, of} from "rxjs";
+import {Router} from "@angular/router";
+import {AuthHelper} from "../../util/auth-helper";
 
 @Component({
   selector: 'app-main',
@@ -29,14 +33,27 @@ export class MainComponent implements OnInit {
 
   constructor(private service: MemberService,
               private dialog: MatDialog,
-              private memberEventService: MemberEventService) {
+              private memberEventService: MemberEventService,
+              private userService: UserService,
+              private router: Router) {
   }
 
   members: Member[] = [];
+  isTokenValid = false;
 
   ngOnInit() {
-    // this.getMembers();
-    this.getMembersToken();
+
+    let isValid =this.userService.checkIsTokenValid()
+      if (isValid) {
+        this.isTokenValid = true;
+        console.log(this.isTokenValid )
+        this.getMembers();
+      }
+
+    if(!this.isTokenValid || AuthHelper.getToken() === null){
+      this.router.navigate(['/log-in']);
+    }
+
     this.memberEventService.memberDeleted$.subscribe((deletedMember) => {
       if (deletedMember) {
         this.members = this.members.filter(m => m.id !== deletedMember.id);
@@ -47,13 +64,6 @@ export class MainComponent implements OnInit {
   getMembers() {
     this.service.getMembers().subscribe((response) => {
       this.members = response;
-    });
-  }
-
-  getMembersToken() {
-    this.service.getMssToken().subscribe((response) => {
-      console.log(response)
-
     });
   }
 

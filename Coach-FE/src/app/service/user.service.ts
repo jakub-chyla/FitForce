@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable, tap} from "rxjs";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {catchError, map, Observable, of, tap} from "rxjs";
 import {User} from "../model/user";
+import {AuthRequest} from "../model/auth-request";
+import {DateHelper} from "../util/date-helper";
+import {AuthHelper} from "../util/auth-helper";
 
 @Injectable({
   providedIn: 'root'
@@ -9,35 +12,33 @@ import {User} from "../model/user";
 export class UserService {
 
   private baseURL = 'http://localhost:8222/auth/';
-  token: string;
-  email: string | null = '';
-
   constructor(private httpClient: HttpClient) {
-    this.token = localStorage.getItem('token') as string;
+
   }
 
-  createUser(user: User): Observable<Object> {
-    return this.httpClient.post(`${this.baseURL}register`, user);
+  check(): Observable<string> {
+    return this.httpClient.get<string>(`${this.baseURL}validate?token=${AuthHelper.getToken()}`);
   }
 
-  authUser(user: User): Observable<Object> {
-    let email = user.email;
+  createUser(user: User): Observable<string> {
+    return this.httpClient.post<string>(`${this.baseURL}register`, user);
+  }
 
-    return this.httpClient.post(`${this.baseURL}auth/authenticate`, user).pipe(
+  singIn(authRequest: AuthRequest): Observable<string> {
+    return this.httpClient.post(`${this.baseURL}token`, authRequest, { responseType: 'text' }).pipe(
       tap((response: any) => {
-
-        localStorage.setItem('token', response.token);
-        localStorage.setItem('role', response.role);
-        localStorage.setItem('email', response.email);
-
-        if (typeof email === "string") {
-          localStorage.setItem('email', email);
-          window.dispatchEvent(new StorageEvent('storage', {
-            key: 'email',
-            newValue: email
-          }));
-        }
+        localStorage.setItem('name', <string>authRequest.username);
+        localStorage.setItem('token', response);
       })
     );
+  }
+
+  checkIsTokenValid()  {
+    this.check().subscribe(
+      (response) => {
+        console.log(response)
+      }
+    );
+    return true
   }
 }

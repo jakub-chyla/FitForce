@@ -4,7 +4,8 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from '@angular/material/button';
 import {ThemeService} from "../../service/theme.service";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
-import {RouterModule} from "@angular/router";
+import {Router, RouterModule} from "@angular/router";
+import {AuthHelper} from "../../util/auth-helper";
 
 @Component({
   selector: 'app-toolbar',
@@ -20,7 +21,15 @@ import {RouterModule} from "@angular/router";
 export class ToolbarComponent {
   themeService: ThemeService = inject(ThemeService);
 
+  constructor(private router: Router) {
+  }
+
   toggleTheme() {
     this.themeService.updateTheme();
+  }
+
+  logOut(){
+    AuthHelper.logOut();
+    this.router.navigate(['/log-in']);
   }
 }

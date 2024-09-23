@@ -19,6 +19,12 @@ public class AuthController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @GetMapping("/validate")
+    public String validateToken(@RequestParam("token") String token) {
+        service.validateToken(token);
+        return "Token is valid";
+    }
+
     @PostMapping("/register")
     public String addNewUser(@RequestBody UserCredential user) {
         return service.saveUser(user);
@@ -34,9 +40,5 @@ public class AuthController {
         }
     }
 
-    @GetMapping("/validate")
-    public String validateToken(@RequestParam("token") String token) {
-        service.validateToken(token);
-        return "Token is valid";
-    }
+
 }

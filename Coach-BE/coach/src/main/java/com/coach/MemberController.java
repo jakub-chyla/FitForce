@@ -34,10 +34,10 @@ public class MemberController {
         return ResponseEntity.ok(memberService.findAllMembers());
     }
 
-    @GetMapping("mess")
-    public ResponseEntity<String> getMessToken() {
-        return ResponseEntity.ok(statClient2.getMessToken());
-    }
+//    @GetMapping("mess")
+//    public ResponseEntity<String> getMessToken() {
+//        return ResponseEntity.ok(statClient2.getMessToken());
+//    }
 
     @GetMapping("/with-name/{name}")
     public ResponseEntity<List<Member>> findAllMembersWithName(@PathVariable("name") String name) {

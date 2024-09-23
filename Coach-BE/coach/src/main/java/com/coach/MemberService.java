@@ -1,6 +1,7 @@
 package com.coach;
 
 import com.coach.client.StatClient;
+import com.coach.client.StatClient2;
 import com.coach.stats.Weight;
 import org.springframework.stereotype.Service;
 
@@ -9,14 +10,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+
 public class MemberService {
 
     private final MemberRepository memberRepository;
     private final StatClient client;
+    private final StatClient2 statClient2;
 
-    public MemberService(MemberRepository memberRepository, StatClient client) {
+    public MemberService(MemberRepository memberRepository, StatClient client, StatClient2 statClient2) {
         this.memberRepository = memberRepository;
         this.client = client;
+        this.statClient2 = statClient2;
     }
 
     public Member saveMember(Member member) {
@@ -29,7 +33,7 @@ public class MemberService {
 
     public FullMemberResponse findMemberWithStats(Integer memberId) {
         Member member = memberRepository.findById(memberId).orElse(Member.builder().firstName("NOT_FOUND").lastName("NOT_FOUND").build());
-        List<Weight> weights = client.findAllStatsByMember(memberId);
+        List<Weight> weights = statClient2.findAllStatsByMember(memberId);
         return FullMemberResponse.builder().name(member.getFirstName()).weights(weights.stream().map(Mapper::map).collect(Collectors.toList())).build();
     }
 

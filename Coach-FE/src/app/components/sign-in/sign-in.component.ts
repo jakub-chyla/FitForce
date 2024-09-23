@@ -1,6 +1,5 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {ThemeService} from "../../service/theme.service";
-import {Member} from "../../model/member";
 import {
   AbstractControl,
   FormBuilder,
@@ -18,7 +17,7 @@ import {NameValidatorPipe} from "../add/name-validator.pipe";
 import {CommonModule} from "@angular/common";
 import {MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle} from "@angular/material/dialog";
 import {MatDatepickerModule} from "@angular/material/datepicker";
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {UserService} from "../../service/user.service";
 import {User} from "../../model/user";
 
@@ -53,7 +52,8 @@ export class SignInComponent implements OnInit  {
 
   constructor(private formBuilder: FormBuilder,
               private memberService: MemberService,
-              private userService: UserService) {
+              private userService: UserService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -83,10 +83,10 @@ export class SignInComponent implements OnInit  {
         password: this.myForm.get('password')?.value,
         email: this.myForm.get('email')?.value
       }
-      console.log(user)
 
       this.userService.createUser(user).subscribe(
         (response) => {
+          console.log(response)
         }
       );
 
