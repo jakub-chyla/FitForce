@@ -1,7 +1,6 @@
 package com.coach;
 
 import com.coach.client.StatClient;
-import com.coach.client.StatClient2;
 import com.coach.stats.Weight;
 import org.springframework.stereotype.Service;
 
@@ -14,13 +13,11 @@ import java.util.stream.Collectors;
 public class MemberService {
 
     private final MemberRepository memberRepository;
-    private final StatClient client;
-    private final StatClient2 statClient2;
+    private final StatClient statClient;
 
-    public MemberService(MemberRepository memberRepository, StatClient client, StatClient2 statClient2) {
+    public MemberService(MemberRepository memberRepository, StatClient statClient) {
         this.memberRepository = memberRepository;
-        this.client = client;
-        this.statClient2 = statClient2;
+        this.statClient = statClient;
     }
 
     public Member saveMember(Member member) {
@@ -33,13 +30,13 @@ public class MemberService {
 
     public FullMemberResponse findMemberWithStats(Integer memberId) {
         Member member = memberRepository.findById(memberId).orElse(Member.builder().firstName("NOT_FOUND").lastName("NOT_FOUND").build());
-        List<Weight> weights = statClient2.findAllStatsByMember(memberId);
+        List<Weight> weights = statClient.findAllStatsByMember(memberId);
         return FullMemberResponse.builder().name(member.getFirstName()).weights(weights.stream().map(Mapper::map).collect(Collectors.toList())).build();
     }
 
     public void deleteWithStats(Integer memberId) {
         memberRepository.deleteById(memberId);
-        client.deleteAllStatsByMember(memberId);
+        statClient.deleteAllStatsByMember(memberId);
     }
 
     public List<Member> findAllMembersWithName(String name) {

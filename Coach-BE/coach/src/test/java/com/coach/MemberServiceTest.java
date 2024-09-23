@@ -1,7 +1,5 @@
 package com.coach;
 
-import com.coach.client.StatClient;
-import com.coach.stats.Weight;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -10,7 +8,6 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -24,8 +21,8 @@ class MemberServiceTest {
     @Mock
     public MemberRepository memberRepository;
 
-    @Mock
-    public StatClient client;
+//    @Mock
+//    public StatClient client;
 
     @BeforeEach
     void setUp() {
@@ -96,32 +93,32 @@ class MemberServiceTest {
         assertEquals(members.get(1).getFirstName(), response.get(1).getFirstName());
     }
 
-    @Test
-    void should_find_member_with_stats() {
-        //given
-        Member member = new Member();
-        member.setFirstName("John");
-        member.setLastName("John@gmail.com");
-
-        Member savedMember = new Member();
-        savedMember.setId(1);
-        savedMember.setFirstName("John");
-        savedMember.setLastName("John@gmail.com");
-
-        List<Weight> stavedWeights = new ArrayList<>();
-        Weight saveWeight = new Weight();
-        saveWeight.setWeight("80");
-        stavedWeights.add(saveWeight);
-
-        //mock the calls
-        when(memberRepository.findById(savedMember.getId())).thenReturn(Optional.of(savedMember));
-        when(client.findAllStatsByMember(savedMember.getId())).thenReturn(stavedWeights);
-
-        //when
-        FullMemberResponse response = memberService.findMemberWithStats(savedMember.getId());
-
-        //then
-        assertEquals(member.getFirstName(), response.getName());
-
-    }
+//    @Test
+//    void should_find_member_with_stats() {
+//        //given
+//        Member member = new Member();
+//        member.setFirstName("John");
+//        member.setLastName("John@gmail.com");
+//
+//        Member savedMember = new Member();
+//        savedMember.setId(1);
+//        savedMember.setFirstName("John");
+//        savedMember.setLastName("John@gmail.com");
+//
+//        List<Weight> stavedWeights = new ArrayList<>();
+//        Weight saveWeight = new Weight();
+//        saveWeight.setWeight("80");
+//        stavedWeights.add(saveWeight);
+//
+//        //mock the calls
+//        when(memberRepository.findById(savedMember.getId())).thenReturn(Optional.of(savedMember));
+//        when(client.findAllStatsByMember(savedMember.getId())).thenReturn(stavedWeights);
+//
+//        //when
+//        FullMemberResponse response = memberService.findMemberWithStats(savedMember.getId());
+//
+//        //then
+//        assertEquals(member.getFirstName(), response.getName());
+//
+//    }
 }

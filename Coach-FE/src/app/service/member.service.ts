@@ -17,30 +17,30 @@ export class MemberService {
   }
 
   getMembers(): Observable<Member[]> {
-    return this.httpClient.get<Member[]>(`${this.baseURL}`, this.getToken());
+    return this.httpClient.get<Member[]>(`${this.baseURL}`, this.getHeaderWithToken());
   }
 
   getMemberWithStats(memberId: number): Observable<Member> {
-    return this.httpClient.get<FullMemberResponse>(`${this.baseURL}/with-stats/${memberId}`, this.getToken());
+    return this.httpClient.get<FullMemberResponse>(`${this.baseURL}/with-stats/${memberId}`, this.getHeaderWithToken());
   }
 
   addMember(member: Member): Observable<Member> {
-    return this.httpClient.post(`${this.baseURL}`, member);
+    return this.httpClient.post(`${this.baseURL}`, member, this.getHeaderWithToken());
   }
 
   updateMember(member: Member): Observable<Member> {
-    return this.httpClient.patch(`${this.baseURL}`, member);
+    return this.httpClient.patch(`${this.baseURL}`, member, this.getHeaderWithToken());
   }
 
   deleteMember(memberId: number): Observable<void> {
-    return this.httpClient.delete<void>(`${this.baseURL}/with-stats/${memberId}`);
+    return this.httpClient.delete<void>(`${this.baseURL}/with-stats/${memberId}`, this.getHeaderWithToken());
   }
 
   getGoals(): Observable<Goal[]> {
-    return this.httpClient.get<Goal[]>(`${this.baseURL}/goals`);
+    return this.httpClient.get<Goal[]>(`${this.baseURL}/goals`, this.getHeaderWithToken());
   }
 
-  private getToken() {
+  private getHeaderWithToken() {
     return {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${localStorage.getItem('token') as string}`

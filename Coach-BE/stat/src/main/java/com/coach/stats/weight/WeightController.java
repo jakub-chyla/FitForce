@@ -14,11 +14,11 @@ public class WeightController {
 
     private final WeightService service;
 
-    @GetMapping("/mess/{member-id}")
-    public ResponseEntity<String> getString(@PathVariable("member-id") Long memberId) {
-        String response = "hello from stats" + memberId;
-        return ResponseEntity.ok(response);
-    }
+//    @GetMapping("/mess/{member-id}")
+//    public ResponseEntity<String> getString(@PathVariable("member-id") Long memberId) {
+//        String response = "hello from stats" + memberId;
+//        return ResponseEntity.ok(response);
+//    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
