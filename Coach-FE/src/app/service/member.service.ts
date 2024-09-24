@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Member} from "../model/member";
 import {Goal} from "../model/goal";
 import {FullMemberResponse} from "../model/fullMemberResponse";
+import {Weight} from "../model/weight";
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,10 @@ export class MemberService {
 
   updateMember(member: Member): Observable<Member> {
     return this.httpClient.patch(`${this.baseURL}`, member, this.getHeaderWithToken());
+  }
+
+  saveWeight(weight: Weight): Observable<Member> {
+    return this.httpClient.post(`http://localhost:8222/api/v1/stats`, weight, this.getHeaderWithToken());
   }
 
   deleteMember(memberId: number): Observable<void> {
