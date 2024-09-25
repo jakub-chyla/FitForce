@@ -18,7 +18,7 @@ public class StatClient {
     private RestTemplate regularRestTemplate;
 
     public List<Weight> findAllStatsByMember(Integer memberId) {
-        String url = "http://localhost:8090/stats/member/" + memberId;
+        String url = "http://localhost:8090/api/v1/stats/member/" + memberId;
 
         ResponseEntity<List<Weight>> responseEntity = regularRestTemplate.exchange(
                 url,

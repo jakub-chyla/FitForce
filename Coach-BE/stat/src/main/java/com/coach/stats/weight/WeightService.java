@@ -13,8 +13,8 @@ public class WeightService {
 
     private final WeightRepository repository;
 
-    public Weight saveStat(Weight stat) {
-        return repository.save(stat);
+    public Weight saveStat(Weight weight) {
+        return repository.save(weight);
     }
 
     public List<Weight> findAllStats() {

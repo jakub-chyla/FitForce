@@ -13,7 +13,7 @@ spring:
         - id: stats
           uri: http://localhost:8090
           predicates:
-            - Path=/stats/**
+            - Path=/api/v1/stats/**
           filters:
             - AuthenticationFilter
         - id: security

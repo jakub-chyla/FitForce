@@ -5,10 +5,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
-@RequestMapping("/stats")
+@RequestMapping("/api/v1/stats")
 @RequiredArgsConstructor
 public class WeightController {
 
@@ -20,10 +22,15 @@ public class WeightController {
 //        return ResponseEntity.ok(response);
 //    }
 
+
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public void save(@RequestBody Weight Stat) {
-        service.saveStat(Stat);
+    public void save(@RequestBody WeightDto weightDto) {
+        System.out.println(weightDto);
+        Weight weight = new Weight();
+        weight.setCreated(LocalDate.parse(weightDto.getCreated(), DateTimeFormatter.ISO_LOCAL_DATE));
+        weight.setWeightValue(Double.valueOf(weightDto.getWeightValue()));
+        weight.setMemberId(1L);
+        service.saveStat(weight);
     }
 
     @GetMapping
