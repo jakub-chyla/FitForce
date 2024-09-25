@@ -1,4 +1,4 @@
-package com.coach;
+package com.coach.model;
 
 import jakarta.persistence.*;
 import lombok.*;

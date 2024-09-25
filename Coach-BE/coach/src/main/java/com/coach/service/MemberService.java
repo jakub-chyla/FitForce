@@ -1,6 +1,11 @@
-package com.coach;
+package com.coach.service;
 
-import com.coach.client.StatClient;
+import com.coach.dto.FullMemberResponse;
+import com.coach.utils.Mapper;
+import com.coach.statsClient.StatClient;
+import com.coach.model.Goal;
+import com.coach.model.Member;
+import com.coach.repository.MemberRepository;
 import com.coach.stats.Weight;
 import org.springframework.stereotype.Service;
 

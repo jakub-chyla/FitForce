@@ -1,10 +1,10 @@
-package com.coach.stats.weight;
+package com.coach.stats.weight.repository;
 
+import com.coach.stats.weight.model.Weight;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.awt.print.Pageable;
 import java.util.List;
 
 public interface WeightRepository extends JpaRepository<Weight, Integer> {

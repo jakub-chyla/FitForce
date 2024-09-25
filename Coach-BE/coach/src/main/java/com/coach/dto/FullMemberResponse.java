@@ -1,4 +1,4 @@
-package com.coach;
+package com.coach.dto;
 
 import com.coach.dto.WeightDto;
 import com.coach.stats.Weight;

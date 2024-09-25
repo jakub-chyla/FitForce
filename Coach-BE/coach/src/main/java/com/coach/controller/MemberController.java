@@ -1,6 +1,11 @@
-package com.coach;
+package com.coach.controller;
 
-import com.coach.client.StatClient;
+import com.coach.dto.FullMemberResponse;
+import com.coach.statsClient.StatClient;
+import com.coach.model.Goal;
+import com.coach.model.Member;
+import com.coach.repository.GoalRepository;
+import com.coach.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

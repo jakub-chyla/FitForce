@@ -1,4 +1,4 @@
-package com.coach.stats.weight;
+package com.coach.stats.weight.model;
 
 import jakarta.persistence.*;
 import lombok.*;

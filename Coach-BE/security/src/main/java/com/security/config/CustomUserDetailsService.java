@@ -1,6 +1,6 @@
 package com.security.config;
 
-import com.security.entity.UserCredential;
+import com.security.model.UserCredential;
 import com.security.repository.UserCredentialRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -2,7 +2,7 @@ package com.security.controller;
 
 
 import com.security.dto.AuthRequest;
-import com.security.entity.UserCredential;
+import com.security.model.UserCredential;
 import com.security.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;

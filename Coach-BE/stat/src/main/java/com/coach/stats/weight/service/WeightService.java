@@ -1,8 +1,8 @@
-package com.coach.stats.weight;
+package com.coach.stats.weight.service;
 
+import com.coach.stats.weight.model.Weight;
+import com.coach.stats.weight.repository.WeightRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

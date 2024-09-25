@@ -1,4 +1,4 @@
-package com.coach.client;
+package com.coach.statsClient;
 
 import com.coach.stats.Weight;
 import org.springframework.beans.factory.annotation.Autowired;

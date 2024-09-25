@@ -2,7 +2,7 @@ package com.security.config;
 
 
 
-import com.security.entity.UserCredential;
+import com.security.model.UserCredential;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

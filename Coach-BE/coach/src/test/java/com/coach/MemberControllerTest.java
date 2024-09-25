@@ -1,6 +1,7 @@
 package com.coach;
 
-import org.h2.bnf.Sentence;
+import com.coach.model.Member;
+import com.coach.repository.MemberRepository;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

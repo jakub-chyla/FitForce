@@ -1,7 +1,9 @@
-package com.coach.stats.weight;
+package com.coach.stats.weight.controller;
 
+import com.coach.stats.weight.service.WeightService;
+import com.coach.stats.weight.dto.WeightDto;
+import com.coach.stats.weight.model.Weight;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
