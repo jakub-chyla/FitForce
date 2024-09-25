@@ -3,4 +3,6 @@ Java +  Angular
 
 
 //TODO 
-- [ ] refactor names in FE
+- [ ] FE refactor names in FE,
+- [ ] BE refactor pacakge sctrucure,
+- [ ] BE update tests 

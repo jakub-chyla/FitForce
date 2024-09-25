@@ -12,11 +12,14 @@ import {MatInput, MatInputModule} from "@angular/material/input";
 import {MatCardModule} from "@angular/material/card";
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle} from "@angular/material/dialog";
-import {MatButtonModule} from "@angular/material/button";
+import {MatButton, MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {NameValidatorPipe} from "../../add/name-validator.pipe";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatSelect, MatSelectModule} from "@angular/material/select";
+import {Member} from "../../../model/member";
+import {MemberService} from "../../../service/member.service";
+import {Weight} from "../../../model/weight";
 
 export interface weightData {
   created: string;
@@ -37,7 +40,7 @@ export interface weightData {
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelect,
+    MatSelect, MatButton,
   ],
   templateUrl: './progress.component.html',
   styleUrls: ['./progress.component.scss']
@@ -66,23 +69,23 @@ export class ProgressComponent implements OnInit {
     ]
   };
 
-  constructor(private formBuilder: FormBuilder,) {
+  constructor(private formBuilder: FormBuilder,
+              private memberService: MemberService) {
   }
 
   ngOnInit() {
     this.myForm = this.formBuilder.group({
-      firstName: ['', [Validators.required, Validators.minLength(3),]],
-      lastName: ['', [Validators.required, Validators.minLength(3),]]
-
+      created: ['', [Validators.required, Validators.minLength(3),]],
+      weightValue: ['', [Validators.required, Validators.minLength(3),]]
     });
 
     setTimeout(() => {
-      this.init();
-    }, 100);
+      this.initTable();
+    }, 250);
 
   }
 
-  init() {
+  initTable() {
     const tableData: weightData[] = [];
     if (this.fullMemberResponse?.weights) {
       this.fullMemberResponse.weights.forEach(weight => {
@@ -116,5 +119,22 @@ export class ProgressComponent implements OnInit {
         }
       ]
     };
+  }
+
+  save() {
+    if (this.myForm.valid) {
+      const weight: Weight = {
+        id: this.fullMemberResponse?.id,
+        created: this.myForm.get('created')?.value,
+        weightValue: this.myForm.get('weightValue')?.value,
+      };
+
+      this.memberService.saveWeight(weight).subscribe(
+        (response) => {
+        console.log(response)
+        }
+      );
+
+    }
   }
 }
