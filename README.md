@@ -9,3 +9,5 @@ Java +  Angular
 - [ ] BE add utils
 - [ ] BE use records
 - [ ] BE implement multiple users
+- [ ] BE endpoint have return value
+- [ ] BE emails

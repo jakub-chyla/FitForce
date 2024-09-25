@@ -22,7 +22,7 @@ public class WeightController {
 //        return ResponseEntity.ok(response);
 //    }
 
-
+    //DOTO return value
     @PostMapping
     public void save(@RequestBody WeightDto weightDto) {
         System.out.println(weightDto);
