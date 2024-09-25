@@ -28,22 +28,22 @@
     <form [formGroup]="myForm">
       <div class="flex justify-start">
         <mat-form-field>
-          <input type="text" matInput formControlName="firstName" placeholder="Date">
+          <input type="text" matInput formControlName="created" placeholder="Date">
           <mat-hint>Enter weight</mat-hint>
-          @if (myForm.controls['firstName'].hasError('required')) {
+          @if (myForm.controls['created'].hasError('required')) {
             <mat-error>Field is required</mat-error>
           }
-          @if (myForm.controls['firstName'].hasError('minlength')) {
+          @if (myForm.controls['created'].hasError('minlength')) {
             <mat-error>Minimum length is 2</mat-error>
           }
         </mat-form-field>
         <mat-form-field class="px-2">
-          <input type="text" matInput formControlName="lastName" placeholder="Weight">
+          <input type="text" matInput formControlName="weightValue" placeholder="Weight">
           <mat-hint>Enter date</mat-hint>
-          @if (myForm.controls['lastName'].hasError('required')) {
+          @if (myForm.controls['weightValue'].hasError('required')) {
             <mat-error>Field is required</mat-error>
           }
-          @if (myForm.controls['lastName'].hasError('minlength')) {
+          @if (myForm.controls['weightValue'].hasError('minlength')) {
             <mat-error>Minimum length is 2</mat-error>
           }
         </mat-form-field>
