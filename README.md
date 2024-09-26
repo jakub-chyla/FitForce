@@ -11,3 +11,4 @@ Java +  Angular
 - [ ] BE implement multiple users
 - [ ] BE endpoint have to return value
 - [ ] BE emails
+- [ ] move URL do utils
