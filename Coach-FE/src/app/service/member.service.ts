@@ -17,8 +17,8 @@ export class MemberService {
 
   }
 
-  getMembers(): Observable<Member[]> {
-    return this.httpClient.get<Member[]>(`${this.baseURL}`, this.getHeaderWithToken());
+  getMembers(userId: number): Observable<Member[]> {
+    return this.httpClient.get<Member[]>(`${this.baseURL}/${userId}`, this.getHeaderWithToken());
   }
 
   getMemberWithStats(memberId: number): Observable<Member> {

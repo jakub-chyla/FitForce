@@ -33,11 +33,10 @@ public class MemberController {
         return ResponseEntity.ok(memberService.saveMember(member));
     }
 
-    @GetMapping
-    public ResponseEntity<List<Member>> findAllMembers() {
-        return ResponseEntity.ok(memberService.findAllMembers());
+    @GetMapping("/{user-id}")
+    public ResponseEntity<List<Member>> findAllMembersForUser(@PathVariable("user-id") Long userId) {
+        return ResponseEntity.ok(memberService.findAllMembers(userId));
     }
-
 
     @GetMapping("/with-name/{name}")
     public ResponseEntity<List<Member>> findAllMembersWithName(@PathVariable("name") String name) {
@@ -45,12 +44,12 @@ public class MemberController {
     }
 
     @GetMapping("/with-stats/{member-id}")
-    public ResponseEntity<FullMemberResponse> findAllMembers(@PathVariable("member-id") Integer memberId) {
+    public ResponseEntity<FullMemberResponse> findAllMembers(@PathVariable("member-id") Long memberId) {
         return ResponseEntity.ok(memberService.findMemberWithStats(memberId));
     }
 
     @DeleteMapping("/with-stats/{member-id}")
-    public void deleteWithStats(@PathVariable("member-id") Integer memberId) {
+    public void deleteWithStats(@PathVariable("member-id") Long memberId) {
         memberService.deleteWithStats(memberId);
     }
 

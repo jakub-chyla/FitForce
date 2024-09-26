@@ -17,7 +17,7 @@ public class StatClient {
     @Autowired
     private RestTemplate regularRestTemplate;
 
-    public List<Weight> findAllStatsByMember(Integer memberId) {
+    public List<Weight> findAllStatsByMember(Long memberId) {
         String url = "http://localhost:8090/api/v1/stats/member/" + memberId;
 
         ResponseEntity<List<Weight>> responseEntity = regularRestTemplate.exchange(
@@ -30,7 +30,7 @@ public class StatClient {
         return responseEntity.getBody();
     }
 
-    public void deleteAllStatsByMember(Integer memberId) {
+    public void deleteAllStatsByMember(Long memberId) {
         String url = "http://localhost:8090/stats/member/" + memberId;
 
         ResponseEntity<List<Weight>> responseEntity = regularRestTemplate.exchange(

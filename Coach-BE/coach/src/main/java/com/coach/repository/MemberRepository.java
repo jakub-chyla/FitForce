@@ -8,7 +8,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface MemberRepository extends JpaRepository<Member, Integer> {
+public interface MemberRepository extends JpaRepository<Member, Long> {
 
     List<Member> findMembersByFirstName(@Param("fistName") String fistName);
+
+
+    List<Member> findMembersByUserId(@Param("userId") Long userId);
 }

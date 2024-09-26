@@ -29,17 +29,17 @@ public class MemberService {
         return memberRepository.save(member);
     }
 
-    public List<Member> findAllMembers() {
-        return memberRepository.findAll();
+    public List<Member> findAllMembers(Long userId) {
+        return memberRepository.findMembersByUserId(userId);
     }
 
-    public FullMemberResponse findMemberWithStats(Integer memberId) {
+    public FullMemberResponse findMemberWithStats(Long memberId) {
         Member member = memberRepository.findById(memberId).orElse(Member.builder().firstName("NOT_FOUND").lastName("NOT_FOUND").build());
         List<Weight> weights = statClient.findAllStatsByMember(memberId);
         return FullMemberResponse.builder().name(member.getFirstName()).weights(weights.stream().map(Mapper::map).collect(Collectors.toList())).build();
     }
 
-    public void deleteWithStats(Integer memberId) {
+    public void deleteWithStats(Long memberId) {
         memberRepository.deleteById(memberId);
         statClient.deleteAllStatsByMember(memberId);
     }

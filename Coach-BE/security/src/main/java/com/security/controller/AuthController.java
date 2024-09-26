@@ -2,7 +2,9 @@ package com.security.controller;
 
 
 import com.security.dto.AuthRequest;
+import com.security.dto.UserDto;
 import com.security.model.UserCredential;
+import com.security.repository.UserCredentialRepository;
 import com.security.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,27 +16,36 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/auth")
 public class AuthController {
     @Autowired
-    private AuthService service;
+    private AuthService authService;
+
+    @Autowired
+    private UserCredentialRepository userCredentialRepository;
 
     @Autowired
     private AuthenticationManager authenticationManager;
 
     @GetMapping("/validate")
-    public String validateToken(@RequestParam("token") String token) {
-        service.validateToken(token);
-        return "Token is valid";
+    public Boolean validateToken(@RequestParam("token") String token) {
+        authService.validateToken(token);
+        return true;
     }
 
     @PostMapping("/register")
     public String addNewUser(@RequestBody UserCredential user) {
-        return service.saveUser(user);
+        return authService.saveUser(user);
+    }
+
+    @GetMapping("/user")
+    public Boolean getUser(@RequestParam("token") String token) {
+        authService.validateToken(token);
+        return true;
     }
 
     @PostMapping("/token")
-    public String getToken(@RequestBody AuthRequest authRequest) {
+    public UserDto getToken(@RequestBody AuthRequest authRequest) {
         Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
         if (authenticate.isAuthenticated()) {
-            return service.generateToken(authRequest.getUsername());
+            return authService.getUserWithToken(authRequest.getUsername());
         } else {
             throw new RuntimeException("invalid access");
         }

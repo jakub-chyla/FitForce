@@ -13,6 +13,7 @@ import {MatInput} from "@angular/material/input";
 import {NgClass} from "@angular/common";
 import {Router, RouterLink} from "@angular/router";
 import {AuthRequest} from "../../model/auth-request";
+import {UserDto} from "../../dto/UserDto";
 
 @Component({
   selector: 'app-log-in',
@@ -54,7 +55,7 @@ export class LogInComponent implements OnInit {
     })
   }
 
-  save() {
+  logIn() {
     if (this.myForm.valid) {
       const authRequest: AuthRequest = {
         username: this.myForm.get('username')?.value,
@@ -62,7 +63,8 @@ export class LogInComponent implements OnInit {
 
       }
       this.userService.singIn(authRequest).subscribe(        (response) => {
-          console.log(response)
+        const userDto: UserDto = response
+          console.log(userDto)
         this.router.navigate(['/main']);
         }
       );

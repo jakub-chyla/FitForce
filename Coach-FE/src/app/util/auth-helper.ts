@@ -9,6 +9,15 @@ export class AuthHelper {
     };
   }
 
+  public static getId() {
+    return localStorage.getItem('userId');
+  }
+
+  public static getIdAsNumber(): number  {
+    return Number(localStorage.getItem('userId'));
+  }
+
+
   public static getToken() {
     return localStorage.getItem('token');
   }

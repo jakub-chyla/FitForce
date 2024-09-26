@@ -3,8 +3,8 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {catchError, map, Observable, of, tap} from "rxjs";
 import {User} from "../model/user";
 import {AuthRequest} from "../model/auth-request";
-import {DateHelper} from "../util/date-helper";
 import {AuthHelper} from "../util/auth-helper";
+import {UserDto} from "../dto/UserDto";
 
 @Injectable({
   providedIn: 'root'
@@ -13,32 +13,33 @@ export class UserService {
 
   private baseURL = 'http://localhost:8222/auth/';
   constructor(private httpClient: HttpClient) {
-
-  }
-
-  check(): Observable<string> {
-    return this.httpClient.get<string>(`${this.baseURL}validate?token=${AuthHelper.getToken()}`);
   }
 
   createUser(user: User): Observable<string> {
     return this.httpClient.post<string>(`${this.baseURL}register`, user);
   }
 
-  singIn(authRequest: AuthRequest): Observable<string> {
-    return this.httpClient.post(`${this.baseURL}token`, authRequest, { responseType: 'text' }).pipe(
-      tap((response: any) => {
-        localStorage.setItem('name', <string>authRequest.username);
-        localStorage.setItem('token', response);
+  singIn(authRequest: AuthRequest): Observable<UserDto> {
+    return this.httpClient.post<UserDto>(`${this.baseURL}token`, authRequest).pipe(
+      tap((response: UserDto) => {
+        console.log(response.id)
+        localStorage.setItem('name', String(authRequest.username));
+        localStorage.setItem('userId', String(response.id));
+        localStorage.setItem('token', String(response.token));
       })
     );
   }
 
-  checkIsTokenValid()  {
-    this.check().subscribe(
-      (response) => {
-        console.log(response)
-      }
+
+  checkToken(): Observable<boolean> {
+    return this.httpClient.get<boolean>(`${this.baseURL}validate?token=${AuthHelper.getToken()}`);
+  }
+
+  checkIsTokenValid(): Observable<boolean> {
+    return this.checkToken().pipe(
+      map(response => {
+        return response;
+      }),
     );
-    return true
   }
 }
