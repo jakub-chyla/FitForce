@@ -1,8 +1,8 @@
 # Coach
 
----
+
 ## Application Launch 01.01.2026
----
+
 ### Technologies:
 Java 17
 springboot 3+
