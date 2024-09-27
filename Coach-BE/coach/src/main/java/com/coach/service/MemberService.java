@@ -7,6 +7,7 @@ import com.coach.model.Goal;
 import com.coach.model.Member;
 import com.coach.repository.MemberRepository;
 import com.coach.stats.Weight;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,16 +15,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-
+@RequiredArgsConstructor
 public class MemberService {
 
     private final MemberRepository memberRepository;
     private final StatClient statClient;
-
-    public MemberService(MemberRepository memberRepository, StatClient statClient) {
-        this.memberRepository = memberRepository;
-        this.statClient = statClient;
-    }
 
     public Member saveMember(Member member) {
         return memberRepository.save(member);

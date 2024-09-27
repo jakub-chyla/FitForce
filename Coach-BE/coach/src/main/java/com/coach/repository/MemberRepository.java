@@ -12,6 +12,5 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
     List<Member> findMembersByFirstName(@Param("fistName") String fistName);
 
-
     List<Member> findMembersByUserId(@Param("userId") Long userId);
 }

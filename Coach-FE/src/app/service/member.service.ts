@@ -34,6 +34,7 @@ export class MemberService {
   }
 
   saveWeight(weight: Weight): Observable<Member> {
+    console.log('here')
     return this.httpClient.post(`http://localhost:8222/api/v1/stats`, weight, this.getHeaderWithToken());
   }
 

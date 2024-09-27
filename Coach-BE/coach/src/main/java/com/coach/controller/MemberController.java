@@ -20,7 +20,6 @@ public class MemberController {
     private final MemberService memberService;
     private final GoalRepository goalRepository;
 
-
     private final StatClient statClient;
 
     @PostMapping

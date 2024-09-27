@@ -1,6 +1,7 @@
 package com.coach.statsClient;
 
 import com.coach.stats.Weight;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -11,11 +12,10 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class StatClient {
 
-
-    @Autowired
-    private RestTemplate regularRestTemplate;
+    private final RestTemplate regularRestTemplate;
 
     public List<Weight> findAllStatsByMember(Long memberId) {
         String url = "http://localhost:8090/api/v1/stats/member/" + memberId;
