@@ -14,7 +14,7 @@
 - Tailwind
 ---
 ### About
-The applicationFull Stack application to help manage clients for personal trainers. The application has implemented micro services, security authentication, dark mode, emails.
+Full Stack application to help manage clients for personal trainers. The application has implemented micro services, security authentication, dark mode, emails. User can add on clients, menagde them, add statistics like: training goal, weight progress shown in chart, book apoinments, create diet.
 
 //TODO 
 - [x] BE implement microservices
