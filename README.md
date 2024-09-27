@@ -1,4 +1,4 @@
-# Coach
+# Fit Force
 
 
 ## Application Launch 01.01.2026
@@ -9,6 +9,7 @@
 - Spring Cloud
 - Spring Security JWT
 - Postgresql
+- Flyway database migration
 - Angular 17
 - Angular Material
 - Tailwind
