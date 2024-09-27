@@ -4,14 +4,14 @@
 ## Application Launch 01.01.2026
 
 ### Technologies:
-Java 17
-springboot 3+
-Spring Cloud
-Spring Security JWT
-Postgresql
-Angular 17
-Angular Material
-Tailwind
+- Java 17
+- springboot 3+
+- Spring Cloud
+- Spring Security JWT
+- Postgresql
+- Angular 17
+- Angular Material
+- Tailwind
 ---
 ### About
 The applicationFull Stack application to help manage clients for personal trainers. The application has implemented micro services, security authentication, dark mode, emails.
