@@ -52,7 +52,7 @@
         </mat-form-field>
         <mat-form-field>
           <mat-label>Goal</mat-label>
-          <mat-select [panelClass]="themeService.themeSignal() === 'dark' ? 'dark-mode-panel' : 'light-mode-panel'"
+          <mat-select formControlName="goal" [panelClass]="themeService.themeSignal() === 'dark' ? 'dark-mode-panel' : 'light-mode-panel'"
                       (selectionChange)="onGoalSelected($event)"
                       [(value)]="selectedGoal">
             @for (goal of goals; track goal) {

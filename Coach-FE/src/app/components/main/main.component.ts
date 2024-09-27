@@ -41,10 +41,18 @@ export class MainComponent implements OnInit {
   isTokenValid = false;
 
   ngOnInit() {
+
+    if(AuthHelper.getToken() === null){
+      if(!this.isTokenValid || AuthHelper.getToken() === null){
+        this.router.navigate(['/log-in']);
+      }
+    }
+
     this.userService.checkIsTokenValid().subscribe(isValid => {
+
       if (isValid) {
         this.isTokenValid = true;
-        this.getMembers(AuthHelper.getIdAsNumber());
+        this.getMembers(AuthHelper.getUserIdAsNumber());
       }
 
       if(!this.isTokenValid || AuthHelper.getToken() === null){

@@ -36,6 +36,7 @@ import {DateAdapter, MAT_DATE_FORMATS} from "@angular/material/core";
 import {FORM_DATE_FORMATS, FormDateAdapter} from "../../util/form-date-adapter";
 import {MatSelect, MatSelectChange, MatSelectModule} from "@angular/material/select";
 import {Goal} from "../../model/goal";
+import {AuthHelper} from "../../util/auth-helper";
 
 
 @Component({
@@ -93,7 +94,7 @@ export class EditMemberComponent implements OnInit {
       phone: [this.data.phone, [Validators.required, Validators.minLength(9), Validators.maxLength(9), this.phoneValidator()]],
       birthday: [this.data.birthday, [Validators.required]],
       email: [this.data.email, [Validators.required]],
-      goal: [this.data.goal, [Validators.required]]
+      goal: [this.data.goal, ]
     });
     this.getGoals();
   }
@@ -124,6 +125,7 @@ export class EditMemberComponent implements OnInit {
     if (this.myForm.valid) {
       const member: Member = {
         id: this.data.id,
+        userId: AuthHelper.getUserIdAsNumber(),
         firstName: this.myForm.get('firstName')?.value,
         lastName: this.myForm.get('lastName')?.value,
         phone: this.myForm.get('phone')?.value,

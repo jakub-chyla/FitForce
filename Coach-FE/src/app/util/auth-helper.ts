@@ -9,11 +9,11 @@ export class AuthHelper {
     };
   }
 
-  public static getId() {
+  public static getUserId() {
     return localStorage.getItem('userId');
   }
 
-  public static getIdAsNumber(): number  {
+  public static getUserIdAsNumber(): number  {
     return Number(localStorage.getItem('userId'));
   }
 

@@ -28,6 +28,7 @@ import {
 import {ThemeService} from "../../service/theme.service";
 import {CommonModule} from "@angular/common";
 import {MatDatepickerModule} from "@angular/material/datepicker";
+import {AuthHelper} from "../../util/auth-helper";
 
 class AbstractControl {
 }
@@ -77,8 +78,8 @@ export class AddComponent implements OnInit {
 
   ngOnInit() {
     this.myForm = this.formBuilder.group({
-      firstName: ['', [Validators.required, Validators.minLength(3),]],
-      lastName: ['', [Validators.required, Validators.minLength(3),]],
+      firstName: ['', [Validators.required, Validators.minLength(3)]],
+      lastName: ['', [Validators.required, Validators.minLength(3)]],
       phone: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9), this.phoneValidator()]],
       birthday: ['', [Validators.required]]
     })
@@ -95,6 +96,7 @@ export class AddComponent implements OnInit {
   save() {
     if (this.myForm.valid) {
       const member: Member = {
+        userId: AuthHelper.getUserIdAsNumber(),
         firstName: this.myForm.get('firstName')?.value,
         lastName: this.myForm.get('lastName')?.value,
         phone: this.myForm.get('phone')?.value,
