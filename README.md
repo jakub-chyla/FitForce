@@ -1,7 +1,7 @@
 # Fit Force
 
 
-## Official Launch 01.01.2026
+## Official Launch 01.01.2025
 
 ### Technologies:
 - Java 17
