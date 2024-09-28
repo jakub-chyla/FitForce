@@ -23,7 +23,7 @@ Full Stack application to help manage clients for personal trainers. The applica
 - [ ] FE refactor names
 - [ ] BE refactor microservices names
 - [ ] BE refactor package structure
-- [ ] BE add tests
+- [x] BE add tests
 - [ ] BE add utils
 - [ ] BE use records
 - [x] BE implement multiple users
