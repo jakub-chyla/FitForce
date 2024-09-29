@@ -33,5 +33,5 @@ Full Stack application to help manage clients for personal trainers. The applica
 - [ ] BE/FE move URL do utils
 - [ ] FE implement snackbar
 - [ ] FE replace timeouts
-- [ ] BE deploy
+- [ ] deploy
 - [ ] FE add notification no user found to main screen
