@@ -17,8 +17,8 @@ spring:
     password: ${DB_PASSWORD} # root
     schema: security
   flyway:
-    schemas: security
     locations: classpath:db/migration
+    schemas: security
     enabled: true
     baselineOnMigrate: true
     cleanDisabled: false
