@@ -1,22 +1,7 @@
-#spring:
-#  application:
-#    name: IDENTITY-SERVICE
-#
-#eureka:
-#  client:
-#    service-url:
-#      defaultZone : http://localhost:8761/eureka/
-#
-#
-#server:
-#  port: 9898
-
-
 hostname: localhost
 client:
   service-url:
     defaultZone: http://localhost:8761/eureka
-
 
 server:
   port: 9898
@@ -27,9 +12,18 @@ spring:
     import: optional:configserver:http://localhost:8888
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/security
-    username: postgres
-    password: root
+    url: jdbc:postgresql://${DB_HOST}:5432/${DB_NAME}
+    username: ${DB_USERNAME} # postgres
+    password: ${DB_PASSWORD} # root
+    schema: security
+  flyway:
+    schemas: security
+    locations: classpath:db/migration
+    enabled: true
+    baselineOnMigrate: true
+    cleanDisabled: false
+    cleanOnValidationError: true
+    clean-on-startup: true
   jpa:
     hibernate:
       ddl-auto: create-drop

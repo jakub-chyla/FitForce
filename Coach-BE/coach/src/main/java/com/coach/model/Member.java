@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "members")
+@Table(name = "members", schema = "coach")
 public class Member {
 
     @Id

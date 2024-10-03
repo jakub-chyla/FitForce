@@ -9,18 +9,22 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "user_credentials", schema = "security")
 public class UserCredential {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_credentials_seq")
+    @SequenceGenerator(name = "user_credentials_seq", sequenceName = "security.user_credentials_seq", allocationSize = 1)
     private Long id;
+
     private String name;
 
-    @Column(name ="first_name")
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name ="last_name")
+    @Column(name = "last_name")
     private String lastName;
+
     private String email;
     private String password;
 }

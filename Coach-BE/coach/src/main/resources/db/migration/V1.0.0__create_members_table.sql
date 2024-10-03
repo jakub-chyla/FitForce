@@ -1,18 +1,17 @@
+create sequence coach.goals_seq increment by 1;
 
-create sequence goals_seq increment by 1;
+select setval('coach.goals_seq', 1);
 
-select setval('goals_seq', 1);
-
-create table goals (
+create table coach.goals (
     id BIGINT PRIMARY KEY,
     name TEXT UNIQUE NOT NULL
 );
 
-create sequence members_seq increment by 1;
+create sequence coach.members_seq increment by 1;
 
-select setval('members_seq', 1);
+select setval('coach.members_seq', 1);
 
-create table members (
+create table coach.members (
     id BIGINT PRIMARY KEY,
     user_id BIGINT,
     first_name TEXT,
@@ -26,10 +25,10 @@ create table members (
     CONSTRAINT fk_goal FOREIGN KEY (goal_id) REFERENCES goals(id)
 );
 
-insert into goals (id, name) values
+insert into coach.goals (id, name) values
   (1, 'Lose weight'),
   (2, 'Gain muscles');
 
-insert into members (id, user_id, first_name, last_name, phone, email, birthday, goal_id, is_active, created)
+insert into coach.members (id, user_id, first_name, last_name, phone, email, birthday, goal_id, is_active, created)
 values
   (1, 1,'John', 'Williams', 1234567890, 'john.williams@example.com', '1985-05-15', 1, true, CURRENT_TIMESTAMP);

@@ -1,15 +1,15 @@
-create sequence weights_seq increment by 1;
+create sequence stat.weights_seq increment by 1;
 
-select setval('weights_seq', 1);
+select setval('stat.weights_seq', 1);
 
-create TABLE weights (
+create TABLE stat.weights (
     id BIGINT PRIMARY KEY,
     member_id bigint,
     created DATE,
     weight_value double precision
 );
 
-  insert into weights (id, member_id, created, weight_value)
+  insert into stat.weights (id, member_id, created, weight_value)
 values
   (1, 1, '2024-01-10', 70.5),
   (2, 1, '2024-02-10', 75.0),
