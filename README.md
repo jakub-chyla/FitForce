@@ -1,7 +1,7 @@
 # Fit Force
 
 
-## Application Launch 01.01.2026
+## Official Launch 01.01.2025
 
 ### Technologies:
 - Java 17
@@ -23,7 +23,7 @@ Full Stack application to help manage clients for personal trainers. The applica
 - [ ] FE refactor names
 - [ ] BE refactor microservices names
 - [ ] BE refactor package structure
-- [ ] BE add tests
+- [x] BE add tests
 - [ ] BE add utils
 - [ ] BE use records
 - [x] BE implement multiple users
@@ -33,5 +33,5 @@ Full Stack application to help manage clients for personal trainers. The applica
 - [ ] BE/FE move URL do utils
 - [ ] FE implement snackbar
 - [ ] FE replace timeouts
-- [ ] BE deploy
+- [ ] deploy
 - [ ] FE add notification no user found to main screen
