@@ -3,6 +3,8 @@
 
 ## Official Launch 01.01.2025
 
+wait less then 1 minute to all microservices boot up https://fit-force-frontend.onrender.com/ deployed alpha version
+
 ### Technologies:
 - Java 17
 - springboot 3+
@@ -33,5 +35,6 @@ Full Stack application to help manage clients for personal trainers. The applica
 - [ ] BE/FE move URL do utils
 - [ ] FE implement snackbar
 - [ ] FE replace timeouts
-- [ ] deploy
+- [x] deploy
+- [ ] add custom domain
 - [ ] FE add notification no user found to main screen
