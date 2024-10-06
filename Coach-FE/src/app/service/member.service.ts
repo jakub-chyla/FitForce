@@ -5,45 +5,44 @@ import {Member} from "../model/member";
 import {Goal} from "../model/goal";
 import {FullMemberResponse} from "../model/fullMemberResponse";
 import {Weight} from "../model/weight";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class MemberService {
-
-  private baseURL = 'http://localhost:8222/api/v1/members'
+  private readonly domain: string | undefined;
 
   constructor(private httpClient: HttpClient) {
-
+    this.domain = environment.domain + '/api/v1/members';
   }
 
   getMembers(userId: number): Observable<Member[]> {
-    return this.httpClient.get<Member[]>(`${this.baseURL}/${userId}`, this.getHeaderWithToken());
+    return this.httpClient.get<Member[]>(`${this.domain}/${userId}`, this.getHeaderWithToken());
   }
 
   getMemberWithStats(memberId: number): Observable<Member> {
-    return this.httpClient.get<FullMemberResponse>(`${this.baseURL}/with-stats/${memberId}`, this.getHeaderWithToken());
+    return this.httpClient.get<FullMemberResponse>(`${this.domain}/with-stats/${memberId}`, this.getHeaderWithToken());
   }
 
   addMember(member: Member): Observable<Member> {
-    return this.httpClient.post(`${this.baseURL}`, member, this.getHeaderWithToken());
+    return this.httpClient.post(`${this.domain}`, member, this.getHeaderWithToken());
   }
 
   updateMember(member: Member): Observable<Member> {
-    return this.httpClient.patch(`${this.baseURL}`, member, this.getHeaderWithToken());
+    return this.httpClient.patch(`${this.domain}`, member, this.getHeaderWithToken());
   }
 
   saveWeight(weight: Weight): Observable<Member> {
-    console.log('here')
-    return this.httpClient.post(`http://localhost:8222/api/v1/stats`, weight, this.getHeaderWithToken());
+    return this.httpClient.post(`${this.domain}`, weight, this.getHeaderWithToken());
   }
 
   deleteMember(memberId: number): Observable<void> {
-    return this.httpClient.delete<void>(`${this.baseURL}/with-stats/${memberId}`, this.getHeaderWithToken());
+    return this.httpClient.delete<void>(`${this.domain}/with-stats/${memberId}`, this.getHeaderWithToken());
   }
 
   getGoals(): Observable<Goal[]> {
-    return this.httpClient.get<Goal[]>(`${this.baseURL}/goals`, this.getHeaderWithToken());
+    return this.httpClient.get<Goal[]>(`${this.domain}/goals`, this.getHeaderWithToken());
   }
 
   private getHeaderWithToken() {
