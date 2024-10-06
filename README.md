@@ -3,7 +3,7 @@
 
 ## Official Launch 01.01.2025
 
-Wait less then 1 minute to all microservices boot up https://fit-force-frontend.onrender.com/ deployed alpha version.
+Wait less then a minute to all microservices boot up https://fit-force-frontend.onrender.com/ deployed alpha version.
 
 ### Technologies:
 - Java 17
