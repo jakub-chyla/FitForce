@@ -14,6 +14,7 @@ import {NgClass} from "@angular/common";
 import {Router, RouterLink} from "@angular/router";
 import {AuthRequest} from "../../model/auth-request";
 import {UserDto} from "../../dto/UserDto";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-log-in',
@@ -45,7 +46,8 @@ export class LogInComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private userService: UserService,
-              private router: Router) {
+              private router: Router,
+              private _snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -55,6 +57,10 @@ export class LogInComponent implements OnInit {
     })
   }
 
+  openSnackBar() {
+    this._snackBar.open('Wrong credentials');
+  }
+
   logIn() {
     if (this.myForm.valid) {
       const authRequest: AuthRequest = {
@@ -62,12 +68,16 @@ export class LogInComponent implements OnInit {
         password: this.myForm.get('password')?.value
 
       }
-      this.userService.singIn(authRequest).subscribe(        (response) => {
-        const userDto: UserDto = response
-          console.log(userDto)
-        this.router.navigate(['/main']);
+      this.userService.singIn(authRequest).subscribe(
+        (response) => {
+          const userDto: UserDto = response;
+          this.router.navigate(['/main']);
+        },
+        (error) => {
+          this.openSnackBar()
         }
       );
+
     }
   }
 }

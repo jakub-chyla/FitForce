@@ -8,8 +8,8 @@
         <div class="grid grid-cols-2 gap-4">
           <mat-divider class="col-span-2"></mat-divider>
           <mat-form-field>
-            <input type="text" matInput formControlName="username" placeholder="aaa">
-            <mat-hint>Enter login</mat-hint>
+            <input type="text" matInput formControlName="username">
+            <mat-hint>Login</mat-hint>
             @if (myForm.controls['username'].hasError('required')) {
               <mat-error>Field is required</mat-error>
             }
@@ -18,8 +18,8 @@
             }
           </mat-form-field>
           <mat-form-field>
-            <input type="text" matInput formControlName="password" placeholder="aaa">
-            <mat-hint>Enter password</mat-hint>
+            <input type="text" matInput formControlName="password">
+            <mat-hint>Password</mat-hint>
             @if (myForm.controls['password'].hasError('required')) {
               <mat-error>Field is required</mat-error>
             }

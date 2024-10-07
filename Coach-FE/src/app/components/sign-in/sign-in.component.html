@@ -8,7 +8,7 @@
       <div class="grid grid-cols-2 gap-4">
         <mat-divider class="col-span-2"></mat-divider>
         <mat-form-field class="">
-          <input type="text" matInput formControlName="firstName" placeholder="John">
+          <input type="text" matInput formControlName="firstName">
           <mat-hint>Enter name</mat-hint>
           @if (myForm.controls['firstName'].hasError('required')) {
             <mat-error> Field is required</mat-error>
@@ -18,7 +18,7 @@
           }
         </mat-form-field>
         <mat-form-field>
-          <input type="text" matInput formControlName="lastName" placeholder="Smith">
+          <input type="text" matInput formControlName="lastName">
           <mat-hint>Enter last name</mat-hint>
           @if (myForm.controls['lastName'].hasError('required')) {
             <mat-error>Field is required</mat-error>
@@ -28,7 +28,7 @@
           }
         </mat-form-field>
         <mat-form-field>
-          <input type="text" matInput formControlName="name" placeholder="aaa">
+          <input type="text" matInput formControlName="name">
           <mat-hint>Enter login</mat-hint>
           @if (myForm.controls['name'].hasError('required')) {
             <mat-error>Field is required</mat-error>
@@ -38,7 +38,7 @@
           }
         </mat-form-field>
         <mat-form-field>
-          <input type="text" matInput formControlName="password" placeholder="aaa">
+          <input type="text" matInput formControlName="password">
           <mat-hint>Enter password</mat-hint>
           @if (myForm.controls['password'].hasError('required')) {
             <mat-error>Field is required</mat-error>
@@ -48,7 +48,7 @@
           }
         </mat-form-field>
         <mat-form-field>
-          <input type="text" matInput formControlName="email" placeholder="aaa@gmail.com">
+          <input type="text" matInput formControlName="email">
           <mat-hint>Enter email</mat-hint>
           @if (myForm.controls['email'].hasError('required')) {
             <mat-error>Field is required</mat-error>

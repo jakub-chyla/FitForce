@@ -5,8 +5,8 @@
       <div class="grid grid-cols-2 gap-4">
         <mat-divider class="col-span-2"></mat-divider>
         <mat-form-field class="">
-          <input type="text" matInput formControlName="firstName" placeholder="John">
-          <mat-hint>Enter name</mat-hint>
+          <input type="text" matInput formControlName="firstName">
+          <mat-hint>Name</mat-hint>
           @if (myForm.controls['firstName'].hasError('required')) {
           <mat-error>  Field is required</mat-error>
           }
@@ -15,8 +15,8 @@
           }
         </mat-form-field>
         <mat-form-field>
-          <input type="text" matInput formControlName="lastName" placeholder="Smith">
-          <mat-hint>Enter last name</mat-hint>
+          <input type="text" matInput formControlName="lastName">
+          <mat-hint>Last name</mat-hint>
           @if (myForm.controls['lastName'].hasError('required')) {
           <mat-error>Field is required</mat-error>
           }
@@ -25,8 +25,8 @@
           }
         </mat-form-field>
         <mat-form-field>
-          <input type="text" matInput formControlName="phone" placeholder="123456789">
-          <mat-hint>Enter phone number</mat-hint>
+          <input type="text" matInput formControlName="phone">
+          <mat-hint>Phone number</mat-hint>
           @if (myForm.controls['phone'].hasError('required')) {
           <mat-error>Field is required</mat-error>
           }
@@ -41,9 +41,8 @@
           }
         </mat-form-field>
         <mat-form-field>
-          <mat-label>Choose a date</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="birthday">
-          <mat-hint>MM/DD/YYYY</mat-hint>
+          <input matInput [matDatepicker]="picker">
+          <mat-hint>Birthday</mat-hint>
           <mat-datepicker-toggle  matIconSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker
             [ngClass]="themeService.themeSignal() === 'dark' ? 'dark-mode-option' : 'light-mode-option'"
