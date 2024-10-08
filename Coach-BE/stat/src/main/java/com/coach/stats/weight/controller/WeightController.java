@@ -46,7 +46,7 @@ public class WeightController {
     }
 
     @DeleteMapping("/member/{member-id}")
-    public void deleteAllStatsByMember(@PathVariable("member-id") Integer memberId) {
+    public void deleteAllStatsByMember(@PathVariable("member-id") Long memberId) {
         service.deleteById(memberId);
     }
 

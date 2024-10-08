@@ -36,6 +36,5 @@ spring:
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
-application:
-  config:
-    members-url: http://localhost:8222/api/v1/stats
+variables:
+  gateway: ${STATS}

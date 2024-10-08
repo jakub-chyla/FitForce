@@ -2,7 +2,7 @@ package com.coach.statsClient;
 
 import com.coach.stats.Weight;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -15,10 +15,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class StatClient {
 
+    @Value("${STATS}")
+    private String statsPath;
+
     private final RestTemplate regularRestTemplate;
 
-    public List<Weight> findAllStatsByMember(Long memberId) {
-        String url = "http://localhost:8090/api/v1/stats/member/" + memberId;
+    public List<Weight> findMemberStats(Long memberId) {
+        String url = statsPath + "/api/v1/stats/member/" + memberId;
 
         ResponseEntity<List<Weight>> responseEntity = regularRestTemplate.exchange(
                 url,
@@ -31,7 +34,7 @@ public class StatClient {
     }
 
     public void deleteAllStatsByMember(Long memberId) {
-        String url = "http://localhost:8090/stats/member/" + memberId;
+        String url = statsPath + "/api/v1/stats/member/" + memberId;
 
         ResponseEntity<List<Weight>> responseEntity = regularRestTemplate.exchange(
                 url,

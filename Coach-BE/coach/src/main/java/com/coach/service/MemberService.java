@@ -31,7 +31,7 @@ public class MemberService {
 
     public FullMemberResponse findMemberWithStats(Long memberId) {
         Member member = memberRepository.findById(memberId).orElse(Member.builder().firstName("NOT_FOUND").lastName("NOT_FOUND").build());
-        List<Weight> weights = statClient.findAllStatsByMember(memberId);
+        List<Weight> weights = statClient.findMemberStats(memberId);
         return FullMemberResponse.builder().name(member.getFirstName()).weights(weights.stream().map(Mapper::map).collect(Collectors.toList())).build();
     }
 

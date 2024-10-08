@@ -7,11 +7,9 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface WeightRepository extends JpaRepository<Weight, Integer> {
+public interface WeightRepository extends JpaRepository<Weight, Long> {
 
-
-        @Query(value = "SELECT * FROM weights w WHERE w.member_id = :memberId ORDER BY w.created DESC LIMIT 4", nativeQuery = true)
-        List<Weight> findAllByMemberIdRecent(@Param("memberId") Long memberId);
-
+    @Query(value = "SELECT * FROM stat.weights w WHERE w.member_id = :memberId ORDER BY w.created DESC LIMIT 4", nativeQuery = true)
+    List<Weight> findAllByMemberIdRecent(@Param("memberId") Long memberId);
 
 }
