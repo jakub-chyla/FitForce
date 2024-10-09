@@ -1,6 +1,6 @@
 create sequence stat.weights_seq increment by 1;
 
-select setval('stat.weights_seq', 1);
+select setval('stat.weights_seq', 7);
 
 create TABLE stat.weights (
     id BIGINT PRIMARY KEY,
@@ -17,3 +17,5 @@ values
   (4, 1, '2025-04-10', 82.3),
   (5, 1, '2025-05-10', 77.5),
   (6, 1, '2025-06-10', 74.2);
+
+--SELECT setval('stat.weights_seq', (SELECT MAX(id) FROM stat.weights) + 1);

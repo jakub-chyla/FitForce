@@ -1,4 +1,4 @@
-import {Component, inject, Input, OnInit} from '@angular/core';
+import {Component, inject, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MatTableModule} from "@angular/material/table";
 import {ChartConfiguration, ChartOptions} from "chart.js";
@@ -20,11 +20,13 @@ import {MatSelect, MatSelectModule} from "@angular/material/select";
 import {Member} from "../../../model/member";
 import {MemberService} from "../../../service/member.service";
 import {Weight} from "../../../model/weight";
+import {weightData} from "../../../dto/weightData";
 
-export interface weightData {
-  created: string;
-  weightValue: number;
-}
+// export interface weightData {
+//   id?: number;
+//   created: string;
+//   weightValue: number;
+// }
 
 @Component({
   selector: 'app-progress',
@@ -40,15 +42,16 @@ export interface weightData {
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelect, MatButton,
+    MatSelect, MatButton, MatDivider,
   ],
   templateUrl: './progress.component.html',
   styleUrls: ['./progress.component.scss']
 })
-export class ProgressComponent implements OnInit {
+export class ProgressComponent implements OnInit, OnChanges {
   themeService: ThemeService = inject(ThemeService);
   @Input() fullMemberResponse?: FullMemberResponse;
   myForm!: FormGroup;
+
 
   public lineChartOptions: ChartOptions<'line'> = {responsive: true};
   public lineChartLegend = true;
@@ -78,12 +81,17 @@ export class ProgressComponent implements OnInit {
       created: ['', [Validators.required, Validators.minLength(3),]],
       weightValue: ['', [Validators.required, Validators.minLength(3),]]
     });
+    this.fullMemberResponse
 
-    setTimeout(() => {
-      this.initTable();
-    }, 250);
-
+    this.initTable();
   }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['fullMemberResponse'] && changes['fullMemberResponse'].currentValue) {
+      this.initTable();
+    }
+  }
+
 
   initTable() {
     const tableData: weightData[] = [];
@@ -101,10 +109,11 @@ export class ProgressComponent implements OnInit {
   }
 
   updateChartData(tableData: weightData[]) {
+    console.log(tableData)
     const reversedData = tableData.slice().reverse();
 
     const labels = reversedData.map(data => data.created);
-    const data = reversedData.map(data => data.weightValue);
+    const data = reversedData.map(data => data.weightValue ?? 0);
 
     this.lineChartData = {
       labels: labels,
@@ -131,10 +140,13 @@ export class ProgressComponent implements OnInit {
 
       this.memberService.saveWeight(weight).subscribe(
         (response) => {
-        console.log(response)
+          this.dataSource.unshift(response);
+          this.dataSource.pop();
+          this.dataSource = [...this.dataSource];
+          this.updateChartData(this.dataSource);
         }
       );
-
     }
   }
+
 }

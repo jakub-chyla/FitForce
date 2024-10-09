@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  domain: 'https://fit-force-gateway.onrender.com'
+  gateway: 'https://fit-force-gateway.onrender.com',
 }

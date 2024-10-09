@@ -26,13 +26,13 @@ public class WeightController {
 
     //DOTO return value
     @PostMapping
-    public void save(@RequestBody WeightDto weightDto) {
-        System.out.println(weightDto);
+    public WeightDto save(@RequestBody WeightDto weightDto) {
         Weight weight = new Weight();
         weight.setCreated(LocalDate.parse(weightDto.getCreated(), DateTimeFormatter.ISO_LOCAL_DATE));
         weight.setWeightValue(Double.valueOf(weightDto.getWeightValue()));
         weight.setMemberId(1L);
         service.saveStat(weight);
+        return weightDto;
     }
 
     @GetMapping

@@ -1,4 +1,5 @@
 export const environment = {
-production: false,
-domain: 'http://localhost:8222'
+  production: false,
+  gateway: 'http://localhost:8222'
+
 }

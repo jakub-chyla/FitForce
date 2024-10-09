@@ -17,8 +17,8 @@ public class Weight {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "weights_seq")
-    @SequenceGenerator(name = "weights_seq", sequenceName = "weights_seq", allocationSize = 1)
-    private Integer id;
+    @SequenceGenerator(name = "weights_seq", sequenceName = "stat.weights_seq", allocationSize = 1)
+    private Long id;
 
     @Column(name = "member_id")
     private Long memberId;

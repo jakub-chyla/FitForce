@@ -14,7 +14,7 @@ export class UserService {
   private domain: string | undefined;
 
   constructor(private httpClient: HttpClient) {
-    this.domain = environment.domain + '/auth';
+    this.domain = environment.gateway + '/auth';
   }
 
   createUser(user: User): Observable<string> {
