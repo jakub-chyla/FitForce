@@ -18,8 +18,9 @@ public class PingScheduler {
     private static final Logger log = LoggerFactory.getLogger(PingScheduler.class);
 
 
-    @Scheduled(fixedRate = 30000)
+    @Scheduled(fixedRate = 60000)
     public void reportCurrentTime() {
+        //TODO refactor to loop
         var responseMember = restTemplateClient.pingMember();
         log.info(responseMember +" ", LocalDateTime.now());
 
@@ -28,6 +29,9 @@ public class PingScheduler {
 
         var responseSecurity = restTemplateClient.pingSecurity();
         log.info(responseSecurity +" ", LocalDateTime.now());
+
+        var responseStats = restTemplateClient.pingStats();
+        log.info(responseStats +" ", LocalDateTime.now());
 
     }
 }

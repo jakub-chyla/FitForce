@@ -57,7 +57,6 @@ public class MemberController {
         return ResponseEntity.ok(goalRepository.findAll());
     }
 
-
     @GetMapping("/ping")
     public ResponseEntity<String> ping() {
         return ResponseEntity.ok("ping coach");

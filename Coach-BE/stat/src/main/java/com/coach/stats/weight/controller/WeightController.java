@@ -50,5 +50,9 @@ public class WeightController {
         service.deleteById(memberId);
     }
 
+    @GetMapping("/ping")
+    public ResponseEntity<String> ping() {
+        return ResponseEntity.ok("ping stats");
+    }
 
 }

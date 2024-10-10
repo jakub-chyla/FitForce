@@ -20,6 +20,9 @@ public class RestTemplateClient {
     @Value("${SECURITY}")
     private String securityPath;
 
+    @Value("${STATS}")
+    private String statsPath;
+
     private final RestTemplate regularRestTemplate;
 
     public String pingMember() {
@@ -50,6 +53,19 @@ public class RestTemplateClient {
 
     public String pingSecurity() {
         String url = securityPath + "/api/v1/security/ping";
+
+        ResponseEntity<String> responseEntity = regularRestTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<>() {}
+        );
+
+        return responseEntity.getBody();
+    }
+
+    public String pingStats() {
+        String url = statsPath + "/api/v1/stats/ping";
 
         ResponseEntity<String> responseEntity = regularRestTemplate.exchange(
                 url,
