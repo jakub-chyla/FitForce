@@ -1,9 +1,9 @@
 <div class="page md:drop-shadow-xl">
   <mat-card class="card">
     <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>Shiba Inu</mat-card-title>
-      <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+      <div class="pt-2.5">
+        <mat-card-title>{{member?.firstName}} {{member?.lastName}}</mat-card-title>
+      </div>
       <span class="icon-spacer"></span>
       <button mat-icon-button (click)="editMember()">
         <mat-icon>edit</mat-icon>
@@ -14,8 +14,8 @@
     </mat-card-header>
     <mat-divider></mat-divider>
     <div class="grid grid-cols-2 gap-4 p-4">
-      <div class=""><img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-                         alt="Photo of a Shiba Inu"></div>
+      <div class="rounded">
+        <img mat-card-image src="assets/avatar-unknown.png"></div>
       <div class="grid gap-3 grid-cols-1">
         <div>{{member?.firstName}}</div>
         <div>{{member?.lastName}}</div>
@@ -32,9 +32,6 @@
       </div>
     </div>
     <mat-card-content>
-      <p>
-        {{member?.firstName}}
-      </p>
     </mat-card-content>
     <mat-divider></mat-divider>
     <mat-card-actions class="flex justify-end">

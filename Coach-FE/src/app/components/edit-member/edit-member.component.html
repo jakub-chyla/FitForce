@@ -8,36 +8,36 @@
           <input type="text" matInput formControlName="firstName" placeholder="John">
           <mat-hint>Enter name</mat-hint>
           @if (myForm.controls['firstName'].hasError('required')) {
-          <mat-error>  Field is required</mat-error>
+            <mat-error> Field is required</mat-error>
           }
           @if (myForm.controls['firstName'].hasError('minlength')) {
-          <mat-error>Minimum length is 2 </mat-error>
+            <mat-error>Minimum length is 2</mat-error>
           }
         </mat-form-field>
         <mat-form-field>
           <input type="text" matInput formControlName="lastName" placeholder="Smith">
           <mat-hint>Enter last name</mat-hint>
           @if (myForm.controls['lastName'].hasError('required')) {
-          <mat-error>Field is required</mat-error>
+            <mat-error>Field is required</mat-error>
           }
           @if (myForm.controls['lastName'].hasError('minlength')) {
-          <mat-error>Minimum length is 2</mat-error>
+            <mat-error>Minimum length is 2</mat-error>
           }
         </mat-form-field>
         <mat-form-field>
           <input type="text" matInput formControlName="phone" placeholder="123456789">
           <mat-hint>Enter phone number</mat-hint>
           @if (myForm.controls['phone'].hasError('required')) {
-          <mat-error>Field is required</mat-error>
+            <mat-error>Field is required</mat-error>
           }
           @if (myForm.controls['phone'].hasError('minlength')) {
-          <mat-error>Too short</mat-error>
+            <mat-error>Too short</mat-error>
           }
           @if (myForm.controls['phone'].hasError('maxLength')) {
-          <mat-error>Too long</mat-error>
+            <mat-error>Too long</mat-error>
           }
           @if (myForm.controls['phone'].hasError('numeric')) {
-          <mat-error>Only numbers are allowed</mat-error>
+            <mat-error>Only numbers are allowed</mat-error>
           }
         </mat-form-field>
         <mat-form-field>
@@ -52,12 +52,14 @@
         </mat-form-field>
         <mat-form-field>
           <mat-label>Goal</mat-label>
-          <mat-select formControlName="goal" [panelClass]="themeService.themeSignal() === 'dark' ? 'dark-mode-panel' : 'light-mode-panel'"
+          <mat-select formControlName="goal"
+                      [panelClass]="themeService.themeSignal() === 'dark' ? 'dark-mode-panel' : 'light-mode-panel'"
                       (selectionChange)="onGoalSelected($event)"
                       [(value)]="selectedGoal">
             @for (goal of goals; track goal) {
-            <mat-option [ngClass]="themeService.themeSignal() === 'dark' ? 'dark-mode-option' : 'light-mode-option'"
-                        [value]="goal">{{goal.name}}</mat-option>
+              <mat-option [ngClass]="themeService.themeSignal() === 'dark' ? 'dark-mode-option' : 'light-mode-option'"
+                          [value]="goal">{{ goal.name }}
+              </mat-option>
             }
           </mat-select>
         </mat-form-field>
@@ -66,8 +68,10 @@
     </form>
   </mat-dialog-content>
   <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>Cancel</button>
-    <button mat-raised-button (click)="save()" [disabled]="myForm.invalid" type="submit">Submit</button>
+    <div class="pr-6 pb-4">
+      <button mat-button mat-dialog-close>Cancel</button>
+      <button mat-raised-button (click)="save()" [disabled]="myForm.invalid" type="submit">Submit</button>
+    </div>
   </mat-dialog-actions>
 </div>
 
