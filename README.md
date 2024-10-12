@@ -18,11 +18,12 @@ Wait less than a minute for all micro services boot up https://fit-force-fronten
 ---
 ### About
 Full Stack application to help manage clients for personal trainers. The application has implemented micro services, security authentication, dark mode, emails. User can add on clients, menagde them, add statistics like: training goal, weight progress shown in chart, book apoinments, create diet.
-
-//TODO 
+---
+### TODO 
 - [x] BE implement microservices
 - [x] BE implement spring security
 - [ ] FE refactor names
+- [ ] FE add spinners when loading
 - [ ] BE refactor microservices names
 - [ ] BE refactor package structure
 - [x] BE add tests
