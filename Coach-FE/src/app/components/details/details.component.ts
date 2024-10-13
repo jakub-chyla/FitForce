@@ -9,16 +9,17 @@ import {MemberService} from "../../service/member.service";
 import {ProgressComponent} from "./progress/progress.component";
 import {Member} from "../../model/member";
 import {FullMemberResponse} from "../../model/fullMemberResponse";
+import {TrainingsComponent} from "./trainings/trainings.component";
 
 @Component({
   selector: 'app-details',
   standalone: true,
-    imports: [MatCardModule,
-        MatTabsModule,
-        MatButtonModule,
-        MatIconModule,
-        MatDividerModule,
-        RouterModule, ProgressComponent],
+  imports: [MatCardModule,
+    MatTabsModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDividerModule,
+    RouterModule, ProgressComponent, TrainingsComponent],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss'
 })

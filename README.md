@@ -1,7 +1,7 @@
 # Fit Force
 
 
-## Official Launch 01.01.2025
+## Mvp Launch 01.01.2025
 
 Wait less than a minute for all micro services boot up https://fit-force-frontend.onrender.com/ deployed alpha version.
 
@@ -29,6 +29,7 @@ Full Stack application to help manage clients for personal trainers. The applica
 - [x] BE add tests
 - [ ] BE add utils
 - [ ] BE use records
+- [ ] FE use signals
 - [x] BE implement multiple users
 - [ ] BE endpoint have to return value
 - [ ] BE emails
