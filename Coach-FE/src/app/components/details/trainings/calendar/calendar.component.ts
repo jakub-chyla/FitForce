@@ -7,16 +7,16 @@ import {
   input,
   signal,
 } from '@angular/core';
-import {CommonModule} from "@angular/common";
-import {Meetings} from "./meetings.interface";
 import { DateTime, Info, Interval } from 'luxon';
+import { CommonModule } from '@angular/common';
+import {Meetings} from "./meetings";
 
 @Component({
-  selector: 'app-calendar',
-  standalone: true,
-  imports: [CommonModule],
+  selector: 'calendar',
   templateUrl: './calendar.component.html',
-  styleUrl: './calendar.component.scss'
+  styleUrls: ['./calendar.component.scss'],
+  imports: [CommonModule],
+  standalone: true,
 })
 export class CalendarComponent {
   meetings: InputSignal<Meetings> = input.required();

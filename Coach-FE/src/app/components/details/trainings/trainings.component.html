@@ -1,11 +1,1 @@
-<mat-card class="demo-inline-calendar-card">
-  <!-- Bind (selectedChange) to the selectDate function to toggle date selection -->
-  <mat-calendar (selectedChange)="selectDate($event)"></mat-calendar>
-</mat-card>
-
-<!-- Display the selected dates -->
-<p>Selected dates:
-  <span *ngIf="selectedDates.length === 0">None</span>
-  <span *ngIf="selectedDates.length > 0">{{ selectedDates[0] | date }}</span>
-  <span *ngIf="selectedDates.length > 1">, {{ selectedDates[1] | date }}</span>
-</p>
+<calendar [meetings]="meetings" />
