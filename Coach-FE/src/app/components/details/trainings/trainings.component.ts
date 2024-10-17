@@ -22,8 +22,8 @@ import {RouterOutlet} from "@angular/router";
 })
 export class TrainingsComponent implements OnInit {
   meetings = {
-    '2024-04-05': ['Dring Coffee', 'Learn React', 'Sleep'],
-    '2024-04-06': ['Dring Coffee', 'Learn Angular', 'Sleep'],
+    '2024-10-05': ['Dring Coffee', 'Learn React', 'Sleep'],
+    '2024-10-06': ['Dring Coffee', 'Learn Angular', 'Sleep'],
   };
   ngOnInit() {}
 }

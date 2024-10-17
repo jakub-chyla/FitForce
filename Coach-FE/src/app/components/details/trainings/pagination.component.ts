@@ -24,7 +24,6 @@ import {outputFromObservable, outputToObservable} from "@angular/core/rxjs-inter
   `,
 })
 export class PaginationComponent implements OnInit {
-  // @Output() changePage = new EventEmitter<number>();
   changePage = output<number>();
   currentPage = input.required<number>();
   total = input.required<number>();
@@ -38,13 +37,13 @@ export class PaginationComponent implements OnInit {
   changePage$ = outputToObservable(this.changePage);
 
   ngOnInit(): void {
-    this.items$.subscribe((items) => {
-      console.log('items', items);
-    });
-
-    this.changePage$.subscribe((page) => {
-      console.log('change page was triggered', page);
-    });
+    // this.items$.subscribe((items) => {
+    //   console.log('items', items);
+    // });
+    //
+    // this.changePage$.subscribe((page) => {
+    //   console.log('change page was triggered', page);
+    // });
   }
 
   range(start: number, end: number): number[] {

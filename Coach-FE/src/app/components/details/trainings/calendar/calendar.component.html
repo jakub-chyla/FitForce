@@ -31,7 +31,8 @@
             'calendar-grid-cell-active':
               activeDay()?.toISODate() === dayOfMonth.toISODate(),
             'calendar-grid-cell-inactive':
-              dayOfMonth.month !== firstDayOfActiveMonth().month
+              dayOfMonth.month !== firstDayOfActiveMonth().month,
+              'calendar-grid-cell-has-event': isDayEven(dayOfMonth)
           }"
           (click)="activeDay.set(dayOfMonth)"
         >
