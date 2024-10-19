@@ -1,7 +1,7 @@
-package com.coach;
+package com.stat;
 
-import com.coach.stats.weight.repository.WeightRepository;
-import com.coach.stats.weight.service.WeightService;
+import com.stat.stats.weight.repository.WeightRepository;
+import com.stat.stats.weight.service.WeightService;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;

@@ -1,8 +1,8 @@
-package com.coach.stats.weight.controller;
+package com.stat.stats.controller;
 
-import com.coach.stats.weight.service.WeightService;
-import com.coach.stats.weight.dto.WeightDto;
-import com.coach.stats.weight.model.Weight;
+import com.stat.stats.weight.service.WeightService;
+import com.stat.stats.weight.dto.WeightDto;
+import com.stat.stats.weight.model.Weight;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/stats")
 @RequiredArgsConstructor
-public class WeightController {
+public class StatController {
 
     private final WeightService service;
 

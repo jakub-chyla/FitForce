@@ -1,7 +1,7 @@
-package com.coach.stats.weight.service;
+package com.stat.stats.weight.service;
 
-import com.coach.stats.weight.model.Weight;
-import com.coach.stats.weight.repository.WeightRepository;
+import com.stat.stats.weight.model.Weight;
+import com.stat.stats.weight.repository.WeightRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

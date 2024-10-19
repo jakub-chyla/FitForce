@@ -1,4 +1,4 @@
-package com.coach.stats.weight.dto;
+package com.stat.stats.weight.dto;
 
 import lombok.Data;
 

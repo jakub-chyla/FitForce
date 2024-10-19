@@ -1,10 +1,9 @@
-package com.coach.stats.weight.model;
+package com.stat.stats.weight.model;
 
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @Getter

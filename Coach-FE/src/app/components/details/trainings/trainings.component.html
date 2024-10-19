@@ -1,12 +1,15 @@
 <div class="flex justify-center">
   <div class="grid grid-cols- gap-4 min-w-80">
-    <div class="">
+    <div>
       <mat-card>
-        <mat-calendar [(selected)]="selected" [dateClass]="dateClass"></mat-calendar>
+        <mat-calendar [(selected)]="selected" [dateClass]="dateClass" (selectedChange)="onDateChange($event)"></mat-calendar>
       </mat-card>
     </div>
     <div class="flex-col">
       <span>Selected date: {{ selected | date }}</span>
+      <div *ngIf="message">
+        <p>{{ message }}</p> <!-- Display the message associated with the selected date -->
+      </div>
     </div>
   </div>
 </div>
