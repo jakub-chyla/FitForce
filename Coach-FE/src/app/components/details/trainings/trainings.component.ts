@@ -20,17 +20,16 @@ import { DatePipe, NgIf } from '@angular/common';
 export class TrainingsComponent implements OnInit {
   selected: Date | null = null;
   highlightedDates: Date[] = [
-    new Date(2024, 9, 10), // October 10, 2024
-    new Date(2024, 9, 15), // October 15, 2024
+    new Date(2024, 9, 10),
+    new Date(2024, 9, 15),
   ];
 
-  // Date to message mapping
   dateMessages: { [key: string]: string } = {
     '2024-10-10': 'Training on Agile Methodologies',
     '2024-10-15': 'Training on Angular Best Practices'
   };
 
-  message: string = ''; // Store the message for the selected date
+  message: string = '';
 
   ngOnInit() {}
 

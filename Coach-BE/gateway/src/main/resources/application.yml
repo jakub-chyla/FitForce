@@ -54,3 +54,6 @@ eureka:
     fetch-registry: false
     service-url:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+
+
+#DISCOVERY=http://localhost:8761;MEMBER=http://localhost:8070;PORT=8222;SECURITY=http://localhost:9898;STATS=http://localhost:8090;CORS=http://localhost:4200

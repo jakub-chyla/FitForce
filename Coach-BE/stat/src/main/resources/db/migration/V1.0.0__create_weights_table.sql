@@ -2,6 +2,16 @@ create sequence stat.weights_seq increment by 1;
 
 select setval('stat.weights_seq', 7);
 
+create sequence stat.trainings_seq increment by 1;
+
+select setval('stat.trainings_seq', 1);
+
+create TABLE stat.trainings (
+    id BIGINT PRIMARY KEY,
+    member_id bigint,
+    appointment DATE
+);
+
 create TABLE stat.weights (
     id BIGINT PRIMARY KEY,
     member_id bigint,
