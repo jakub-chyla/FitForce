@@ -28,4 +28,9 @@ values
   (5, 1, '2025-05-10', 77.5),
   (6, 1, '2025-06-10', 74.2);
 
+    insert into stat.trainings (id, member_id, appointment)
+values
+  (1, 1, '2024-10-01'),
+  (2, 1, '2024-10-30');
+
 --SELECT setval('stat.weights_seq', (SELECT MAX(id) FROM stat.weights) + 1);

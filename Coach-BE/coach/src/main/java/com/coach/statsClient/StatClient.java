@@ -1,5 +1,6 @@
 package com.coach.statsClient;
 
+import com.coach.dto.StatDto;
 import com.coach.stats.Weight;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,10 +21,10 @@ public class StatClient {
 
     private final RestTemplate regularRestTemplate;
 
-    public List<Weight> findMemberStats(Long memberId) {
+    public StatDto findMemberStats(Long memberId) {
         String url = statsPath + "/api/v1/stats/member/" + memberId;
 
-        ResponseEntity<List<Weight>> responseEntity = regularRestTemplate.exchange(
+        ResponseEntity<StatDto> responseEntity = regularRestTemplate.exchange(
                 url,
                 HttpMethod.GET,
                 null,

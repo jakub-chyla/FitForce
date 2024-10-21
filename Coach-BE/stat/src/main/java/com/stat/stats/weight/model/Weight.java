@@ -8,9 +8,6 @@ import java.time.LocalDate;
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
 @Table(name = "weights", schema = "stat")
 public class Weight {
 

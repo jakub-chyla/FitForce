@@ -133,7 +133,7 @@ export class ProgressComponent implements OnInit, OnChanges {
   save() {
     if (this.myForm.valid) {
       const weight: Weight = {
-        id: this.fullMemberResponse?.id,
+        id: this.fullMemberResponse?.memberId,
         created: this.myForm.get('created')?.value,
         weightValue: this.myForm.get('weightValue')?.value,
       };

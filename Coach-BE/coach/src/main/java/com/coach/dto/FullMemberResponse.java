@@ -1,5 +1,6 @@
 package com.coach.dto;
 
+import com.coach.model.Training;
 import lombok.*;
 
 import java.util.List;
@@ -11,6 +12,8 @@ import java.util.List;
 @Builder
 public class FullMemberResponse {
 
-    private String name;
-    List<WeightDto> weights;
+    private Long memberId;
+
+    private List<WeightDto> weights;
+    private List<TrainingDto> trainings;
 }

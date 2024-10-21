@@ -1,12 +1,12 @@
 package com.coach.service;
 
 import com.coach.dto.FullMemberResponse;
+import com.coach.dto.StatDto;
 import com.coach.utils.Mapper;
 import com.coach.statsClient.StatClient;
 import com.coach.model.Goal;
 import com.coach.model.Member;
 import com.coach.repository.MemberRepository;
-import com.coach.stats.Weight;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -31,8 +31,12 @@ public class MemberService {
 
     public FullMemberResponse findMemberWithStats(Long memberId) {
         Member member = memberRepository.findById(memberId).orElse(Member.builder().firstName("NOT_FOUND").lastName("NOT_FOUND").build());
-        List<Weight> weights = statClient.findMemberStats(memberId);
-        return FullMemberResponse.builder().name(member.getFirstName()).weights(weights.stream().map(Mapper::map).collect(Collectors.toList())).build();
+        StatDto stats = statClient.findMemberStats(memberId);
+        FullMemberResponse response = new FullMemberResponse();
+        response.setMemberId(memberId);
+        response.setTrainings(stats.getTrainings().stream().map(Mapper::mapTraining).collect(Collectors.toList()));
+        response.setWeights(stats.getWeights().stream().map(Mapper::mapWeight).collect(Collectors.toList()));
+        return response;
     }
 
     public void deleteWithStats(Long memberId) {

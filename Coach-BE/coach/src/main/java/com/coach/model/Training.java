@@ -1,8 +1,9 @@
-package com.stat.stats.training.model;
+package com.coach.model;
 
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 

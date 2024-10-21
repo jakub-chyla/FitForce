@@ -1,5 +1,7 @@
 package com.stat.stats.controller;
 
+import com.stat.stats.dto.StatDto;
+import com.stat.stats.training.service.TrainingService;
 import com.stat.stats.weight.service.WeightService;
 import com.stat.stats.weight.dto.WeightDto;
 import com.stat.stats.weight.model.Weight;
@@ -16,7 +18,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class StatController {
 
-    private final WeightService service;
+    private final WeightService weightService;
+    private final TrainingService trainingService;
 
 //    @GetMapping("/mess/{member-id}")
 //    public ResponseEntity<String> getString(@PathVariable("member-id") Long memberId) {
@@ -31,23 +34,26 @@ public class StatController {
         weight.setCreated(LocalDate.parse(weightDto.getCreated(), DateTimeFormatter.ISO_LOCAL_DATE));
         weight.setWeightValue(Double.valueOf(weightDto.getWeightValue()));
         weight.setMemberId(1L);
-        service.saveStat(weight);
+        weightService.saveStat(weight);
         return weightDto;
     }
 
     @GetMapping
     public ResponseEntity<List<Weight>> findAllStats() {
-        return ResponseEntity.ok(service.findAllStats());
+        return ResponseEntity.ok(weightService.findAllStats());
     }
 
     @GetMapping("/member/{member-id}")
-    public ResponseEntity<List<Weight>> findAllStats(@PathVariable("member-id") Long memberId) {
-        return ResponseEntity.ok(service.findAllStatsByMember(memberId));
+    public ResponseEntity<StatDto> findAllStats(@PathVariable("member-id") Long memberId) {
+        StatDto statDto = new StatDto();
+        statDto.setWeights(weightService.findAllStatsByMember(memberId));
+        statDto.setTrainings(trainingService.findAllTrainingsByMember(memberId));
+        return ResponseEntity.ok(statDto);
     }
 
     @DeleteMapping("/member/{member-id}")
     public void deleteAllStatsByMember(@PathVariable("member-id") Long memberId) {
-        service.deleteById(memberId);
+        weightService.deleteById(memberId);
     }
 
     @GetMapping("/ping")

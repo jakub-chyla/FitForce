@@ -1,9 +1,10 @@
 import {Goal} from "./goal";
 import {Weight} from "./weight";
+import {Training} from "./training";
 
 export class FullMemberResponse {
-  id?: number;
-  name?: string;
+  memberId?: number;
   weights?: Weight[];
+  trainings?: Training[];
 
 }

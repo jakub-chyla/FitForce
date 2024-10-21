@@ -11,4 +11,8 @@ import java.util.List;
 public interface TrainingRepository extends JpaRepository<Training, Long> {
 
 
+    @Query(value = "SELECT * FROM stat.trainings w WHERE w.member_id = :memberId", nativeQuery = true)
+    List<Training> findAllByMemberId(@Param("memberId") Long memberId);
+
+
 }
