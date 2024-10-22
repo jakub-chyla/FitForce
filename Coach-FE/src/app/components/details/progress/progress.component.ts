@@ -81,7 +81,6 @@ export class ProgressComponent implements OnInit, OnChanges {
       created: ['', [Validators.required, Validators.minLength(3),]],
       weightValue: ['', [Validators.required, Validators.minLength(3),]]
     });
-    this.fullMemberResponse
 
     this.initTable();
   }
@@ -109,7 +108,6 @@ export class ProgressComponent implements OnInit, OnChanges {
   }
 
   updateChartData(tableData: weightData[]) {
-    console.log(tableData)
     const reversedData = tableData.slice().reverse();
 
     const labels = reversedData.map(data => data.created);

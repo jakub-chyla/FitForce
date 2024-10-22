@@ -42,10 +42,10 @@ public class MemberController {
         return ResponseEntity.ok(memberService.findAllMembersWithName(name));
     }
 
-    @GetMapping("/with-stats/{member-id}")
-    public ResponseEntity<FullMemberResponse> findAllMembers(@PathVariable("member-id") Long memberId) {
-        return ResponseEntity.ok(memberService.findMemberWithStats(memberId));
-    }
+//    @GetMapping("/with-stats/{member-id}")
+//    public ResponseEntity<FullMemberResponse> findAllMembers(@PathVariable("member-id") Long memberId) {
+//        return ResponseEntity.ok(memberService.findMemberWithStats(memberId));
+//    }
 
     @DeleteMapping("/with-stats/{member-id}")
     public void deleteWithStats(@PathVariable("member-id") Long memberId) {

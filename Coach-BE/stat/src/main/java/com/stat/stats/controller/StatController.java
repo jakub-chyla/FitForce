@@ -1,10 +1,13 @@
 package com.stat.stats.controller;
 
+import com.stat.stats.dto.FullMemberResponse;
 import com.stat.stats.dto.StatDto;
+import com.stat.stats.training.model.Training;
 import com.stat.stats.training.service.TrainingService;
 import com.stat.stats.weight.service.WeightService;
 import com.stat.stats.weight.dto.WeightDto;
 import com.stat.stats.weight.model.Weight;
+import com.stat.utils.Mapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/stats")
@@ -43,12 +47,15 @@ public class StatController {
         return ResponseEntity.ok(weightService.findAllStats());
     }
 
-    @GetMapping("/member/{member-id}")
-    public ResponseEntity<StatDto> findAllStats(@PathVariable("member-id") Long memberId) {
-        StatDto statDto = new StatDto();
-        statDto.setWeights(weightService.findAllStatsByMember(memberId));
-        statDto.setTrainings(trainingService.findAllTrainingsByMember(memberId));
-        return ResponseEntity.ok(statDto);
+
+    @GetMapping("/with-stats/{member-id}")
+    public ResponseEntity<FullMemberResponse> findAllMembers(@PathVariable("member-id") Long memberId) {
+        FullMemberResponse response = new FullMemberResponse();
+        List<Weight> weights = weightService.findAllStatsByMember(memberId);
+        List<Training> trainings = trainingService.findAllTrainingsByMember(memberId);
+        response.setWeights(weights.stream().map(Mapper::mapWeight).collect(Collectors.toList()));
+        response.setTrainings(trainings.stream().map(Mapper::mapTraining).collect(Collectors.toList()));
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/member/{member-id}")

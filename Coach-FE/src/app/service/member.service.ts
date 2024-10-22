@@ -24,8 +24,8 @@ export class MemberService {
     return this.httpClient.get<Member[]>(`${this.coach}/${userId}`, this.getHeaderWithToken());
   }
 
-  getMemberWithStats(memberId: number): Observable<FullMemberResponse> {
-    return this.httpClient.get<FullMemberResponse>(`${this.coach}/with-stats/${memberId}`, this.getHeaderWithToken());
+  getStatsForMemberId(memberId: number): Observable<FullMemberResponse> {
+    return this.httpClient.get<FullMemberResponse>(`${this.stats}/with-stats/${memberId}`, this.getHeaderWithToken());
   }
 
   addMember(member: Member): Observable<Member> {

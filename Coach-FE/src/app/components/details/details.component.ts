@@ -44,8 +44,7 @@ export class DetailsComponent implements OnInit {
   }
 
   getMemberWithStats(memberId: number) {
-    this.service.getMemberWithStats(memberId).subscribe((response) => {
-      console.log(response.trainings)
+    this.service.getStatsForMemberId(memberId).subscribe((response) => {
       this.fullMemberResponse = response;
     });
   }
