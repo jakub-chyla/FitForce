@@ -2,3 +2,9 @@
   background-color: red;
   border-radius: 50%;
 }
+
+.bottom{
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}

@@ -52,7 +52,6 @@ export class ProgressComponent implements OnInit, OnChanges {
   @Input() fullMemberResponse?: FullMemberResponse;
   myForm!: FormGroup;
 
-
   public lineChartOptions: ChartOptions<'line'> = {responsive: true};
   public lineChartLegend = true;
   displayedColumns: string[] = ['created', 'weightValue'];
@@ -90,7 +89,6 @@ export class ProgressComponent implements OnInit, OnChanges {
       this.initTable();
     }
   }
-
 
   initTable() {
     const tableData: weightData[] = [];

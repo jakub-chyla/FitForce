@@ -1,15 +1,50 @@
 <div class="flex justify-center">
-  <div class="grid grid-cols- gap-4 min-w-80">
-    <div>
-      <mat-card>
-        <mat-calendar [(selected)]="selected" [dateClass]="dateClass" (selectedChange)="onDateChange($event)"></mat-calendar>
-      </mat-card>
-    </div>
-    <div class="flex-col">
+  <div class="grid grid-cols-2 gap-4 p-8 min-w-80">
+    <div style="min-height: 360px" class="">
       <span>Selected date: {{ selected | date }}</span>
       <div *ngIf="message">
         <p>{{ message }}</p>
       </div>
+    </div>
+    <div class="row-span-2">
+      <mat-card>
+        <mat-calendar [(selected)]="selected" [dateClass]="dateClass"
+                      (selectedChange)="onDateChange($event)"></mat-calendar>
+      </mat-card>
+    </div>
+    <div class="bottom">
+      <form [formGroup]="myForm">
+          <div>
+            <div class="flex justify-start">
+              <mat-form-field>
+                <input type="text" matInput formControlName="created" placeholder="Date">
+                <mat-hint>Enter weight</mat-hint>
+                @if (myForm.controls['created'].hasError('required')) {
+                  <mat-error>Field is required</mat-error>
+                }
+                @if (myForm.controls['created'].hasError('minlength')) {
+                  <mat-error>Minimum length is 2</mat-error>
+                }
+              </mat-form-field>
+              <mat-form-field class="px-2">
+                <input type="text" matInput formControlName="weightValue" placeholder="Weight">
+                <mat-hint>Enter date</mat-hint>
+                @if (myForm.controls['weightValue'].hasError('required')) {
+                  <mat-error>Field is required</mat-error>
+                }
+                @if (myForm.controls['weightValue'].hasError('minlength')) {
+                  <mat-error>Minimum length is 2</mat-error>
+                }
+              </mat-form-field>
+            </div>
+            <div class="flex justify-end pt-2">
+              <div class="flex justify-between w-40 pr-2">
+                <button color="warn" mat-flat-button>Clear</button>
+                <button color="primary" (click)="save()" mat-flat-button>Add</button>
+              </div>
+            </div>
+          </div>
+      </form>
     </div>
   </div>
 </div>

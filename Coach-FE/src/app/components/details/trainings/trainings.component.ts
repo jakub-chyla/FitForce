@@ -15,6 +15,11 @@ import {DatePipe, NgIf} from '@angular/common';
 import {FullMemberResponse} from "../../../model/fullMemberResponse";
 import {Weight} from "../../../model/weight";
 import {Training} from "../../../model/training";
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {MemberService} from "../../../service/member.service";
+import {MatButton} from "@angular/material/button";
+import {MatError, MatFormField, MatHint} from "@angular/material/form-field";
+import {MatInput} from "@angular/material/input";
 
 @Component({
   selector: 'app-trainings',
@@ -25,12 +30,13 @@ import {Training} from "../../../model/training";
   imports: [
     MatCalendar,
     MatCard,
-    MatCardModule, MatDatepickerModule, DatePipe, NgIf
+    MatCardModule, MatDatepickerModule, DatePipe, NgIf, MatButton, MatError, MatFormField, MatHint, MatInput, ReactiveFormsModule
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TrainingsComponent implements OnInit, OnChanges  {
   @Input() fullMemberResponse?: FullMemberResponse;
+  myForm!: FormGroup;
   trainings?: Training[] = [];
 
   selected: Date | null = null;
@@ -46,7 +52,15 @@ export class TrainingsComponent implements OnInit, OnChanges  {
 
   message: string = '';
 
+  constructor(private formBuilder: FormBuilder,
+              private memberService: MemberService) {
+  }
+
   ngOnInit() {
+    this.myForm = this.formBuilder.group({
+      created: ['', [Validators.required, Validators.minLength(3),]],
+      weightValue: ['', [Validators.required, Validators.minLength(3),]]
+    });
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -85,6 +99,25 @@ export class TrainingsComponent implements OnInit, OnChanges  {
     } else {
       this.message = '';
       console.log('No date selected');
+    }
+  }
+
+  save() {
+    if (this.myForm.valid) {
+      const weight: Weight = {
+        id: this.fullMemberResponse?.memberId,
+        created: this.myForm.get('created')?.value,
+        weightValue: this.myForm.get('weightValue')?.value,
+      };
+
+      this.memberService.saveWeight(weight).subscribe(
+        (response) => {
+          // this.dataSource.unshift(response);
+          // this.dataSource.pop();
+          // this.dataSource = [...this.dataSource];
+          // this.updateChartData(this.dataSource);
+        }
+      );
     }
   }
 
