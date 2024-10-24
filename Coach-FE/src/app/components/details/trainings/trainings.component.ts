@@ -39,7 +39,7 @@ export class TrainingsComponent implements OnInit, OnChanges  {
   myForm!: FormGroup;
   trainings?: Training[] = [];
 
-  selected: Date | null = null;
+  selectedDate: Date | null = null;
   highlightedDates: Date[] = [
     // new Date(2024, 9, 10),
     // new Date(2024, 9, 15),
@@ -58,8 +58,8 @@ export class TrainingsComponent implements OnInit, OnChanges  {
 
   ngOnInit() {
     this.myForm = this.formBuilder.group({
-      created: ['', [Validators.required, Validators.minLength(3),]],
-      weightValue: ['', [Validators.required, Validators.minLength(3),]]
+      time: ['', [Validators.required, Validators.minLength(3),]],
+      note: ['', [Validators.minLength(3),]]
     });
   }
 
@@ -104,13 +104,15 @@ export class TrainingsComponent implements OnInit, OnChanges  {
 
   save() {
     if (this.myForm.valid) {
-      const weight: Weight = {
-        id: this.fullMemberResponse?.memberId,
-        created: this.myForm.get('created')?.value,
-        weightValue: this.myForm.get('weightValue')?.value,
+      const training: Training = {
+        memberId: this.fullMemberResponse?.memberId,
+        time: this.myForm.get('time')?.value,
+        // @ts-ignore
+        appointment: this.selectedDate,
+        note: this.myForm.get('note')?.value,
       };
 
-      this.memberService.saveWeight(weight).subscribe(
+      this.memberService.saveTraining(training).subscribe(
         (response) => {
           // this.dataSource.unshift(response);
           // this.dataSource.pop();

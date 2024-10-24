@@ -4,7 +4,7 @@ select setval('stat.weights_seq', 7);
 
 create sequence stat.trainings_seq increment by 1;
 
-select setval('stat.trainings_seq', 1);
+select setval('stat.trainings_seq', 2);
 
 create TABLE stat.trainings (
     id BIGINT PRIMARY KEY,

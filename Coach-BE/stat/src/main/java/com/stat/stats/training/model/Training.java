@@ -4,6 +4,7 @@ package com.stat.stats.training.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -20,5 +21,5 @@ public class Training {
     @Column(name = "member_Id")
     private Long memberId;
 
-    private LocalDateTime appointment;
+    private LocalDate appointment;
 }

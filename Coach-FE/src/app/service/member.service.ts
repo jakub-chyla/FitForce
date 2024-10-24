@@ -7,6 +7,7 @@ import {FullMemberResponse} from "../model/fullMemberResponse";
 import {Weight} from "../model/weight";
 import {environment} from "../../environments/environment";
 import {weightData} from "../dto/weightData";
+import {Training} from "../model/training";
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,12 @@ export class MemberService {
   }
 
   saveWeight(weight: weightData): Observable<weightData> {
-    return this.httpClient.post<weightData>(`${this.stats}`, weight, this.getHeaderWithToken());
+    return this.httpClient.post<weightData>(`${this.stats}/save-weight`, weight, this.getHeaderWithToken());
+  }
+
+  saveTraining(training: Training): Observable<Training> {
+    console.log(training)
+    return this.httpClient.post<Training>(`${this.stats}/save-training`, training, this.getHeaderWithToken());
   }
 
   deleteMember(memberId: number): Observable<void> {

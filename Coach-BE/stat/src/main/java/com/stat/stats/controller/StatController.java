@@ -2,6 +2,7 @@ package com.stat.stats.controller;
 
 import com.stat.stats.dto.FullMemberResponse;
 import com.stat.stats.dto.StatDto;
+import com.stat.stats.training.dto.TrainingDto;
 import com.stat.stats.training.model.Training;
 import com.stat.stats.training.service.TrainingService;
 import com.stat.stats.weight.service.WeightService;
@@ -32,14 +33,23 @@ public class StatController {
 //    }
 
     //DOTO return value
-    @PostMapping
-    public WeightDto save(@RequestBody WeightDto weightDto) {
+    @PostMapping("/save-weight")
+    public WeightDto saveWeight(@RequestBody WeightDto weightDto) {
         Weight weight = new Weight();
         weight.setCreated(LocalDate.parse(weightDto.getCreated(), DateTimeFormatter.ISO_LOCAL_DATE));
         weight.setWeightValue(Double.valueOf(weightDto.getWeightValue()));
         weight.setMemberId(1L);
         weightService.saveStat(weight);
         return weightDto;
+    }
+
+    @PostMapping("/save-training")
+    public TrainingDto saveTraining(@RequestBody TrainingDto trainingDto) {
+        Training training = new Training();
+        training.setMemberId(trainingDto.getMemberId());
+        training.setAppointment(trainingDto.getAppointment());
+        trainingService.saveTraining(training);
+        return trainingDto;
     }
 
     @GetMapping

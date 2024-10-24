@@ -1,5 +1,7 @@
 export class Training {
   id?: number;
   memberId?: number;
-  appointment?: string;
+  time?: string;
+  appointment?: Date;
+  note?: string;
 }

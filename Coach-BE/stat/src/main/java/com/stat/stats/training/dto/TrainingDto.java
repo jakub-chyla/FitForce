@@ -2,6 +2,8 @@ package com.stat.stats.training.dto;
 
 import lombok.Data;
 
+import java.time.LocalDate;
+
 @Data
 public class TrainingDto {
 
@@ -9,5 +11,9 @@ public class TrainingDto {
 
     private Long memberId;
 
-    private String appointment;
+    private String time;
+
+    private LocalDate appointment;
+
+    private String note;
 }

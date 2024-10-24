@@ -22,7 +22,7 @@ public class Mapper {
         TrainingDto trainingDto = new TrainingDto();
         trainingDto.setId(training.getId());
         trainingDto.setMemberId(training.getMemberId());
-        trainingDto.setAppointment(training.getAppointment().toString());
+        trainingDto.setAppointment(training.getAppointment());
         return trainingDto;
     }
 }

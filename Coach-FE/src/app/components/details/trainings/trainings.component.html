@@ -1,14 +1,14 @@
 <div class="flex justify-center">
   <div class="grid grid-cols-2 gap-4 p-8 min-w-80">
     <div style="min-height: 360px" class="">
-      <span>Selected date: {{ selected | date }}</span>
+      <span>Selected date: {{ selectedDate | date }}</span>
       <div *ngIf="message">
         <p>{{ message }}</p>
       </div>
     </div>
     <div class="row-span-2">
       <mat-card>
-        <mat-calendar [(selected)]="selected" [dateClass]="dateClass"
+        <mat-calendar [(selected)]="selectedDate" [dateClass]="dateClass"
                       (selectedChange)="onDateChange($event)"></mat-calendar>
       </mat-card>
     </div>
@@ -17,22 +17,22 @@
           <div>
             <div class="flex justify-start">
               <mat-form-field>
-                <input type="text" matInput formControlName="created" placeholder="Date">
-                <mat-hint>Enter weight</mat-hint>
-                @if (myForm.controls['created'].hasError('required')) {
+                <input type="text" matInput formControlName="time" placeholder="Time">
+                <mat-hint>Enter time</mat-hint>
+                @if (myForm.controls['time'].hasError('required')) {
                   <mat-error>Field is required</mat-error>
                 }
-                @if (myForm.controls['created'].hasError('minlength')) {
+                @if (myForm.controls['time'].hasError('minlength')) {
                   <mat-error>Minimum length is 2</mat-error>
                 }
               </mat-form-field>
               <mat-form-field class="px-2">
-                <input type="text" matInput formControlName="weightValue" placeholder="Weight">
+                <input type="text" matInput formControlName="note" placeholder="Note">
                 <mat-hint>Enter date</mat-hint>
-                @if (myForm.controls['weightValue'].hasError('required')) {
+                @if (myForm.controls['note'].hasError('required')) {
                   <mat-error>Field is required</mat-error>
                 }
-                @if (myForm.controls['weightValue'].hasError('minlength')) {
+                @if (myForm.controls['note'].hasError('minlength')) {
                   <mat-error>Minimum length is 2</mat-error>
                 }
               </mat-form-field>

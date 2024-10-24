@@ -17,4 +17,8 @@ public class TrainingService {
     public List<Training> findAllTrainingsByMember(Long memberId) {
         return trainingRepository.findAllByMemberId(memberId);
     }
+
+    public Training saveTraining(Training training) {
+        return trainingRepository.save(training);
+    }
 }
