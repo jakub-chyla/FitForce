@@ -1,8 +1,6 @@
 package com.stat.stats.controller;
 
 import com.stat.stats.dto.FullMemberResponse;
-import com.stat.stats.dto.StatDto;
-import com.stat.stats.training.dto.TrainingDto;
 import com.stat.stats.training.model.Training;
 import com.stat.stats.training.service.TrainingService;
 import com.stat.stats.weight.service.WeightService;
@@ -21,7 +19,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1/stats")
 @RequiredArgsConstructor
-public class StatController {
+public class StatsController {
 
     private final WeightService weightService;
     private final TrainingService trainingService;
@@ -44,12 +42,8 @@ public class StatController {
     }
 
     @PostMapping("/save-training")
-    public TrainingDto saveTraining(@RequestBody TrainingDto trainingDto) {
-        Training training = new Training();
-        training.setMemberId(trainingDto.getMemberId());
-        training.setAppointment(trainingDto.getAppointment());
-        trainingService.saveTraining(training);
-        return trainingDto;
+    public Training saveTraining(@RequestBody Training training) {
+        return trainingService.saveTraining(training);
     }
 
     @GetMapping
@@ -57,14 +51,16 @@ public class StatController {
         return ResponseEntity.ok(weightService.findAllStats());
     }
 
-
-    @GetMapping("/with-stats/{member-id}")
+    @GetMapping("/{member-id}")
     public ResponseEntity<FullMemberResponse> findAllMembers(@PathVariable("member-id") Long memberId) {
         FullMemberResponse response = new FullMemberResponse();
+        response.setMemberId(memberId);
+
         List<Weight> weights = weightService.findAllStatsByMember(memberId);
         List<Training> trainings = trainingService.findAllTrainingsByMember(memberId);
-        response.setWeights(weights.stream().map(Mapper::mapWeight).collect(Collectors.toList()));
-        response.setTrainings(trainings.stream().map(Mapper::mapTraining).collect(Collectors.toList()));
+
+        response.setWeights(weights.stream().map(Mapper::mapWeightToDto).collect(Collectors.toList()));
+        response.setTrainings(trainings);
         return ResponseEntity.ok(response);
     }
 

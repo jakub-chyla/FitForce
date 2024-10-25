@@ -20,6 +20,7 @@ import {MemberService} from "../../../service/member.service";
 import {MatButton} from "@angular/material/button";
 import {MatError, MatFormField, MatHint} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
+import {DateTimeHelper} from "../../../util/date-time-helper";
 
 @Component({
   selector: 'app-trainings',
@@ -34,7 +35,7 @@ import {MatInput} from "@angular/material/input";
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TrainingsComponent implements OnInit, OnChanges  {
+export class TrainingsComponent implements OnInit, OnChanges {
   @Input() fullMemberResponse?: FullMemberResponse;
   myForm!: FormGroup;
   trainings?: Training[] = [];
@@ -65,21 +66,32 @@ export class TrainingsComponent implements OnInit, OnChanges  {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['fullMemberResponse'] && changes['fullMemberResponse'].currentValue) {
-      this.updateCalendar();
+      this.updateCalendarDates();
     }
   }
 
-  private updateCalendar() {
+  private updateCalendarDates() {
     this.trainings = this.fullMemberResponse?.trainings
     if (this.trainings) {
       for (let training of this.trainings) {
         if (training.appointment) {
           let date = new Date(training.appointment);
           this.highlightedDates.push(date)
+          // @ts-ignore
+          this.updateCalendarNotes(date,training.note)
         }
       }
     }
   }
+
+  private updateCalendarNotes(date: Date | string, message: string): void {
+    if (typeof date === 'string') {
+      date = new Date(date);
+    }
+    const formattedDate = DateTimeHelper.formatDateToString(date);
+    this.dateMessages[formattedDate] = message;
+  }
+
 
   dateClass = (date: Date): string => {
     const highlight = this.highlightedDates.some(d =>
@@ -95,11 +107,17 @@ export class TrainingsComponent implements OnInit, OnChanges  {
       const dateKey = `${selectedDate.getFullYear()}-${(selectedDate.getMonth() + 1).toString().padStart(2, '0')}-${selectedDate.getDate().toString().padStart(2, '0')}`;
       this.message = this.dateMessages[dateKey] || 'No training scheduled on this date';
       console.log('Selected date:', selectedDate);
-      console.log('Message:', this.message);
+      // console.log('Message:', this.message);
     } else {
       this.message = '';
-      console.log('No date selected');
+
     }
+  }
+
+  getDate(date: Date): Date {
+    let appointment = new Date(date);
+    appointment.setDate(appointment.getDate() + 1);
+    return appointment
   }
 
   save() {
@@ -108,16 +126,19 @@ export class TrainingsComponent implements OnInit, OnChanges  {
         memberId: this.fullMemberResponse?.memberId,
         time: this.myForm.get('time')?.value,
         // @ts-ignore
-        appointment: this.selectedDate,
+        appointment: this.getDate(this.selectedDate),
         note: this.myForm.get('note')?.value,
       };
 
       this.memberService.saveTraining(training).subscribe(
         (response) => {
-          // this.dataSource.unshift(response);
-          // this.dataSource.pop();
-          // this.dataSource = [...this.dataSource];
-          // this.updateChartData(this.dataSource);
+          if (response !== undefined) {
+            // @ts-ignore
+            let date = new Date(response.appointment)
+            this.highlightedDates.push(date)
+            // @ts-ignore
+            this.updateCalendarNotes(response.appointment, response.note)
+          }
         }
       );
     }

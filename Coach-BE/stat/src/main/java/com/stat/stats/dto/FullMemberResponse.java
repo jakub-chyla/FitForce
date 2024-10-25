@@ -1,6 +1,6 @@
 package com.stat.stats.dto;
 
-import com.stat.stats.training.dto.TrainingDto;
+import com.stat.stats.training.model.Training;
 import com.stat.stats.weight.dto.WeightDto;
 import lombok.*;
 
@@ -16,5 +16,5 @@ public class FullMemberResponse {
     private Long memberId;
 
     private List<WeightDto> weights;
-    private List<TrainingDto> trainings;
+    private List<Training> trainings;
 }

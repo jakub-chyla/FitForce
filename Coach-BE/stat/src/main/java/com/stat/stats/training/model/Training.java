@@ -20,6 +20,8 @@ public class Training {
 
     @Column(name = "member_Id")
     private Long memberId;
+    private String time;
 
     private LocalDate appointment;
+    private String note;
 }
