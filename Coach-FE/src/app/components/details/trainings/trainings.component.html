@@ -4,10 +4,10 @@
       <span>Selected date: {{ selectedDate | date }}</span>
       <div *ngIf="message">
         <p>{{ message }}</p>
-      </div>
+        </div>
     </div>
-    <div class="row-span-2">
-      <mat-card>
+    <div *ngIf="showCalendar" class="row-span-2">
+      <mat-card >
         <mat-calendar [(selected)]="selectedDate" [dateClass]="dateClass"
                       (selectedChange)="onDateChange($event)"></mat-calendar>
       </mat-card>

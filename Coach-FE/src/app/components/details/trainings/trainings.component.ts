@@ -39,6 +39,7 @@ export class TrainingsComponent implements OnInit, OnChanges {
   @Input() fullMemberResponse?: FullMemberResponse;
   myForm!: FormGroup;
   trainings?: Training[] = [];
+  showCalendar = false;
 
   selectedDate: Date | null = null;
   highlightedDates: Date[] = [
@@ -54,7 +55,8 @@ export class TrainingsComponent implements OnInit, OnChanges {
   message: string = '';
 
   constructor(private formBuilder: FormBuilder,
-              private memberService: MemberService) {
+              private memberService: MemberService,
+              private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -62,11 +64,17 @@ export class TrainingsComponent implements OnInit, OnChanges {
       time: ['', [Validators.required, Validators.minLength(3),]],
       note: ['', [Validators.minLength(3),]]
     });
+    // setTimeout(() => {
+    //   this.showCalendar = true;
+    //   console.log(this.showCalendar);
+    //   this.cdr.detectChanges(); // Trigger change detection manually
+    // }, 5000);
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['fullMemberResponse'] && changes['fullMemberResponse'].currentValue) {
       this.updateCalendarDates();
+      this.showCalendar = true
     }
   }
 
@@ -77,8 +85,6 @@ export class TrainingsComponent implements OnInit, OnChanges {
         if (training.appointment) {
           let date = new Date(training.appointment);
           this.highlightedDates.push(date)
-          // @ts-ignore
-          this.updateCalendarNotes(date,training.note)
         }
       }
     }
@@ -90,8 +96,8 @@ export class TrainingsComponent implements OnInit, OnChanges {
     }
     const formattedDate = DateTimeHelper.formatDateToString(date);
     this.dateMessages[formattedDate] = message;
+    this.message= message;
   }
-
 
   dateClass = (date: Date): string => {
     const highlight = this.highlightedDates.some(d =>
@@ -121,6 +127,7 @@ export class TrainingsComponent implements OnInit, OnChanges {
   }
 
   save() {
+    this.showCalendar = false
     if (this.myForm.valid) {
       const training: Training = {
         memberId: this.fullMemberResponse?.memberId,
@@ -138,10 +145,18 @@ export class TrainingsComponent implements OnInit, OnChanges {
             this.highlightedDates.push(date)
             // @ts-ignore
             this.updateCalendarNotes(response.appointment, response.note)
+            this.updateCalendarDates()
+            setTimeout(() => {
+              this.showCalendar = true
+              this.cdr.detectChanges();
+            },1);
           }
         }
       );
     }
+
+
+
   }
 
 }
