@@ -69,6 +69,11 @@ public class StatsController {
         weightService.deleteById(memberId);
     }
 
+    @DeleteMapping("training/{training-id}")
+    public Long deleteTraining(@PathVariable("training-id") Long trainingId) {
+        return trainingService.deleteById(trainingId);
+    }
+
     @GetMapping("/ping")
     public ResponseEntity<String> ping() {
         return ResponseEntity.ok("ping stats");

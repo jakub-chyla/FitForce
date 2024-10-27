@@ -45,6 +45,10 @@ export class MemberService {
     return this.httpClient.post<Training>(`${this.stats}/save-training`, training, this.getHeaderWithToken());
   }
 
+  deleteTraining(trainingId: number): Observable<number> {
+    return this.httpClient.delete<number>(`${this.stats}/training/${trainingId}`, this.getHeaderWithToken());
+  }
+
   deleteMember(memberId: number): Observable<void> {
     return this.httpClient.delete<void>(`${this.coach}/with-stats/${memberId}`, this.getHeaderWithToken());
   }

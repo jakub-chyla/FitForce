@@ -12,6 +12,12 @@
                       (selectedChange)="onDateChange($event)"></mat-calendar>
       </mat-card>
     </div>
+    <div *ngIf="!showCalendar" class="row-span-2">
+      <mat-card >
+        <mat-calendar [(selected)]="selectedDate" [dateClass]="dateClass"
+                      (selectedChange)="onDateChange($event)"></mat-calendar>
+      </mat-card>
+    </div>
     <div class="bottom">
       <form [formGroup]="myForm">
           <div>
@@ -39,7 +45,7 @@
             </div>
             <div class="flex justify-end pt-2">
               <div class="flex justify-between w-40 pr-2">
-                <button color="warn" mat-flat-button>Clear</button>
+                <button color="warn" (click)="deleteTraining()" mat-flat-button>Clear</button>
                 <button color="primary" (click)="save()" mat-flat-button>Add</button>
               </div>
             </div>

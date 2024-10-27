@@ -21,4 +21,9 @@ public class TrainingService {
     public Training saveTraining(Training training) {
         return trainingRepository.save(training);
     }
+
+    public Long deleteById(Long trainingId) {
+        trainingRepository.deleteById(trainingId);
+        return trainingId;
+    }
 }

@@ -21,6 +21,8 @@ import {MatButton} from "@angular/material/button";
 import {MatError, MatFormField, MatHint} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {DateTimeHelper} from "../../../util/date-time-helper";
+import _default from "chart.js/dist/plugins/plugin.tooltip";
+import numbers = _default.defaults.animations.numbers;
 
 @Component({
   selector: 'app-trainings',
@@ -38,19 +40,13 @@ import {DateTimeHelper} from "../../../util/date-time-helper";
 export class TrainingsComponent implements OnInit, OnChanges {
   @Input() fullMemberResponse?: FullMemberResponse;
   myForm!: FormGroup;
-  trainings?: Training[] = [];
+  trainings: Training[] = [];
   showCalendar = false;
 
-  selectedDate: Date | null = null;
-  highlightedDates: Date[] = [
-    // new Date(2024, 9, 10),
-    // new Date(2024, 9, 15),
-  ];
+  selectedDate: Date =   new Date(2000, 1, 1);
+  highlightedDates: Date[] = [];
 
-  dateMessages: { [key: string]: string } = {
-    '2024-10-10': 'Training on Agile Methodologies',
-    '2024-10-15': 'Training on Angular Best Practices'
-  };
+  dateMessages: { [key: string]: string } = {};
 
   message: string = '';
 
@@ -64,11 +60,6 @@ export class TrainingsComponent implements OnInit, OnChanges {
       time: ['', [Validators.required, Validators.minLength(3),]],
       note: ['', [Validators.minLength(3),]]
     });
-    // setTimeout(() => {
-    //   this.showCalendar = true;
-    //   console.log(this.showCalendar);
-    //   this.cdr.detectChanges(); // Trigger change detection manually
-    // }, 5000);
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -79,8 +70,8 @@ export class TrainingsComponent implements OnInit, OnChanges {
   }
 
   private updateCalendarDates() {
-    this.trainings = this.fullMemberResponse?.trainings
     if (this.trainings) {
+      this.trainings = this.fullMemberResponse?.trainings || [];
       for (let training of this.trainings) {
         if (training.appointment) {
           let date = new Date(training.appointment);
@@ -96,7 +87,7 @@ export class TrainingsComponent implements OnInit, OnChanges {
     }
     const formattedDate = DateTimeHelper.formatDateToString(date);
     this.dateMessages[formattedDate] = message;
-    this.message= message;
+    this.message = message;
   }
 
   dateClass = (date: Date): string => {
@@ -149,14 +140,36 @@ export class TrainingsComponent implements OnInit, OnChanges {
             setTimeout(() => {
               this.showCalendar = true
               this.cdr.detectChanges();
-            },1);
+            }, 1);
           }
         }
       );
     }
-
-
-
   }
+
+  deleteTraining(){
+    this.memberService.deleteTraining(this.getSelectedTraining()).subscribe((response)=>{
+      console.log(response);
+    })
+  }
+
+  getSelectedTraining(): number {
+    const training = this.trainings.find(d => {
+      if (!d.appointment) return false;
+
+      const appointmentDate = d.appointment instanceof Date ? d.appointment : new Date(d.appointment);
+      return (
+        !isNaN(appointmentDate.getTime()) &&
+        appointmentDate.getDate() === this.selectedDate?.getDate() &&
+        appointmentDate.getMonth() === this.selectedDate.getMonth() &&
+        appointmentDate.getFullYear() === this.selectedDate.getFullYear()
+      );
+    });
+
+    console.log(training?.id);
+    return training?.id ?? -1;
+  }
+
+
 
 }
