@@ -44,8 +44,8 @@ export class TrainingsComponent implements OnInit, OnChanges {
   showCalendar = false;
 
   selectedDate: Date =   new Date(2000, 1, 1);
-  highlightedDates: Date[] = [];
 
+  highlightedDates: Date[] = [];
   dateMessages: { [key: string]: string } = {};
 
   message: string = '';
@@ -103,8 +103,6 @@ export class TrainingsComponent implements OnInit, OnChanges {
     if (selectedDate) {
       const dateKey = `${selectedDate.getFullYear()}-${(selectedDate.getMonth() + 1).toString().padStart(2, '0')}-${selectedDate.getDate().toString().padStart(2, '0')}`;
       this.message = this.dateMessages[dateKey] || 'No training scheduled on this date';
-      console.log('Selected date:', selectedDate);
-      // console.log('Message:', this.message);
     } else {
       this.message = '';
 
@@ -147,29 +145,44 @@ export class TrainingsComponent implements OnInit, OnChanges {
     }
   }
 
-  deleteTraining(){
-    this.memberService.deleteTraining(this.getSelectedTraining()).subscribe((response)=>{
-      console.log(response);
-    })
+  deleteTraining() {
+    const selectedDate = this.selectedDate;
+
+    const normalizedSelectedDate = new Date(
+      selectedDate.getFullYear(),
+      selectedDate.getMonth(),
+      selectedDate.getDate()
+    );
+
+    this.memberService.deleteTraining(this.getSelectedTraining(selectedDate)).subscribe((response) => {
+      this.trainings = this.trainings.filter(training => training.id !== response);
+      this.highlightedDates = this.highlightedDates.filter(date => {
+        const normalizedDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        return normalizedDate.getTime() !== normalizedSelectedDate.getTime();
+      });
+
+      setTimeout(() => {
+        this.showCalendar = true
+        this.cdr.detectChanges();
+        this.showCalendar = false
+      }, 1);
+
+    });
   }
 
-  getSelectedTraining(): number {
+  getSelectedTraining(selectedDate: Date): number {
     const training = this.trainings.find(d => {
       if (!d.appointment) return false;
 
       const appointmentDate = d.appointment instanceof Date ? d.appointment : new Date(d.appointment);
       return (
         !isNaN(appointmentDate.getTime()) &&
-        appointmentDate.getDate() === this.selectedDate?.getDate() &&
-        appointmentDate.getMonth() === this.selectedDate.getMonth() &&
-        appointmentDate.getFullYear() === this.selectedDate.getFullYear()
+        appointmentDate.getDate() === selectedDate?.getDate() &&
+        appointmentDate.getMonth() === selectedDate.getMonth() &&
+        appointmentDate.getFullYear() === selectedDate.getFullYear()
       );
     });
-
-    console.log(training?.id);
     return training?.id ?? -1;
   }
-
-
 
 }

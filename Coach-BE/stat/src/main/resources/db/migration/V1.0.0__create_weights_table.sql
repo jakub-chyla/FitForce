@@ -6,19 +6,6 @@ create sequence stat.trainings_seq increment by 1;
 
 select setval('stat.trainings_seq', 2);
 
-create TABLE stat.trainings (
-    id BIGINT PRIMARY KEY,
-    member_id bigint,
-    time text,
-    appointment DATE,
-    note text
-);
-
-    insert into stat.trainings (id, member_id, time, appointment, note)
-values
-  (1, 1, '10:20', '2024-10-01', 'note1'),
-  (2, 1, '10:20', '2024-10-30', 'note2');
-
 create TABLE stat.weights (
     id BIGINT PRIMARY KEY,
     member_id bigint,
@@ -36,4 +23,15 @@ values
   (6, 1, '2025-06-10', 74.2);
 
 
---SELECT setval('stat.weights_seq', (SELECT MAX(id) FROM stat.weights) + 1);
+create TABLE stat.trainings (
+    id BIGINT PRIMARY KEY,
+    member_id bigint,
+    time text,
+    appointment DATE,
+    note text
+);
+
+    insert into stat.trainings (id, member_id, time, appointment, note)
+values
+  (1, 1, '10:20', '2024-10-01', 'note1'),
+  (2, 1, '10:20', '2024-10-30', 'note2');
