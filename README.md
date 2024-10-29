@@ -12,7 +12,7 @@ Wait less than a minute for all micro services boot up https://fit-force-fronten
 - Spring Security JWT
 - Postgresql
 - Flyway database migration
-- Angular 17
+- Angular 18
 - Angular Material
 - Tailwind
 ---
