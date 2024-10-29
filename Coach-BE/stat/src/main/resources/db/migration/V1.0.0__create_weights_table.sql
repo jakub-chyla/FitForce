@@ -6,6 +6,10 @@ create sequence stat.trainings_seq increment by 1;
 
 select setval('stat.trainings_seq', 2);
 
+create sequence stat.diets_seq increment by 1;
+
+select setval('stat.diets_seq', 2);
+
 create TABLE stat.weights (
     id BIGINT PRIMARY KEY,
     member_id bigint,
@@ -35,3 +39,14 @@ create TABLE stat.trainings (
 values
   (1, 1, '10:20', '2024-10-01', 'note1'),
   (2, 1, '10:20', '2024-10-30', 'note2');
+
+  create TABLE stat.diets (
+    id BIGINT PRIMARY KEY,
+    member_id bigint
+);
+
+    insert into stat.diets (id, member_id)
+values
+  (1, 1),
+  (2, 1);
+

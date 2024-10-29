@@ -22,21 +22,25 @@ Full Stack application to help manage clients for personal trainers. The applica
 ### TODO 
 - [x] BE implement microservices
 - [x] BE implement spring security
-- [ ] FE refactor names
-- [ ] FE add spinners when loading
 - [ ] BE refactor microservices names
 - [ ] BE refactor package structure
 - [x] BE add tests
 - [ ] BE add utils
 - [ ] BE use records
-- [ ] FE use signals
 - [x] BE implement multiple users
 - [ ] BE endpoint have to return value
 - [ ] BE emails
 - [ ] BE update tests
 - [ ] BE/FE move URL do utils
+- [ ] FE refactor names
+- [ ] FE add spinners when loading
+- [ ] FE use signals
+- [ ] FE remove style
+- [ ] FE remove console.logs
+- [ ] FE replace *ngIFs
 - [ ] FE implement snackbar
 - [ ] FE replace timeouts
-- [x] deploy
-- [ ] add custom domain
 - [ ] FE add notification no user found to main screen
+- [x] deploy on Render
+- [ ] add custom domain
+

@@ -10,6 +10,7 @@ import {ProgressComponent} from "./progress/progress.component";
 import {Member} from "../../model/member";
 import {FullMemberResponse} from "../../model/fullMemberResponse";
 import {TrainingsComponent} from "./trainings/trainings.component";
+import {DietComponent} from "./diet/diet.component";
 
 @Component({
   selector: 'app-details',
@@ -19,7 +20,7 @@ import {TrainingsComponent} from "./trainings/trainings.component";
     MatButtonModule,
     MatIconModule,
     MatDividerModule,
-    RouterModule, ProgressComponent, TrainingsComponent],
+    RouterModule, ProgressComponent, TrainingsComponent, DietComponent],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss'
 })
