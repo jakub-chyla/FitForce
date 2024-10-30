@@ -1,55 +1,181 @@
-import { Component, Input } from '@angular/core';
+import {Component, inject, Input, SimpleChanges} from '@angular/core';
 import { ChartConfiguration, ChartOptions } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import {FullMemberResponse} from "../../../model/fullMemberResponse";
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
+import {MatButton} from "@angular/material/button";
+import {
+  MatCell,
+  MatCellDef,
+  MatColumnDef,
+  MatHeaderCell,
+  MatHeaderRow,
+  MatHeaderRowDef,
+  MatRow, MatRowDef, MatTable
+} from "@angular/material/table";
+import {MatDivider} from "@angular/material/divider";
+import {MatError, MatFormField, MatHint} from "@angular/material/form-field";
+import {MatInput} from "@angular/material/input";
+import {ThemeService} from "../../../service/theme.service";
+import {weightData} from "../../../dto/weightData";
+import {Weight} from "../../../model/weight";
+import {MemberService} from "../../../service/member.service";
 
 @Component({
   selector: 'app-diet',
   standalone: true,
   imports: [
-    BaseChartDirective
+    BaseChartDirective,
+    FormsModule,
+    MatButton,
+    MatCell,
+    MatCellDef,
+    MatColumnDef,
+    MatDivider,
+    MatError,
+    MatFormField,
+    MatHeaderCell,
+    MatHeaderRow,
+    MatHeaderRowDef,
+    MatHint,
+    MatInput,
+    MatRow,
+    MatRowDef,
+    MatTable,
+    ReactiveFormsModule
   ],
   templateUrl: './diet.component.html',
   styleUrls: ['./diet.component.scss']
 })
 export class DietComponent {
+  themeService: ThemeService = inject(ThemeService);
   @Input() fullMemberResponse?: FullMemberResponse;
+  myForm!: FormGroup;
 
-  // Polar Area Chart Data
-  public polarAreaChartData: ChartConfiguration<'polarArea'>['data'] = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+  public lineChartOptions: ChartOptions<'line'> = {responsive: true};
+  public lineChartLegend = true;
+  displayedColumns: string[] = ['created', 'weightValue'];
+  dataSource: weightData[] = [];
+
+  // Doughnut Chart Data
+  public doughnutChartData: ChartConfiguration<'doughnut'>['data'] = {
+    labels: ['Carbohydrates', 'Protein', 'Fat'],
     datasets: [
       {
-        data: [90, 85, 80, 83, 88, 80],
+        data: [60, 25, 15],
         label: 'Weight Distribution',
         backgroundColor: [
-          'rgba(255, 99, 132, 0.6)',
-          'rgba(54, 162, 235, 0.6)',
           'rgba(255, 206, 86, 0.6)',
-          'rgba(75, 192, 192, 0.6)',
-          'rgba(153, 102, 255, 0.6)',
-          'rgba(255, 159, 64, 0.6)',
-          'rgba(201, 203, 207, 0.6)'
+          'rgba(54, 162, 235, 0.6)',
+          'rgba(153, 102, 255, 0.6)'
         ],
+        hoverBackgroundColor: [
+          'rgba(255, 206, 86, 0.8)',
+          'rgba(54, 162, 235, 0.8)',
+          'rgba(153, 102, 255, 0.8)'
+        ]
       }
     ]
   };
 
-  // Polar Area Chart Options
-  public polarAreaChartOptions: ChartOptions<'polarArea'> = {
+  // Doughnut Chart Options
+  public doughnutChartOptions: ChartOptions<'doughnut'> = {
     responsive: true,
     plugins: {
       legend: {
         position: 'top',
       },
     },
+    cutout: '50%',  // Optional: Adjusts the doughnut's hole size
   };
 
-  public polarAreaChartLegend = true;
+  public lineChartData: ChartConfiguration<'line'>['data'] = {
+    labels: [],
+    datasets: [
+      {
+        data: [],
+        label: 'Weight',
+        fill: true,
+        tension: 0.5,
+        borderColor: 'black',
+        backgroundColor: 'rgba(65,64,64,0.3)'
+      }
+    ]
+  };
+
+  constructor(private formBuilder: FormBuilder,
+              private memberService: MemberService) {
+  }
+
+  public doughnutChartLegend = true;
 
   ngOnInit() {
-    setTimeout(() => {
-      console.log(this.fullMemberResponse);
-    }, 100);
+    this.myForm = this.formBuilder.group({
+      created: ['', [Validators.required, Validators.minLength(3),]],
+      weightValue: ['', [Validators.required, Validators.minLength(3),]]
+    });
+
+    this.initTable();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['fullMemberResponse'] && changes['fullMemberResponse'].currentValue) {
+      this.initTable();
+    }
+  }
+
+  initTable() {
+    const tableData: weightData[] = [];
+    if (this.fullMemberResponse?.weights) {
+      this.fullMemberResponse.weights.forEach(weight => {
+        tableData.push({
+          created: weight.created ?? '',
+          weightValue: weight.weightValue ?? 0
+        });
+      });
+
+      this.dataSource = tableData;
+      this.updateChartData(tableData);
+    }
+  }
+
+  updateChartData(tableData: weightData[]) {
+    const reversedData = tableData.slice().reverse();
+
+    const labels = reversedData.map(data => data.created);
+    const data = reversedData.map(data => data.weightValue ?? 0);
+
+    this.lineChartData = {
+      labels: labels,
+      datasets: [
+        {
+          data: data,
+          label: 'Weight',
+          fill: true,
+          tension: 0.5,
+          borderColor: 'black',
+          backgroundColor: 'rgba(65,64,64,0.3)',
+        }
+      ]
+    };
+  }
+
+  save() {
+    if (this.myForm.valid) {
+      const weight: Weight = {
+        id: this.fullMemberResponse?.memberId,
+        created: this.myForm.get('created')?.value,
+        weightValue: this.myForm.get('weightValue')?.value,
+      };
+
+      this.memberService.saveWeight(weight).subscribe(
+        (response) => {
+          this.dataSource.unshift(response);
+          this.dataSource.pop();
+          this.dataSource = [...this.dataSource];
+          this.updateChartData(this.dataSource);
+        }
+      );
+    }
   }
 }
