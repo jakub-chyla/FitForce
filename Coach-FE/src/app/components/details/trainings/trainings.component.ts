@@ -23,6 +23,16 @@ import {MatInput} from "@angular/material/input";
 import {DateTimeHelper} from "../../../util/date-time-helper";
 import _default from "chart.js/dist/plugins/plugin.tooltip";
 import numbers = _default.defaults.animations.numbers;
+import {
+    MatCell,
+    MatCellDef,
+    MatColumnDef,
+    MatHeaderCell,
+    MatHeaderRow,
+    MatHeaderRowDef,
+    MatRow, MatRowDef, MatTable
+} from "@angular/material/table";
+import {weightData} from "../../../dto/weightData";
 
 @Component({
   selector: 'app-trainings',
@@ -30,11 +40,11 @@ import numbers = _default.defaults.animations.numbers;
   styleUrls: ['./trainings.component.scss'],
   standalone: true,
   providers: [provideNativeDateAdapter()],
-  imports: [
-    MatCalendar,
-    MatCard,
-    MatCardModule, MatDatepickerModule, DatePipe, NgIf, MatButton, MatError, MatFormField, MatHint, MatInput, ReactiveFormsModule
-  ],
+    imports: [
+        MatCalendar,
+        MatCard,
+        MatCardModule, MatDatepickerModule, DatePipe, NgIf, MatButton, MatError, MatFormField, MatHint, MatInput, ReactiveFormsModule, MatCell, MatCellDef, MatColumnDef, MatHeaderCell, MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef, MatTable
+    ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TrainingsComponent implements OnInit, OnChanges {
@@ -46,6 +56,8 @@ export class TrainingsComponent implements OnInit, OnChanges {
   selectedDate: Date =   new Date(2000, 1, 1);
 
   highlightedDates: Date[] = [];
+  dataSource: weightData[] = [];
+  displayedColumns: string[] = ['created', 'weightValue'];
   dateMessages: { [key: string]: string } = {};
 
   message: string = '';
@@ -58,7 +70,9 @@ export class TrainingsComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.myForm = this.formBuilder.group({
       time: ['', [Validators.required, Validators.minLength(3),]],
-      note: ['', [Validators.minLength(3),]]
+      note: ['', [Validators.minLength(3),]],
+      created: ['', [Validators.required, Validators.minLength(3),]],
+      weightValue: ['', [Validators.required, Validators.minLength(3),]]
     });
   }
 

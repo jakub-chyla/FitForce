@@ -50,7 +50,11 @@ import {weightData} from "../../../dto/weightData";
 export class ProgressComponent implements OnInit, OnChanges {
   themeService: ThemeService = inject(ThemeService);
   @Input() fullMemberResponse?: FullMemberResponse;
-  myForm!: FormGroup;
+
+  myForm: FormGroup = this.formBuilder.group({
+    created: ['', [Validators.required, Validators.minLength(3)]],
+    weightValue: ['', [Validators.required, Validators.minLength(3)]]
+  });
 
   public lineChartOptions: ChartOptions<'line'> = {responsive: true};
   public lineChartLegend = true;
@@ -76,11 +80,6 @@ export class ProgressComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.myForm = this.formBuilder.group({
-      created: ['', [Validators.required, Validators.minLength(3),]],
-      weightValue: ['', [Validators.required, Validators.minLength(3),]]
-    });
-
     this.initTable();
   }
 
