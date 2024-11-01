@@ -20,7 +20,8 @@ import {MatSelect, MatSelectModule} from "@angular/material/select";
 import {Member} from "../../../model/member";
 import {MemberService} from "../../../service/member.service";
 import {Weight} from "../../../model/weight";
-import {weightData} from "../../../dto/weightData";
+import {WeightDto} from "../../../dto/weightDto";
+import {WeightData} from "../../../dto/weightData";
 
 // export interface weightData {
 //   id?: number;
@@ -49,7 +50,9 @@ import {weightData} from "../../../dto/weightData";
 })
 export class ProgressComponent implements OnInit, OnChanges {
   themeService: ThemeService = inject(ThemeService);
-  @Input() fullMemberResponse?: FullMemberResponse;
+  @Input() id: number = 0;
+  fullMemberResponse: FullMemberResponse = new FullMemberResponse();
+  weights: WeightDto[] = [];
 
   myForm: FormGroup = this.formBuilder.group({
     created: ['', [Validators.required, Validators.minLength(3)]],
@@ -59,7 +62,7 @@ export class ProgressComponent implements OnInit, OnChanges {
   public lineChartOptions: ChartOptions<'line'> = {responsive: true};
   public lineChartLegend = true;
   displayedColumns: string[] = ['created', 'weightValue'];
-  dataSource: weightData[] = [];
+  dataSource: WeightData[] = [];
 
   public lineChartData: ChartConfiguration<'line'>['data'] = {
     labels: [],
@@ -80,7 +83,7 @@ export class ProgressComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.initTable();
+    this.getWeightByMemberId(this.id);
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -89,22 +92,28 @@ export class ProgressComponent implements OnInit, OnChanges {
     }
   }
 
+  getWeightByMemberId(memberId: number) {
+    this.memberService.getWeightsByMemberID(memberId).subscribe((response) => {
+      this.weights = response;
+      this.initTable();
+    });
+  }
+
   initTable() {
-    const tableData: weightData[] = [];
-    if (this.fullMemberResponse?.weights) {
-      this.fullMemberResponse.weights.forEach(weight => {
+    const tableData: WeightData[] = [];
+
+      this.weights.forEach(weight => {
         tableData.push({
           created: weight.created ?? '',
           weightValue: weight.weightValue ?? 0
         });
       });
-
       this.dataSource = tableData;
       this.updateChartData(tableData);
-    }
+    
   }
 
-  updateChartData(tableData: weightData[]) {
+  updateChartData(tableData: WeightData[]) {
     const reversedData = tableData.slice().reverse();
 
     const labels = reversedData.map(data => data.created);

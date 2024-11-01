@@ -1,6 +1,5 @@
-export class WeightData {
+export class WeightDto {
   id?: number;
   created?: string;
   weightValue?: number;
 }
-//TODO to remove?

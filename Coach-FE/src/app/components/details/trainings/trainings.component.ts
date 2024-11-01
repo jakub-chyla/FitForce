@@ -32,7 +32,7 @@ import {
     MatHeaderRowDef,
     MatRow, MatRowDef, MatTable
 } from "@angular/material/table";
-import {weightData} from "../../../dto/weightData";
+import {WeightData} from "../../../dto/weightData";
 
 @Component({
   selector: 'app-trainings',
@@ -56,7 +56,7 @@ export class TrainingsComponent implements OnInit, OnChanges {
   selectedDate: Date =   new Date(2000, 1, 1);
 
   highlightedDates: Date[] = [];
-  dataSource: weightData[] = [];
+  dataSource: WeightData[] = [];
   displayedColumns: string[] = ['created', 'weightValue'];
   dateMessages: { [key: string]: string } = {};
 

@@ -25,28 +25,15 @@ import {DietComponent} from "./diet/diet.component";
   styleUrl: './details.component.scss'
 })
 export class DetailsComponent implements OnInit {
-  id?:number
-  member?: Member;
-  fullMemberResponse?: FullMemberResponse;
+  id: number = 0;
 
-  constructor(private service: MemberService,
-              private route: ActivatedRoute ) {
+  constructor(private route: ActivatedRoute) {
   }
 
   ngOnInit() {
 
     this.route.paramMap.subscribe(params => {
-      const memberId = params.get('id');
-      if (memberId !== null) {
-        this.id = Number(memberId)
-        this.getMemberWithStats(Number(memberId));
-      }
-    });
-  }
-
-  getMemberWithStats(memberId: number) {
-    this.service.getStatsForMemberId(memberId).subscribe((response) => {
-      this.fullMemberResponse = response;
+      this.id = this.id = Number(params.get('id'));
     });
   }
 

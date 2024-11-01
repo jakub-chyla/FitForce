@@ -17,7 +17,7 @@ import {MatDivider} from "@angular/material/divider";
 import {MatError, MatFormField, MatHint} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {ThemeService} from "../../../service/theme.service";
-import {weightData} from "../../../dto/weightData";
+import {WeightData} from "../../../dto/weightData";
 import {Weight} from "../../../model/weight";
 import {MemberService} from "../../../service/member.service";
 
@@ -55,7 +55,7 @@ export class DietComponent {
   public lineChartOptions: ChartOptions<'line'> = {responsive: true};
   public lineChartLegend = true;
   displayedColumns: string[] = ['created', 'weightValue'];
-  dataSource: weightData[] = [];
+  dataSource: WeightData[] = [];
 
   // Doughnut Chart Data
   public doughnutChartData: ChartConfiguration<'doughnut'>['data'] = {
@@ -125,7 +125,7 @@ export class DietComponent {
   }
 
   initTable() {
-    const tableData: weightData[] = [];
+    const tableData: WeightData[] = [];
     if (this.fullMemberResponse?.weights) {
       this.fullMemberResponse.weights.forEach(weight => {
         tableData.push({
@@ -139,7 +139,7 @@ export class DietComponent {
     }
   }
 
-  updateChartData(tableData: weightData[]) {
+  updateChartData(tableData: WeightData[]) {
     const reversedData = tableData.slice().reverse();
 
     const labels = reversedData.map(data => data.created);

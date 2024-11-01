@@ -6,8 +6,9 @@ import {Goal} from "../model/goal";
 import {FullMemberResponse} from "../model/fullMemberResponse";
 import {Weight} from "../model/weight";
 import {environment} from "../../environments/environment";
-import {weightData} from "../dto/weightData";
 import {Training} from "../model/training";
+import {WeightDto} from "../dto/weightDto";
+import {WeightData} from "../dto/weightData";
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,10 @@ export class MemberService {
     return this.httpClient.get<FullMemberResponse>(`${this.stats}/${memberId}`, this.getHeaderWithToken());
   }
 
+  getWeightsByMemberID(memberId: number): Observable<WeightDto[]> {
+    return this.httpClient.get<WeightDto[]>(`${this.stats}/weights/${memberId}`, this.getHeaderWithToken());
+  }
+
   addMember(member: Member): Observable<Member> {
     return this.httpClient.post(`${this.coach}`, member, this.getHeaderWithToken());
   }
@@ -37,8 +42,8 @@ export class MemberService {
     return this.httpClient.patch(`${this.coach}`, member, this.getHeaderWithToken());
   }
 
-  saveWeight(weight: weightData): Observable<weightData> {
-    return this.httpClient.post<weightData>(`${this.stats}/save-weight`, weight, this.getHeaderWithToken());
+  saveWeight(weight: WeightData): Observable<WeightData> {
+    return this.httpClient.post<WeightData>(`${this.stats}/save-weight`, weight, this.getHeaderWithToken());
   }
 
   saveTraining(training: Training): Observable<Training> {
