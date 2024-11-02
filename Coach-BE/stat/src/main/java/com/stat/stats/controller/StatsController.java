@@ -66,9 +66,14 @@ public class StatsController {
     }
 
     @GetMapping("weights/{member-id}")
-    public ResponseEntity<List<WeightDto>> findWeightByMemberId(@PathVariable("member-id") Long memberId) {
+    public ResponseEntity<List<WeightDto>> findWeightsByMemberId(@PathVariable("member-id") Long memberId) {
         List<Weight> weights = weightService.findAllStatsByMember(memberId);
         return ResponseEntity.ok(weights.stream().map(Mapper::mapWeightToDto).collect(Collectors.toList()));
+    }
+
+    @GetMapping("trainings/{member-id}")
+    public ResponseEntity<List<Training>> findTrainingsByMemberId(@PathVariable("member-id") Long memberId) {
+        return ResponseEntity.ok(trainingService.findAllTrainingsByMember(memberId));
     }
 
     @DeleteMapping("/member/{member-id}")

@@ -24,13 +24,13 @@ import {DateTimeHelper} from "../../../util/date-time-helper";
 import _default from "chart.js/dist/plugins/plugin.tooltip";
 import numbers = _default.defaults.animations.numbers;
 import {
-    MatCell,
-    MatCellDef,
-    MatColumnDef,
-    MatHeaderCell,
-    MatHeaderRow,
-    MatHeaderRowDef,
-    MatRow, MatRowDef, MatTable
+  MatCell,
+  MatCellDef,
+  MatColumnDef,
+  MatHeaderCell, MatHeaderCellDef,
+  MatHeaderRow,
+  MatHeaderRowDef,
+  MatRow, MatRowDef, MatTable
 } from "@angular/material/table";
 import {WeightData} from "../../../dto/weightData";
 
@@ -40,17 +40,25 @@ import {WeightData} from "../../../dto/weightData";
   styleUrls: ['./trainings.component.scss'],
   standalone: true,
   providers: [provideNativeDateAdapter()],
-    imports: [
-        MatCalendar,
-        MatCard,
-        MatCardModule, MatDatepickerModule, DatePipe, NgIf, MatButton, MatError, MatFormField, MatHint, MatInput, ReactiveFormsModule, MatCell, MatCellDef, MatColumnDef, MatHeaderCell, MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef, MatTable
-    ],
+  imports: [
+    MatCalendar,
+    MatCard,
+    MatCardModule, MatDatepickerModule, DatePipe, NgIf, MatButton, MatError, MatFormField, MatHint, MatInput, ReactiveFormsModule, MatCell, MatCellDef, MatColumnDef, MatHeaderCell, MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef, MatTable, MatHeaderCellDef
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TrainingsComponent implements OnInit, OnChanges {
   @Input() fullMemberResponse?: FullMemberResponse;
-  myForm!: FormGroup;
+  @Input() id: number = 0;
   trainings: Training[] = [];
+
+  myForm: FormGroup = this.formBuilder.group({
+    time: ['', [Validators.required, Validators.minLength(3),]],
+    note: ['', [Validators.minLength(3),]],
+    created: ['', [Validators.required, Validators.minLength(3),]],
+    weightValue: ['', [Validators.required, Validators.minLength(3),]]
+  });
+
   showCalendar = false;
 
   selectedDate: Date =   new Date(2000, 1, 1);
@@ -68,12 +76,7 @@ export class TrainingsComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.myForm = this.formBuilder.group({
-      time: ['', [Validators.required, Validators.minLength(3),]],
-      note: ['', [Validators.minLength(3),]],
-      created: ['', [Validators.required, Validators.minLength(3),]],
-      weightValue: ['', [Validators.required, Validators.minLength(3),]]
-    });
+    this.getWeightByMemberId(this.id);
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -83,7 +86,14 @@ export class TrainingsComponent implements OnInit, OnChanges {
     }
   }
 
-  private updateCalendarDates() {
+  getWeightByMemberId(memberId: number) {
+    this.memberService.getTrainingsByMemberID(memberId).subscribe((response) => {
+      this.trainings = response;
+      this.updateCalendarDates()
+    });
+  }
+
+  updateCalendarDates() {
     if (this.trainings) {
       this.trainings = this.fullMemberResponse?.trainings || [];
       for (let training of this.trainings) {
@@ -133,9 +143,8 @@ export class TrainingsComponent implements OnInit, OnChanges {
     this.showCalendar = false
     if (this.myForm.valid) {
       const training: Training = {
-        memberId: this.fullMemberResponse?.memberId,
+        memberId: this.id,
         time: this.myForm.get('time')?.value,
-        // @ts-ignore
         appointment: this.getDate(this.selectedDate),
         note: this.myForm.get('note')?.value,
       };

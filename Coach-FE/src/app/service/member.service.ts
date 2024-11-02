@@ -34,6 +34,10 @@ export class MemberService {
     return this.httpClient.get<WeightDto[]>(`${this.stats}/weights/${memberId}`, this.getHeaderWithToken());
   }
 
+  getTrainingsByMemberID(memberId: number): Observable<Training[]> {
+    return this.httpClient.get<Training[]>(`${this.stats}/trainings/${memberId}`, this.getHeaderWithToken());
+  }
+
   addMember(member: Member): Observable<Member> {
     return this.httpClient.post(`${this.coach}`, member, this.getHeaderWithToken());
   }

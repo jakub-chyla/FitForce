@@ -51,7 +51,6 @@ import {WeightData} from "../../../dto/weightData";
 export class ProgressComponent implements OnInit, OnChanges {
   themeService: ThemeService = inject(ThemeService);
   @Input() id: number = 0;
-  fullMemberResponse: FullMemberResponse = new FullMemberResponse();
   weights: WeightDto[] = [];
 
   myForm: FormGroup = this.formBuilder.group({
@@ -110,7 +109,7 @@ export class ProgressComponent implements OnInit, OnChanges {
       });
       this.dataSource = tableData;
       this.updateChartData(tableData);
-    
+
   }
 
   updateChartData(tableData: WeightData[]) {
@@ -137,7 +136,7 @@ export class ProgressComponent implements OnInit, OnChanges {
   save() {
     if (this.myForm.valid) {
       const weight: Weight = {
-        id: this.fullMemberResponse?.memberId,
+        id: this.id,
         created: this.myForm.get('created')?.value,
         weightValue: this.myForm.get('weightValue')?.value,
       };
