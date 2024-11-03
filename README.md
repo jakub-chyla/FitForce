@@ -1,7 +1,7 @@
 # Fit Force
 
 
-## Mvp Launch 01.01.2025
+## Mvp Launch 01.02.2025
 
 Wait less than a minute for all micro services boot up https://fit-force-frontend.onrender.com/ deployed alpha version.
 

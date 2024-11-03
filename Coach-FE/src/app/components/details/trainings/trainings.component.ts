@@ -33,6 +33,7 @@ import {
   MatRow, MatRowDef, MatTable
 } from "@angular/material/table";
 import {WeightData} from "../../../dto/weightData";
+import {MatProgressSpinner} from "@angular/material/progress-spinner";
 
 @Component({
   selector: 'app-trainings',
@@ -43,25 +44,26 @@ import {WeightData} from "../../../dto/weightData";
   imports: [
     MatCalendar,
     MatCard,
-    MatCardModule, MatDatepickerModule, DatePipe, NgIf, MatButton, MatError, MatFormField, MatHint, MatInput, ReactiveFormsModule, MatCell, MatCellDef, MatColumnDef, MatHeaderCell, MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef, MatTable, MatHeaderCellDef
+    MatCardModule, MatDatepickerModule, DatePipe, NgIf, MatButton, MatError, MatFormField, MatHint, MatInput, ReactiveFormsModule, MatCell, MatCellDef, MatColumnDef, MatHeaderCell, MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef, MatTable, MatHeaderCellDef, MatProgressSpinner
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TrainingsComponent implements OnInit, OnChanges {
   @Input() fullMemberResponse?: FullMemberResponse;
   @Input() id: number = 0;
+  @Input() selectedTab: number = 0;
   trainings: Training[] = [];
 
   myForm: FormGroup = this.formBuilder.group({
     time: ['', [Validators.required, Validators.minLength(3),]],
     note: ['', [Validators.minLength(3),]],
-    created: ['', [Validators.required, Validators.minLength(3),]],
-    weightValue: ['', [Validators.required, Validators.minLength(3),]]
   });
 
   showCalendar = false;
 
-  selectedDate: Date =   new Date(2000, 1, 1);
+  // selectedDate: Date = new Date();
+  selectedDate: Date = new Date(2000, 1, 1);
+  startDate: Date = new Date();
 
   highlightedDates: Date[] = [];
   dataSource: WeightData[] = [];
@@ -76,36 +78,42 @@ export class TrainingsComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.getWeightByMemberId(this.id);
+    this.getTrainingsByMemberId(this.id);
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['fullMemberResponse'] && changes['fullMemberResponse'].currentValue) {
-      this.updateCalendarDates();
-      this.showCalendar = true
+      this.updateHighlightedDates();
     }
-  }
-
-  getWeightByMemberId(memberId: number) {
-    this.memberService.getTrainingsByMemberID(memberId).subscribe((response) => {
-      this.trainings = response;
-      this.updateCalendarDates()
-    });
-  }
-
-  updateCalendarDates() {
-    if (this.trainings) {
-      this.trainings = this.fullMemberResponse?.trainings || [];
-      for (let training of this.trainings) {
-        if (training.appointment) {
-          let date = new Date(training.appointment);
-          this.highlightedDates.push(date)
-        }
+    if (changes['selectedTab']) {
+      if (this.selectedTab === 1) {
+        this.getTrainingsByMemberId(this.id);
       }
     }
   }
 
-  private updateCalendarNotes(date: Date | string, message: string): void {
+  getTrainingsByMemberId(memberId: number) {
+    this.showCalendar = false;
+    this.cdr.detectChanges();
+    this.memberService.getTrainingsByMemberID(memberId).subscribe((response) => {
+      this.trainings = response;
+      this.updateHighlightedDates()
+    });
+  }
+
+  updateHighlightedDates() {
+    for (let training of this.trainings) {
+      if (training.appointment) {
+        let date = new Date(training.appointment);
+        this.highlightedDates.push(date)
+        this.updateCalendarNotes(date, training.note!)
+      }      console.log('here');
+      this.showCalendar = true;
+      this.cdr.detectChanges();
+    }
+  }
+
+  updateCalendarNotes(date: Date | string, message: string): void {
     if (typeof date === 'string') {
       date = new Date(date);
     }
@@ -157,9 +165,10 @@ export class TrainingsComponent implements OnInit, OnChanges {
             this.highlightedDates.push(date)
             // @ts-ignore
             this.updateCalendarNotes(response.appointment, response.note)
-            this.updateCalendarDates()
+            this.updateHighlightedDates()
             setTimeout(() => {
               this.showCalendar = true
+              // console.log(this.showCalendar)
               this.cdr.detectChanges();
             }, 1);
           }
@@ -170,7 +179,6 @@ export class TrainingsComponent implements OnInit, OnChanges {
 
   deleteTraining() {
     const selectedDate = this.selectedDate;
-
     const normalizedSelectedDate = new Date(
       selectedDate.getFullYear(),
       selectedDate.getMonth(),
@@ -185,9 +193,7 @@ export class TrainingsComponent implements OnInit, OnChanges {
       });
 
       setTimeout(() => {
-        this.showCalendar = true
         this.cdr.detectChanges();
-        this.showCalendar = false
       }, 1);
 
     });

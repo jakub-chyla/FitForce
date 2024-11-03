@@ -24,12 +24,6 @@
                       (selectedChange)="onDateChange($event)"></mat-calendar>
       </mat-card>
     </div>
-    <div *ngIf="!showCalendar" class="row-span-2">
-      <mat-card>
-        <mat-calendar [(selected)]="selectedDate" [dateClass]="dateClass"
-                      (selectedChange)="onDateChange($event)"></mat-calendar>
-      </mat-card>
-    </div>
     <div class="bottom">
       <form [formGroup]="myForm">
         <div>

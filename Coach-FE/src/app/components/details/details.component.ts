@@ -26,15 +26,19 @@ import {DietComponent} from "./diet/diet.component";
 })
 export class DetailsComponent implements OnInit {
   id: number = 0;
+  selectedTab: number = 0;
 
   constructor(private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-
     this.route.paramMap.subscribe(params => {
       this.id = this.id = Number(params.get('id'));
     });
+  }
+
+  logSelectedIndex(index: number): void {
+    this.selectedTab = index;
   }
 
 }

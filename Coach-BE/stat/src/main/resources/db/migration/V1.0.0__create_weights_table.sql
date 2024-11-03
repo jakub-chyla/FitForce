@@ -37,8 +37,8 @@ create TABLE stat.trainings (
 
     insert into stat.trainings (id, member_id, time, appointment, note)
 values
-  (1, 1, '10:20', '2024-10-01', 'note1'),
-  (2, 1, '10:20', '2024-10-30', 'note2');
+  (1, 1, '10:20', '2024-11-01', 'note1'),
+  (2, 1, '10:20', '2024-11-30', 'note2');
 
   create TABLE stat.diets (
     id BIGINT PRIMARY KEY,

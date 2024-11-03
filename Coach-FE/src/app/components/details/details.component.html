@@ -9,12 +9,12 @@
         <mat-icon style="color: red">close</mat-icon>
       </button>
     </mat-card-header>
-    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center">
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center"   (selectedIndexChange)="logSelectedIndex($event)">>
       <mat-tab label="Progress">
         <app-progress [id]="id"></app-progress>
       </mat-tab>
       <mat-tab label="Trainings">
-        <app-trainings [id]="id"></app-trainings>
+        <app-trainings [id]="id" [selectedTab]="selectedTab" ></app-trainings>
       </mat-tab>
 <!--      <mat-tab label="Diet">-->
 <!--        <app-diet></app-diet>-->
