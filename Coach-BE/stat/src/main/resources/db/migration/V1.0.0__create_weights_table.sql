@@ -17,6 +17,19 @@ create TABLE stat.weights (
     weight_value double precision
 );
 
+create TABLE stat.trainings (
+    id BIGINT PRIMARY KEY,
+    member_id bigint,
+    time text,
+    appointment DATE,
+    note text
+);
+
+ create TABLE stat.diets (
+    id BIGINT PRIMARY KEY,
+    member_id bigint
+);
+
   insert into stat.weights (id, member_id, created, weight_value)
 values
   (1, 1, '2024-01-10', 70.5),
@@ -27,23 +40,10 @@ values
   (6, 1, '2025-06-10', 74.2);
 
 
-create TABLE stat.trainings (
-    id BIGINT PRIMARY KEY,
-    member_id bigint,
-    time text,
-    appointment DATE,
-    note text
-);
-
     insert into stat.trainings (id, member_id, time, appointment, note)
 values
   (1, 1, '10:20', '2024-11-01', 'note1'),
   (2, 1, '10:20', '2024-11-30', 'note2');
-
-  create TABLE stat.diets (
-    id BIGINT PRIMARY KEY,
-    member_id bigint
-);
 
     insert into stat.diets (id, member_id)
 values

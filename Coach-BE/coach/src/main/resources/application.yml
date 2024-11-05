@@ -3,7 +3,7 @@ eureka:
     hostname: localhost
   client:
     service-url:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      defaultZone: http://localhost:8761/eureka
 
 server:
   port: ${PORT}
@@ -17,7 +17,6 @@ spring:
     url: jdbc:postgresql://${DB_HOST}:5432/${DB_NAME}
     username: ${DB_USERNAME} # postgres
     password: ${DB_PASSWORD} # root
-    schema: coach
   flyway:
     locations: classpath:db/migration
     schemas: coach

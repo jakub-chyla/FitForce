@@ -1,7 +1,9 @@
-hostname: localhost
-client:
-  service-url:
-    defaultZone: http://localhost:8761/eureka
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
 
 server:
   port: ${PORT}
@@ -15,7 +17,6 @@ spring:
     url: jdbc:postgresql://${DB_HOST}:5432/${DB_NAME}
     username: ${DB_USERNAME} # postgres
     password: ${DB_PASSWORD} # root
-    schema: stat
   flyway:
     schemas: stat
     locations: classpath:db/migration

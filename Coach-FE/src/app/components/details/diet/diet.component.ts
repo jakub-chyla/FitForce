@@ -1,4 +1,4 @@
-import {Component, inject, Input, SimpleChanges} from '@angular/core';
+import {Component, inject, Input, OnChanges, SimpleChanges} from '@angular/core';
 import { ChartConfiguration, ChartOptions } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import {FullMemberResponse} from "../../../model/fullMemberResponse";
@@ -8,7 +8,7 @@ import {
   MatCell,
   MatCellDef,
   MatColumnDef,
-  MatHeaderCell,
+  MatHeaderCell, MatHeaderCellDef,
   MatHeaderRow,
   MatHeaderRowDef,
   MatRow, MatRowDef, MatTable
@@ -20,6 +20,7 @@ import {ThemeService} from "../../../service/theme.service";
 import {WeightData} from "../../../dto/weightData";
 import {Weight} from "../../../model/weight";
 import {MemberService} from "../../../service/member.service";
+import {WeightDto} from "../../../dto/weightDto";
 
 @Component({
   selector: 'app-diet',
@@ -42,20 +43,26 @@ import {MemberService} from "../../../service/member.service";
     MatRow,
     MatRowDef,
     MatTable,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatHeaderCellDef
   ],
   templateUrl: './diet.component.html',
   styleUrls: ['./diet.component.scss']
 })
-export class DietComponent {
+export class DietComponent implements OnChanges  {
   themeService: ThemeService = inject(ThemeService);
   @Input() fullMemberResponse?: FullMemberResponse;
-  myForm!: FormGroup;
+  @Input() id: number = 0;
+  myForm: FormGroup = this.formBuilder.group({
+    created: ['', [Validators.required, Validators.minLength(3)]],
+    weightValue: ['', [Validators.required, Validators.minLength(3)]]
+  });
 
   public lineChartOptions: ChartOptions<'line'> = {responsive: true};
   public lineChartLegend = true;
   displayedColumns: string[] = ['created', 'weightValue'];
   dataSource: WeightData[] = [];
+  weights: WeightDto[] = [];
 
   // Doughnut Chart Data
   public doughnutChartData: ChartConfiguration<'doughnut'>['data'] = {
@@ -110,12 +117,7 @@ export class DietComponent {
   public doughnutChartLegend = true;
 
   ngOnInit() {
-    this.myForm = this.formBuilder.group({
-      created: ['', [Validators.required, Validators.minLength(3),]],
-      weightValue: ['', [Validators.required, Validators.minLength(3),]]
-    });
-
-    this.initTable();
+    this.getWeightByMemberId(this.id);
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -124,19 +126,25 @@ export class DietComponent {
     }
   }
 
+  getWeightByMemberId(memberId: number) {
+    this.memberService.getWeightsByMemberID(memberId).subscribe((response) => {
+      this.weights = response;
+      this.initTable();
+    });
+  }
+
   initTable() {
     const tableData: WeightData[] = [];
-    if (this.fullMemberResponse?.weights) {
-      this.fullMemberResponse.weights.forEach(weight => {
-        tableData.push({
-          created: weight.created ?? '',
-          weightValue: weight.weightValue ?? 0
-        });
-      });
 
-      this.dataSource = tableData;
-      this.updateChartData(tableData);
-    }
+    this.weights.forEach(weight => {
+      tableData.push({
+        created: weight.created ?? '',
+        weightValue: weight.weightValue ?? 0
+      });
+    });
+    this.dataSource = tableData;
+    this.updateChartData(tableData);
+
   }
 
   updateChartData(tableData: WeightData[]) {

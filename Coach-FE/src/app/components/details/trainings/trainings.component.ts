@@ -60,16 +60,11 @@ export class TrainingsComponent implements OnInit, OnChanges {
   });
 
   showCalendar = false;
-
-  // selectedDate: Date = new Date();
-  selectedDate: Date = new Date(2000, 1, 1);
-  startDate: Date = new Date();
-
+  selectedDate: Date = new Date();
   highlightedDates: Date[] = [];
-  dataSource: WeightData[] = [];
-  displayedColumns: string[] = ['created', 'weightValue'];
+  dataSource: Training[] = [];
+  displayedColumns: string[] = ['time', 'note'];
   dateMessages: { [key: string]: string } = {};
-
   message: string = '';
 
   constructor(private formBuilder: FormBuilder,
@@ -101,13 +96,26 @@ export class TrainingsComponent implements OnInit, OnChanges {
     });
   }
 
+  updateTable() {
+    this.dataSource = this.trainings.filter((training) => {
+      if (!training.appointment) return false;
+      const trainingDate = new Date(training.appointment);
+      return (
+        trainingDate.getFullYear() === this.selectedDate.getFullYear() &&
+        trainingDate.getMonth() === this.selectedDate.getMonth() &&
+        trainingDate.getDate() === this.selectedDate.getDate()
+      );
+    });
+  }
+
   updateHighlightedDates() {
     for (let training of this.trainings) {
       if (training.appointment) {
         let date = new Date(training.appointment);
         this.highlightedDates.push(date)
         this.updateCalendarNotes(date, training.note!)
-      }      console.log('here');
+      }
+      this.updateTable();
       this.showCalendar = true;
       this.cdr.detectChanges();
     }
@@ -137,8 +145,8 @@ export class TrainingsComponent implements OnInit, OnChanges {
       this.message = this.dateMessages[dateKey] || 'No training scheduled on this date';
     } else {
       this.message = '';
-
     }
+    this.updateTable()
   }
 
   getDate(date: Date): Date {
@@ -162,13 +170,14 @@ export class TrainingsComponent implements OnInit, OnChanges {
           if (response !== undefined) {
             // @ts-ignore
             let date = new Date(response.appointment)
+            this.trainings.push(response)
             this.highlightedDates.push(date)
             // @ts-ignore
             this.updateCalendarNotes(response.appointment, response.note)
             this.updateHighlightedDates()
             setTimeout(() => {
+              this.updateTable();
               this.showCalendar = true
-              // console.log(this.showCalendar)
               this.cdr.detectChanges();
             }, 1);
           }
