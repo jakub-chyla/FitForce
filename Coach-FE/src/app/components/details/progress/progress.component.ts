@@ -92,7 +92,7 @@ export class ProgressComponent implements OnInit, OnChanges {
   }
 
   getWeightByMemberId(memberId: number) {
-    this.memberService.getWeightsByMemberID(memberId).subscribe((response) => {
+    this.memberService.getWeightsByMemberId(memberId).subscribe((response) => {
       this.weights = response;
       this.initTable();
     });

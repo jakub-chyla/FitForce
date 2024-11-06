@@ -1,6 +1,6 @@
 import {Component, inject, Input, OnChanges, SimpleChanges} from '@angular/core';
-import { ChartConfiguration, ChartOptions } from 'chart.js';
-import { BaseChartDirective } from 'ng2-charts';
+import {ChartConfiguration, ChartOptions} from 'chart.js';
+import {BaseChartDirective} from 'ng2-charts';
 import {FullMemberResponse} from "../../../model/fullMemberResponse";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatButton} from "@angular/material/button";
@@ -21,6 +21,7 @@ import {WeightData} from "../../../dto/weightData";
 import {Weight} from "../../../model/weight";
 import {MemberService} from "../../../service/member.service";
 import {WeightDto} from "../../../dto/weightDto";
+import {Diet} from "../../../model/Diet";
 
 @Component({
   selector: 'app-diet',
@@ -49,7 +50,7 @@ import {WeightDto} from "../../../dto/weightDto";
   templateUrl: './diet.component.html',
   styleUrls: ['./diet.component.scss']
 })
-export class DietComponent implements OnChanges  {
+export class DietComponent implements OnChanges {
   themeService: ThemeService = inject(ThemeService);
   @Input() fullMemberResponse?: FullMemberResponse;
   @Input() id: number = 0;
@@ -60,13 +61,13 @@ export class DietComponent implements OnChanges  {
 
   public lineChartOptions: ChartOptions<'line'> = {responsive: true};
   public lineChartLegend = true;
-  displayedColumns: string[] = ['created', 'weightValue'];
-  dataSource: WeightData[] = [];
-  weights: WeightDto[] = [];
+  displayedColumns: string[] = ['product', 'carbohydrates', 'proteins', 'fats'];
+  dataSource: Diet[] = [];
+  diets: Diet[] = [];
 
   // Doughnut Chart Data
   public doughnutChartData: ChartConfiguration<'doughnut'>['data'] = {
-    labels: ['Carbohydrates', 'Protein', 'Fat'],
+    labels: ['Carbohydrates', 'Proteins', 'Fats'],
     datasets: [
       {
         data: [60, 25, 15],
@@ -117,31 +118,33 @@ export class DietComponent implements OnChanges  {
   public doughnutChartLegend = true;
 
   ngOnInit() {
-    this.getWeightByMemberId(this.id);
+    this.getDietByMemberId(this.id);
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['fullMemberResponse'] && changes['fullMemberResponse'].currentValue) {
-      this.initTable();
+      // this.initTable();
     }
   }
 
-  getWeightByMemberId(memberId: number) {
-    this.memberService.getWeightsByMemberID(memberId).subscribe((response) => {
-      this.weights = response;
-      this.initTable();
+  getDietByMemberId(memberId: number) {
+    this.memberService.getDietsByMemberId(memberId).subscribe((response) => {
+      this.dataSource = response.diets;
+      console.log(response)
+      console.log(this.dataSource)
+      // this.initTable();
     });
   }
 
   initTable() {
     const tableData: WeightData[] = [];
 
-    this.weights.forEach(weight => {
-      tableData.push({
-        created: weight.created ?? '',
-        weightValue: weight.weightValue ?? 0
-      });
-    });
+    // this.diets.forEach(weight => {
+    //   tableData.push({
+    //     created: weight.created ?? '',
+    //     weightValue: weight.weightValue ?? 0
+    //   });
+    // });
     this.dataSource = tableData;
     this.updateChartData(tableData);
 

@@ -7,8 +7,10 @@ import {FullMemberResponse} from "../model/fullMemberResponse";
 import {Weight} from "../model/weight";
 import {environment} from "../../environments/environment";
 import {Training} from "../model/training";
+import {Diet} from "../model/Diet";
 import {WeightDto} from "../dto/weightDto";
 import {WeightData} from "../dto/weightData";
+import {DietDto} from "../dto/dietDto";
 
 @Injectable({
   providedIn: 'root'
@@ -30,12 +32,16 @@ export class MemberService {
     return this.httpClient.get<FullMemberResponse>(`${this.stats}/${memberId}`, this.getHeaderWithToken());
   }
 
-  getWeightsByMemberID(memberId: number): Observable<WeightDto[]> {
+  getWeightsByMemberId(memberId: number): Observable<WeightDto[]> {
     return this.httpClient.get<WeightDto[]>(`${this.stats}/weights/${memberId}`, this.getHeaderWithToken());
   }
 
-  getTrainingsByMemberID(memberId: number): Observable<Training[]> {
+  getTrainingsByMemberId(memberId: number): Observable<Training[]> {
     return this.httpClient.get<Training[]>(`${this.stats}/trainings/${memberId}`, this.getHeaderWithToken());
+  }
+
+  getDietsByMemberId(memberId: number): Observable<DietDto> {
+    return this.httpClient.get<DietDto>(`${this.stats}/diets/${memberId}`, this.getHeaderWithToken());
   }
 
   addMember(member: Member): Observable<Member> {

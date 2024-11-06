@@ -90,7 +90,7 @@ export class TrainingsComponent implements OnInit, OnChanges {
   getTrainingsByMemberId(memberId: number) {
     this.showCalendar = false;
     this.cdr.detectChanges();
-    this.memberService.getTrainingsByMemberID(memberId).subscribe((response) => {
+    this.memberService.getTrainingsByMemberId(memberId).subscribe((response) => {
       this.trainings = response;
       this.updateHighlightedDates()
     });

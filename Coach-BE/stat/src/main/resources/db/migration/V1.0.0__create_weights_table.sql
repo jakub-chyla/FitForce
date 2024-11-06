@@ -27,7 +27,11 @@ create TABLE stat.trainings (
 
  create TABLE stat.diets (
     id BIGINT PRIMARY KEY,
-    member_id bigint
+    member_id bigint,
+    product text,
+    carbohydrates INTEGER,
+    proteins INTEGER,
+    fats INTEGER
 );
 
   insert into stat.weights (id, member_id, created, weight_value)
@@ -45,8 +49,8 @@ values
   (1, 1, '10:20', '2024-11-01', 'note1'),
   (2, 1, '10:20', '2024-11-30', 'note2');
 
-    insert into stat.diets (id, member_id)
+    insert into stat.diets (id, member_id, product, carbohydrates, proteins, fats)
 values
-  (1, 1),
-  (2, 1);
+  (1, 1, 'apple', 222, 100, 80 ),
+  (2, 1, 'cheese', 100, 150, 333 );
 

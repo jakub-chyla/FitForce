@@ -1,5 +1,8 @@
 package com.stat.stats.controller;
 
+import com.stat.stats.diet.dto.DietDto;
+import com.stat.stats.diet.model.Diet;
+import com.stat.stats.diet.service.DietService;
 import com.stat.stats.dto.FullMemberResponse;
 import com.stat.stats.training.model.Training;
 import com.stat.stats.training.service.TrainingService;
@@ -23,6 +26,7 @@ public class StatsController {
 
     private final WeightService weightService;
     private final TrainingService trainingService;
+    private final DietService dietService;
 
 //    @GetMapping("/mess/{member-id}")
 //    public ResponseEntity<String> getString(@PathVariable("member-id") Long memberId) {
@@ -74,6 +78,11 @@ public class StatsController {
     @GetMapping("trainings/{member-id}")
     public ResponseEntity<List<Training>> findTrainingsByMemberId(@PathVariable("member-id") Long memberId) {
         return ResponseEntity.ok(trainingService.findAllTrainingsByMember(memberId));
+    }
+
+    @GetMapping("diets/{member-id}")
+    public ResponseEntity<DietDto> findDietsByMemberId(@PathVariable("member-id") Long memberId) {
+        return ResponseEntity.ok(dietService.findAllByMemberId(memberId));
     }
 
     @DeleteMapping("/member/{member-id}")

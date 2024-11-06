@@ -17,4 +17,12 @@ public class Diet {
 
     @Column(name = "member_id")
     private Long memberId;
+
+    private String product;
+
+    private Integer carbohydrates;
+
+    private Integer proteins;
+
+    private Integer fats;
 }
