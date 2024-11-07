@@ -22,6 +22,7 @@ import {Weight} from "../../../model/weight";
 import {MemberService} from "../../../service/member.service";
 import {WeightDto} from "../../../dto/weightDto";
 import {Diet} from "../../../model/Diet";
+import {DietDto} from "../../../dto/dietDto";
 
 @Component({
   selector: 'app-diet',
@@ -63,15 +64,15 @@ export class DietComponent implements OnChanges {
   public lineChartLegend = true;
   displayedColumns: string[] = ['product', 'carbohydrates', 'proteins', 'fats'];
   dataSource: Diet[] = [];
-  diets: Diet[] = [];
+  dietDto: DietDto = new DietDto();
 
   // Doughnut Chart Data
   public doughnutChartData: ChartConfiguration<'doughnut'>['data'] = {
     labels: ['Carbohydrates', 'Proteins', 'Fats'],
     datasets: [
       {
-        data: [60, 25, 15],
-        label: 'Weight Distribution',
+        data: [1, 1, 1],
+        label: 'Micro elements',
         backgroundColor: [
           'rgba(255, 206, 86, 0.6)',
           'rgba(54, 162, 235, 0.6)',
@@ -84,17 +85,6 @@ export class DietComponent implements OnChanges {
         ]
       }
     ]
-  };
-
-  // Doughnut Chart Options
-  public doughnutChartOptions: ChartOptions<'doughnut'> = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'top',
-      },
-    },
-    cutout: '50%',  // Optional: Adjusts the doughnut's hole size
   };
 
   public lineChartData: ChartConfiguration<'line'>['data'] = {
@@ -111,6 +101,18 @@ export class DietComponent implements OnChanges {
     ]
   };
 
+  // Doughnut Chart Options
+  public doughnutChartOptions: ChartOptions<'doughnut'> = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+    },
+    cutout: '50%',  // Optional: Adjusts the doughnut's hole size
+  };
+
+
   constructor(private formBuilder: FormBuilder,
               private memberService: MemberService) {
   }
@@ -123,70 +125,80 @@ export class DietComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['fullMemberResponse'] && changes['fullMemberResponse'].currentValue) {
-      // this.initTable();
+      this.initTable();
     }
   }
 
   getDietByMemberId(memberId: number) {
     this.memberService.getDietsByMemberId(memberId).subscribe((response) => {
-      this.dataSource = response.diets;
-      console.log(response)
-      console.log(this.dataSource)
-      // this.initTable();
+      this.dietDto = response
+      this.initTable();
     });
   }
 
   initTable() {
-    const tableData: WeightData[] = [];
-
-    // this.diets.forEach(weight => {
-    //   tableData.push({
-    //     created: weight.created ?? '',
-    //     weightValue: weight.weightValue ?? 0
-    //   });
-    // });
-    this.dataSource = tableData;
-    this.updateChartData(tableData);
-
+    this.dataSource = this.dietDto.diets;
+    this.updateChartData();
   }
 
-  updateChartData(tableData: WeightData[]) {
-    const reversedData = tableData.slice().reverse();
+  updateChartData() {
+    const carbohydrates = this.dietDto.sumCarbohydrates!;
+    const proteins = this.dietDto.sumProteins!
+    const fats = this.dietDto.sumFats!
 
-    const labels = reversedData.map(data => data.created);
-    const data = reversedData.map(data => data.weightValue ?? 0);
+    let data: number[] = [carbohydrates, proteins, fats];
 
-    this.lineChartData = {
-      labels: labels,
+    this.doughnutChartData = {
+      labels: ['Carbohydrates', 'Proteins', 'Fats'],
       datasets: [
         {
           data: data,
-          label: 'Weight',
-          fill: true,
-          tension: 0.5,
-          borderColor: 'black',
-          backgroundColor: 'rgba(65,64,64,0.3)',
+          label: 'Micro elements',
+          backgroundColor: [
+            'rgba(255, 206, 86, 0.6)',
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(153, 102, 255, 0.6)'
+          ],
+          hoverBackgroundColor: [
+            'rgba(255, 206, 86, 0.8)',
+            'rgba(54, 162, 235, 0.8)',
+            'rgba(153, 102, 255, 0.8)'
+          ]
         }
       ]
     };
+
+    // this.lineChartData = {
+    //   labels: labels,
+    //   datasets: [
+    //     {
+    //       data: data,
+    //       label: 'Weight',
+    //       fill: true,
+    //       tension: 0.5,
+    //       borderColor: 'black',
+    //       backgroundColor: 'rgba(65,64,64,0.3)',
+    //     }
+    //   ]
+    // };
   }
 
   save() {
-    if (this.myForm.valid) {
-      const weight: Weight = {
-        id: this.fullMemberResponse?.memberId,
-        created: this.myForm.get('created')?.value,
-        weightValue: this.myForm.get('weightValue')?.value,
-      };
-
-      this.memberService.saveWeight(weight).subscribe(
-        (response) => {
-          this.dataSource.unshift(response);
-          this.dataSource.pop();
-          this.dataSource = [...this.dataSource];
-          this.updateChartData(this.dataSource);
-        }
-      );
-    }
+    // if (this.myForm.valid) {
+    //   const weight: Weight = {
+    //     id: this.fullMemberResponse?.memberId,
+    //     created: this.myForm.get('created')?.value,
+    //     weightValue: this.myForm.get('weightValue')?.value,
+    //   };
+    //
+    //   this.memberService.saveWeight(weight).subscribe(
+    //     (response) => {
+    //       this.dataSource.unshift(response);
+    //       this.dataSource.pop();
+    //       this.dataSource = [...this.dataSource];
+    //       this.updateChartData(this.dataSource);
+    //     }
+    //   );
+    // }
   }
 }
