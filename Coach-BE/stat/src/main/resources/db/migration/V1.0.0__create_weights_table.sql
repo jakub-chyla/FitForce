@@ -1,41 +1,45 @@
-create sequence stat.weights_seq increment by 1;
+DROP SEQUENCE IF EXISTS stat.weights_seq;
+DROP SEQUENCE IF EXISTS stat.trainings_seq;
+DROP SEQUENCE IF EXISTS stat.diets_seq;
 
-select setval('stat.weights_seq', 7);
+CREATE SEQUENCE stat.weights_seq INCREMENT BY 1;
+SELECT setval('stat.weights_seq', 7);
 
-create sequence stat.trainings_seq increment by 1;
+CREATE SEQUENCE stat.trainings_seq INCREMENT BY 1;
+SELECT setval('stat.trainings_seq', 2);
 
-select setval('stat.trainings_seq', 2);
+CREATE SEQUENCE stat.diets_seq INCREMENT BY 1;
+SELECT setval('stat.diets_seq', 2);
 
-create sequence stat.diets_seq increment by 1;
+DROP TABLE IF EXISTS stat.weights;
+DROP TABLE IF EXISTS stat.trainings;
+DROP TABLE IF EXISTS stat.diets;
 
-select setval('stat.diets_seq', 2);
-
-create TABLE stat.weights (
+CREATE TABLE stat.weights (
     id BIGINT PRIMARY KEY,
-    member_id bigint,
+    member_id BIGINT,
     created DATE,
-    weight_value double precision
+    weight_value DOUBLE PRECISION
 );
 
-create TABLE stat.trainings (
+CREATE TABLE stat.trainings (
     id BIGINT PRIMARY KEY,
-    member_id bigint,
-    time text,
+    member_id BIGINT,
+    time TEXT,
     appointment DATE,
-    note text
+    note TEXT
 );
 
- create TABLE stat.diets (
+CREATE TABLE stat.diets (
     id BIGINT PRIMARY KEY,
-    member_id bigint,
-    product text,
+    member_id BIGINT,
+    product TEXT,
     carbohydrates INTEGER,
     proteins INTEGER,
     fats INTEGER
 );
 
-  insert into stat.weights (id, member_id, created, weight_value)
-values
+INSERT INTO stat.weights (id, member_id, created, weight_value) VALUES
   (1, 1, '2024-01-10', 70.5),
   (2, 1, '2024-02-10', 75.0),
   (3, 1, '2025-03-10', 78.8),
@@ -43,14 +47,10 @@ values
   (5, 1, '2025-05-10', 77.5),
   (6, 1, '2025-06-10', 74.2);
 
-
-    insert into stat.trainings (id, member_id, time, appointment, note)
-values
+INSERT INTO stat.trainings (id, member_id, time, appointment, note) VALUES
   (1, 1, '10:20', '2024-11-01', 'note1'),
   (2, 1, '10:20', '2024-11-30', 'note2');
 
-    insert into stat.diets (id, member_id, product, carbohydrates, proteins, fats)
-values
-  (1, 1, 'apple', 222, 100, 80 ),
-  (2, 1, 'cheese', 100, 150, 333 );
-
+INSERT INTO stat.diets (id, member_id, product, carbohydrates, proteins, fats) VALUES
+  (1, 1, 'apple', 222, 100, 80),
+  (2, 1, 'cheese', 100, 150, 333);
