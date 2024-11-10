@@ -1,7 +1,6 @@
 import {Component, inject, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {ChartConfiguration, ChartOptions} from 'chart.js';
 import {BaseChartDirective} from 'ng2-charts';
-import {FullMemberResponse} from "../../../model/fullMemberResponse";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatButton} from "@angular/material/button";
 import {
@@ -17,10 +16,7 @@ import {MatDivider} from "@angular/material/divider";
 import {MatError, MatFormField, MatHint} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {ThemeService} from "../../../service/theme.service";
-import {WeightData} from "../../../dto/weightData";
-import {Weight} from "../../../model/weight";
 import {MemberService} from "../../../service/member.service";
-import {WeightDto} from "../../../dto/weightDto";
 import {Diet} from "../../../model/Diet";
 import {DietDto} from "../../../dto/dietDto";
 
@@ -53,20 +49,17 @@ import {DietDto} from "../../../dto/dietDto";
 })
 export class DietComponent implements OnChanges {
   themeService: ThemeService = inject(ThemeService);
-  @Input() fullMemberResponse?: FullMemberResponse;
-  @Input() id: number = 0;
+  @Input() memberId: number = 0;
   myForm: FormGroup = this.formBuilder.group({
-    created: ['', [Validators.required, Validators.minLength(3)]],
-    weightValue: ['', [Validators.required, Validators.minLength(3)]]
+    product: ['', [Validators.required, Validators.minLength(3)]],
+    carbohydrates: ['', [Validators.required, Validators.minLength(3)]],
+    proteins: ['', [Validators.required, Validators.minLength(3)]],
+    fats: ['', [Validators.required, Validators.minLength(3)]]
   });
 
-  public lineChartOptions: ChartOptions<'line'> = {responsive: true};
-  public lineChartLegend = true;
   displayedColumns: string[] = ['product', 'carbohydrates', 'proteins', 'fats'];
   dataSource: Diet[] = [];
-  dietDto: DietDto = new DietDto();
 
-  // Doughnut Chart Data
   public doughnutChartData: ChartConfiguration<'doughnut'>['data'] = {
     labels: ['Carbohydrates', 'Proteins', 'Fats'],
     datasets: [
@@ -87,21 +80,6 @@ export class DietComponent implements OnChanges {
     ]
   };
 
-  public lineChartData: ChartConfiguration<'line'>['data'] = {
-    labels: [],
-    datasets: [
-      {
-        data: [],
-        label: 'Weight',
-        fill: true,
-        tension: 0.5,
-        borderColor: 'black',
-        backgroundColor: 'rgba(65,64,64,0.3)'
-      }
-    ]
-  };
-
-  // Doughnut Chart Options
   public doughnutChartOptions: ChartOptions<'doughnut'> = {
     responsive: true,
     plugins: {
@@ -109,7 +87,7 @@ export class DietComponent implements OnChanges {
         position: 'top',
       },
     },
-    cutout: '50%',  // Optional: Adjusts the doughnut's hole size
+    cutout: '50%',
   };
 
 
@@ -120,31 +98,35 @@ export class DietComponent implements OnChanges {
   public doughnutChartLegend = true;
 
   ngOnInit() {
-    this.getDietByMemberId(this.id);
+    this.getDietByMemberId(this.memberId);
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['fullMemberResponse'] && changes['fullMemberResponse'].currentValue) {
-      this.initTable();
     }
   }
 
   getDietByMemberId(memberId: number) {
     this.memberService.getDietsByMemberId(memberId).subscribe((response) => {
-      this.dietDto = response
-      this.initTable();
+      this.updateChart(response);
+      this.updateTable(response);
     });
   }
 
-  initTable() {
-    this.dataSource = this.dietDto.diets;
-    this.updateChartData();
+  updateTable(response: DietDto) {
+    console.log(response.diets)
+    for(var diet of response.diets){
+      this.dataSource.push(diet);
+      this.dataSource = [...this.dataSource];
+    }
+    console.log(this.dataSource)
+
   }
 
-  updateChartData() {
-    const carbohydrates = this.dietDto.sumCarbohydrates!;
-    const proteins = this.dietDto.sumProteins!
-    const fats = this.dietDto.sumFats!
+  updateChart(dietDto: DietDto) {
+    const carbohydrates = dietDto.sumCarbohydrates!;
+    const proteins = dietDto.sumProteins!
+    const fats = dietDto.sumFats!
 
     let data: number[] = [carbohydrates, proteins, fats];
 
@@ -167,38 +149,25 @@ export class DietComponent implements OnChanges {
         }
       ]
     };
-
-    // this.lineChartData = {
-    //   labels: labels,
-    //   datasets: [
-    //     {
-    //       data: data,
-    //       label: 'Weight',
-    //       fill: true,
-    //       tension: 0.5,
-    //       borderColor: 'black',
-    //       backgroundColor: 'rgba(65,64,64,0.3)',
-    //     }
-    //   ]
-    // };
   }
 
   save() {
-    // if (this.myForm.valid) {
-    //   const weight: Weight = {
-    //     id: this.fullMemberResponse?.memberId,
-    //     created: this.myForm.get('created')?.value,
-    //     weightValue: this.myForm.get('weightValue')?.value,
-    //   };
-    //
-    //   this.memberService.saveWeight(weight).subscribe(
-    //     (response) => {
-    //       this.dataSource.unshift(response);
-    //       this.dataSource.pop();
-    //       this.dataSource = [...this.dataSource];
-    //       this.updateChartData(this.dataSource);
-    //     }
-    //   );
-    // }
+    if (this.myForm.valid) {
+      const diet: Diet = {
+        memberId: this.memberId,
+        product: this.myForm.get('product')?.value,
+        carbohydrates: this.myForm.get('carbohydrates')?.value,
+        proteins: this.myForm.get('carbohydrates')?.value,
+        fats: this.myForm.get('fats')?.value,
+      };
+
+      this.memberService.saveDiet(diet).subscribe(
+        (response) => {
+          this.updateChart(response);
+          this.updateTable(response);
+        }
+      );
+    }
   }
+
 }

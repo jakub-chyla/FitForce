@@ -24,9 +24,9 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class StatsController {
 
+    private final DietService dietService;
     private final WeightService weightService;
     private final TrainingService trainingService;
-    private final DietService dietService;
 
 //    @GetMapping("/mess/{member-id}")
 //    public ResponseEntity<String> getString(@PathVariable("member-id") Long memberId) {
@@ -34,21 +34,6 @@ public class StatsController {
 //        return ResponseEntity.ok(response);
 //    }
 
-    //DOTO return value
-    @PostMapping("/save-weight")
-    public WeightDto saveWeight(@RequestBody WeightDto weightDto) {
-        Weight weight = new Weight();
-        weight.setCreated(LocalDate.parse(weightDto.getCreated(), DateTimeFormatter.ISO_LOCAL_DATE));
-        weight.setWeightValue(Double.valueOf(weightDto.getWeightValue()));
-        weight.setMemberId(1L);
-        weightService.saveStat(weight);
-        return weightDto;
-    }
-
-    @PostMapping("/save-training")
-    public Training saveTraining(@RequestBody Training training) {
-        return trainingService.saveTraining(training);
-    }
 
     @GetMapping
     public ResponseEntity<List<Weight>> findAllStats() {
@@ -83,6 +68,27 @@ public class StatsController {
     @GetMapping("diets/{member-id}")
     public ResponseEntity<DietDto> findDietsByMemberId(@PathVariable("member-id") Long memberId) {
         return ResponseEntity.ok(dietService.findAllByMemberId(memberId));
+    }
+
+    //DOTO return value
+    @PostMapping("/save-weight")
+    public WeightDto saveWeight(@RequestBody WeightDto weightDto) {
+        Weight weight = new Weight();
+        weight.setCreated(LocalDate.parse(weightDto.getCreated(), DateTimeFormatter.ISO_LOCAL_DATE));
+        weight.setWeightValue(Double.valueOf(weightDto.getWeightValue()));
+        weight.setMemberId(1L);
+        weightService.saveStat(weight);
+        return weightDto;
+    }
+
+    @PostMapping("/save-training")
+    public Training saveTraining(@RequestBody Training training) {
+        return trainingService.saveTraining(training);
+    }
+
+    @PostMapping("/save-diet")
+    public DietDto saveDiet(@RequestBody Diet diet) {
+        return dietService.saveDiet(diet);
     }
 
     @DeleteMapping("/member/{member-id}")

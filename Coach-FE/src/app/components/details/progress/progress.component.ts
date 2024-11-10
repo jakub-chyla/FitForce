@@ -50,7 +50,7 @@ import {WeightData} from "../../../dto/weightData";
 })
 export class ProgressComponent implements OnInit, OnChanges {
   themeService: ThemeService = inject(ThemeService);
-  @Input() id: number = 0;
+  @Input() memberId: number = 0;
   weights: WeightDto[] = [];
 
   myForm: FormGroup = this.formBuilder.group({
@@ -82,7 +82,7 @@ export class ProgressComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.getWeightByMemberId(this.id);
+    this.getWeightByMemberId(this.memberId);
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -136,7 +136,7 @@ export class ProgressComponent implements OnInit, OnChanges {
   save() {
     if (this.myForm.valid) {
       const weight: Weight = {
-        id: this.id,
+        id: this.memberId,
         created: this.myForm.get('created')?.value,
         weightValue: this.myForm.get('weightValue')?.value,
       };

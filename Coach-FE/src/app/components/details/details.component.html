@@ -11,13 +11,13 @@
     </mat-card-header>
     <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center"   (selectedIndexChange)="logSelectedIndex($event)">>
       <mat-tab label="Progress">
-        <app-progress [id]="id"></app-progress>
+        <app-progress [memberId]="id"></app-progress>
       </mat-tab>
       <mat-tab label="Trainings">
-        <app-trainings [id]="id" [selectedTab]="selectedTab" ></app-trainings>
+        <app-trainings [memberId]="id" [selectedTab]="selectedTab" ></app-trainings>
       </mat-tab>
       <mat-tab label="Diet">
-        <app-diet [id]="id"></app-diet>
+        <app-diet [memberId]="id"></app-diet>
       </mat-tab>
     </mat-tab-group>
     <mat-card-content></mat-card-content>

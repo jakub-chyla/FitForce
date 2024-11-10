@@ -60,6 +60,10 @@ export class MemberService {
     return this.httpClient.post<Training>(`${this.stats}/save-training`, training, this.getHeaderWithToken());
   }
 
+  saveDiet(diet: Diet): Observable<DietDto> {
+    return this.httpClient.post<DietDto>(`${this.stats}/save-diet`, diet, this.getHeaderWithToken());
+  }
+
   deleteTraining(trainingId: number): Observable<number> {
     return this.httpClient.delete<number>(`${this.stats}/training/${trainingId}`, this.getHeaderWithToken());
   }

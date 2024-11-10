@@ -8,7 +8,7 @@
       </ng-container>
 
       <ng-container matColumnDef="carbohydrates">
-        <th mat-header-cell *matHeaderCellDef> Carbohydrates</th>
+        <th mat-header-cell *matHeaderCellDef> Carbs</th>
         <td mat-cell *matCellDef="let element"> {{ element.carbohydrates }}</td>
       </ng-container>
 
@@ -39,22 +39,42 @@
     <form [formGroup]="myForm">
       <div class="flex justify-start">
         <mat-form-field>
-          <input type="text" matInput formControlName="created" placeholder="Date">
+          <input type="text" matInput formControlName="product" placeholder="product">
           <mat-hint>Enter weight</mat-hint>
-          @if (myForm.controls['created'].hasError('required')) {
+          @if (myForm.controls['product'].hasError('required')) {
             <mat-error>Field is required</mat-error>
           }
-          @if (myForm.controls['created'].hasError('minlength')) {
+          @if (myForm.controls['product'].hasError('minlength')) {
             <mat-error>Minimum length is 2</mat-error>
           }
         </mat-form-field>
         <mat-form-field class="px-2">
-          <input type="text" matInput formControlName="weightValue" placeholder="Weight">
+          <input type="text" matInput formControlName="carbohydrates" placeholder="carbohydrates">
           <mat-hint>Enter date</mat-hint>
-          @if (myForm.controls['weightValue'].hasError('required')) {
+          @if (myForm.controls['carbohydrates'].hasError('required')) {
             <mat-error>Field is required</mat-error>
           }
-          @if (myForm.controls['weightValue'].hasError('minlength')) {
+          @if (myForm.controls['carbohydrates'].hasError('minlength')) {
+            <mat-error>Minimum length is 2</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field>
+          <input type="text" matInput formControlName="proteins" placeholder="proteins">
+          <mat-hint>Enter weight</mat-hint>
+          @if (myForm.controls['proteins'].hasError('required')) {
+            <mat-error>Field is required</mat-error>
+          }
+          @if (myForm.controls['proteins'].hasError('minlength')) {
+            <mat-error>Minimum length is 2</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field class="px-2">
+          <input type="text" matInput formControlName="fats" placeholder="fats">
+          <mat-hint>Enter date</mat-hint>
+          @if (myForm.controls['fats'].hasError('required')) {
+            <mat-error>Field is required</mat-error>
+          }
+          @if (myForm.controls['fats'].hasError('minlength')) {
             <mat-error>Minimum length is 2</mat-error>
           }
         </mat-form-field>

@@ -50,7 +50,7 @@ import {MatProgressSpinner} from "@angular/material/progress-spinner";
 })
 export class TrainingsComponent implements OnInit, OnChanges {
   @Input() fullMemberResponse?: FullMemberResponse;
-  @Input() id: number = 0;
+  @Input() memberId: number = 0;
   @Input() selectedTab: number = 0;
   trainings: Training[] = [];
 
@@ -73,7 +73,7 @@ export class TrainingsComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.getTrainingsByMemberId(this.id);
+    this.getTrainingsByMemberId(this.memberId);
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -82,7 +82,7 @@ export class TrainingsComponent implements OnInit, OnChanges {
     }
     if (changes['selectedTab']) {
       if (this.selectedTab === 1) {
-        this.getTrainingsByMemberId(this.id);
+        this.getTrainingsByMemberId(this.memberId);
       }
     }
   }
@@ -159,7 +159,7 @@ export class TrainingsComponent implements OnInit, OnChanges {
     this.showCalendar = false
     if (this.myForm.valid) {
       const training: Training = {
-        memberId: this.id,
+        memberId: this.memberId,
         time: this.myForm.get('time')?.value,
         appointment: this.getDate(this.selectedDate),
         note: this.myForm.get('note')?.value,
