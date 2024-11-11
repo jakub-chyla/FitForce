@@ -3,23 +3,32 @@
   <div>
     <table mat-table [dataSource]="dataSource" class="table">
       <ng-container matColumnDef="product">
-        <th mat-header-cell *matHeaderCellDef> Product</th>
+        <th mat-header-cell *matHeaderCellDef>Product</th>
         <td mat-cell *matCellDef="let element"> {{ element.product }}</td>
       </ng-container>
 
       <ng-container matColumnDef="carbohydrates">
-        <th mat-header-cell *matHeaderCellDef> Carbs</th>
+        <th mat-header-cell *matHeaderCellDef>Carbs</th>
         <td mat-cell *matCellDef="let element"> {{ element.carbohydrates }}</td>
       </ng-container>
 
       <ng-container matColumnDef="proteins">
-        <th mat-header-cell *matHeaderCellDef> Proteins</th>
+        <th mat-header-cell *matHeaderCellDef>Proteins</th>
         <td mat-cell *matCellDef="let element"> {{ element.proteins }}</td>
       </ng-container>
 
       <ng-container matColumnDef="fats">
-        <th mat-header-cell *matHeaderCellDef> Fats</th>
+        <th mat-header-cell *matHeaderCellDef>Fats</th>
         <td mat-cell *matCellDef="let element"> {{ element.fats }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="blank">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button color="warn" (click)="delete(element.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

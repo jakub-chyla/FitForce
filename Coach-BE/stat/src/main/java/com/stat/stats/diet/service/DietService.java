@@ -37,6 +37,11 @@ public class DietService {
         return dietDto;
     }
 
+    public Long deleteById(Long dietId) {
+        dietRepository.deleteById(dietId);
+        return dietId;
+    }
+
     public DietDto findAllByMemberId(Long memberId) {
         DietDto dietDto = new DietDto();
         List<Diet> diets = dietRepository.findAllByMemberId(memberId);

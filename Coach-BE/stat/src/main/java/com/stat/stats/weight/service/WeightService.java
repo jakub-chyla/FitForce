@@ -26,7 +26,8 @@ public class WeightService {
         return weightRepository.findAllByMemberIdRecent(memberId);
     }
 
-    public void deleteById(Long memberId) {
-        weightRepository.deleteById(memberId);
+    public Long deleteById(Long weightId) {
+        weightRepository.deleteById(weightId);
+        return weightId;
     }
 }

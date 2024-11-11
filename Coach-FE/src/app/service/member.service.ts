@@ -64,12 +64,20 @@ export class MemberService {
     return this.httpClient.post<DietDto>(`${this.stats}/save-diet`, diet, this.getHeaderWithToken());
   }
 
+  deleteMember(memberId: number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.coach}/with-stats/${memberId}`, this.getHeaderWithToken());
+  }
+
+  deleteWeight(weightId: number): Observable<number> {
+    return this.httpClient.delete<number>(`${this.stats}/weight/${weightId}`, this.getHeaderWithToken());
+  }
+
   deleteTraining(trainingId: number): Observable<number> {
     return this.httpClient.delete<number>(`${this.stats}/training/${trainingId}`, this.getHeaderWithToken());
   }
 
-  deleteMember(memberId: number): Observable<void> {
-    return this.httpClient.delete<void>(`${this.coach}/with-stats/${memberId}`, this.getHeaderWithToken());
+  deleteDiet(dietId: number): Observable<number> {
+    return this.httpClient.delete<number>(`${this.stats}/diet/${dietId}`, this.getHeaderWithToken());
   }
 
   getGoals(): Observable<Goal[]> {

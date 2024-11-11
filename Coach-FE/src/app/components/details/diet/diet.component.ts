@@ -2,7 +2,7 @@ import {Component, inject, Input, OnChanges, SimpleChanges} from '@angular/core'
 import {ChartConfiguration, ChartOptions} from 'chart.js';
 import {BaseChartDirective} from 'ng2-charts';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {MatButton} from "@angular/material/button";
+import {MatButton, MatIconButton} from "@angular/material/button";
 import {
   MatCell,
   MatCellDef,
@@ -19,6 +19,7 @@ import {ThemeService} from "../../../service/theme.service";
 import {MemberService} from "../../../service/member.service";
 import {Diet} from "../../../model/Diet";
 import {DietDto} from "../../../dto/dietDto";
+import {MatIcon} from "@angular/material/icon";
 
 @Component({
   selector: 'app-diet',
@@ -42,7 +43,9 @@ import {DietDto} from "../../../dto/dietDto";
     MatRowDef,
     MatTable,
     ReactiveFormsModule,
-    MatHeaderCellDef
+    MatHeaderCellDef,
+    MatIcon,
+    MatIconButton
   ],
   templateUrl: './diet.component.html',
   styleUrls: ['./diet.component.scss']
@@ -57,7 +60,7 @@ export class DietComponent implements OnChanges {
     fats: ['', [Validators.required, Validators.minLength(3)]]
   });
 
-  displayedColumns: string[] = ['product', 'carbohydrates', 'proteins', 'fats'];
+  displayedColumns: string[] = ['product', 'carbohydrates', 'proteins', 'fats', 'blank'];
   dataSource: Diet[] = [];
 
   public doughnutChartData: ChartConfiguration<'doughnut'>['data'] = {
@@ -115,7 +118,7 @@ export class DietComponent implements OnChanges {
 
   updateTable(response: DietDto) {
     console.log(response.diets)
-    for(var diet of response.diets){
+    for (var diet of response.diets) {
       this.dataSource.push(diet);
       this.dataSource = [...this.dataSource];
     }
@@ -168,6 +171,14 @@ export class DietComponent implements OnChanges {
         }
       );
     }
+  }
+
+  delete(id: number) {
+    this.memberService.deleteDiet(id).subscribe(
+      (response) => {
+        this.dataSource = this.dataSource.filter(diet => diet.id !== response);
+      }
+    );
   }
 
 }

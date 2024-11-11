@@ -12,8 +12,8 @@ import {MatInput, MatInputModule} from "@angular/material/input";
 import {MatCardModule} from "@angular/material/card";
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle} from "@angular/material/dialog";
-import {MatButton, MatButtonModule} from "@angular/material/button";
-import {MatIconModule} from "@angular/material/icon";
+import {MatButton, MatButtonModule, MatIconButton} from "@angular/material/button";
+import {MatIcon, MatIconModule} from "@angular/material/icon";
 import {NameValidatorPipe} from "../../add/name-validator.pipe";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatSelect, MatSelectModule} from "@angular/material/select";
@@ -43,7 +43,7 @@ import {WeightData} from "../../../dto/weightData";
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelect, MatButton, MatDivider,
+    MatSelect, MatButton, MatDivider, MatIcon, MatIconButton,
   ],
   templateUrl: './progress.component.html',
   styleUrls: ['./progress.component.scss']
@@ -60,7 +60,7 @@ export class ProgressComponent implements OnInit, OnChanges {
 
   public lineChartOptions: ChartOptions<'line'> = {responsive: true};
   public lineChartLegend = true;
-  displayedColumns: string[] = ['created', 'weightValue'];
+  displayedColumns: string[] = ['created', 'weightValue', 'blank'];
   dataSource: WeightData[] = [];
 
   public lineChartData: ChartConfiguration<'line'>['data'] = {
@@ -103,6 +103,7 @@ export class ProgressComponent implements OnInit, OnChanges {
 
       this.weights.forEach(weight => {
         tableData.push({
+          id: weight.id ?? 0,
           created: weight.created ?? '',
           weightValue: weight.weightValue ?? 0
         });
@@ -131,6 +132,7 @@ export class ProgressComponent implements OnInit, OnChanges {
         }
       ]
     };
+    console.log(this.dataSource)
   }
 
   save() {
@@ -150,6 +152,14 @@ export class ProgressComponent implements OnInit, OnChanges {
         }
       );
     }
+  }
+
+  delete(id: number) {
+    this.memberService.deleteWeight(id).subscribe(
+      (response) => {
+        this.dataSource = this.dataSource.filter(diet => diet.id !== response);
+      }
+    );
   }
 
 }

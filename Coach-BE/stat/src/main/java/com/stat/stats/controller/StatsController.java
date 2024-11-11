@@ -96,9 +96,19 @@ public class StatsController {
         weightService.deleteById(memberId);
     }
 
+    @DeleteMapping("weight/{weight-id}")
+    public Long deleteWeight(@PathVariable("weight-id") Long weightId) {
+        return weightService.deleteById(weightId);
+    }
+
     @DeleteMapping("training/{training-id}")
     public Long deleteTraining(@PathVariable("training-id") Long trainingId) {
         return trainingService.deleteById(trainingId);
+    }
+
+    @DeleteMapping("diet/{diet-id}")
+    public Long deleteDiet(@PathVariable("diet-id") Long dietId) {
+        return dietService.deleteById(dietId);
     }
 
     @GetMapping("/ping")
