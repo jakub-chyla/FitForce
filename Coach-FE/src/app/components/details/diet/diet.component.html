@@ -48,8 +48,8 @@
     <form [formGroup]="myForm">
       <div class="flex justify-start">
         <mat-form-field>
-          <input type="text" matInput formControlName="product" placeholder="product">
-          <mat-hint>Enter weight</mat-hint>
+          <input type="text" matInput formControlName="product" placeholder="Product">
+          <mat-hint>Product</mat-hint>
           @if (myForm.controls['product'].hasError('required')) {
             <mat-error>Field is required</mat-error>
           }
@@ -58,8 +58,8 @@
           }
         </mat-form-field>
         <mat-form-field class="px-2">
-          <input type="text" matInput formControlName="carbohydrates" placeholder="carbohydrates">
-          <mat-hint>Enter date</mat-hint>
+          <input type="text" matInput formControlName="carbohydrates" placeholder="Carbs">
+          <mat-hint>Carbs</mat-hint>
           @if (myForm.controls['carbohydrates'].hasError('required')) {
             <mat-error>Field is required</mat-error>
           }
@@ -68,8 +68,8 @@
           }
         </mat-form-field>
         <mat-form-field>
-          <input type="text" matInput formControlName="proteins" placeholder="proteins">
-          <mat-hint>Enter weight</mat-hint>
+          <input type="text" matInput formControlName="proteins" placeholder="Proteins">
+          <mat-hint>Proteins</mat-hint>
           @if (myForm.controls['proteins'].hasError('required')) {
             <mat-error>Field is required</mat-error>
           }
@@ -78,8 +78,8 @@
           }
         </mat-form-field>
         <mat-form-field class="px-2">
-          <input type="text" matInput formControlName="fats" placeholder="fats">
-          <mat-hint>Enter date</mat-hint>
+          <input type="text" matInput formControlName="fats" placeholder="Fats">
+          <mat-hint>Fats</mat-hint>
           @if (myForm.controls['fats'].hasError('required')) {
             <mat-error>Field is required</mat-error>
           }
@@ -87,10 +87,7 @@
             <mat-error>Minimum length is 2</mat-error>
           }
         </mat-form-field>
-      </div>
-      <div class="flex justify-end pt-2">
-        <div class="flex justify-between w-40 pr-2">
-          <button color="warn" mat-flat-button>Clear</button>
+        <div class="pt-3">
           <button color="primary" (click)="save()" mat-flat-button>Add</button>
         </div>
       </div>
