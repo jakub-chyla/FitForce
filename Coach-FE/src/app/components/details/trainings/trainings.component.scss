@@ -8,3 +8,15 @@
   flex-direction: column;
   justify-content: end;
 }
+
+.mat-column-time,
+.mat-column-note,
+.mat-column-blank {
+  text-align: center;
+}
+
+
+.mat-column-blank {
+  width: 10%;
+}
+

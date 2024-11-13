@@ -17,7 +17,7 @@ import {Weight} from "../../../model/weight";
 import {Training} from "../../../model/training";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MemberService} from "../../../service/member.service";
-import {MatButton} from "@angular/material/button";
+import {MatButton, MatIconButton} from "@angular/material/button";
 import {MatError, MatFormField, MatHint} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {DateTimeHelper} from "../../../util/date-time-helper";
@@ -34,6 +34,7 @@ import {
 } from "@angular/material/table";
 import {WeightData} from "../../../dto/weightData";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
+import {MatIcon} from "@angular/material/icon";
 
 @Component({
   selector: 'app-trainings',
@@ -44,7 +45,7 @@ import {MatProgressSpinner} from "@angular/material/progress-spinner";
   imports: [
     MatCalendar,
     MatCard,
-    MatCardModule, MatDatepickerModule, DatePipe, NgIf, MatButton, MatError, MatFormField, MatHint, MatInput, ReactiveFormsModule, MatCell, MatCellDef, MatColumnDef, MatHeaderCell, MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef, MatTable, MatHeaderCellDef, MatProgressSpinner
+    MatCardModule, MatDatepickerModule, DatePipe, NgIf, MatButton, MatError, MatFormField, MatHint, MatInput, ReactiveFormsModule, MatCell, MatCellDef, MatColumnDef, MatHeaderCell, MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef, MatTable, MatHeaderCellDef, MatProgressSpinner, MatIcon, MatIconButton
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -63,7 +64,7 @@ export class TrainingsComponent implements OnInit, OnChanges {
   selectedDate: Date = new Date();
   highlightedDates: Date[] = [];
   dataSource: Training[] = [];
-  displayedColumns: string[] = ['time', 'note'];
+  displayedColumns: string[] = ['time', 'note', 'blank'];
   dateMessages: { [key: string]: string } = {};
   message: string = '';
 
@@ -142,7 +143,7 @@ export class TrainingsComponent implements OnInit, OnChanges {
   onDateChange(selectedDate: Date | null) {
     if (selectedDate) {
       const dateKey = `${selectedDate.getFullYear()}-${(selectedDate.getMonth() + 1).toString().padStart(2, '0')}-${selectedDate.getDate().toString().padStart(2, '0')}`;
-      this.message = this.dateMessages[dateKey] || 'No training scheduled on this date';
+      this.message = this.dateMessages[dateKey] || 'No training';
     } else {
       this.message = '';
     }
@@ -184,6 +185,14 @@ export class TrainingsComponent implements OnInit, OnChanges {
         }
       );
     }
+  }
+
+  delete(id: number) {
+    this.memberService.deleteWeight(id).subscribe(
+      (response) => {
+        this.dataSource = this.dataSource.filter(diet => diet.id !== response);
+      }
+    );
   }
 
   deleteTraining() {

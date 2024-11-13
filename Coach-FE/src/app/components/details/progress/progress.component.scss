@@ -4,13 +4,12 @@
 }
 
 
-
 .mat-column-created,
-.mat-column-weightValue {
+.mat-column-weightValue,
+.mat-column-blank{
   text-align: center;
 }
 
 .mat-column-blank {
   width: 10%;
-  text-align: center;
 }

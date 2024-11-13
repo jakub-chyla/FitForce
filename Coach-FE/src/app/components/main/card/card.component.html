@@ -5,10 +5,10 @@
         <mat-card-title>{{member?.firstName}} {{member?.lastName}}</mat-card-title>
       </div>
       <span class="icon-spacer"></span>
-      <button mat-icon-button (click)="editMember()" class="hover-blue">
+      <button mat-icon-button color="primary" (click)="editMember()">
         <mat-icon>edit</mat-icon>
       </button>
-      <button mat-icon-button (click)="deleteMember()">
+      <button mat-icon-button color="warn" (click)="deleteMember()">
         <mat-icon>delete</mat-icon>
       </button>
     </mat-card-header>
@@ -36,7 +36,7 @@
     <mat-divider></mat-divider>
     <mat-card-actions class="flex justify-end">
       <div class="p-4">
-        <button mat-button (click)="openDetails()">DETAILS</button>
+        <button mat-flat-button color="primary" (click)="openDetails()">DETAILS</button>
       </div>
     </mat-card-actions>
   </mat-card>
