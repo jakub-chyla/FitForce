@@ -117,13 +117,10 @@ export class DietComponent implements OnChanges {
   }
 
   updateTable(response: DietDto) {
-    console.log(response.diets)
     for (var diet of response.diets) {
       this.dataSource.push(diet);
       this.dataSource = [...this.dataSource];
     }
-    console.log(this.dataSource)
-
   }
 
   updateChart(dietDto: DietDto) {

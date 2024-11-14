@@ -32,7 +32,6 @@ import {
   MatHeaderRowDef,
   MatRow, MatRowDef, MatTable
 } from "@angular/material/table";
-import {WeightData} from "../../../dto/weightData";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
 import {MatIcon} from "@angular/material/icon";
 
@@ -188,7 +187,7 @@ export class TrainingsComponent implements OnInit, OnChanges {
   }
 
   delete(id: number) {
-    this.memberService.deleteWeight(id).subscribe(
+    this.memberService.deleteTraining(id).subscribe(
       (response) => {
         this.dataSource = this.dataSource.filter(diet => diet.id !== response);
       }

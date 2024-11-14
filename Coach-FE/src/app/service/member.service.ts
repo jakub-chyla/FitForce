@@ -9,7 +9,6 @@ import {environment} from "../../environments/environment";
 import {Training} from "../model/training";
 import {Diet} from "../model/Diet";
 import {WeightDto} from "../dto/weightDto";
-import {WeightData} from "../dto/weightData";
 import {DietDto} from "../dto/dietDto";
 
 @Injectable({
@@ -52,8 +51,8 @@ export class MemberService {
     return this.httpClient.patch(`${this.coach}`, member, this.getHeaderWithToken());
   }
 
-  saveWeight(weight: WeightData): Observable<WeightData> {
-    return this.httpClient.post<WeightData>(`${this.stats}/save-weight`, weight, this.getHeaderWithToken());
+  saveWeight(weight: WeightDto): Observable<WeightDto[]> {
+    return this.httpClient.post<WeightDto[]>(`${this.stats}/save-weight`, weight, this.getHeaderWithToken());
   }
 
   saveTraining(training: Training): Observable<Training> {
@@ -68,8 +67,8 @@ export class MemberService {
     return this.httpClient.delete<void>(`${this.coach}/with-stats/${memberId}`, this.getHeaderWithToken());
   }
 
-  deleteWeight(weightId: number): Observable<number> {
-    return this.httpClient.delete<number>(`${this.stats}/weight/${weightId}`, this.getHeaderWithToken());
+  deleteWeight(weightId: number): Observable<WeightDto[]> {
+    return this.httpClient.delete<WeightDto[]>(`${this.stats}/weight/${weightId}`, this.getHeaderWithToken());
   }
 
   deleteTraining(trainingId: number): Observable<number> {

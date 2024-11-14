@@ -21,7 +21,6 @@ import {Member} from "../../../model/member";
 import {MemberService} from "../../../service/member.service";
 import {Weight} from "../../../model/weight";
 import {WeightDto} from "../../../dto/weightDto";
-import {WeightData} from "../../../dto/weightData";
 
 // export interface weightData {
 //   id?: number;
@@ -61,7 +60,7 @@ export class ProgressComponent implements OnInit, OnChanges {
   public lineChartOptions: ChartOptions<'line'> = {responsive: true};
   public lineChartLegend = true;
   displayedColumns: string[] = ['created', 'weightValue', 'blank'];
-  dataSource: WeightData[] = [];
+  dataSource: WeightDto[] = [];
 
   public lineChartData: ChartConfiguration<'line'>['data'] = {
     labels: [],
@@ -99,7 +98,7 @@ export class ProgressComponent implements OnInit, OnChanges {
   }
 
   initTable() {
-    const tableData: WeightData[] = [];
+    const tableData: WeightDto[] = [];
 
       this.weights.forEach(weight => {
         tableData.push({
@@ -113,11 +112,13 @@ export class ProgressComponent implements OnInit, OnChanges {
 
   }
 
-  updateChartData(tableData: WeightData[]) {
+  updateChartData(tableData: WeightDto[]) {
     const reversedData = tableData.slice().reverse();
 
     const labels = reversedData.map(data => data.created);
     const data = reversedData.map(data => data.weightValue ?? 0);
+    console.log(labels)
+    console.log(data)
 
     this.lineChartData = {
       labels: labels,
@@ -132,7 +133,6 @@ export class ProgressComponent implements OnInit, OnChanges {
         }
       ]
     };
-    console.log(this.dataSource)
   }
 
   save() {
@@ -145,10 +145,8 @@ export class ProgressComponent implements OnInit, OnChanges {
 
       this.memberService.saveWeight(weight).subscribe(
         (response) => {
-          this.dataSource.unshift(response);
-          this.dataSource.pop();
-          this.dataSource = [...this.dataSource];
-          this.updateChartData(this.dataSource);
+          this.dataSource = response;
+          this.updateChartData(response);
         }
       );
     }
@@ -157,9 +155,9 @@ export class ProgressComponent implements OnInit, OnChanges {
   delete(id: number) {
     this.memberService.deleteWeight(id).subscribe(
       (response) => {
-        this.dataSource = this.dataSource.filter(diet => diet.id !== response);
+        this.dataSource = response;
+        this.updateChartData(response);
       }
     );
   }
-
 }

@@ -9,15 +9,11 @@ import com.stat.stats.training.service.TrainingService;
 import com.stat.stats.weight.service.WeightService;
 import com.stat.stats.weight.dto.WeightDto;
 import com.stat.stats.weight.model.Weight;
-import com.stat.utils.Mapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/stats")
@@ -46,18 +42,17 @@ public class StatsController {
         FullMemberResponse response = new FullMemberResponse();
         response.setMemberId(memberId);
 
-        List<Weight> weights = weightService.findAllStatsByMember(memberId);
+        List<WeightDto> weights = weightService.findRecentWeightsByMember(memberId);
         List<Training> trainings = trainingService.findAllTrainingsByMember(memberId);
 
-        response.setWeights(weights.stream().map(Mapper::mapWeightToDto).collect(Collectors.toList()));
+        response.setWeights(weights);
         response.setTrainings(trainings);
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("weights/{member-id}")
-    public ResponseEntity<List<WeightDto>> findWeightsByMemberId(@PathVariable("member-id") Long memberId) {
-        List<Weight> weights = weightService.findAllStatsByMember(memberId);
-        return ResponseEntity.ok(weights.stream().map(Mapper::mapWeightToDto).collect(Collectors.toList()));
+    public ResponseEntity<List<WeightDto>> findWeightsByMemberId(@PathVariable("member-id") Long memberId) {;
+        return ResponseEntity.ok(weightService.findRecentWeightsByMember(memberId));
     }
 
     @GetMapping("trainings/{member-id}")
@@ -70,15 +65,10 @@ public class StatsController {
         return ResponseEntity.ok(dietService.findAllByMemberId(memberId));
     }
 
-    //DOTO return value
     @PostMapping("/save-weight")
-    public WeightDto saveWeight(@RequestBody WeightDto weightDto) {
-        Weight weight = new Weight();
-        weight.setCreated(LocalDate.parse(weightDto.getCreated(), DateTimeFormatter.ISO_LOCAL_DATE));
-        weight.setWeightValue(Double.valueOf(weightDto.getWeightValue()));
-        weight.setMemberId(1L);
-        weightService.saveStat(weight);
-        return weightDto;
+    public ResponseEntity<List<WeightDto>> saveWeight(@RequestBody WeightDto weightDto) {
+        Weight weight = weightService.saveStat(weightDto);
+        return ResponseEntity.ok(weightService.findRecentWeightsByMember(weight.getMemberId()));
     }
 
     @PostMapping("/save-training")
@@ -97,8 +87,9 @@ public class StatsController {
     }
 
     @DeleteMapping("weight/{weight-id}")
-    public Long deleteWeight(@PathVariable("weight-id") Long weightId) {
-        return weightService.deleteById(weightId);
+    public ResponseEntity<List<WeightDto>> deleteWeight(@PathVariable("weight-id") Weight weight) {
+        weightService.deleteById(weight.getId());
+        return ResponseEntity.ok(weightService.findRecentWeightsByMember(weight.getMemberId()));
     }
 
     @DeleteMapping("training/{training-id}")
