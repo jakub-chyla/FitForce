@@ -4,7 +4,7 @@ import {catchError, map, Observable, of, tap} from "rxjs";
 import {User} from "../model/user";
 import {AuthRequest} from "../model/auth-request";
 import {AuthHelper} from "../util/auth-helper";
-import {UserDto} from "../dto/UserDto";
+import {UserDto} from "../dto/userDto";
 import {environment} from "../../environments/environment";
 
 @Injectable({

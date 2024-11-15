@@ -98,8 +98,9 @@ public class StatsController {
     }
 
     @DeleteMapping("diet/{diet-id}")
-    public Long deleteDiet(@PathVariable("diet-id") Long dietId) {
-        return dietService.deleteById(dietId);
+    public ResponseEntity<DietDto> deleteDiet(@PathVariable("diet-id") Diet diet) {
+        dietService.deleteById(diet.getId());
+        return ResponseEntity.ok(dietService.findAllByMemberId(diet.getMemberId()));
     }
 
     @GetMapping("/ping")

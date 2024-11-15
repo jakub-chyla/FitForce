@@ -108,11 +108,11 @@ export class ProgressComponent implements OnInit, OnChanges {
         });
       });
       this.dataSource = tableData;
-      this.updateChartData(tableData);
+      this.updateChart(tableData);
 
   }
 
-  updateChartData(tableData: WeightDto[]) {
+  updateChart(tableData: WeightDto[]) {
     const reversedData = tableData.slice().reverse();
 
     const labels = reversedData.map(data => data.created);
@@ -146,7 +146,7 @@ export class ProgressComponent implements OnInit, OnChanges {
       this.memberService.saveWeight(weight).subscribe(
         (response) => {
           this.dataSource = response;
-          this.updateChartData(response);
+          this.updateChart(response);
         }
       );
     }
@@ -156,7 +156,7 @@ export class ProgressComponent implements OnInit, OnChanges {
     this.memberService.deleteWeight(id).subscribe(
       (response) => {
         this.dataSource = response;
-        this.updateChartData(response);
+        this.updateChart(response);
       }
     );
   }

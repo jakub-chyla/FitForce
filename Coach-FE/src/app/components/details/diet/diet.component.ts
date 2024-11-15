@@ -17,7 +17,7 @@ import {MatError, MatFormField, MatHint} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {ThemeService} from "../../../service/theme.service";
 import {MemberService} from "../../../service/member.service";
-import {Diet} from "../../../model/Diet";
+import {Diet} from "../../../model/diet";
 import {DietDto} from "../../../dto/dietDto";
 import {MatIcon} from "@angular/material/icon";
 
@@ -111,16 +111,9 @@ export class DietComponent implements OnChanges {
 
   getDietByMemberId(memberId: number) {
     this.memberService.getDietsByMemberId(memberId).subscribe((response) => {
+      this.dataSource = response.diets;
       this.updateChart(response);
-      this.updateTable(response);
     });
-  }
-
-  updateTable(response: DietDto) {
-    for (var diet of response.diets) {
-      this.dataSource.push(diet);
-      this.dataSource = [...this.dataSource];
-    }
   }
 
   updateChart(dietDto: DietDto) {
@@ -157,14 +150,14 @@ export class DietComponent implements OnChanges {
         memberId: this.memberId,
         product: this.myForm.get('product')?.value,
         carbohydrates: this.myForm.get('carbohydrates')?.value,
-        proteins: this.myForm.get('carbohydrates')?.value,
+        proteins: this.myForm.get('proteins')?.value,
         fats: this.myForm.get('fats')?.value,
       };
 
       this.memberService.saveDiet(diet).subscribe(
         (response) => {
+          this.dataSource = response.diets;
           this.updateChart(response);
-          this.updateTable(response);
         }
       );
     }
@@ -173,7 +166,8 @@ export class DietComponent implements OnChanges {
   delete(id: number) {
     this.memberService.deleteDiet(id).subscribe(
       (response) => {
-        this.dataSource = this.dataSource.filter(diet => diet.id !== response);
+        this.dataSource = response.diets;
+        this.updateChart(response);
       }
     );
   }

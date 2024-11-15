@@ -22,13 +22,11 @@ public class DietService {
 
     public DietDto saveDiet(Diet newDiet) {
         DietDto dietDto = new DietDto();
+        dietRepository.save(newDiet);
         List<Diet> diets = dietRepository.findAllByMemberId(newDiet.getMemberId());
-        Map<String, Integer> countSums = countSums(diets);
 
-        List<Diet> dietList  = new ArrayList<>();
-        Diet diet = dietRepository.save(newDiet);
-        dietList.add(diet);
-        dietDto.setDiets(dietList);
+        dietDto.setDiets(diets);
+        Map<String, Integer> countSums = countSums(diets);
 
         dietDto.setSumCarbohydrates(countSums.get("carbohydrates"));
         dietDto.setSumProteins(countSums.get("proteins"));

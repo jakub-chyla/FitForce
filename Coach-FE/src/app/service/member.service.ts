@@ -4,12 +4,11 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Member} from "../model/member";
 import {Goal} from "../model/goal";
 import {FullMemberResponse} from "../model/fullMemberResponse";
-import {Weight} from "../model/weight";
 import {environment} from "../../environments/environment";
 import {Training} from "../model/training";
-import {Diet} from "../model/Diet";
 import {WeightDto} from "../dto/weightDto";
 import {DietDto} from "../dto/dietDto";
+import {Diet} from "../model/diet";
 
 @Injectable({
   providedIn: 'root'
@@ -75,8 +74,8 @@ export class MemberService {
     return this.httpClient.delete<number>(`${this.stats}/training/${trainingId}`, this.getHeaderWithToken());
   }
 
-  deleteDiet(dietId: number): Observable<number> {
-    return this.httpClient.delete<number>(`${this.stats}/diet/${dietId}`, this.getHeaderWithToken());
+  deleteDiet(dietId: number): Observable<DietDto> {
+    return this.httpClient.delete<DietDto>(`${this.stats}/diet/${dietId}`, this.getHeaderWithToken());
   }
 
   getGoals(): Observable<Goal[]> {
