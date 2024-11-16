@@ -1,4 +1,4 @@
-import {Component, inject, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {ChangeDetectorRef, Component, inject, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MatTableModule} from "@angular/material/table";
 import {ChartConfiguration, ChartOptions} from "chart.js";
@@ -50,6 +50,7 @@ import {WeightDto} from "../../../dto/weightDto";
 export class ProgressComponent implements OnInit, OnChanges {
   themeService: ThemeService = inject(ThemeService);
   @Input() memberId: number = 0;
+  @Input() selectedTab: number = 1;
   weights: WeightDto[] = [];
 
   myForm: FormGroup = this.formBuilder.group({
@@ -61,6 +62,8 @@ export class ProgressComponent implements OnInit, OnChanges {
   public lineChartLegend = true;
   displayedColumns: string[] = ['created', 'weightValue', 'blank'];
   dataSource: WeightDto[] = [];
+
+  showChart: boolean = false;
 
   public lineChartData: ChartConfiguration<'line'>['data'] = {
     labels: [],
@@ -87,6 +90,15 @@ export class ProgressComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['fullMemberResponse'] && changes['fullMemberResponse'].currentValue) {
       this.initTable();
+    }
+    if (changes['selectedTab']) {
+      if (this.selectedTab === 0) {
+        this.getWeightByMemberId(this.memberId);
+      }
+      if (this.selectedTab !== 0) {
+        this.showChart = false;
+
+      }
     }
   }
 
@@ -133,6 +145,8 @@ export class ProgressComponent implements OnInit, OnChanges {
         }
       ]
     };
+    this.showChart = true;
+    console.log(this.showChart)
   }
 
   save() {

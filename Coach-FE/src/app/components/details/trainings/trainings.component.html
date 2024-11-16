@@ -1,9 +1,7 @@
-<div class="flex justify-center">
-  <div class="grid grid-cols-2 gap-4 p-8 min-w-80">
-    <div style="min-height: 360px" class="mt-4">
-      <div class="flex justify-center content-center">
-        <h4>Selected date: {{ selectedDate | date }} {{ message }}</h4>
-      </div>
+<mat-divider></mat-divider>
+<div class="flex flex-wrap justify-around">
+  <div class="p-8">
+    <div >
       <!--      <div *ngIf="message">-->
       <!--        <p>{{ message }}</p>-->
       <!--      </div>-->
@@ -27,12 +25,6 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
-    </div>
-    <div *ngIf="showCalendar" class="row-span-2">
-      <mat-card>
-        <mat-calendar [(selected)]="selectedDate" [dateClass]="dateClass"
-                      (selectedChange)="onDateChange($event)"></mat-calendar>
-      </mat-card>
     </div>
     <div class="bottom">
       <form [formGroup]="myForm">
@@ -66,4 +58,11 @@
       </form>
     </div>
   </div>
+  <div *ngIf="showCalendar" class="p-8 calendar">
+    <mat-card>
+      <mat-calendar [(selected)]="selectedDate" [dateClass]="dateClass"
+                    (selectedChange)="onDateChange($event)"></mat-calendar>
+    </mat-card>
+  </div>
 </div>
+

@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Member} from "../model/member";
 import {Goal} from "../model/goal";
 import {FullMemberResponse} from "../model/fullMemberResponse";
+import {Weight} from "../model/weight";
 import {environment} from "../../environments/environment";
 import {Training} from "../model/training";
 import {WeightDto} from "../dto/weightDto";

@@ -34,6 +34,7 @@ import {
 } from "@angular/material/table";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
 import {MatIcon} from "@angular/material/icon";
+import {MatDivider} from "@angular/material/divider";
 
 @Component({
   selector: 'app-trainings',
@@ -44,7 +45,7 @@ import {MatIcon} from "@angular/material/icon";
   imports: [
     MatCalendar,
     MatCard,
-    MatCardModule, MatDatepickerModule, DatePipe, NgIf, MatButton, MatError, MatFormField, MatHint, MatInput, ReactiveFormsModule, MatCell, MatCellDef, MatColumnDef, MatHeaderCell, MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef, MatTable, MatHeaderCellDef, MatProgressSpinner, MatIcon, MatIconButton
+    MatCardModule, MatDatepickerModule, DatePipe, NgIf, MatButton, MatError, MatFormField, MatHint, MatInput, ReactiveFormsModule, MatCell, MatCellDef, MatColumnDef, MatHeaderCell, MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef, MatTable, MatHeaderCellDef, MatProgressSpinner, MatIcon, MatIconButton, MatDivider
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -62,10 +63,11 @@ export class TrainingsComponent implements OnInit, OnChanges {
   showCalendar = false;
   selectedDate: Date = new Date();
   highlightedDates: Date[] = [];
-  dataSource: Training[] = [];
   displayedColumns: string[] = ['time', 'note', 'blank'];
   dateMessages: { [key: string]: string } = {};
   message: string = '';
+
+  dataSource: Training[] = [];
 
   constructor(private formBuilder: FormBuilder,
               private memberService: MemberService,
@@ -130,6 +132,7 @@ export class TrainingsComponent implements OnInit, OnChanges {
     this.message = message;
   }
 
+  // 2
   dateClass = (date: Date): string => {
     const highlight = this.highlightedDates.some(d =>
       d.getDate() === date.getDate() &&
@@ -190,10 +193,10 @@ export class TrainingsComponent implements OnInit, OnChanges {
     this.memberService.deleteTraining(id).subscribe(
       (response) => {
         this.dataSource = this.dataSource.filter(diet => diet.id !== response);
+        this.cdr.detectChanges();
       }
     );
   }
-
   deleteTraining() {
     const selectedDate = this.selectedDate;
     const normalizedSelectedDate = new Date(

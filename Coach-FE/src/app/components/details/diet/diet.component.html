@@ -1,97 +1,97 @@
 <mat-divider></mat-divider>
-<div class="grid grid-cols-2 gap-4 p-8 min-w-80">
-  <div>
-    <table mat-table [dataSource]="dataSource" class="table">
-      <ng-container matColumnDef="product">
-        <th mat-header-cell *matHeaderCellDef>Product</th>
-        <td mat-cell *matCellDef="let element"> {{ element.product }}</td>
-      </ng-container>
+<div class="flex flex-wrap justify-around">
+  <div class="p-8" style="max-width: 580px">
+    <div>
+      <table mat-table [dataSource]="dataSource" class="table">
+        <ng-container matColumnDef="product">
+          <th mat-header-cell *matHeaderCellDef>Product</th>
+          <td mat-cell *matCellDef="let element"> {{ element.product }}</td>
+        </ng-container>
 
-      <ng-container matColumnDef="carbohydrates">
-        <th mat-header-cell *matHeaderCellDef>Carbs</th>
-        <td mat-cell *matCellDef="let element"> {{ element.carbohydrates }}</td>
-      </ng-container>
+        <ng-container matColumnDef="carbohydrates">
+          <th mat-header-cell *matHeaderCellDef>Carbs</th>
+          <td mat-cell *matCellDef="let element"> {{ element.carbohydrates }}</td>
+        </ng-container>
 
-      <ng-container matColumnDef="proteins">
-        <th mat-header-cell *matHeaderCellDef>Proteins</th>
-        <td mat-cell *matCellDef="let element"> {{ element.proteins }}</td>
-      </ng-container>
+        <ng-container matColumnDef="proteins">
+          <th mat-header-cell *matHeaderCellDef>Proteins</th>
+          <td mat-cell *matCellDef="let element"> {{ element.proteins }}</td>
+        </ng-container>
 
-      <ng-container matColumnDef="fats">
-        <th mat-header-cell *matHeaderCellDef>Fats</th>
-        <td mat-cell *matCellDef="let element"> {{ element.fats }}</td>
-      </ng-container>
+        <ng-container matColumnDef="fats">
+          <th mat-header-cell *matHeaderCellDef>Fats</th>
+          <td mat-cell *matCellDef="let element"> {{ element.fats }}</td>
+        </ng-container>
 
-      <ng-container matColumnDef="blank">
-        <th mat-header-cell *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let element">
-          <button mat-icon-button color="warn" (click)="delete(element.id)">
-            <mat-icon>delete</mat-icon>
-          </button>
-        </td>
-      </ng-container>
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
+        <ng-container matColumnDef="blank">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button color="warn" (click)="delete(element.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+    <div>
+      <form [formGroup]="myForm">
+        <div class="flex justify-start">
+          <mat-form-field>
+            <input type="text" matInput formControlName="product" placeholder="Product">
+            <mat-hint>Product</mat-hint>
+            @if (myForm.controls['product'].hasError('required')) {
+              <mat-error>Field is required</mat-error>
+            }
+            @if (myForm.controls['product'].hasError('minlength')) {
+              <mat-error>Minimum length is 2</mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field class="px-2">
+            <input type="text" matInput formControlName="carbohydrates" placeholder="Carbs">
+            <mat-hint>Carbs</mat-hint>
+            @if (myForm.controls['carbohydrates'].hasError('required')) {
+              <mat-error>Field is required</mat-error>
+            }
+            @if (myForm.controls['carbohydrates'].hasError('minlength')) {
+              <mat-error>Minimum length is 2</mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field>
+            <input type="text" matInput formControlName="proteins" placeholder="Proteins">
+            <mat-hint>Proteins</mat-hint>
+            @if (myForm.controls['proteins'].hasError('required')) {
+              <mat-error>Field is required</mat-error>
+            }
+            @if (myForm.controls['proteins'].hasError('minlength')) {
+              <mat-error>Minimum length is 2</mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field class="px-2">
+            <input type="text" matInput formControlName="fats" placeholder="Fats">
+            <mat-hint>Fats</mat-hint>
+            @if (myForm.controls['fats'].hasError('required')) {
+              <mat-error>Field is required</mat-error>
+            }
+            @if (myForm.controls['fats'].hasError('minlength')) {
+              <mat-error>Minimum length is 2</mat-error>
+            }
+          </mat-form-field>
+          <div class="pt-3">
+            <button color="primary" (click)="save()" mat-flat-button>Add</button>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
-  <div class="row-span-2" style="display: block;">
-    <div class="center">
-      <canvas baseChart width="100" height="100"
+  <div class="chart p-8" style="display: block;">
+      <canvas baseChart width="390" height="390"
               [type]="'doughnut'"
               [data]="doughnutChartData"
               [options]="doughnutChartOptions"
               [legend]="doughnutChartLegend">
       </canvas>
     </div>
-  </div>
-  <div>
-    <form [formGroup]="myForm">
-      <div class="flex justify-start">
-        <mat-form-field>
-          <input type="text" matInput formControlName="product" placeholder="Product">
-          <mat-hint>Product</mat-hint>
-          @if (myForm.controls['product'].hasError('required')) {
-            <mat-error>Field is required</mat-error>
-          }
-          @if (myForm.controls['product'].hasError('minlength')) {
-            <mat-error>Minimum length is 2</mat-error>
-          }
-        </mat-form-field>
-        <mat-form-field class="px-2">
-          <input type="text" matInput formControlName="carbohydrates" placeholder="Carbs">
-          <mat-hint>Carbs</mat-hint>
-          @if (myForm.controls['carbohydrates'].hasError('required')) {
-            <mat-error>Field is required</mat-error>
-          }
-          @if (myForm.controls['carbohydrates'].hasError('minlength')) {
-            <mat-error>Minimum length is 2</mat-error>
-          }
-        </mat-form-field>
-        <mat-form-field>
-          <input type="text" matInput formControlName="proteins" placeholder="Proteins">
-          <mat-hint>Proteins</mat-hint>
-          @if (myForm.controls['proteins'].hasError('required')) {
-            <mat-error>Field is required</mat-error>
-          }
-          @if (myForm.controls['proteins'].hasError('minlength')) {
-            <mat-error>Minimum length is 2</mat-error>
-          }
-        </mat-form-field>
-        <mat-form-field class="px-2">
-          <input type="text" matInput formControlName="fats" placeholder="Fats">
-          <mat-hint>Fats</mat-hint>
-          @if (myForm.controls['fats'].hasError('required')) {
-            <mat-error>Field is required</mat-error>
-          }
-          @if (myForm.controls['fats'].hasError('minlength')) {
-            <mat-error>Minimum length is 2</mat-error>
-          }
-        </mat-form-field>
-        <div class="pt-3">
-          <button color="primary" (click)="save()" mat-flat-button>Add</button>
-        </div>
-      </div>
-    </form>
-  </div>
 </div>
 

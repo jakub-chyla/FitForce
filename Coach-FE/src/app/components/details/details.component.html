@@ -1,5 +1,5 @@
 <div class="page md:drop-shadow-xl">
-  <mat-card class="w-1/2 tabs-container" appearance="outlined">
+  <mat-card class="" appearance="outlined">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
       <mat-card-title>Simple card</mat-card-title>
@@ -11,7 +11,7 @@
     </mat-card-header>
     <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center"   (selectedIndexChange)="logSelectedIndex($event)">>
       <mat-tab label="Progress">
-        <app-progress [memberId]="id"></app-progress>
+        <app-progress [memberId]="id" [selectedTab]="selectedTab"></app-progress>
       </mat-tab>
       <mat-tab label="Trainings">
         <app-trainings [memberId]="id" [selectedTab]="selectedTab" ></app-trainings>
