@@ -93,8 +93,8 @@ public class StatsController {
     }
 
     @DeleteMapping("training/{training-id}")
-    public Long deleteTraining(@PathVariable("training-id") Long trainingId) {
-        return trainingService.deleteById(trainingId);
+    public Training deleteTraining(@PathVariable("training-id") Training training) {
+        return trainingService.delete(training);
     }
 
     @DeleteMapping("diet/{diet-id}")

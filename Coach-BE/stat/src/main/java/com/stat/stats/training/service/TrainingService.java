@@ -2,7 +2,6 @@ package com.stat.stats.training.service;
 
 import com.stat.stats.training.model.Training;
 import com.stat.stats.training.repository.TrainingRepository;
-import com.stat.stats.weight.model.Weight;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +21,8 @@ public class TrainingService {
         return trainingRepository.save(training);
     }
 
-    public Long deleteById(Long trainingId) {
-        trainingRepository.deleteById(trainingId);
-        return trainingId;
+    public Training delete(Training training) {
+        trainingRepository.delete(training);
+        return training;
     }
 }

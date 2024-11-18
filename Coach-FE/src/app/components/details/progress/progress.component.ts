@@ -21,6 +21,7 @@ import {Member} from "../../../model/member";
 import {MemberService} from "../../../service/member.service";
 import {Weight} from "../../../model/weight";
 import {WeightDto} from "../../../dto/weightDto";
+import {ActivatedRoute} from "@angular/router";
 
 // export interface weightData {
 //   id?: number;
@@ -80,10 +81,14 @@ export class ProgressComponent implements OnInit, OnChanges {
   };
 
   constructor(private formBuilder: FormBuilder,
-              private memberService: MemberService) {
+              private memberService: MemberService,
+              private route: ActivatedRoute) {
   }
 
-  ngOnInit() {
+    ngOnInit() {
+      this.route.parent?.paramMap.subscribe(params => {
+        this.memberId = Number(params.get('id'));
+      });
     this.getWeightByMemberId(this.memberId);
   }
 

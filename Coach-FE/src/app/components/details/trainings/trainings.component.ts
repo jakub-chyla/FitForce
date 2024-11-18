@@ -35,6 +35,7 @@ import {
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
 import {MatIcon} from "@angular/material/icon";
 import {MatDivider} from "@angular/material/divider";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-trainings',
@@ -71,10 +72,14 @@ export class TrainingsComponent implements OnInit, OnChanges {
 
   constructor(private formBuilder: FormBuilder,
               private memberService: MemberService,
-              private cdr: ChangeDetectorRef) {
+              private cdr: ChangeDetectorRef,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit() {
+    this.route.parent?.paramMap.subscribe(params => {
+      this.memberId = Number(params.get('id'));
+    });
     this.getTrainingsByMemberId(this.memberId);
   }
 
@@ -91,7 +96,6 @@ export class TrainingsComponent implements OnInit, OnChanges {
 
   getTrainingsByMemberId(memberId: number) {
     this.showCalendar = false;
-    this.cdr.detectChanges();
     this.memberService.getTrainingsByMemberId(memberId).subscribe((response) => {
       this.trainings = response;
       this.updateHighlightedDates()
@@ -108,6 +112,12 @@ export class TrainingsComponent implements OnInit, OnChanges {
         trainingDate.getDate() === this.selectedDate.getDate()
       );
     });
+
+    setTimeout(() => {
+      this.showCalendar = true
+      this.cdr.detectChanges();
+    }, 100);
+
   }
 
   updateHighlightedDates() {
@@ -118,8 +128,6 @@ export class TrainingsComponent implements OnInit, OnChanges {
         this.updateCalendarNotes(date, training.note!)
       }
       this.updateTable();
-      this.showCalendar = true;
-      this.cdr.detectChanges();
     }
   }
 
@@ -190,48 +198,28 @@ export class TrainingsComponent implements OnInit, OnChanges {
   }
 
   delete(id: number) {
-    this.memberService.deleteTraining(id).subscribe(
-      (response) => {
-        this.dataSource = this.dataSource.filter(diet => diet.id !== response);
-        this.cdr.detectChanges();
-      }
-    );
-  }
-  deleteTraining() {
-    const selectedDate = this.selectedDate;
-    const normalizedSelectedDate = new Date(
-      selectedDate.getFullYear(),
-      selectedDate.getMonth(),
-      selectedDate.getDate()
-    );
+    this.showCalendar = false
 
-    this.memberService.deleteTraining(this.getSelectedTraining(selectedDate)).subscribe((response) => {
-      this.trainings = this.trainings.filter(training => training.id !== response);
-      this.highlightedDates = this.highlightedDates.filter(date => {
-        const normalizedDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-        return normalizedDate.getTime() !== normalizedSelectedDate.getTime();
-      });
+      this.memberService.deleteTraining(id).subscribe(
+        (response) => {
+          if (response !== undefined) {
+            console.log(response)
+            this.trainings = this.trainings.filter((training) => training.id !== response.id);
+            // @ts-ignore
+            let dateToRemove = new Date(response.appointment);
+            this.highlightedDates = this.highlightedDates.filter(
+              (date) => date.getTime() !== dateToRemove.getTime()
+            );
 
-      setTimeout(() => {
-        this.cdr.detectChanges();
-      }, 1);
-
-    });
-  }
-
-  getSelectedTraining(selectedDate: Date): number {
-    const training = this.trainings.find(d => {
-      if (!d.appointment) return false;
-
-      const appointmentDate = d.appointment instanceof Date ? d.appointment : new Date(d.appointment);
-      return (
-        !isNaN(appointmentDate.getTime()) &&
-        appointmentDate.getDate() === selectedDate?.getDate() &&
-        appointmentDate.getMonth() === selectedDate.getMonth() &&
-        appointmentDate.getFullYear() === selectedDate.getFullYear()
+            // @ts-ignore
+            this.updateCalendarNotes(response.appointment, response.note)
+            this.updateHighlightedDates()
+            setTimeout(() => {
+              this.updateTable();
+              this.showCalendar = true
+            }, 1);
+          }
+        }
       );
-    });
-    return training?.id ?? -1;
   }
-
 }

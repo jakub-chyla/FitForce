@@ -71,8 +71,8 @@ export class MemberService {
     return this.httpClient.delete<WeightDto[]>(`${this.stats}/weight/${weightId}`, this.getHeaderWithToken());
   }
 
-  deleteTraining(trainingId: number): Observable<number> {
-    return this.httpClient.delete<number>(`${this.stats}/training/${trainingId}`, this.getHeaderWithToken());
+  deleteTraining(trainingId: number): Observable<Training> {
+    return this.httpClient.delete<Training>(`${this.stats}/training/${trainingId}`, this.getHeaderWithToken());
   }
 
   deleteDiet(dietId: number): Observable<DietDto> {

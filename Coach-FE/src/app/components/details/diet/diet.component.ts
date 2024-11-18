@@ -20,6 +20,7 @@ import {MemberService} from "../../../service/member.service";
 import {Diet} from "../../../model/diet";
 import {DietDto} from "../../../dto/dietDto";
 import {MatIcon} from "@angular/material/icon";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-diet',
@@ -95,12 +96,16 @@ export class DietComponent implements OnChanges {
 
 
   constructor(private formBuilder: FormBuilder,
-              private memberService: MemberService) {
+              private memberService: MemberService,
+              private route: ActivatedRoute) {
   }
 
   public doughnutChartLegend = true;
 
   ngOnInit() {
+    this.route.parent?.paramMap.subscribe(params => {
+      this.memberId = Number(params.get('id'));
+    })
     this.getDietByMemberId(this.memberId);
   }
 

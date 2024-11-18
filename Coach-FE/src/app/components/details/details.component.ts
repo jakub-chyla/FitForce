@@ -11,6 +11,7 @@ import {Member} from "../../model/member";
 import {FullMemberResponse} from "../../model/fullMemberResponse";
 import {TrainingsComponent} from "./trainings/trainings.component";
 import {DietComponent} from "./diet/diet.component";
+import {NgForOf} from "@angular/common";
 
 @Component({
   selector: 'app-details',
@@ -20,21 +21,28 @@ import {DietComponent} from "./diet/diet.component";
     MatButtonModule,
     MatIconModule,
     MatDividerModule,
-    RouterModule, ProgressComponent, TrainingsComponent, DietComponent],
+    RouterModule, ProgressComponent, TrainingsComponent, DietComponent, NgForOf],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss'
 })
 export class DetailsComponent implements OnInit {
   id: number = 0;
   selectedTab: number = 0;
+  tabLinks: { path: string; label: string }[] = [];
 
   constructor(private route: ActivatedRoute) {
   }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      this.id = this.id = Number(params.get('id'));
+      this.id = Number(params.get('id'));
     });
+
+    this.tabLinks = [
+      { path: `progress`, label: 'Progress' },
+      { path: `trainings`, label: 'Trainings' },
+      { path: `diet`, label: 'Diet' },
+    ];
   }
 
   logSelectedIndex(index: number): void {
