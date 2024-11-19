@@ -15,6 +15,8 @@ public class DietDto {
     private List<Diet> diets;
 
     private Integer sumCarbohydrates;
+
     private Integer sumProteins;
+
     private Integer sumFats;
 }

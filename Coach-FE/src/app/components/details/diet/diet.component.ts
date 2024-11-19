@@ -1,4 +1,4 @@
-import {Component, inject, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, inject, Input, OnChanges, SimpleChanges, ViewEncapsulation} from '@angular/core';
 import {ChartConfiguration, ChartOptions} from 'chart.js';
 import {BaseChartDirective} from 'ng2-charts';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
@@ -129,7 +129,7 @@ export class DietComponent implements OnChanges {
     let data: number[] = [carbohydrates, proteins, fats];
 
     this.doughnutChartData = {
-      labels: ['Carbohydrates', 'Proteins', 'Fats'],
+      labels: ['Carbs', 'Proteins', 'Fats'],
       datasets: [
         {
           data: data,

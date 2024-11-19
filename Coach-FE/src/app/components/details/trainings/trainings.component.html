@@ -64,5 +64,11 @@
                     (selectedChange)="onDateChange($event)"></mat-calendar>
     </mat-card>
   </div>
+  <div *ngIf="!showCalendar" class="p-8 calendar">
+    <mat-card>
+      <mat-calendar [(selected)]="selectedDate" [dateClass]="dateClass"
+                    (selectedChange)="onDateChange($event)"></mat-calendar>
+    </mat-card>
+  </div>
 </div>
 

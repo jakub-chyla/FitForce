@@ -6,6 +6,8 @@ import com.coach.model.Member;
 import com.coach.repository.GoalRepository;
 import com.coach.service.MemberService;
 import com.coach.statsClient.StatClient;
+import com.coach.utils.ApiUrl;
+import com.coach.utils.Helper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,21 +15,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/members")
+@RequestMapping(ApiUrl.API + ApiUrl.V1)
 @RequiredArgsConstructor
 public class MemberController {
 
     private final MemberService memberService;
     private final GoalRepository goalRepository;
 
-    private final StatClient statClient;
-
-    @GetMapping("/{user-id}")
+    @GetMapping(ApiUrl.Member.GET_MEMBER)
     public ResponseEntity<List<Member>> findAllMembersForUser(@PathVariable("user-id") Long userId) {
         return ResponseEntity.ok(memberService.findAllMembers(userId));
     }
 
-    @GetMapping("/with-name/{name}")
+    @GetMapping(ApiUrl.Member.WITH_NAME + "/{name}")
     public ResponseEntity<List<Member>> findAllMembersWithName(@PathVariable("name") String name) {
         return ResponseEntity.ok(memberService.findAllMembersWithName(name));
     }
@@ -61,7 +61,6 @@ public class MemberController {
     public void deleteWithStats(@PathVariable("member-id") Long memberId) {
         memberService.deleteWithStats(memberId);
     }
-
 
 
 }

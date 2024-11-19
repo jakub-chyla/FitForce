@@ -199,7 +199,6 @@ export class TrainingsComponent implements OnInit, OnChanges {
 
   delete(id: number) {
     this.showCalendar = false
-
       this.memberService.deleteTraining(id).subscribe(
         (response) => {
           if (response !== undefined) {
