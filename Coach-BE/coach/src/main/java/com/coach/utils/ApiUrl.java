@@ -11,7 +11,8 @@ public class ApiUrl {
     @UtilityClass
     public class Member {
         public final String BASE = "/members";
-        public final String GET_MEMBER = BASE + "/{user-id}";
-        public final String WITH_NAME = "/with-name";
+        public final String GOALS = BASE +  "/goals";
+        public final String PING = BASE +  "/ping";
+
     }
 }

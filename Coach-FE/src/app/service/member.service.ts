@@ -27,10 +27,6 @@ export class MemberService {
     return this.httpClient.get<Member[]>(`${this.coach}/${userId}`, this.getHeaderWithToken());
   }
 
-  getStatsForMemberId(memberId: number): Observable<FullMemberResponse> {
-    return this.httpClient.get<FullMemberResponse>(`${this.stats}/${memberId}`, this.getHeaderWithToken());
-  }
-
   getWeightsByMemberId(memberId: number): Observable<WeightDto[]> {
     return this.httpClient.get<WeightDto[]>(`${this.stats}/weights/${memberId}`, this.getHeaderWithToken());
   }
@@ -43,12 +39,12 @@ export class MemberService {
     return this.httpClient.get<DietDto>(`${this.stats}/diets/${memberId}`, this.getHeaderWithToken());
   }
 
-  addMember(member: Member): Observable<Member> {
+  saveMember(member: Member): Observable<Member> {
     return this.httpClient.post(`${this.coach}`, member, this.getHeaderWithToken());
   }
 
   updateMember(member: Member): Observable<Member> {
-    return this.httpClient.patch(`${this.coach}`, member, this.getHeaderWithToken());
+    return this.httpClient.put(`${this.coach}`, member, this.getHeaderWithToken());
   }
 
   saveWeight(weight: WeightDto): Observable<WeightDto[]> {
@@ -64,7 +60,7 @@ export class MemberService {
   }
 
   deleteMember(memberId: number): Observable<void> {
-    return this.httpClient.delete<void>(`${this.coach}/with-stats/${memberId}`, this.getHeaderWithToken());
+    return this.httpClient.delete<void>(`${this.coach}/${memberId}`, this.getHeaderWithToken());
   }
 
   deleteWeight(weightId: number): Observable<WeightDto[]> {

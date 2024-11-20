@@ -81,7 +81,7 @@ export class AddComponent implements OnInit {
       firstName: ['', [Validators.required, Validators.minLength(3)]],
       lastName: ['', [Validators.required, Validators.minLength(3)]],
       phone: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9), this.phoneValidator()]],
-      birthday: ['', [Validators.required]]
+      birthday: ['']
     })
   }
 
@@ -103,7 +103,7 @@ export class AddComponent implements OnInit {
         birthday: this.myForm.get('birthday')?.value,
       }
 
-      this.memberService.addMember(member).subscribe(
+      this.memberService.saveMember(member).subscribe(
         (response) => {
           this.onSave.emit(response);
           this.closeDialog();
