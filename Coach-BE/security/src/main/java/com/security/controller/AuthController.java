@@ -1,11 +1,11 @@
 package com.security.controller;
 
-
 import com.security.dto.AuthRequest;
 import com.security.dto.UserDto;
 import com.security.model.UserCredential;
 import com.security.repository.UserCredentialRepository;
 import com.security.service.AuthService;
+import com.security.utils.ApiUrl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -13,35 +13,26 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping(ApiUrl.API + ApiUrl.V1)
 public class AuthController {
     @Autowired
     private AuthService authService;
 
     @Autowired
-    private UserCredentialRepository userCredentialRepository;
-
-    @Autowired
     private AuthenticationManager authenticationManager;
 
-    @GetMapping("/validate")
+    @GetMapping(ApiUrl.Security.VALIDATE)
     public Boolean validateToken(@RequestParam("token") String token) {
         authService.validateToken(token);
         return true;
     }
 
-    @PostMapping("/register")
+    @PostMapping(ApiUrl.Security.REGISTER)
     public String addNewUser(@RequestBody UserCredential user) {
         return authService.saveUser(user);
     }
 
-    @GetMapping("/user")
-    public Boolean getUser(@RequestParam("token") String token) {
-        authService.validateToken(token);
-        return true;
-    }
-
-    @PostMapping("/token")
+    @PostMapping(ApiUrl.Security.TOKEN)
     public UserDto getToken(@RequestBody AuthRequest authRequest) {
         Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
         if (authenticate.isAuthenticated()) {
@@ -50,6 +41,5 @@ public class AuthController {
             throw new RuntimeException("invalid access");
         }
     }
-
 
 }

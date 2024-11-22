@@ -31,9 +31,9 @@ public class AuthConfig {
                 .requestMatchers(
                         "/api/v1/security/auth/register",
                         "/api/v1/security/ping",
-                        "/auth/register",
-                        "/auth/token",
-                        "/auth/validate"
+                        "/api/v1/auth/register",
+                        "/api/v1/auth/token",
+                        "/api/v1/auth/validate"
                 ).permitAll()
                 .and()
                 .build();
