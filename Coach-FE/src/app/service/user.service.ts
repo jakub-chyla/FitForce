@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {catchError, map, Observable, of, tap} from "rxjs";
+import {Injectable} from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {map, Observable, tap} from "rxjs";
 import {User} from "../model/user";
 import {AuthRequest} from "../model/auth-request";
 import {AuthHelper} from "../util/auth-helper";
@@ -11,10 +11,9 @@ import {environment} from "../../environments/environment";
   providedIn: 'root'
 })
 export class UserService {
-  private domain: string | undefined;
+  domain = environment.gateway + '/api/v1/auth';
 
   constructor(private httpClient: HttpClient) {
-    this.domain = environment.gateway + '/api/v1/auth';
   }
 
   createUser(user: User): Observable<string> {
@@ -30,7 +29,6 @@ export class UserService {
       })
     );
   }
-
 
   checkToken(): Observable<boolean> {
     return this.httpClient.get<boolean>(`${this.domain}/validate?token=${AuthHelper.getToken()}`);
