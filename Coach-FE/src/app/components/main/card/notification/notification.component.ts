@@ -1,27 +1,26 @@
 import {Component, EventEmitter, inject, Inject, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MemberService} from "../../../../service/member.service";
 import {
   MAT_DIALOG_DATA,
-  MatDialogActions, MatDialogClose,
+  MatDialogActions,
+  MatDialogClose,
   MatDialogContent,
   MatDialogRef,
   MatDialogTitle
 } from "@angular/material/dialog";
-import {AddComponent} from "../../../add/add.component";
 import {Member} from "../../../../model/member";
 import {ThemeService} from "../../../../service/theme.service";
-import {MatButton, MatButtonModule} from "@angular/material/button";
+import {MatButtonModule} from "@angular/material/button";
 import {MatCardModule} from "@angular/material/card";
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
 import {MatDividerModule} from "@angular/material/divider";
-import {NameValidatorPipe} from "../../../add/name-validator.pipe";
 import {CommonModule} from "@angular/common";
 import {MatDatepickerModule} from "@angular/material/datepicker";
-import {MatSelect, MatSelectModule} from "@angular/material/select";
+import {MatSelectModule} from "@angular/material/select";
 import {MemberEventService} from "../../../../service/member-event-service.service";
 
 @Component({
@@ -36,13 +35,11 @@ import {MemberEventService} from "../../../../service/member-event-service.servi
     MatInputModule,
     MatIconModule,
     MatDividerModule,
-    NameValidatorPipe,
     CommonModule,
     MatDialogContent,
     MatDialogTitle,
     MatDialogClose,
     MatDatepickerModule,
-    MatSelect,
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,

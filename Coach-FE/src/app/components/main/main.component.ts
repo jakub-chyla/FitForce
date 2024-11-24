@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Member} from "../../model/member";
 import {MatDialog} from "@angular/material/dialog";
 import {MatFabButton} from "@angular/material/button";
@@ -8,7 +8,6 @@ import {AddComponent} from "../add/add.component";
 import {CardComponent} from "./card/card.component";
 import {CommonModule} from "@angular/common";
 import {MatTooltipModule} from "@angular/material/tooltip";
-import {NotificationComponent} from "./card/notification/notification.component";
 import {MemberEventService} from "../../service/member-event-service.service";
 import {UserService} from "../../service/user.service";
 import {Router} from "@angular/router";
@@ -22,8 +21,7 @@ import {AuthHelper} from "../../util/auth-helper";
     CommonModule,
     MatTooltipModule,
     MatFabButton,
-    MatIcon,
-    NotificationComponent
+    MatIcon
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'
@@ -42,8 +40,8 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {
 
-    if(AuthHelper.getToken() === null){
-      if(!this.isTokenValid || AuthHelper.getToken() === null){
+    if (AuthHelper.getToken() === null) {
+      if (!this.isTokenValid || AuthHelper.getToken() === null) {
         this.router.navigate(['/log-in']);
       }
     }
@@ -55,7 +53,7 @@ export class MainComponent implements OnInit {
         this.getMembers(AuthHelper.getUserIdAsNumber());
       }
 
-      if(!this.isTokenValid || AuthHelper.getToken() === null){
+      if (!this.isTokenValid || AuthHelper.getToken() === null) {
         this.router.navigate(['/log-in']);
       }
 

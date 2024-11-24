@@ -1,7 +1,7 @@
 import {HttpHeaders} from "@angular/common/http";
 
 export class AuthHelper {
-    public static getHeaderWithToken() {
+  public static getHeaderWithToken() {
     return {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${localStorage.getItem('token') as string}`
@@ -13,7 +13,7 @@ export class AuthHelper {
     return localStorage.getItem('userId');
   }
 
-  public static getUserIdAsNumber(): number  {
+  public static getUserIdAsNumber(): number {
     return Number(localStorage.getItem('userId'));
   }
 

@@ -17,11 +17,11 @@ import {
 import {MemberService} from "../../service/member.service";
 import {
   MAT_DIALOG_DATA,
-  MatDialogActions, MatDialogClose,
+  MatDialogActions,
+  MatDialogClose,
   MatDialogContent,
   MatDialogRef,
   MatDialogTitle,
-
 } from "@angular/material/dialog";
 import {AddComponent} from "../add/add.component";
 import {MatButtonModule} from "@angular/material/button";
@@ -29,7 +29,6 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
 import {MatDividerModule} from "@angular/material/divider";
-import {NameValidatorPipe} from "../add/name-validator.pipe";
 import {CommonModule} from "@angular/common";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {DateAdapter, MAT_DATE_FORMATS} from "@angular/material/core";
@@ -51,7 +50,6 @@ import {AuthHelper} from "../../util/auth-helper";
     MatInputModule,
     MatIconModule,
     MatDividerModule,
-    NameValidatorPipe,
     CommonModule,
     MatDialogContent,
     MatDialogTitle,
@@ -94,7 +92,7 @@ export class EditMemberComponent implements OnInit {
       phone: [this.data.phone, [Validators.required, Validators.minLength(9), Validators.maxLength(9), this.phoneValidator()]],
       birthday: [this.data.birthday, [Validators.required]],
       email: [this.data.email, [Validators.required]],
-      goal: [this.data.goal, ]
+      goal: [this.data.goal,]
     });
     this.getGoals();
   }

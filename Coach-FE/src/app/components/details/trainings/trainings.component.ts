@@ -1,5 +1,4 @@
 import {
-  AfterViewChecked,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -11,9 +10,8 @@ import {
 import {MatCalendar, MatDatepickerModule} from "@angular/material/datepicker";
 import {MatCard, MatCardModule} from "@angular/material/card";
 import {provideNativeDateAdapter} from "@angular/material/core";
-import {DatePipe, NgIf} from '@angular/common';
+import {NgIf} from '@angular/common';
 import {FullMemberResponse} from "../../../model/fullMemberResponse";
-import {Weight} from "../../../model/weight";
 import {Training} from "../../../model/training";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MemberService} from "../../../service/member.service";
@@ -21,18 +19,18 @@ import {MatButton, MatIconButton} from "@angular/material/button";
 import {MatError, MatFormField, MatHint} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {DateTimeHelper} from "../../../util/date-time-helper";
-import _default from "chart.js/dist/plugins/plugin.tooltip";
-import numbers = _default.defaults.animations.numbers;
 import {
   MatCell,
   MatCellDef,
   MatColumnDef,
-  MatHeaderCell, MatHeaderCellDef,
+  MatHeaderCell,
+  MatHeaderCellDef,
   MatHeaderRow,
   MatHeaderRowDef,
-  MatRow, MatRowDef, MatTable
+  MatRow,
+  MatRowDef,
+  MatTable
 } from "@angular/material/table";
-import {MatProgressSpinner} from "@angular/material/progress-spinner";
 import {MatIcon} from "@angular/material/icon";
 import {MatDivider} from "@angular/material/divider";
 import {ActivatedRoute} from "@angular/router";
@@ -46,7 +44,7 @@ import {ActivatedRoute} from "@angular/router";
   imports: [
     MatCalendar,
     MatCard,
-    MatCardModule, MatDatepickerModule, DatePipe, NgIf, MatButton, MatError, MatFormField, MatHint, MatInput, ReactiveFormsModule, MatCell, MatCellDef, MatColumnDef, MatHeaderCell, MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef, MatTable, MatHeaderCellDef, MatProgressSpinner, MatIcon, MatIconButton, MatDivider
+    MatCardModule, MatDatepickerModule, NgIf, MatButton, MatError, MatFormField, MatHint, MatInput, ReactiveFormsModule, MatCell, MatCellDef, MatColumnDef, MatHeaderCell, MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef, MatTable, MatHeaderCellDef, MatIcon, MatIconButton, MatDivider
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -199,26 +197,25 @@ export class TrainingsComponent implements OnInit, OnChanges {
 
   delete(id: number) {
     this.showCalendar = false
-      this.memberService.deleteTraining(id).subscribe(
-        (response) => {
-          if (response !== undefined) {
-            console.log(response)
-            this.trainings = this.trainings.filter((training) => training.id !== response.id);
-            // @ts-ignore
-            let dateToRemove = new Date(response.appointment);
-            this.highlightedDates = this.highlightedDates.filter(
-              (date) => date.getTime() !== dateToRemove.getTime()
-            );
+    this.memberService.deleteTraining(id).subscribe(
+      (response) => {
+        if (response !== undefined) {
+          this.trainings = this.trainings.filter((training) => training.id !== response.id);
+          // @ts-ignore
+          let dateToRemove = new Date(response.appointment);
+          this.highlightedDates = this.highlightedDates.filter(
+            (date) => date.getTime() !== dateToRemove.getTime()
+          );
 
-            // @ts-ignore
-            this.updateCalendarNotes(response.appointment, response.note)
-            this.updateHighlightedDates()
-            setTimeout(() => {
-              this.updateTable();
-              this.showCalendar = true
-            }, 1);
-          }
+          // @ts-ignore
+          this.updateCalendarNotes(response.appointment, response.note)
+          this.updateHighlightedDates()
+          setTimeout(() => {
+            this.updateTable();
+            this.showCalendar = true
+          }, 1);
         }
-      );
+      }
+    );
   }
 }

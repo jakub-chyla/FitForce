@@ -1,4 +1,4 @@
-import {Component, inject, Input, OnChanges, SimpleChanges, ViewEncapsulation} from '@angular/core';
+import {Component, inject, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {ChartConfiguration, ChartOptions} from 'chart.js';
 import {BaseChartDirective} from 'ng2-charts';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
@@ -7,10 +7,13 @@ import {
   MatCell,
   MatCellDef,
   MatColumnDef,
-  MatHeaderCell, MatHeaderCellDef,
+  MatHeaderCell,
+  MatHeaderCellDef,
   MatHeaderRow,
   MatHeaderRowDef,
-  MatRow, MatRowDef, MatTable
+  MatRow,
+  MatRowDef,
+  MatTable
 } from "@angular/material/table";
 import {MatDivider} from "@angular/material/divider";
 import {MatError, MatFormField, MatHint} from "@angular/material/form-field";

@@ -4,7 +4,11 @@ import {
   AbstractControl,
   FormBuilder,
   FormControl,
-  FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators
+  FormGroup,
+  ReactiveFormsModule,
+  ValidationErrors,
+  ValidatorFn,
+  Validators
 } from "@angular/forms";
 import {MemberService} from "../../service/member.service";
 import {MatDividerModule} from "@angular/material/divider";
@@ -13,9 +17,8 @@ import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {MatCardModule} from "@angular/material/card";
-import {NameValidatorPipe} from "../add/name-validator.pipe";
 import {CommonModule} from "@angular/common";
-import {MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle} from "@angular/material/dialog";
+import {MatDialogClose} from "@angular/material/dialog";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {Router, RouterLink} from "@angular/router";
 import {UserService} from "../../service/user.service";
@@ -32,11 +35,7 @@ import {User} from "../../model/user";
     MatIconModule,
     MatCardModule,
     MatDividerModule,
-    NameValidatorPipe,
     CommonModule,
-    MatDialogContent,
-    MatDialogTitle,
-    MatDialogActions,
     MatDialogClose,
     MatFormFieldModule,
     MatInputModule,
@@ -46,14 +45,13 @@ import {User} from "../../model/user";
   templateUrl: './sign-in.component.html',
   styleUrl: './sign-in.component.scss'
 })
-export class SignInComponent implements OnInit  {
+export class SignInComponent implements OnInit {
   themeService: ThemeService = inject(ThemeService);
   myForm!: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
-              private memberService: MemberService,
-              private userService: UserService,
-              private router: Router) {
+              private userService: UserService
+  ) {
   }
 
   ngOnInit() {
@@ -70,7 +68,7 @@ export class SignInComponent implements OnInit  {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = (control as FormControl).value;
       const valid = /^\d+$/.test(value);
-      return valid ? null : { numeric: true };
+      return valid ? null : {numeric: true};
     };
   }
 
@@ -86,7 +84,6 @@ export class SignInComponent implements OnInit  {
 
       this.userService.createUser(user).subscribe(
         (response) => {
-          console.log(response)
         }
       );
 

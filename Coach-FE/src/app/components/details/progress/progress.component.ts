@@ -1,33 +1,21 @@
-import {ChangeDetectorRef, Component, inject, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, inject, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MatTableModule} from "@angular/material/table";
 import {ChartConfiguration, ChartOptions} from "chart.js";
 import {BaseChartDirective} from "ng2-charts";
-import {MatDivider, MatDividerModule} from "@angular/material/divider";
+import {MatDivider} from "@angular/material/divider";
 import {ThemeService} from "../../../service/theme.service";
-import {FullMemberResponse} from "../../../model/fullMemberResponse";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatFormField, MatFormFieldModule} from "@angular/material/form-field";
 import {MatInput, MatInputModule} from "@angular/material/input";
 import {MatCardModule} from "@angular/material/card";
 import {MatTabsModule} from "@angular/material/tabs";
-import {MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle} from "@angular/material/dialog";
-import {MatButton, MatButtonModule, MatIconButton} from "@angular/material/button";
-import {MatIcon, MatIconModule} from "@angular/material/icon";
-import {NameValidatorPipe} from "../../add/name-validator.pipe";
-import {MatDatepickerModule} from "@angular/material/datepicker";
-import {MatSelect, MatSelectModule} from "@angular/material/select";
-import {Member} from "../../../model/member";
+import {MatButton, MatIconButton} from "@angular/material/button";
+import {MatIcon} from "@angular/material/icon";
 import {MemberService} from "../../../service/member.service";
 import {Weight} from "../../../model/weight";
 import {WeightDto} from "../../../dto/weightDto";
 import {ActivatedRoute} from "@angular/router";
-
-// export interface weightData {
-//   id?: number;
-//   created: string;
-//   weightValue: number;
-// }
 
 @Component({
   selector: 'app-progress',
@@ -43,7 +31,7 @@ import {ActivatedRoute} from "@angular/router";
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelect, MatButton, MatDivider, MatIcon, MatIconButton,
+    MatButton, MatDivider, MatIcon, MatIconButton,
   ],
   templateUrl: './progress.component.html',
   styleUrls: ['./progress.component.scss']
@@ -85,10 +73,10 @@ export class ProgressComponent implements OnInit, OnChanges {
               private route: ActivatedRoute) {
   }
 
-    ngOnInit() {
-      this.route.parent?.paramMap.subscribe(params => {
-        this.memberId = Number(params.get('id'));
-      });
+  ngOnInit() {
+    this.route.parent?.paramMap.subscribe(params => {
+      this.memberId = Number(params.get('id'));
+    });
     this.getWeightByMemberId(this.memberId);
   }
 
@@ -117,15 +105,15 @@ export class ProgressComponent implements OnInit, OnChanges {
   initTable() {
     const tableData: WeightDto[] = [];
 
-      this.weights.forEach(weight => {
-        tableData.push({
-          id: weight.id ?? 0,
-          created: weight.created ?? '',
-          weightValue: weight.weightValue ?? 0
-        });
+    this.weights.forEach(weight => {
+      tableData.push({
+        id: weight.id ?? 0,
+        created: weight.created ?? '',
+        weightValue: weight.weightValue ?? 0
       });
-      this.dataSource = tableData;
-      this.updateChart(tableData);
+    });
+    this.dataSource = tableData;
+    this.updateChart(tableData);
 
   }
 
@@ -134,8 +122,6 @@ export class ProgressComponent implements OnInit, OnChanges {
 
     const labels = reversedData.map(data => data.created);
     const data = reversedData.map(data => data.weightValue ?? 0);
-    console.log(labels)
-    console.log(data)
 
     this.lineChartData = {
       labels: labels,
@@ -151,7 +137,6 @@ export class ProgressComponent implements OnInit, OnChanges {
       ]
     };
     this.showChart = true;
-    console.log(this.showChart)
   }
 
   save() {

@@ -11,11 +11,11 @@ public class ApiUrl {
     @UtilityClass
     public class Security {
         public final String BASE = "/auth";
-        public final String VALIDATE = BASE +  "/validate";
-        public final String REGISTER = BASE +  "/register";
-        public final String USER = BASE +  "/user";
-        public final String TOKEN = BASE +  "/token";
-        public final String PING = BASE +  "/ping";
+        public final String VALIDATE = BASE + "/validate";
+        public final String REGISTER = BASE + "/register";
+        public final String USER = BASE + "/user";
+        public final String TOKEN = BASE + "/token";
+        public final String PING = BASE + "/ping";
 
     }
 }

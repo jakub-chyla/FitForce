@@ -5,12 +5,6 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {MatDividerModule} from "@angular/material/divider";
 import {ActivatedRoute, RouterModule} from "@angular/router";
-import {MemberService} from "../../service/member.service";
-import {ProgressComponent} from "./progress/progress.component";
-import {Member} from "../../model/member";
-import {FullMemberResponse} from "../../model/fullMemberResponse";
-import {TrainingsComponent} from "./trainings/trainings.component";
-import {DietComponent} from "./diet/diet.component";
 import {NgForOf} from "@angular/common";
 
 @Component({
@@ -21,7 +15,7 @@ import {NgForOf} from "@angular/common";
     MatButtonModule,
     MatIconModule,
     MatDividerModule,
-    RouterModule, ProgressComponent, TrainingsComponent, DietComponent, NgForOf],
+    RouterModule, NgForOf],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss'
 })
@@ -39,9 +33,9 @@ export class DetailsComponent implements OnInit {
     });
 
     this.tabLinks = [
-      { path: `progress`, label: 'Progress' },
-      { path: `trainings`, label: 'Trainings' },
-      { path: `diet`, label: 'Diet' },
+      {path: `progress`, label: 'Progress'},
+      {path: `trainings`, label: 'Trainings'},
+      {path: `diet`, label: 'Diet'},
     ];
   }
 

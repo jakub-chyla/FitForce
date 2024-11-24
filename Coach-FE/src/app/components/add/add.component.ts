@@ -1,6 +1,7 @@
 import {Component, EventEmitter, inject, Inject, OnInit, Output} from '@angular/core';
 import {
-  FormBuilder, FormControl,
+  FormBuilder,
+  FormControl,
   FormGroup,
   ReactiveFormsModule,
   ValidationErrors,
@@ -15,12 +16,12 @@ import {MatInputModule} from "@angular/material/input";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatCardModule} from "@angular/material/card";
 import {MatDividerModule} from "@angular/material/divider";
-import {NameValidatorPipe} from "./name-validator.pipe";
 import {MemberService} from "../../service/member.service";
 import {Member} from "../../model/member";
 import {
   MAT_DIALOG_DATA,
-  MatDialogActions, MatDialogClose,
+  MatDialogActions,
+  MatDialogClose,
   MatDialogContent,
   MatDialogRef,
   MatDialogTitle
@@ -44,7 +45,6 @@ class AbstractControl {
     MatIconModule,
     MatCardModule,
     MatDividerModule,
-    NameValidatorPipe,
     CommonModule,
     MatDialogContent,
     MatDialogTitle,
@@ -89,7 +89,7 @@ export class AddComponent implements OnInit {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = (control as FormControl).value;
       const valid = /^\d+$/.test(value);
-      return valid ? null : { numeric: true };
+      return valid ? null : {numeric: true};
     };
   }
 

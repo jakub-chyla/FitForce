@@ -38,7 +38,7 @@ public class AuthService {
             userDto.setToken(generateToken(username));
             userDto.setId(userCredential.getId());
             return userDto;
-        }else {
+        } else {
             throw new RuntimeException("User not found");
         }
 
