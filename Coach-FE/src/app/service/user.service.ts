@@ -6,12 +6,14 @@ import {AuthRequest} from "../model/auth-request";
 import {AuthHelper} from "../util/auth-helper";
 import {UserDto} from "../dto/userDto";
 import {environment} from "../../environments/environment";
+import {AUTH, V1} from "../util/api-url";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  domain = environment.gateway + '/api/v1/auth';
+  // domain = environment.gateway + '/api/v1/auth';
+  domain = environment.gateway + V1 + AUTH;
 
   constructor(private httpClient: HttpClient) {
   }
