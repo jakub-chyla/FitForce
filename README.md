@@ -41,6 +41,7 @@ Full Stack application to help manage clients for personal trainers. The applica
 - [ ] FE implement snackbar
 - [ ] FE replace timeouts
 - [ ] FE add notification no user found to main screen
+- [ ] use section/ng-template
 - [x] deploy on Render
 - [ ] add custom domain
 
