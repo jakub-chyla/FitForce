@@ -1,9 +1,7 @@
 # Fit Force
 
 
-## Mvp Launch 01.02.2025
-
-Wait less than a minute for all micro services boot up https://fit-force-frontend.onrender.com/ deployed alpha version.
+## MVP Launch 01.02.2025
 
 ### Technologies:
 - Java 17
