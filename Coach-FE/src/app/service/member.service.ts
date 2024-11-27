@@ -9,13 +9,14 @@ import {WeightDto} from "../dto/weightDto";
 import {DietDto} from "../dto/dietDto";
 import {Diet} from "../model/diet";
 import {AuthHelper} from "../util/auth-helper";
+import {MEMBERS, STATS, V1} from "../util/api-url";
 
 @Injectable({
   providedIn: 'root'
 })
 export class MemberService {
-  coach = environment.gateway + '/api/v1/members';
-  stats = environment.gateway + '/api/v1/stats';
+  coach = environment.gateway + V1 + MEMBERS;
+  stats = environment.gateway + V1 + STATS;
 
   constructor(private httpClient: HttpClient) {
   }

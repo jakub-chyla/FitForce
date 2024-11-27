@@ -12,7 +12,6 @@ import {AUTH, V1} from "../util/api-url";
   providedIn: 'root'
 })
 export class UserService {
-  // domain = environment.gateway + '/api/v1/auth';
   domain = environment.gateway + V1 + AUTH;
 
   constructor(private httpClient: HttpClient) {
