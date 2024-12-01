@@ -34,6 +34,7 @@ Full Stack application to help manage clients for personal trainers. The applica
 - [ ] FE add spinners when loading
 - [ ] FE use signals
 - [ ] FE remove style
+- [ ] FE add animations
 - [ ] FE remove console.logs
 - [ ] FE replace *ngIFs
 - [ ] FE implement snackbar
