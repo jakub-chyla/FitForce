@@ -37,3 +37,5 @@ spring:
 
 variables:
   gateway: ${STATS}
+
+#  PORT=8070;DB_HOST=localhost;DB_USERNAME=postgres;DB_NAME=fit_force;DB_PASSWORD=root;STATS=http://localhost:8090

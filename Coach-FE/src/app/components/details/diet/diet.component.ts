@@ -21,7 +21,7 @@ import {MatInput} from "@angular/material/input";
 import {ThemeService} from "../../../service/theme.service";
 import {MemberService} from "../../../service/member.service";
 import {Diet} from "../../../model/diet";
-import {DietDto} from "../../../dto/dietDto";
+import {DietDto} from "../../../dto/diet.dto";
 import {MatIcon} from "@angular/material/icon";
 import {ActivatedRoute} from "@angular/router";
 

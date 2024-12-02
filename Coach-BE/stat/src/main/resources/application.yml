@@ -34,3 +34,6 @@ spring:
         format_sql: true
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+
+#PORT=8090;DB_HOST=localhost;DB_USERNAME=postgres;DB_NAME=fit_force;DB_PASSWORD=root

@@ -2,7 +2,7 @@ package com.coach.controller;
 
 import com.coach.model.Goal;
 import com.coach.model.Member;
-import com.coach.repository.GoalRepository;
+import com.coach.service.GoalService;
 import com.coach.service.MemberService;
 import com.coach.utils.ApiUrl;
 import lombok.RequiredArgsConstructor;
@@ -17,16 +17,18 @@ import java.util.List;
 public class MemberController {
 
     private final MemberService memberService;
-    private final GoalRepository goalRepository;
+
+    private final GoalService goalService;
+
 
     @GetMapping(ApiUrl.Member.BASE +"/{user-id}")
     public ResponseEntity<List<Member>> findAllMembersForUser(@PathVariable("user-id") Long userId) {
-        return ResponseEntity.ok(memberService.findAllMembers(userId));
+        return ResponseEntity.ok(memberService.findAllMembersByUserId(userId));
     }
 
     @GetMapping(ApiUrl.Member.GOALS)
     public ResponseEntity<List<Goal>> findAllGoals() {
-        return ResponseEntity.ok(goalRepository.findAll());
+        return ResponseEntity.ok(goalService.findAllGoals());
     }
 
     @PostMapping(ApiUrl.Member.BASE)
@@ -40,8 +42,9 @@ public class MemberController {
     }
 
     @DeleteMapping(ApiUrl.Member.BASE + "/{member-id}")
-    public void deleteWithStats(@PathVariable("member-id") Long memberId) {
+    public ResponseEntity<Void> deleteWithStats(@PathVariable("member-id") Long memberId) {
         memberService.deleteWithStats(memberId);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping(ApiUrl.Member.PING)

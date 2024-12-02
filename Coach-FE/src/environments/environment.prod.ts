@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  gateway: 'https://fit-force-gateway.onrender.com',
+  gateway: 'http://194.59.158.73:8080/',
 }

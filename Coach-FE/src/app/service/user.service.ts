@@ -4,7 +4,7 @@ import {map, Observable, tap} from "rxjs";
 import {User} from "../model/user";
 import {AuthRequest} from "../model/auth-request";
 import {AuthHelper} from "../util/auth-helper";
-import {UserDto} from "../dto/userDto";
+import {UserDto} from "../dto/user-dto";
 import {environment} from "../../environments/environment";
 import {AUTH, V1} from "../util/api-url";
 

@@ -14,7 +14,7 @@ import {MatButton, MatIconButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
 import {MemberService} from "../../../service/member.service";
 import {Weight} from "../../../model/weight";
-import {WeightDto} from "../../../dto/weightDto";
+import {WeightDto} from "../../../dto/weight.dto";
 import {ActivatedRoute} from "@angular/router";
 
 @Component({

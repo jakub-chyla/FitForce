@@ -11,7 +11,7 @@ import {MatInput} from "@angular/material/input";
 import {NgClass} from "@angular/common";
 import {Router, RouterLink} from "@angular/router";
 import {AuthRequest} from "../../model/auth-request";
-import {UserDto} from "../../dto/userDto";
+import {UserDto} from "../../dto/user-dto";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({

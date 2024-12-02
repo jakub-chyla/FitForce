@@ -11,7 +11,6 @@ import {MatCalendar, MatDatepickerModule} from "@angular/material/datepicker";
 import {MatCard, MatCardModule} from "@angular/material/card";
 import {provideNativeDateAdapter} from "@angular/material/core";
 import {NgIf} from '@angular/common';
-import {FullMemberResponse} from "../../../model/fullMemberResponse";
 import {Training} from "../../../model/training";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MemberService} from "../../../service/member.service";
@@ -49,7 +48,6 @@ import {ActivatedRoute} from "@angular/router";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TrainingsComponent implements OnInit, OnChanges {
-  @Input() fullMemberResponse?: FullMemberResponse;
   @Input() memberId: number = 0;
   @Input() selectedTab: number = 0;
   trainings: Training[] = [];

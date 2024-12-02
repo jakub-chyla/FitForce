@@ -10,7 +10,6 @@ import {
   ValidatorFn,
   Validators
 } from "@angular/forms";
-import {MemberService} from "../../service/member.service";
 import {MatDividerModule} from "@angular/material/divider";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
@@ -20,7 +19,7 @@ import {MatCardModule} from "@angular/material/card";
 import {CommonModule} from "@angular/common";
 import {MatDialogClose} from "@angular/material/dialog";
 import {MatDatepickerModule} from "@angular/material/datepicker";
-import {Router, RouterLink} from "@angular/router";
+import {RouterLink} from "@angular/router";
 import {UserService} from "../../service/user.service";
 import {User} from "../../model/user";
 
