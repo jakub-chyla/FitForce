@@ -3,16 +3,12 @@ package com.stat.stats.diet.service;
 import com.stat.stats.diet.dto.DietDto;
 import com.stat.stats.diet.model.Diet;
 import com.stat.stats.diet.repository.DietRepository;
-import com.stat.stats.training.model.Training;
-import com.stat.utils.Mapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor

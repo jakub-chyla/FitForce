@@ -15,7 +15,6 @@ public class RestTemplateClient {
     @Value("${GATEWAY}")
     private String gatewayPath;
 
-
     private final RestTemplate regularRestTemplate;
 
     public String pingGateway() {

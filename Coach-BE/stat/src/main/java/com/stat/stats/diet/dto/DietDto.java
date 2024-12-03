@@ -1,7 +1,6 @@
 package com.stat.stats.diet.dto;
 
 import com.stat.stats.diet.model.Diet;
-import jakarta.persistence.Column;
 import lombok.Data;
 
 import java.util.List;

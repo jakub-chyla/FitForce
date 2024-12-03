@@ -21,18 +21,6 @@ public class StatClient {
 
     private final RestTemplate regularRestTemplate;
 
-    public StatDto findMemberStats(Long memberId) {
-        String url = statsPath + "/api/v1/stats/member/" + memberId;
-
-        ResponseEntity<StatDto> responseEntity = regularRestTemplate.exchange(
-                url,
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<>() {}
-        );
-
-        return responseEntity.getBody();
-    }
 
     public void deleteAllStatsByMember(Long memberId) {
         String url = statsPath + "/api/v1/stats/member/" + memberId;

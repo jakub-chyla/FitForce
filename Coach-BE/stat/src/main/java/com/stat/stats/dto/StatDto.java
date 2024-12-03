@@ -2,9 +2,7 @@ package com.stat.stats.dto;
 
 import com.stat.stats.training.model.Training;
 import com.stat.stats.weight.model.Weight;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;

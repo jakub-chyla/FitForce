@@ -1,8 +1,5 @@
 package com.stat.utils;
 
-
-import com.stat.stats.diet.dto.DietDto;
-import com.stat.stats.diet.model.Diet;
 import com.stat.stats.weight.dto.WeightDto;
 import com.stat.stats.weight.model.Weight;
 import lombok.experimental.UtilityClass;
