@@ -3,11 +3,11 @@
   justify-content: center;
 }
 
-
 .mat-column-created,
 .mat-column-weightValue,
 .mat-column-blank {
   text-align: center;
+  max-width: 80px;
 }
 
 .mat-column-blank {
@@ -17,4 +17,14 @@
 .chart {
   width: 392px;
   height: 392px;
+}
+
+.add-button {
+  padding-right: 6px
+}
+
+.centered-hint {
+  display: block;
+  text-align: center;
+  width: 100%;
 }

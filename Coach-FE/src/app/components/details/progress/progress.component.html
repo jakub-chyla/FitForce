@@ -2,8 +2,8 @@
 <div class="flex flex-wrap justify-around">
   <div class="p-8">
     <div>
-      <table mat-table [dataSource]="dataSource" class="table">
-        <ng-container matColumnDef="created">
+      <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="created" >
           <th mat-header-cell *matHeaderCellDef> Created</th>
           <td mat-cell *matCellDef="let element"> {{ element.created }}</td>
         </ng-container>
@@ -29,8 +29,8 @@
       <form [formGroup]="myForm">
         <div class="flex justify-start">
           <mat-form-field>
-            <input type="text" matInput formControlName="created" placeholder="Date">
-            <mat-hint>Enter weight</mat-hint>
+            <input type="text" matInput formControlName="created">
+            <mat-hint >Date</mat-hint>
             @if (myForm.controls['created'].hasError('required')) {
               <mat-error>Field is required</mat-error>
             }
@@ -39,8 +39,8 @@
             }
           </mat-form-field>
           <mat-form-field class="px-3">
-            <input type="text" matInput formControlName="weightValue" placeholder="Weight">
-            <mat-hint>Enter date</mat-hint>
+            <input type="text" matInput formControlName="weightValue">
+            <mat-hint >Weight</mat-hint>
             @if (myForm.controls['weightValue'].hasError('required')) {
               <mat-error>Field is required</mat-error>
             }
@@ -48,7 +48,7 @@
               <mat-error>Minimum length is 2</mat-error>
             }
           </mat-form-field>
-          <div class="pt-3">
+          <div class="pt-3 add-button">
             <button color="primary" (click)="save()" mat-flat-button>Add</button>
           </div>
         </div>
