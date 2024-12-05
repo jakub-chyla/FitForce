@@ -29,6 +29,9 @@ Full Stack application to help manage clients for personal trainers. The applica
 - [ ] BE endpoint have to return value
 - [ ] BE emails
 - [ ] BE update tests
+- [ ] BE add roles
+- [ ] BE add stripe
+- [ ] BE buy me coffee
 - [ ] BE/FE move URL do utils
 - [ ] FE refactor names
 - [ ] FE add spinners when loading
@@ -43,4 +46,5 @@ Full Stack application to help manage clients for personal trainers. The applica
 - [ ] use section/ng-template
 - [x] deploy on Render
 - [ ] add custom domain
+
 
