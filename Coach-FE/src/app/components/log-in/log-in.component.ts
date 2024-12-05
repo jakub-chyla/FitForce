@@ -56,7 +56,10 @@ export class LogInComponent implements OnInit {
   }
 
   openSnackBar() {
-    this._snackBar.open('Wrong credentials');
+    this._snackBar.open('Wrong credentials', '', {
+      duration: 1000,
+      panelClass: ['custom-snackbar']
+    });
   }
 
   logIn() {

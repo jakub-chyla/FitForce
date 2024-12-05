@@ -42,20 +42,19 @@ $dark-text-color: #333;
   background-color: $semi-dark-bg-color;
   color: $light-text-color;
 
-  ::ng-deep  .mat-mdc-snack-bar-container {
+  :host ::ng-deep .mat-mdc-snack-bar-container {
     background-color: $semi-dark-bg-color !important;
   }
 
-  ::ng-deep  .mdc-snackbar__label {
+  :host ::ng-deep .mdc-snackbar__label {
     background-color: $semi-dark-bg-color !important;
   }
 
-
-  ::ng-deep  .mat-mdc-snack-bar-container {
+  :host ::ng-deep .mat-mdc-snack-bar-container {
     background-color: $semi-dark-bg-color !important;
   }
 
-  ::ng-deep  .mdc-snackbar__surface {
+  :host ::ng-deep .mdc-snackbar__surface {
     background-color: $semi-dark-bg-color !important;
   }
 }
@@ -64,19 +63,19 @@ $dark-text-color: #333;
 .light {
   @include mat.all-component-themes($light-theme);
 
-  ::ng-deep  .mat-mdc-snack-bar-container {
+  :host ::ng-deep .mat-mdc-snack-bar-container {
     background-color: $semi-light-bg-color !important;
   }
 
-  ::ng-deep  .mdc-snackbar__label {
+  :host ::ng-deep .mdc-snackbar__label {
     background-color: $semi-light-bg-color !important;
   }
 
-  ::ng-deep  .mat-mdc-snack-bar-container {
+  :host ::ng-deep .mat-mdc-snack-bar-container {
     background-color: $semi-light-bg-color !important;
   }
 
-  ::ng-deep  .mdc-snackbar__surface {
+  :host ::ng-deep .mdc-snackbar__surface {
     background-color: $semi-light-bg-color !important;
   }
 }
