@@ -16,10 +16,13 @@ import {MemberService} from "../../../service/member.service";
 import {Weight} from "../../../model/weight";
 import {WeightDto} from "../../../dto/weight.dto";
 import {ActivatedRoute} from "@angular/router";
+import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
+import {provideNativeDateAdapter} from "@angular/material/core";
 
 @Component({
   selector: 'app-progress',
   standalone: true,
+  providers: [provideNativeDateAdapter()],
   imports: [CommonModule,
     MatTableModule,
     BaseChartDirective,
@@ -31,7 +34,7 @@ import {ActivatedRoute} from "@angular/router";
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButton, MatDivider, MatIcon, MatIconButton,
+    MatButton, MatDivider, MatIcon, MatIconButton, MatDatepickerToggle, MatDatepicker, MatDatepickerInput,
   ],
   templateUrl: './progress.component.html',
   styleUrls: ['./progress.component.scss']

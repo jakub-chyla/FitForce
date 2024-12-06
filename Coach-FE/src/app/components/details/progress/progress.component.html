@@ -29,14 +29,11 @@
       <form [formGroup]="myForm">
         <div class="flex justify-start">
           <mat-form-field>
-            <input type="text" matInput formControlName="created">
-            <mat-hint >Date</mat-hint>
-            @if (myForm.controls['created'].hasError('required')) {
-              <mat-error>Field is required</mat-error>
-            }
-            @if (myForm.controls['created'].hasError('minlength')) {
-              <mat-error>Minimum length is 2</mat-error>
-            }
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="created">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
           <mat-form-field class="px-3">
             <input type="text" matInput formControlName="weightValue">

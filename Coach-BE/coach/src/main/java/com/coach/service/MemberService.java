@@ -20,6 +20,9 @@ public class MemberService {
     }
 
     public List<Member> findAllMembersByUserId(Long userId) {
+        //get all members for user
+        // get all training s for user
+        // get next training for user
         return memberRepository.findAllMembersByUserId(userId);
     }
 
