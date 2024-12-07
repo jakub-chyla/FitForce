@@ -17,12 +17,13 @@ import {Weight} from "../../../model/weight";
 import {WeightDto} from "../../../dto/weight.dto";
 import {ActivatedRoute} from "@angular/router";
 import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
-import {provideNativeDateAdapter} from "@angular/material/core";
+import {DateAdapter, provideNativeDateAdapter} from '@angular/material/core';
 
 @Component({
   selector: 'app-progress',
   standalone: true,
-  providers: [provideNativeDateAdapter()],
+  providers: [provideNativeDateAdapter(),
+],
   imports: [CommonModule,
     MatTableModule,
     BaseChartDirective,
@@ -73,7 +74,10 @@ export class ProgressComponent implements OnInit, OnChanges {
 
   constructor(private formBuilder: FormBuilder,
               private memberService: MemberService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+private dateAdapter: DateAdapter<Date>
+            ) {
+    this.dateAdapter.setLocale('en-GB'); // dd-MM-yyyy format
   }
 
   ngOnInit() {

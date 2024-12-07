@@ -11,5 +11,6 @@ CREATE TABLE security.user_credentials (
     first_name TEXT,
     last_name TEXT,
     email TEXT,
-    password TEXT
+    password TEXT,
+    role TEXT
 );
