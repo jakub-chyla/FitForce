@@ -7,7 +7,7 @@ import com.coach.repository.UserCredentialRepository;
 import com.coach.service.GoalService;
 import com.coach.service.MemberService;
 import com.coach.utils.ApiUrl;
-import com.coach.validator.ValidUserId;
+import com.coach.validator.ValidAdmin;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +31,7 @@ public class MemberController {
     private final GoalService goalService;
 
     @GetMapping(ApiUrl.Member.BASE +"/{user-id}")
-    public ResponseEntity<List<Member>> findAllMembersForUser(@PathVariable("user-id") @ValidUserId Long userId) {
+    public ResponseEntity<List<Member>> findAllMembersForUser(@PathVariable("user-id") @ValidAdmin Long userId) {
         return ResponseEntity.ok(memberService.findAllMembersByUserId(userId));
     }
 

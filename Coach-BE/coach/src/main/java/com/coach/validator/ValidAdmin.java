@@ -8,11 +8,11 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Constraint(validatedBy = UserIdValidator.class)
+@Constraint(validatedBy = AdminValidator.class)
 @Target({ ElementType.PARAMETER })
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ValidUserId {
-    String message() default "Invalid userId. It must be equal to 2.";
+public @interface ValidAdmin {
+    String message() default "Access denied, user is not admin";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }
