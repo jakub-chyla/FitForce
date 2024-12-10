@@ -1,6 +1,6 @@
 import {Component, EventEmitter, inject, Inject, OnInit, Output} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {MemberService} from "../../../../service/member.service";
+import {MemberService} from "../../../service/member.service";
 import {
   MAT_DIALOG_DATA,
   MatDialogActions,
@@ -9,8 +9,8 @@ import {
   MatDialogRef,
   MatDialogTitle
 } from "@angular/material/dialog";
-import {Member} from "../../../../model/member";
-import {ThemeService} from "../../../../service/theme.service";
+import {Member} from "../../../model/member";
+import {ThemeService} from "../../../service/theme.service";
 import {MatButtonModule} from "@angular/material/button";
 import {MatCardModule} from "@angular/material/card";
 import {MatTabsModule} from "@angular/material/tabs";
@@ -21,7 +21,7 @@ import {MatDividerModule} from "@angular/material/divider";
 import {CommonModule} from "@angular/common";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatSelectModule} from "@angular/material/select";
-import {MemberEventService} from "../../../../service/member-event-service.service";
+import {MemberEventService} from "../../../service/member-event-service.service";
 
 @Component({
   selector: 'app-notification',

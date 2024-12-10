@@ -5,16 +5,16 @@ import {MatFabButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
 import {MemberService} from "../../service/member.service";
 import {AddComponent} from "../add/add.component";
-import {CardComponent} from "./card/card.component";
 import {CommonModule} from "@angular/common";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MemberEventService} from "../../service/member-event-service.service";
 import {UserService} from "../../service/user.service";
 import {Router} from "@angular/router";
 import {AuthHelper} from "../../util/auth-helper";
+import {CardComponent} from "../card/card.component";
 
 @Component({
-  selector: 'app-main',
+  selector: 'app-list',
   standalone: true,
   imports: [
     CardComponent,
@@ -23,10 +23,10 @@ import {AuthHelper} from "../../util/auth-helper";
     MatFabButton,
     MatIcon
   ],
-  templateUrl: './main.component.html',
-  styleUrl: './main.component.scss'
+  templateUrl: './list.component.html',
+  styleUrl: './list.component.scss'
 })
-export class MainComponent implements OnInit {
+export class ListComponent implements OnInit {
 
   constructor(private service: MemberService,
               private dialog: MatDialog,
@@ -47,7 +47,6 @@ export class MainComponent implements OnInit {
     }
 
     this.userService.checkIsTokenValid().subscribe(isValid => {
-
       if (isValid) {
         this.isTokenValid = true;
         this.getMembers(AuthHelper.getUserIdAsNumber());

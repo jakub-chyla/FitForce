@@ -26,6 +26,10 @@ public class MemberService {
         return memberRepository.findAllMembersByUserId(userId);
     }
 
+    public List<Member> findAll(){
+        return memberRepository.findAll();
+    };
+
     public void deleteWithStats(Long memberId) {
         memberRepository.deleteById(memberId);
         statClient.deleteAllStatsByMember(memberId);

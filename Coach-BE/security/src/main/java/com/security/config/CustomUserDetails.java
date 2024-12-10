@@ -1,5 +1,6 @@
 package com.security.config;
 
+import com.security.enums.Role;
 import com.security.model.UserCredential;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -11,9 +12,10 @@ import java.util.Collections;
 public class CustomUserDetails implements UserDetails {
 
     private String username;
+
     private String password;
 
-    private String role;
+    private Role role;
 
     public CustomUserDetails(UserCredential userCredential) {
         this.username = userCredential.getName();
@@ -23,7 +25,7 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority(role));
+        return null;
     }
 
     @Override

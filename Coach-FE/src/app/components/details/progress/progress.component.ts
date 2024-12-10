@@ -17,12 +17,15 @@ import {Weight} from "../../../model/weight";
 import {WeightDto} from "../../../dto/weight.dto";
 import {ActivatedRoute} from "@angular/router";
 import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
-import {DateAdapter, provideNativeDateAdapter} from '@angular/material/core';
+import {DateAdapter, MAT_DATE_FORMATS, provideNativeDateAdapter} from '@angular/material/core';
+import {FORM_DATE_FORMATS, FormDateAdapter} from "../../../util/form-date-adapter";
 
 @Component({
   selector: 'app-progress',
   standalone: true,
   providers: [provideNativeDateAdapter(),
+    {provide: DateAdapter, useClass: FormDateAdapter},
+    {provide: MAT_DATE_FORMATS, useValue: FORM_DATE_FORMATS},
 ],
   imports: [CommonModule,
     MatTableModule,

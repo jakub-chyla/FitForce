@@ -1,6 +1,7 @@
 package com.security.service;
 
 import com.security.dto.UserDto;
+import com.security.enums.Role;
 import com.security.model.UserCredential;
 import com.security.repository.UserCredentialRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ public class AuthService {
 
     public String saveUser(UserCredential credential) {
         credential.setPassword(passwordEncoder.encode(credential.getPassword()));
+        credential.setRole(Role.USER);
         userCredentialRepository.save(credential);
         return "user added to the system";
     }

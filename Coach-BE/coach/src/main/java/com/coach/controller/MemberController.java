@@ -31,8 +31,13 @@ public class MemberController {
     private final GoalService goalService;
 
     @GetMapping(ApiUrl.Member.BASE +"/{user-id}")
-    public ResponseEntity<List<Member>> findAllMembersForUser(@PathVariable("user-id") @ValidAdmin Long userId) {
+    public ResponseEntity<List<Member>> findAllMembersForUser(@PathVariable("user-id") Long userId) {
         return ResponseEntity.ok(memberService.findAllMembersByUserId(userId));
+    }
+
+    @GetMapping(ApiUrl.Member.BASE)
+    public ResponseEntity<List<Member>> finaAll(@ValidAdmin Long userId) {
+        return ResponseEntity.ok(memberService.findAll());
     }
 
     @GetMapping(ApiUrl.Member.BASE + "/all/{user-id}")

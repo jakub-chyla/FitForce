@@ -1,13 +1,13 @@
 import {Component, Input, OnInit, Output} from '@angular/core';
-import {MatCardModule} from "@angular/material/card";
 import {MatButtonModule} from "@angular/material/button";
-import {MatIconModule} from "@angular/material/icon";
+import {MatCardModule} from "@angular/material/card";
 import {MatDividerModule} from "@angular/material/divider";
-import {Router} from "@angular/router";
+import {MatIconModule} from "@angular/material/icon";
 import {MatTabsModule} from "@angular/material/tabs";
+import {Member} from "../../model/member";
+import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
-import {Member} from "../../../model/member";
-import {EditMemberComponent} from "../../edit-member/edit-member.component";
+import {EditMemberComponent} from "../edit-member/edit-member.component";
 import {NotificationComponent} from "./notification/notification.component";
 
 @Component({
