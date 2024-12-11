@@ -30,36 +30,16 @@ public class MemberController {
 
     private final GoalService goalService;
 
+
     @GetMapping(ApiUrl.Member.BASE +"/{user-id}")
     public ResponseEntity<List<Member>> findAllMembersForUser(@PathVariable("user-id") Long userId) {
         return ResponseEntity.ok(memberService.findAllMembersByUserId(userId));
     }
 
-    @GetMapping(ApiUrl.Member.BASE)
-    public ResponseEntity<List<Member>> finaAll(@ValidAdmin Long userId) {
+    @GetMapping(ApiUrl.Member.ADMIN +"/{user-id}")
+    public ResponseEntity<List<Member>> findAll(@PathVariable("user-id") @ValidAdmin Long userId) {
         return ResponseEntity.ok(memberService.findAll());
     }
-
-    @GetMapping(ApiUrl.Member.BASE + "/all/{user-id}")
-    public ResponseEntity<List<Member>> findAllMembers(@PathVariable("user-id") Long userId) {
-        Optional<UserCredential> optionalUser = userCredentialRepository.findById(userId);
-
-        if (optionalUser.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(null); // or throw a custom exception
-        }
-
-        UserCredential user = optionalUser.get();
-
-        if (!"ADMIN".equals(user.getRole())) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Access Denied: User does not have ADMIN role.");
-        }
-
-        return ResponseEntity.ok(memberService.findAllMembersByUserId(userId));
-    }
-
-
-
 
     @GetMapping(ApiUrl.Member.GOALS)
     public ResponseEntity<List<Goal>> findAllGoals() {
@@ -87,9 +67,9 @@ public class MemberController {
         return ResponseEntity.ok("ping coach");
     }
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<String> handleValidationExceptions(MethodArgumentNotValidException ex) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Validation error in MemberController: " + ex.getMessage());
-    }
+//    @ExceptionHandler(MethodArgumentNotValidException.class)
+//    public ResponseEntity<String> handleValidationExceptions(MethodArgumentNotValidException ex) {
+//        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Validation error in MemberController: " + ex.getMessage());
+//    }
 
 }

@@ -7,6 +7,7 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {Router, RouterModule} from "@angular/router";
 import {AuthHelper} from "../../util/auth-helper";
 import {MatTooltip} from "@angular/material/tooltip";
+import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 
 @Component({
   selector: 'app-toolbar',
@@ -15,7 +16,7 @@ import {MatTooltip} from "@angular/material/tooltip";
     MatButtonModule,
     MatIconModule,
     MatSlideToggleModule,
-    RouterModule, MatTooltip],
+    RouterModule, MatTooltip, MatMenu, MatMenuItem, MatMenuTrigger],
   templateUrl: './toolbar.component.html',
   styleUrl: './toolbar.component.scss'
 })

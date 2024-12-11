@@ -1,7 +1,12 @@
 <mat-toolbar>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+  <button mat-icon-button [matMenuTriggerFor]="menu" class="example-icon" aria-label="Example icon-button with menu icon">
     <mat-icon>menu</mat-icon>
   </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>  <a routerLink="control-panel" routerLinkActive="active" class="nav-link">Coach</a></button>
+    <button mat-menu-item>Item 2</button>
+  </mat-menu>
+
   <a routerLink="main" routerLinkActive="active" class="nav-link">Coach</a>
   <span class="icon-spacer"></span>
   <div class="theme-control">
