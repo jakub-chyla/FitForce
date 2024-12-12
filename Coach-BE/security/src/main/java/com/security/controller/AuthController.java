@@ -31,7 +31,7 @@ public class AuthController {
         return authService.saveUser(user);
     }
 
-    @PostMapping(ApiUrl.Security.TOKEN)
+    @PostMapping(ApiUrl.Security.LOG_IN)
     public UserDto getToken(@RequestBody AuthRequest authRequest) {
         Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
         if (authenticate.isAuthenticated()) {

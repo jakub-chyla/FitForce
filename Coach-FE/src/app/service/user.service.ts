@@ -22,11 +22,12 @@ export class UserService {
   }
 
   singIn(authRequest: AuthRequest): Observable<UserDto> {
-    return this.httpClient.post<UserDto>(`${this.domain}/token`, authRequest).pipe(
+    return this.httpClient.post<UserDto>(`${this.domain}/log-in`, authRequest).pipe(
       tap((response: UserDto) => {
         localStorage.setItem('name', String(authRequest.username));
         localStorage.setItem('userId', String(response.id));
         localStorage.setItem('token', String(response.token));
+        localStorage.setItem('role', String(response.role));
       })
     );
   }

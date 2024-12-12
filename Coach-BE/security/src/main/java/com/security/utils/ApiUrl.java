@@ -14,7 +14,7 @@ public class ApiUrl {
         public final String VALIDATE = BASE + "/validate";
         public final String REGISTER = BASE + "/register";
         public final String USER = BASE + "/user";
-        public final String TOKEN = BASE + "/token";
+        public final String LOG_IN = BASE + "/log-in";
         public final String PING = BASE + "/ping";
 
     }

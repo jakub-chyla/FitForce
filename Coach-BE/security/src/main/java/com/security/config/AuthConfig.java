@@ -31,7 +31,7 @@ public class AuthConfig {
                         "/api/v1/security/auth/register",
                         "/api/v1/security/ping",
                         "/api/v1/auth/register",
-                        "/api/v1/auth/token",
+                        "/api/v1/auth/log-in",
                         "/api/v1/auth/validate"
                 ).permitAll()
                 .and()

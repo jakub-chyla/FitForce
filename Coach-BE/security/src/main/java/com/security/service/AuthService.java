@@ -37,13 +37,13 @@ public class AuthService {
         if (userCredentialOptional.isPresent()) {
             UserCredential userCredential = userCredentialOptional.get();
             UserDto userDto = new UserDto();
-            userDto.setToken(generateToken(username));
             userDto.setId(userCredential.getId());
+            userDto.setToken(generateToken(username));
+            userDto.setRole(userCredential.getRole());
             return userDto;
         } else {
             throw new RuntimeException("User not found");
         }
-
     }
 
     public void validateToken(String token) {
