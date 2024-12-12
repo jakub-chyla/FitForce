@@ -32,7 +32,7 @@ Full Stack application to help manage clients for personal trainers. The applica
 - [ ] BE add roles
 - [ ] BE add stripe
 - [ ] BE buy me coffee
-- [ ] BE/FE move URL do utils
+- [x] BE/FE move URL do utils
 - [ ] FE refactor names
 - [ ] FE add spinners when loading
 - [ ] FE use signals
