@@ -11,7 +11,6 @@ import {MatInput} from "@angular/material/input";
 import {NgClass} from "@angular/common";
 import {Router, RouterLink} from "@angular/router";
 import {AuthRequest} from "../../model/auth-request";
-import {UserDto} from "../../dto/user-dto";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
@@ -71,7 +70,6 @@ export class LogInComponent implements OnInit {
       }
       this.userService.singIn(authRequest).subscribe(
         (response) => {
-          const userDto: UserDto = response;
           this.router.navigate(['/main']);
         },
         (error) => {

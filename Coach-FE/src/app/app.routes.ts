@@ -29,7 +29,7 @@ export const routes: Routes = [
       { path: 'progress', component: ProgressComponent },
       { path: 'trainings', component: TrainingsComponent },
       { path: 'diet', component: DietComponent },
-      { path: '', redirectTo: 'progress', pathMatch: 'full' }, // Default tab
+      { path: '', redirectTo: 'progress', pathMatch: 'full' },
     ],
   },
   { path: '**', redirectTo: 'main' },
