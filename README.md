@@ -1,5 +1,4 @@
-# Fit Force
-
+# Fit Force 
 
 ## MVP Launch 01.02.2025
 
@@ -15,7 +14,9 @@
 - Tailwind
 ---
 ### About
-Full Stack application to help manage clients for personal trainers. The application has implemented micro services, security authentication, dark mode, emails. User can add on clients, menagde them, add statistics like: training goal, weight progress shown in chart, book apoinments, create diet.
+
+Saas full tack application to help manage clients for personal trainers. The application has implemented micro services, security authentication, dark mode, emails. User can add on clients, menagde them, add statistics like: training goal, weight progress shown in chart, book apoinments, create diet.
+
 ---
 ### TODO 
 - [x] BE implement microservices
