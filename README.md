@@ -19,13 +19,27 @@ Saas full stack application to help manage clients for personal trainers. The ap
 
 ### Overview
 
+Sign in
+
 ![image](https://github.com/user-attachments/assets/af4a1fde-82df-4ece-9adc-5fb6608dc93b)
+
+
+Add member/client
 
 ![image](https://github.com/user-attachments/assets/3210f245-c7b9-40e0-beeb-f7cd87299b96)
 
+
+Member weight chart
+
 ![image](https://github.com/user-attachments/assets/2125e208-1795-4264-87e1-393223043627)
 
+
+Member gym appointment
+
 ![image](https://github.com/user-attachments/assets/8757d2c3-abcb-4bf5-a170-f5815f03152e)
+
+
+Member diet list and chart
 
 ![image](https://github.com/user-attachments/assets/7f30ce3f-a1d1-42cd-bd86-3f9fd6f98f2a)
 
