@@ -66,7 +66,7 @@ export class NotificationComponent implements OnInit {
   delete() {
     const memberId = this.member?.id!;
     this.memberService.deleteMember(memberId).subscribe(() => {
-      this.memberEventService.deleteMember(this.member!);
+      this.memberEventService.passMember(this.member!);
       this.closeDialog();
     });
   }

@@ -56,7 +56,7 @@ export class ListComponent implements OnInit {
         this.router.navigate(['/log-in']);
       }
 
-      this.memberEventService.memberDeleted$.subscribe((deletedMember) => {
+      this.memberEventService.member$.subscribe((deletedMember) => {
         if (deletedMember) {
           this.members = this.members.filter(m => m.id !== deletedMember.id);
         }

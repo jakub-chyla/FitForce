@@ -2,21 +2,19 @@
   <mat-card class="" appearance="outlined">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>Simple card</mat-card-title>
-      <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+      <mat-card-title>{{member.firstName}} {{member.lastName}}</mat-card-title>
+      <mat-card-subtitle>{{member.goal?.name}}</mat-card-subtitle>
       <span class="icon-spacer"></span>
       <button mat-icon-button aria-label="Example icon-button with heart icon" [routerLink]="['/list']">
         <mat-icon color="warn">close</mat-icon>
       </button>
     </mat-card-header>
     <nav mat-tab-nav-bar [tabPanel]="tabPanel">
-      <a
-        mat-tab-link
+      <a mat-tab-link
         *ngFor="let link of tabLinks"
         [routerLink]="link.path"
         routerLinkActive #rla="routerLinkActive"
-        [active]="rla.isActive"
-      >
+        [active]="rla.isActive">
         {{ link.label }}
       </a>
     </nav>

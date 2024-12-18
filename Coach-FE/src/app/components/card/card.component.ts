@@ -9,6 +9,7 @@ import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {EditMemberComponent} from "../edit-member/edit-member.component";
 import {NotificationComponent} from "./notification/notification.component";
+import {MemberEventService} from "../../service/member-event-service.service";
 
 @Component({
   selector: 'app-card',
@@ -18,12 +19,12 @@ import {NotificationComponent} from "./notification/notification.component";
   styleUrl: './card.component.scss'
 })
 export class CardComponent implements OnInit {
-
   @Input() member?: Member
   @Output() onDelete?: Member;
 
   constructor(private router: Router,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private memberEventService: MemberEventService ) {
   }
 
   ngOnInit() {
@@ -52,8 +53,10 @@ export class CardComponent implements OnInit {
     });
   }
 
-
   openDetails() {
+    if (this.member) {
+      this.memberEventService.passMember(this.member);
+    }
     this.router.navigate(['details', this.member?.id]);
   }
 

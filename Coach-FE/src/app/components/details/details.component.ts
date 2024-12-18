@@ -6,6 +6,8 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatDividerModule} from "@angular/material/divider";
 import {ActivatedRoute, RouterModule} from "@angular/router";
 import {NgForOf} from "@angular/common";
+import {MemberEventService} from "../../service/member-event-service.service";
+import {Member} from "../../model/member";
 
 @Component({
   selector: 'app-details',
@@ -21,10 +23,12 @@ import {NgForOf} from "@angular/common";
 })
 export class DetailsComponent implements OnInit {
   id: number = 0;
-  selectedTab: number = 0;
+  member!: Member;
   tabLinks: { path: string; label: string }[] = [];
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute,
+              private memberEventService: MemberEventService
+  ) {
   }
 
   ngOnInit() {
@@ -32,15 +36,17 @@ export class DetailsComponent implements OnInit {
       this.id = Number(params.get('id'));
     });
 
+    this.memberEventService.member$.subscribe((member) => {
+      if (member) {
+        this.member = member;
+      }
+    });
+
     this.tabLinks = [
       {path: `progress`, label: 'Progress'},
       {path: `trainings`, label: 'Trainings'},
       {path: `diet`, label: 'Diet'},
     ];
-  }
-
-  logSelectedIndex(index: number): void {
-    this.selectedTab = index;
   }
 
 }

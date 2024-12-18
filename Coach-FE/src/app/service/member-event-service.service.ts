@@ -6,10 +6,11 @@ import {BehaviorSubject} from "rxjs";
   providedIn: 'root'
 })
 export class MemberEventService {
-  private memberDeletedSource = new BehaviorSubject<Member | null>(null);
-  memberDeleted$ = this.memberDeletedSource.asObservable();
+  private memberSource = new BehaviorSubject<Member | null>(null);
+  member$ = this.memberSource.asObservable();
 
-  deleteMember(member: Member) {
-    this.memberDeletedSource.next(member);
+  passMember(member: Member) {
+    this.memberSource.next(member);
   }
+
 }
