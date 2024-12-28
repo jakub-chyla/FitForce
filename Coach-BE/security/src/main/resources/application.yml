@@ -6,6 +6,17 @@ client:
 server:
   port: ${PORT}
 spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: fit.force.email@gmail.com # ${MAIL_USERNAME} # your gmail account
+    password: hcyffnroxmrupmzo # ${MAIL_PASSWORD} # your gmail password
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
   application:
     name: security
   config:
@@ -32,5 +43,6 @@ spring:
         format_sql: true
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+
 
 #  PORT=9898;DB_HOST=localhost;DB_USERNAME=postgres;DB_NAME=fit_force;DB_PASSWORD=root
