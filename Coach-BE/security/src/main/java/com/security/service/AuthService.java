@@ -38,6 +38,9 @@ public class AuthService {
             UserCredential userCredential = userCredentialOptional.get();
             UserDto userDto = new UserDto();
             userDto.setId(userCredential.getId());
+            userDto.setUserName(userCredential.getName());
+            userDto.setFirstName(userCredential.getFirstName());
+            userDto.setLastName(userCredential.getLastName());
             userDto.setToken(generateToken(username));
             userDto.setRole(userCredential.getRole());
             return userDto;

@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {map, Observable, tap} from "rxjs";
+import {BehaviorSubject, map, Observable, tap} from "rxjs";
 import {User} from "../model/user";
 import {AuthRequest} from "../model/auth-request";
 import {AuthHelper} from "../util/auth-helper";
-import {UserDto} from "../dto/user-dto";
 import {environment} from "../../environments/environment";
 import {AUTH, V1} from "../util/api-url";
 
@@ -13,6 +12,8 @@ import {AUTH, V1} from "../util/api-url";
 })
 export class UserService {
   domain = environment.gateway + V1 + AUTH;
+  private userSource = new BehaviorSubject<User | null>(null);
+  user$ = this.userSource.asObservable();
 
   constructor(private httpClient: HttpClient) {
   }
@@ -21,13 +22,15 @@ export class UserService {
     return this.httpClient.post<string>(`${this.domain}/register`, user);
   }
 
-  singIn(authRequest: AuthRequest): Observable<UserDto> {
-    return this.httpClient.post<UserDto>(`${this.domain}/log-in`, authRequest).pipe(
-      tap((response: UserDto) => {
-        localStorage.setItem('name', String(authRequest.username));
-        localStorage.setItem('userId', String(response.id));
+  logIn(authRequest: AuthRequest): Observable<User> {
+    return this.httpClient.post<User>(`${this.domain}/log-in`, authRequest).pipe(
+      tap((response: User) => {
+        if (response) {
+          this.emitUser(response);
+        }
+
+        //TODO refactor
         localStorage.setItem('token', String(response.token));
-        localStorage.setItem('role', String(response.role));
       })
     );
   }
@@ -43,4 +46,9 @@ export class UserService {
       }),
     );
   }
+
+  emitUser(user: User) {
+    this.userSource.next(user);
+  }
+
 }

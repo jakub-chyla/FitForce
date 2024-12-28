@@ -12,6 +12,7 @@ import {UserService} from "../../service/user.service";
 import {Router} from "@angular/router";
 import {AuthHelper} from "../../util/auth-helper";
 import {CardComponent} from "../card/card.component";
+import {User} from "../../model/user";
 
 @Component({
   selector: 'app-list',
@@ -37,8 +38,14 @@ export class ListComponent implements OnInit {
 
   members: Member[] = [];
   isTokenValid = false;
+  user?: User;
 
   ngOnInit() {
+    this.userService.user$.subscribe((user) => {
+      if (user) {
+        this.user = user;
+      }
+    });
 
     if (AuthHelper.getToken() === null) {
       if (!this.isTokenValid || AuthHelper.getToken() === null) {
@@ -47,9 +54,9 @@ export class ListComponent implements OnInit {
     }
 
     this.userService.checkIsTokenValid().subscribe(isValid => {
-      if (isValid) {
+      if (isValid && this.user?.id) {
         this.isTokenValid = true;
-        this.getMembers(AuthHelper.getUserIdAsNumber());
+        this.getMembers(this.user?.id);
       }
 
       if (!this.isTokenValid || AuthHelper.getToken() === null) {

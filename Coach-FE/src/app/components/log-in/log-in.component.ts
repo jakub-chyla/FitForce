@@ -51,7 +51,8 @@ export class LogInComponent implements OnInit {
     this.myForm = this.formBuilder.group({
       username: ['', [Validators.required, Validators.minLength(3),]],
       password: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(9)]],
-    })
+    });
+
   }
 
   openSnackBar() {
@@ -66,9 +67,8 @@ export class LogInComponent implements OnInit {
       const authRequest: AuthRequest = {
         username: this.myForm.get('username')?.value,
         password: this.myForm.get('password')?.value
-
       }
-      this.userService.singIn(authRequest).subscribe(
+      this.userService.logIn(authRequest).subscribe(
         (response) => {
           this.router.navigate(['/main']);
         },
@@ -76,7 +76,6 @@ export class LogInComponent implements OnInit {
           this.openSnackBar()
         }
       );
-
     }
   }
 }

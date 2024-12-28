@@ -7,6 +7,7 @@ import {UserService} from "../../service/user.service";
 import {Router} from "@angular/router";
 import {Member} from "../../model/member";
 import {AuthHelper} from "../../util/auth-helper";
+import {User} from "../../model/user";
 
 @Component({
   selector: 'app-control-panel',
@@ -20,15 +21,18 @@ import {AuthHelper} from "../../util/auth-helper";
 })
 export class ControlPanelComponent implements OnInit {
 
-  constructor(private service: MemberService) {
+  constructor(private service: MemberService,
+              private userService: UserService) {
   }
 
   members: Member[] = [];
 
-
   ngOnInit() {
-    this.getMembers(AuthHelper.getUserIdAsNumber());
-
+    this.userService.user$.subscribe((user) => {
+      if (user && user.id !== undefined) {
+          this.getMembers(user.id);
+        }
+    });
   }
 
   getMembers(userId: number) {

@@ -30,6 +30,8 @@ import {ThemeService} from "../../service/theme.service";
 import {CommonModule} from "@angular/common";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {AuthHelper} from "../../util/auth-helper";
+import {UserService} from "../../service/user.service";
+import {User} from "../../model/user";
 
 class AbstractControl {
 }
@@ -67,16 +69,24 @@ export class AddComponent implements OnInit {
   @Output() onSave: EventEmitter<Member> = new EventEmitter<Member>();
 
   myForm!: FormGroup;
+  user?: User;
 
   readonly startDate = new Date(1990, 0, 1);
 
   constructor(private formBuilder: FormBuilder,
               private memberService: MemberService,
               private dialogRef: MatDialogRef<AddComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any) {
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              private userService: UserService) {
   }
 
   ngOnInit() {
+    this.userService.user$.subscribe((user) => {
+      if (user) {
+        this.user = user;
+      }
+    });
+
     this.myForm = this.formBuilder.group({
       firstName: ['', [Validators.required, Validators.minLength(3)]],
       lastName: ['', [Validators.required, Validators.minLength(3)]],
@@ -96,7 +106,7 @@ export class AddComponent implements OnInit {
   save() {
     if (this.myForm.valid) {
       const member: Member = {
-        userId: AuthHelper.getUserIdAsNumber(),
+        userId: this.user?.id,
         firstName: this.myForm.get('firstName')?.value,
         lastName: this.myForm.get('lastName')?.value,
         phone: this.myForm.get('phone')?.value,

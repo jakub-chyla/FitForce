@@ -9,19 +9,8 @@ export class AuthHelper {
     };
   }
 
-  public static getUserId() {
-    return localStorage.getItem('userId');
-  }
-
-  public static getUserIdAsNumber(): number {
-    return Number(localStorage.getItem('userId'));
-  }
-
   public static getToken() {
     return localStorage.getItem('token');
   }
 
-  public static logOut() {
-    return localStorage.setItem('token', '');
-  }
 }

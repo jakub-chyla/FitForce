@@ -36,6 +36,8 @@ import {FORM_DATE_FORMATS, FormDateAdapter} from "../../util/form-date-adapter";
 import {MatSelect, MatSelectChange, MatSelectModule} from "@angular/material/select";
 import {Goal} from "../../model/goal";
 import {AuthHelper} from "../../util/auth-helper";
+import {UserService} from "../../service/user.service";
+import {User} from "../../model/user";
 
 
 @Component({
@@ -76,16 +78,24 @@ export class EditMemberComponent implements OnInit {
   myForm!: FormGroup;
   goals: Goal[] = [];
   selectedGoal?: Goal;
+  user?: User;
 
   readonly startDate = new Date(1990, 0, 1);
 
   constructor(private formBuilder: FormBuilder,
               private memberService: MemberService,
               private dialogRef: MatDialogRef<AddComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any) {
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              private userService: UserService) {
   }
 
   ngOnInit() {
+    this.userService.user$.subscribe((user) => {
+      if (user) {
+        this.user = user;
+      }
+    });
+
     this.myForm = this.formBuilder.group({
       firstName: [this.data.firstName, [Validators.required, Validators.minLength(3),]],
       lastName: [this.data.lastName, [Validators.required, Validators.minLength(3),]],
@@ -123,7 +133,7 @@ export class EditMemberComponent implements OnInit {
     if (this.myForm.valid) {
       const member: Member = {
         id: this.data.id,
-        userId: AuthHelper.getUserIdAsNumber(),
+        userId: this.user?.id,
         firstName: this.myForm.get('firstName')?.value,
         lastName: this.myForm.get('lastName')?.value,
         phone: this.myForm.get('phone')?.value,

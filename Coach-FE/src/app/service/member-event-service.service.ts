@@ -9,7 +9,7 @@ export class MemberEventService {
   private memberSource = new BehaviorSubject<Member | null>(null);
   member$ = this.memberSource.asObservable();
 
-  passMember(member: Member) {
+  emitMember(member: Member) {
     this.memberSource.next(member);
   }
 

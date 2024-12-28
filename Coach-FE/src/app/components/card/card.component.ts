@@ -55,7 +55,7 @@ export class CardComponent implements OnInit {
 
   openDetails() {
     if (this.member) {
-      this.memberEventService.passMember(this.member);
+      this.memberEventService.emitMember(this.member);
     }
     this.router.navigate(['details', this.member?.id]);
   }
