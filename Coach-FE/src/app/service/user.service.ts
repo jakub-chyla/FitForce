@@ -5,7 +5,7 @@ import {User} from "../model/user";
 import {AuthRequest} from "../model/auth-request";
 import {AuthHelper} from "../util/auth-helper";
 import {environment} from "../../environments/environment";
-import {AUTH, V1} from "../util/api-url";
+import {AUTH, SEND, V1} from "../util/api-url";
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +18,15 @@ export class UserService {
   constructor(private httpClient: HttpClient) {
   }
 
+  //TODO refactor urls
+
   createUser(user: User): Observable<string> {
     return this.httpClient.post<string>(`${this.domain}/register`, user);
   }
+
+  // sendEmail(): Observable<void> {
+  //   return this.httpClient.get<void>(`${this.domain}/send`, AuthHelper.getHeaderWithToken());
+  // }
 
   logIn(authRequest: AuthRequest): Observable<User> {
     return this.httpClient.post<User>(`${this.domain}/log-in`, authRequest).pipe(

@@ -15,7 +15,7 @@ public class EmailSenderService {
         SimpleMailMessage  message = new SimpleMailMessage();
         message.setFrom("fit.force.email@gmail.com");
         message.setTo(recipient);
-        message.setText(body);
+        message.setText("aaa");
         message.setSubject(subject);
 
         mailSender.send(message);

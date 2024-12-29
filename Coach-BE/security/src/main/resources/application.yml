@@ -10,7 +10,7 @@ spring:
     host: smtp.gmail.com
     port: 587
     username: fit.force.email@gmail.com # ${MAIL_USERNAME} # your gmail account
-    password: hcyffnroxmrupmzo # ${MAIL_PASSWORD} # your gmail password
+    password: ${MAIL_PASSWORD} # ${MAIL_PASSWORD} # your gmail password
     properties:
       mail:
         smtp:
@@ -45,4 +45,4 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
 
-#  PORT=9898;DB_HOST=localhost;DB_USERNAME=postgres;DB_NAME=fit_force;DB_PASSWORD=root
+#  PORT=9898;DB_HOST=localhost;DB_USERNAME=postgres;DB_NAME=fit_force;DB_PASSWORD=root;EMAIL_PASS=hcyffnroxmrupmzo
