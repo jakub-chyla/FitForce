@@ -63,6 +63,13 @@
             }
           </mat-select>
         </mat-form-field>
+        <div class="col-span-2">
+          <div class="images-container">
+            <div *ngFor="let image of images">
+              <img mat-card-image [src]="'assets/' + image" alt="{{ image }}"/>
+            </div>
+          </div>
+        </div>
         <mat-divider class="col-span-2"></mat-divider>
       </div>
     </form>

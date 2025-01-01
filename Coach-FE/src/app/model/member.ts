@@ -7,6 +7,7 @@ export class Member {
   lastName?: string;
   email?: string;
   phone?: number;
+  avatar?: number;
   birthday?: string;
   goal?: Goal;
 }

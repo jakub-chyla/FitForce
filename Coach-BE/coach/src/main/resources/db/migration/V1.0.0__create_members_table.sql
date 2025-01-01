@@ -1,26 +1,27 @@
-DROP SEQUENCE IF EXISTS coach.goals_seq;
-DROP SEQUENCE IF EXISTS coach.members_seq;
+drop sequence IF EXISTS coach.goals_seq;
+drop sequence IF EXISTS coach.members_seq;
 
-CREATE SEQUENCE coach.goals_seq INCREMENT BY 1;
-SELECT setval('coach.goals_seq', 1);
+create sequence coach.goals_seq increment by 1;
+select setval('coach.goals_seq', 1);
 
-CREATE SEQUENCE coach.members_seq INCREMENT BY 1;
-SELECT setval('coach.members_seq', 1);
+create sequence coach.members_seq increment by 1;
+select setval('coach.members_seq', 1);
 
-DROP TABLE IF EXISTS coach.members;
-DROP TABLE IF EXISTS coach.goals;
+drop table IF EXISTS coach.members;
+drop table IF EXISTS coach.goals;
 
-CREATE TABLE coach.goals (
+create TABLE coach.goals (
     id BIGINT PRIMARY KEY,
     name TEXT UNIQUE NOT NULL
 );
 
-CREATE TABLE coach.members (
+create TABLE coach.members (
     id BIGINT PRIMARY KEY,
     user_id BIGINT,
     first_name TEXT,
     last_name TEXT,
     phone BIGINT,
+    avatar BIGINT,
     email TEXT,
     birthday DATE,
     goal_id BIGINT,
@@ -29,10 +30,10 @@ CREATE TABLE coach.members (
     CONSTRAINT fk_goal FOREIGN KEY (goal_id) REFERENCES coach.goals(id)
 );
 
-INSERT INTO coach.goals (id, name) VALUES
+insert into coach.goals (id, name) values
   (1, 'Lose weight'),
   (2, 'Gain muscles');
 
-INSERT INTO coach.members (id, user_id, first_name, last_name, phone, email, birthday, goal_id, is_active, created)
-VALUES
-  (1, 1, 'John', 'Williams', 1234567890, 'john.williams@example.com', '1985-05-15', 1, true, CURRENT_TIMESTAMP);
+insert into coach.members (id, user_id, first_name, last_name, phone, avatar, email, birthday, goal_id, is_active, created)
+values
+  (1, 1, 'John', 'Williams', 1234567890, 1,'john.williams@example.com', '1985-05-15', 1, true, current_timestamp);

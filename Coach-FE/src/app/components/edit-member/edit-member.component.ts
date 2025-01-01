@@ -35,9 +35,9 @@ import {DateAdapter, MAT_DATE_FORMATS} from "@angular/material/core";
 import {FORM_DATE_FORMATS, FormDateAdapter} from "../../util/form-date-adapter";
 import {MatSelect, MatSelectChange, MatSelectModule} from "@angular/material/select";
 import {Goal} from "../../model/goal";
-import {AuthHelper} from "../../util/auth-helper";
 import {UserService} from "../../service/user.service";
 import {User} from "../../model/user";
+import {Images} from "../../../assets/images";
 
 
 @Component({
@@ -71,7 +71,6 @@ import {User} from "../../model/user";
 })
 
 export class EditMemberComponent implements OnInit {
-
   themeService: ThemeService = inject(ThemeService);
   @Output() onSave: EventEmitter<Member> = new EventEmitter<Member>();
 
@@ -79,6 +78,7 @@ export class EditMemberComponent implements OnInit {
   goals: Goal[] = [];
   selectedGoal?: Goal;
   user?: User;
+  images = Images.list
 
   readonly startDate = new Date(1990, 0, 1);
 

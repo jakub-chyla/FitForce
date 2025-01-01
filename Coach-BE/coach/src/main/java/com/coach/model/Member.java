@@ -33,6 +33,7 @@ public class Member {
     private LocalDateTime created = LocalDateTime.now();
 
     private Integer phone;
+    private Integer avatar;
 
     private String email;
 

@@ -12,13 +12,18 @@ public class EmailSenderService {
     private final JavaMailSender mailSender;
 
     public void sendEmail(String recipient, String subject, String body) {
-        SimpleMailMessage  message = new SimpleMailMessage();
+        SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("fit.force.email@gmail.com");
         message.setTo(recipient);
         message.setText("aaa");
         message.setSubject(subject);
 
-        mailSender.send(message);
+        try {
+            mailSender.send(message);
+        } catch (Exception e) {
+
+        }
+
         System.out.println(message);
     }
 }
