@@ -66,7 +66,14 @@
         <div class="col-span-2">
           <div class="images-container">
             <div *ngFor="let image of images">
-              <img mat-card-image [src]="'assets/' + image" alt="{{ image }}"/>
+              <div class="images-container-selected" *ngIf="image === selectedAvatar + '.svg'"><img
+                mat-card-image
+                [src]="'assets/' + image"
+                alt="{{ image }}"></div>
+              <div (click)="setAvatar(image)" class="images-container-hover" *ngIf="image !== selectedAvatar + '.svg'"><img
+                mat-card-image
+                [src]="'assets/' + image"
+                alt="{{ image }}"></div>
             </div>
           </div>
         </div>

@@ -20,17 +20,17 @@
   background-color 0.3s ease;
 }
 
-.images-container img:hover {
+.images-container-hover img:hover {
   border-radius: 100%;
   cursor: pointer;
   border: 2px solid rgb(54, 147, 239);
 }
 
-//.images-container-selected img {
-//  border-radius: 100%;
-//  cursor: pointer;
-//  border: 2px solid rgb(54, 147, 239);
-//}
+.images-container-selected img {
+  border-radius: 100%;
+  cursor: pointer;
+  border: 2px solid rgb(54, 147, 239);
+}
 
 .example-stretched-tabs {
   width: 800px;

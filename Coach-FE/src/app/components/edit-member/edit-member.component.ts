@@ -79,6 +79,7 @@ export class EditMemberComponent implements OnInit {
   selectedGoal?: Goal;
   user?: User;
   images = Images.list
+  selectedAvatar!: number;
 
   readonly startDate = new Date(1990, 0, 1);
 
@@ -102,8 +103,12 @@ export class EditMemberComponent implements OnInit {
       phone: [this.data.phone, [Validators.required, Validators.minLength(9), Validators.maxLength(9), this.phoneValidator()]],
       birthday: [this.data.birthday, [Validators.required]],
       email: [this.data.email, [Validators.required]],
-      goal: [this.data.goal,]
+      goal: [this.data.goal,],
+      avatar: [this.data.avatar]
     });
+
+    this.selectedAvatar = this.data.avatar;
+
     this.getGoals();
   }
 
@@ -139,7 +144,8 @@ export class EditMemberComponent implements OnInit {
         phone: this.myForm.get('phone')?.value,
         birthday: this.myForm.get('birthday')?.value,
         email: this.myForm.get('email')?.value,
-        goal: this.selectedGoal
+        goal: this.selectedGoal,
+        avatar: this.selectedAvatar
       };
 
       this.memberService.updateMember(member).subscribe(
@@ -150,6 +156,10 @@ export class EditMemberComponent implements OnInit {
       );
 
     }
+  }
+
+  setAvatar(image: string) {
+    this.selectedAvatar = Number(image.split('.')[0]);
   }
 
   closeDialog(): void {
