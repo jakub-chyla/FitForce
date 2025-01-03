@@ -29,7 +29,7 @@ public class MemberController {
     private final UserCredentialRepository userCredentialRepository;
 
     private final GoalService goalService;
-    
+
     @GetMapping(ApiUrl.Member.BASE +"/{user-id}")
     public ResponseEntity<List<Member>> findAllMembersForUser(@PathVariable("user-id") Long userId) {
         return ResponseEntity.ok(memberService.findAllMembersByUserId(userId));

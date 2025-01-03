@@ -59,15 +59,21 @@ export class SignInComponent implements OnInit {
       lastName: ['', [Validators.required, Validators.minLength(3),]],
       name: ['', [Validators.required, Validators.minLength(3),]],
       password: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(9)]],
-      email: ['', [Validators.required, Validators.minLength(3),]]
+      email: ['', [Validators.required, Validators.minLength(3),]],
+      phone: ['', [this.phoneValidator()]]
     })
   }
 
   phoneValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = (control as FormControl).value;
-      const valid = /^\d+$/.test(value);
-      return valid ? null : {numeric: true};
+
+      if (!value) {
+        return null;
+      }
+
+      const valid = /^\d{9}$/.test(value);
+      return valid ? null : { exactNineDigits: true };
     };
   }
 
@@ -78,12 +84,11 @@ export class SignInComponent implements OnInit {
         lastName: this.myForm.get('lastName')?.value,
         name: this.myForm.get('name')?.value,
         password: this.myForm.get('password')?.value,
-        email: this.myForm.get('email')?.value
+        email: this.myForm.get('email')?.value,
+        phone: this.myForm.get('phone')?.value
       }
 
       this.userService.createUser(user).subscribe(
-        (response) => {
-        }
       );
 
     }

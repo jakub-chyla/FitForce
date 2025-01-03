@@ -27,7 +27,10 @@ public class UserCredential {
     private String lastName;
 
     private String email;
+
     private String password;
+
+    private Integer phone;
 
     @Enumerated(EnumType.STRING)
     private Role role;
