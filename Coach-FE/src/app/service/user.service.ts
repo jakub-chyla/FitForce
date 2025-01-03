@@ -5,7 +5,7 @@ import {User} from "../model/user";
 import {AuthRequest} from "../model/auth-request";
 import {AuthHelper} from "../util/auth-helper";
 import {environment} from "../../environments/environment";
-import {AUTH, V1} from "../util/api-url";
+import {AUTH, LOG_IN, REGISTER, V1, VALIDATE} from "../util/api-url";
 
 @Injectable({
   providedIn: 'root'
@@ -18,29 +18,25 @@ export class UserService {
   constructor(private httpClient: HttpClient) {
   }
 
-  //TODO refactor urls
-
   createUser(user: User): Observable<string> {
-    return this.httpClient.post(`${this.domain}/register`, user, {
+    return this.httpClient.post(this.domain + REGISTER, user, {
       responseType: 'text'
     });
   }
 
   logIn(authRequest: AuthRequest): Observable<User> {
-    return this.httpClient.post<User>(`${this.domain}/log-in`, authRequest).pipe(
+    return this.httpClient.post<User>(this.domain + LOG_IN, authRequest).pipe(
       tap((response: User) => {
         if (response) {
           this.emitUser(response);
+          localStorage.setItem('token', String(response.token));
         }
-
-        //TODO refactor
-        localStorage.setItem('token', String(response.token));
       })
     );
   }
 
   checkToken(): Observable<boolean> {
-    return this.httpClient.get<boolean>(`${this.domain}/validate?token=${AuthHelper.getToken()}`);
+    return this.httpClient.get<boolean>(this.domain + VALIDATE + `?token=${AuthHelper.getToken()}`);
   }
 
   checkIsTokenValid(): Observable<boolean> {
