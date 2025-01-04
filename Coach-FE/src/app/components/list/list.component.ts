@@ -13,6 +13,7 @@ import {Router} from "@angular/router";
 import {AuthHelper} from "../../util/auth-helper";
 import {CardComponent} from "../card/card.component";
 import {User} from "../../model/user";
+import {CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray} from "@angular/cdk/drag-drop";
 
 @Component({
   selector: 'app-list',
@@ -22,7 +23,9 @@ import {User} from "../../model/user";
     CommonModule,
     MatTooltipModule,
     MatFabButton,
-    MatIcon
+    MatIcon,
+    CdkDropList,
+    CdkDrag
   ],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss'
@@ -70,6 +73,10 @@ export class ListComponent implements OnInit {
       });
     });
 
+  }
+
+  drop(event: CdkDragDrop<any[]>) {
+    moveItemInArray(this.members, event.previousIndex, event.currentIndex);
   }
 
   getMembers(userId: number) {

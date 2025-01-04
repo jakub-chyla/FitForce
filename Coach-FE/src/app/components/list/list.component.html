@@ -1,5 +1,5 @@
-<div class="cards-container">
-  <div *ngFor="let card of members">
+<div class="cards-container" cdkDropList (cdkDropListDropped)="drop($event)">
+  <div *ngFor="let card of members" cdkDrag class="card-wrapper">
     <app-card [member]="card"></app-card>
   </div>
 </div>
