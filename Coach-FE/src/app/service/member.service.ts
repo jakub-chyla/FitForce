@@ -9,7 +9,7 @@ import {WeightDto} from "../dto/weight.dto";
 import {DietDto} from "../dto/diet.dto";
 import {Diet} from "../model/diet";
 import {AuthHelper} from "../util/auth-helper";
-import {ADMIN, DIETS, GOALS, MEMBERS, STATS, TRAININGS, V1, WEIGHTS} from "../util/api-url";
+import {ADMIN, DIETS, GOALS, MEMBERS, NEXT_TRAININGS, STATS, TRAININGS, V1, WEIGHTS} from "../util/api-url";
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +35,10 @@ export class MemberService {
 
   getTrainingsByMemberId(memberId: number): Observable<Training[]> {
     return this.httpClient.get<Training[]>(this.stats + TRAININGS + `/${memberId}`, AuthHelper.getHeaderWithToken());
+  }
+
+  getNextTrainingByMemberId(memberId: number): Observable<Training> {
+    return this.httpClient.get<Training>(this.stats + NEXT_TRAININGS + `/${memberId}`, AuthHelper.getHeaderWithToken());
   }
 
   getDietsByMemberId(memberId: number): Observable<DietDto> {

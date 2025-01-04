@@ -9,6 +9,7 @@ export const REGISTER: string = '/register';
 export const ADMIN: string = '/admin';
 export const WEIGHTS: string = '/weights';
 export const TRAININGS: string = '/trainings';
+export const NEXT_TRAININGS: string = '/next-trainings';
 export const DIETS: string = '/diets';
 export const GOALS: string = '/goals';
 export const LOG_IN: string = '/log-in';

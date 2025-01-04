@@ -10,6 +10,8 @@ import {MatDialog} from "@angular/material/dialog";
 import {EditMemberComponent} from "../edit-member/edit-member.component";
 import {NotificationComponent} from "./notification/notification.component";
 import {MemberEventService} from "../../service/member-event-service.service";
+import {MemberService} from "../../service/member.service";
+import {Training} from "../../model/training";
 
 @Component({
   selector: 'app-card',
@@ -21,13 +23,20 @@ import {MemberEventService} from "../../service/member-event-service.service";
 export class CardComponent implements OnInit {
   @Input() member?: Member
   @Output() onDelete?: Member;
+  nextTraining?: Training;
 
   constructor(private router: Router,
               private dialog: MatDialog,
-              private memberEventService: MemberEventService ) {
+              private memberEventService: MemberEventService,
+              private memberService: MemberService) {
   }
 
   ngOnInit() {
+    if(this.member && this.member.id) {
+      this.memberService.getNextTrainingByMemberId(this.member.id).subscribe((response) => {
+        this.nextTraining = response;
+      });
+    }
   }
 
   editMember() {

@@ -34,6 +34,11 @@ public class StatsController {
         return ResponseEntity.ok(trainingService.findAllTrainingsByMember(memberId));
     }
 
+    @GetMapping(ApiUrl.Stat.NEXT_TRAININGS + "/{member-id}")
+    public ResponseEntity<Training> findNextTrainingsByMemberId(@PathVariable("member-id") Long memberId) {
+        return ResponseEntity.ok(trainingService.findNextTrainingsByMemberId(memberId));
+    }
+
     @GetMapping(ApiUrl.Stat.DIETS + "/{member-id}")
     public ResponseEntity<DietDto> findDietsByMemberId(@PathVariable("member-id") Long memberId) {
         return ResponseEntity.ok(dietService.findAllByMemberId(memberId));

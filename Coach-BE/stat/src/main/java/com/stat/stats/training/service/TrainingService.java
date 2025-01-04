@@ -17,6 +17,10 @@ public class TrainingService {
         return trainingRepository.findAllByMemberId(memberId);
     }
 
+    public Training findNextTrainingsByMemberId(Long memberId) {
+        return trainingRepository.findNextTrainingsByMemberId(memberId);
+    }
+
     public Training saveTraining(Training training) {
         return trainingRepository.save(training);
     }

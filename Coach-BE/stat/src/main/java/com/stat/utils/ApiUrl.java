@@ -13,6 +13,7 @@ public class ApiUrl {
         public final String BASE = "/stats";
         public final String WEIGHTS = BASE +  "/weights";
         public final String TRAININGS = BASE +  "/trainings";
+        public final String NEXT_TRAININGS = BASE +  "/next-trainings";
         public final String DIETS = BASE +  "/diets";
         public final String MEMBER = BASE +  "/member";
         public final String PING = BASE +  "/ping";
