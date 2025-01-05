@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Long> {
 
-    List<Member> findAllMembersByUserId(@Param("userId") Long userId);
+    List<Member> findAllMembersByUserId(Long userId);
 }

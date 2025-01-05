@@ -1,10 +1,14 @@
 <mat-toolbar>
-  <button mat-icon-button [matMenuTriggerFor]="menu" class="example-icon" aria-label="Example icon-button with menu icon">
+  <button mat-icon-button [matMenuTriggerFor]="menu" class="example-icon"
+          aria-label="Example icon-button with menu icon">
     <mat-icon>menu</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item>  <a routerLink="control-panel" routerLinkActive="active" class="nav-link">Coach</a></button>
-    <button mat-menu-item>Item 2</button>
+    <button mat-menu-item><a routerLink="control-panel" routerLinkActive="active" class="nav-link">Control panel</a>
+    </button>
+    <button mat-menu-item>Pricing</button>
+    <button mat-menu-item>Contact</button>
+    <button mat-menu-item>About</button>
   </mat-menu>
 
   <a routerLink="main" routerLinkActive="active" class="nav-link">Coach</a>
@@ -12,14 +16,14 @@
   <div class="theme-control">
     <mat-slide-toggle checked (click)="toggleTheme()"></mat-slide-toggle>
     <button mat-icon-button>
-      @if (themeService.themeSignal() === 'dark'){
-      <mat-icon>bedtime</mat-icon>
+      @if (themeService.themeSignal() === 'dark') {
+        <mat-icon>bedtime</mat-icon>
       } @else {
-      <mat-icon>brightness_5</mat-icon>
+        <mat-icon>brightness_5</mat-icon>
       }
     </button>
   </div>
-  {{user?.firstName}} {{user?.lastName}}
+  {{ user?.firstName }} {{ user?.lastName }}
   <button mat-icon-button class="example-icon favorite-icon"
           aria-label="Example icon-button with heart icon" (click)="logOut()"
           matTooltip="Log out">
