@@ -2,14 +2,11 @@ package com.security.model;
 
 import com.security.enums.Role;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@Setter
 @Table(name = "user_credentials", schema = "security")
 public class UserCredential {
 

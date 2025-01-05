@@ -9,7 +9,18 @@ import {WeightDto} from "../dto/weight.dto";
 import {DietDto} from "../dto/diet.dto";
 import {Diet} from "../model/diet";
 import {AuthHelper} from "../util/auth-helper";
-import {ADMIN, DIETS, GOALS, MEMBERS, NEXT_TRAININGS, STATS, TRAININGS, V1, WEIGHTS} from "../util/api-url";
+import {
+  ADMIN,
+  DIETS,
+  GOALS,
+  MEMBERS,
+  MEMBERS_ORDER,
+  NEXT_TRAININGS,
+  STATS,
+  TRAININGS,
+  V1,
+  WEIGHTS
+} from "../util/api-url";
 
 @Injectable({
   providedIn: 'root'
@@ -51,6 +62,10 @@ export class MemberService {
 
   saveMember(member: Member): Observable<Member> {
     return this.httpClient.post(this.coach, member, AuthHelper.getHeaderWithToken());
+  }
+
+  saveMembersOrder(members: Member[]): Observable<void> {
+    return this.httpClient.post<void>(this.coach + MEMBERS_ORDER, members, AuthHelper.getHeaderWithToken());
   }
 
   saveWeight(weight: WeightDto): Observable<WeightDto[]> {

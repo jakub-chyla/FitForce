@@ -14,6 +14,6 @@ public class ApiUrl {
         public final String GOALS = BASE +  "/goals";
         public final String PING = BASE +  "/ping";
         public final String ADMIN = BASE +  "/admin";
-
+        public final String MEMBERS_ORDER = BASE +  "/members-order";
     }
 }

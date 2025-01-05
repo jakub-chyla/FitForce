@@ -25,12 +25,12 @@ public class MemberController {
 
     private final GoalService goalService;
 
-    @GetMapping(ApiUrl.Member.BASE +"/{user-id}")
+    @GetMapping(ApiUrl.Member.BASE + "/{user-id}")
     public ResponseEntity<List<Member>> findAllMembersForUser(@PathVariable("user-id") Long userId) {
         return ResponseEntity.ok(memberService.findAllMembersByUserId(userId));
     }
 
-    @GetMapping(ApiUrl.Member.ADMIN +"/{user-id}")
+    @GetMapping(ApiUrl.Member.ADMIN + "/{user-id}")
     public ResponseEntity<List<Member>> findAll(@PathVariable("user-id") @ValidAdmin Long userId) {
         return ResponseEntity.ok(memberService.findAll());
     }
@@ -41,8 +41,14 @@ public class MemberController {
     }
 
     @PostMapping(ApiUrl.Member.BASE)
-    public ResponseEntity<Member> save(@RequestBody Member member) {
+    public ResponseEntity<Member> saveMember(@RequestBody Member member) {
         return ResponseEntity.ok(memberService.saveMember(member));
+    }
+
+    @PostMapping(ApiUrl.Member.MEMBERS_ORDER)
+    public ResponseEntity<Void> saveMembersOrder(@RequestBody List<Member> members) {
+        memberService.saveMembersOrder(members);
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping(ApiUrl.Member.BASE)

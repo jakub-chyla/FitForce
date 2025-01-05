@@ -22,6 +22,7 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {RouterLink} from "@angular/router";
 import {UserService} from "../../service/user.service";
 import {User} from "../../model/user";
+import {FormValidator} from "../../util/form-validator";
 
 @Component({
   selector: 'app-sign-in',
@@ -60,21 +61,8 @@ export class SignInComponent implements OnInit {
       name: ['', [Validators.required, Validators.minLength(3),]],
       password: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(9)]],
       email: ['', [Validators.required, Validators.minLength(3),]],
-      phone: ['', [this.phoneValidator()]]
+      phone: ['', [FormValidator.phoneValidator()]]
     })
-  }
-
-  phoneValidator(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      const value = (control as FormControl).value;
-
-      if (!value) {
-        return null;
-      }
-
-      const valid = /^\d{9}$/.test(value);
-      return valid ? null : { exactNineDigits: true };
-    };
   }
 
   save() {

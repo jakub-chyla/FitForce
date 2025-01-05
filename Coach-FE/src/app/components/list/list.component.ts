@@ -50,7 +50,7 @@ export class ListComponent implements OnInit {
       }
     });
 
-    if (AuthHelper.getToken() === null) {
+    if (this.user === undefined) {
       if (!this.isTokenValid || AuthHelper.getToken() === null) {
         this.router.navigate(['/log-in']);
       }
@@ -77,6 +77,11 @@ export class ListComponent implements OnInit {
 
   drop(event: CdkDragDrop<any[]>) {
     moveItemInArray(this.members, event.previousIndex, event.currentIndex);
+    this.saveMembersOrder();
+  }
+
+  saveMembersOrder() {
+    this.service.saveMembersOrder(this.members).subscribe();
   }
 
   getMembers(userId: number) {

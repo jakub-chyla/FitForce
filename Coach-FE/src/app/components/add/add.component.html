@@ -8,46 +8,53 @@
           <input type="text" matInput formControlName="firstName">
           <mat-hint>Name</mat-hint>
           @if (myForm.controls['firstName'].hasError('required')) {
-          <mat-error>  Field is required</mat-error>
+            <mat-error> Field is required</mat-error>
           }
           @if (myForm.controls['firstName'].hasError('minlength')) {
-          <mat-error>Minimum length is 2 </mat-error>
+            <mat-error>Minimum length is 2</mat-error>
           }
         </mat-form-field>
         <mat-form-field>
           <input type="text" matInput formControlName="lastName">
           <mat-hint>Last name</mat-hint>
           @if (myForm.controls['lastName'].hasError('required')) {
-          <mat-error>Field is required</mat-error>
+            <mat-error>Field is required</mat-error>
           }
           @if (myForm.controls['lastName'].hasError('minlength')) {
-          <mat-error>Minimum length is 2</mat-error>
+            <mat-error>Minimum length is 2</mat-error>
           }
         </mat-form-field>
         <mat-form-field>
-          <input type="text" matInput formControlName="phone">
+          <input type="number" matInput formControlName="phone">
           <mat-hint>Phone number</mat-hint>
-          @if (myForm.controls['phone'].hasError('required')) {
-          <mat-error>Field is required</mat-error>
-          }
-          @if (myForm.controls['phone'].hasError('minlength')) {
-          <mat-error>Too short</mat-error>
-          }
-          @if (myForm.controls['phone'].hasError('maxLength')) {
-          <mat-error>Too long</mat-error>
-          }
-          @if (myForm.controls['phone'].hasError('numeric')) {
-          <mat-error>Only numbers are allowed</mat-error>
+          @if (myForm.controls['phone'].hasError('exactNineDigits')) {
+            <mat-error>Number should have 9 digits</mat-error>
           }
         </mat-form-field>
         <mat-form-field>
           <input matInput [matDatepicker]="picker">
           <mat-hint>Birthday</mat-hint>
-          <mat-datepicker-toggle  matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker
             [ngClass]="themeService.themeSignal() === 'dark' ? 'dark-mode-option' : 'light-mode-option'"
-            [panelClass]="themeService.themeSignal() === 'dark' ? 'dark-mode-panel' : 'light-mode-panel'" #picker startView="year" [startAt]="startDate"></mat-datepicker>
+            [panelClass]="themeService.themeSignal() === 'dark' ? 'dark-mode-panel' : 'light-mode-panel'" #picker
+            startView="year" [startAt]="startDate"></mat-datepicker>
         </mat-form-field>
+        <div class="col-span-2">
+          <div class="images-container">
+            <div *ngFor="let image of images">
+              <div class="images-container-selected" *ngIf="image === selectedAvatar + '.svg'"><img
+                mat-card-image
+                [src]="'assets/' + image"
+                alt="{{ image }}"></div>
+              <div (click)="setAvatar(image)" class="images-container-hover" *ngIf="image !== selectedAvatar + '.svg'">
+                <img
+                  mat-card-image
+                  [src]="'assets/' + image"
+                  alt="{{ image }}"></div>
+            </div>
+          </div>
+        </div>
         <mat-divider class="col-span-2"></mat-divider>
       </div>
     </form>

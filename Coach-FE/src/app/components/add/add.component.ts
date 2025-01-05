@@ -1,13 +1,5 @@
 import {Component, EventEmitter, inject, Inject, OnInit, Output} from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  ValidationErrors,
-  ValidatorFn,
-  Validators
-} from "@angular/forms";
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {DateAdapter, MAT_DATE_FORMATS} from "@angular/material/core";
 import {FORM_DATE_FORMATS, FormDateAdapter} from "../../util/form-date-adapter";
 import {MatButtonModule} from "@angular/material/button";
@@ -29,12 +21,10 @@ import {
 import {ThemeService} from "../../service/theme.service";
 import {CommonModule} from "@angular/common";
 import {MatDatepickerModule} from "@angular/material/datepicker";
-import {AuthHelper} from "../../util/auth-helper";
 import {UserService} from "../../service/user.service";
 import {User} from "../../model/user";
-
-class AbstractControl {
-}
+import {Images} from "../../../assets/images";
+import {FormValidator} from "../../util/form-validator";
 
 @Component({
   selector: 'app-add',
@@ -70,6 +60,8 @@ export class AddComponent implements OnInit {
 
   myForm!: FormGroup;
   user?: User;
+  images = Images.list
+  selectedAvatar = 1;
 
   readonly startDate = new Date(1990, 0, 1);
 
@@ -90,17 +82,14 @@ export class AddComponent implements OnInit {
     this.myForm = this.formBuilder.group({
       firstName: ['', [Validators.required, Validators.minLength(3)]],
       lastName: ['', [Validators.required, Validators.minLength(3)]],
-      phone: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9), this.phoneValidator()]],
-      birthday: ['']
+      phone: ['', [FormValidator.phoneValidator()]],
+      birthday: [''],
+      avatar: [this.selectedAvatar, Validators.required]
     })
   }
 
-  phoneValidator(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      const value = (control as FormControl).value;
-      const valid = /^\d+$/.test(value);
-      return valid ? null : {numeric: true};
-    };
+  setAvatar(image: string) {
+    this.selectedAvatar = Number(image.split('.')[0]);
   }
 
   save() {
@@ -111,6 +100,7 @@ export class AddComponent implements OnInit {
         lastName: this.myForm.get('lastName')?.value,
         phone: this.myForm.get('phone')?.value,
         birthday: this.myForm.get('birthday')?.value,
+        avatar: this.selectedAvatar
       }
 
       this.memberService.saveMember(member).subscribe(
