@@ -24,21 +24,19 @@ export class ControlPanelComponent implements OnInit {
   members: Member[] = [];
 
   ngOnInit() {
-    this.userService.user$.subscribe((user) => {
-      if (user && user.id !== undefined) {
-        this.getMembers(user.id);
-      }
-    });
+    if (!this.members.length) {
+      this.userService.user$.subscribe((user) => {
+        if (user && user.id !== undefined) {
+          this.getMembers(user.id);
+        }
+      });
+    }
   }
 
   getMembers(userId: number) {
     this.service.getAllMembers(userId).subscribe((response) => {
       this.members = response;
     });
-
-    // this.userService.sendEmail().subscribe(() => {
-    //   console.log('sent')
-    // });
   }
 
 }

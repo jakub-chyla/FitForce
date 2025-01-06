@@ -1,6 +1,6 @@
 mat-toolbar {
   justify-content: space-between;
-  padding: 0 2rem;
+  padding: 0 2rem 0 2rem;
 
   .theme-control {
     display: flex;
@@ -11,5 +11,10 @@ mat-toolbar {
 
 .icon-spacer {
   flex: 1 1 auto;
+}
+
+.logo-vertical-line{
+  padding-right: 16px;
+  border-right: 1px solid;
 }
 

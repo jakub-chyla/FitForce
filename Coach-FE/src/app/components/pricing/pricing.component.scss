@@ -1,0 +1,36 @@
+.card{
+  width: 30vh;
+  max-width: 600px;
+  min-width: 100px;
+  border: 1px solid #9a9a9a;
+  border-radius: 30px;
+  margin: 15px 15px 15px 15px;
+  height: 400px;
+
+}
+
+.card:hover{
+  border-color: #00abbf;
+  cursor: pointer;
+}
+
+.inside-card{
+  padding-top: 20px;
+  margin: 20px;
+
+}
+
+.features-list ul {
+  list-style-type: disc;
+  margin: 8px;
+  padding: 8px;
+  font-size: 1.2em;
+}
+
+.features-list li {
+  margin-bottom: 8px;
+}
+
+.price{
+  font-size: 1.5em;
+}

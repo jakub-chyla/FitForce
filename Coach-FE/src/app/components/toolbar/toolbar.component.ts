@@ -9,6 +9,8 @@ import {MatTooltip} from "@angular/material/tooltip";
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 import {UserService} from "../../service/user.service";
 import {User} from "../../model/user";
+import {NgIf} from "@angular/common";
+import {Role} from "../../enum/role";
 
 @Component({
   selector: 'app-toolbar',
@@ -17,7 +19,7 @@ import {User} from "../../model/user";
     MatButtonModule,
     MatIconModule,
     MatSlideToggleModule,
-    RouterModule, MatTooltip, MatMenu, MatMenuItem, MatMenuTrigger],
+    RouterModule, MatTooltip, MatMenu, MatMenuItem, MatMenuTrigger, NgIf],
   templateUrl: './toolbar.component.html',
   styleUrl: './toolbar.component.scss'
 })
@@ -46,4 +48,6 @@ export class ToolbarComponent implements OnInit {
     this.userService.emitUser(new User());
     this.router.navigate(['/log-in']);
   }
+
+  protected readonly Role = Role;
 }

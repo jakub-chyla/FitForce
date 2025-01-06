@@ -1,17 +1,17 @@
 <mat-toolbar>
-  <button mat-icon-button [matMenuTriggerFor]="menu" class="example-icon"
-          aria-label="Example icon-button with menu icon">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item><a routerLink="control-panel" routerLinkActive="active" class="nav-link">Control panel</a>
-    </button>
-    <button mat-menu-item>Pricing</button>
-    <button mat-menu-item>Contact</button>
-    <button mat-menu-item>About</button>
-  </mat-menu>
-
-  <a routerLink="main" routerLinkActive="active" class="nav-link">Coach</a>
+  <div class="logo-vertical-line">
+    <a routerLink="main" routerLinkActive="active" class="nav-link">Fit Force</a>
+  </div>
+  <span class="pr-2"></span>
+  <button *ngIf="user?.role === Role.ADMIN" mat-stroked-button><a routerLink="control-panel" routerLinkActive="active"
+                                                                  class="nav-link">Control panel</a></button>
+  <span class="pr-2"></span>
+  <button mat-stroked-button><a routerLink="pricing" routerLinkActive="active"
+                                class="nav-link">Pricing</a></button>
+  <span class="pr-2"></span>
+  <button mat-stroked-button>Contact</button>
+  <span class="pr-2"></span>
+  <button mat-stroked-button>About</button>
   <span class="icon-spacer"></span>
   <div class="theme-control">
     <mat-slide-toggle checked (click)="toggleTheme()"></mat-slide-toggle>
